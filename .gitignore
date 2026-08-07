@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+node_modules/
+dist/
+build/
+.next/
+.nuxt/
+.output/
+.turbo/
+coverage/
+.env
+.env.local
+playwright-report/
+test-results/
