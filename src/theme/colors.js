@@ -1,0 +1,119 @@
+/**
+ * Color palette mapped from Figma design tokens to CSS custom properties.
+ * Values are also exported as a JS object for use with styled-components theme.
+ */
+
+export const colorTokens = {
+  /* Brand */
+  '--color-brand-primary': '#1a1a2e',
+  '--color-brand-primary-hover': '#16213e',
+  '--color-brand-secondary': '#0f3460',
+  '--color-brand-accent': '#e94560',
+  '--color-brand-accent-hover': '#c73a52',
+
+  /* Neutrals */
+  '--color-neutral-0': '#ffffff',
+  '--color-neutral-50': '#f8f9fa',
+  '--color-neutral-100': '#f1f3f5',
+  '--color-neutral-200': '#e9ecef',
+  '--color-neutral-300': '#dee2e6',
+  '--color-neutral-400': '#ced4da',
+  '--color-neutral-500': '#adb5bd',
+  '--color-neutral-600': '#868e96',
+  '--color-neutral-700': '#495057',
+  '--color-neutral-800': '#343a40',
+  '--color-neutral-900': '#212529',
+  '--color-neutral-1000': '#000000',
+
+  /* Semantic */
+  '--color-success': '#2b8a3e',
+  '--color-success-bg': '#d3f9d8',
+  '--color-warning': '#e67700',
+  '--color-warning-bg': '#fff3bf',
+  '--color-error': '#c92a2a',
+  '--color-error-bg': '#ffe3e3',
+  '--color-info': '#1971c2',
+  '--color-info-bg': '#d0ebff',
+
+  /* Surface & text */
+  '--color-background': '#ffffff',
+  '--color-background-subtle': '#f8f9fa',
+  '--color-surface': '#ffffff',
+  '--color-surface-raised': '#ffffff',
+  '--color-border': '#dee2e6',
+  '--color-border-strong': '#adb5bd',
+  '--color-text-primary': '#212529',
+  '--color-text-secondary': '#495057',
+  '--color-text-muted': '#868e96',
+  '--color-text-inverse': '#ffffff',
+  '--color-text-link': '#0f3460',
+  '--color-focus-ring': '#1971c2',
+};
+
+/** Theme object for styled-components (CSS var references). */
+export const colors = {
+  brand: {
+    primary: 'var(--color-brand-primary)',
+    primaryHover: 'var(--color-brand-primary-hover)',
+    secondary: 'var(--color-brand-secondary)',
+    accent: 'var(--color-brand-accent)',
+    accentHover: 'var(--color-brand-accent-hover)',
+  },
+  neutral: {
+    0: 'var(--color-neutral-0)',
+    50: 'var(--color-neutral-50)',
+    100: 'var(--color-neutral-100)',
+    200: 'var(--color-neutral-200)',
+    300: 'var(--color-neutral-300)',
+    400: 'var(--color-neutral-400)',
+    500: 'var(--color-neutral-500)',
+    600: 'var(--color-neutral-600)',
+    700: 'var(--color-neutral-700)',
+    800: 'var(--color-neutral-800)',
+    900: 'var(--color-neutral-900)',
+    1000: 'var(--color-neutral-1000)',
+  },
+  semantic: {
+    success: 'var(--color-success)',
+    successBg: 'var(--color-success-bg)',
+    warning: 'var(--color-warning)',
+    warningBg: 'var(--color-warning-bg)',
+    error: 'var(--color-error)',
+    errorBg: 'var(--color-error-bg)',
+    info: 'var(--color-info)',
+    infoBg: 'var(--color-info-bg)',
+  },
+  background: 'var(--color-background)',
+  backgroundSubtle: 'var(--color-background-subtle)',
+  surface: 'var(--color-surface)',
+  surfaceRaised: 'var(--color-surface-raised)',
+  border: 'var(--color-border)',
+  borderStrong: 'var(--color-border-strong)',
+  text: {
+    primary: 'var(--color-text-primary)',
+    secondary: 'var(--color-text-secondary)',
+    muted: 'var(--color-text-muted)',
+    inverse: 'var(--color-text-inverse)',
+    link: 'var(--color-text-link)',
+  },
+  focusRing: 'var(--color-focus-ring)',
+};
+
+/** Raw hex values for places that cannot use CSS variables. */
+export const colorValues = Object.fromEntries(
+  Object.entries(colorTokens).map(([key, value]) => [
+    key.replace(/^--color-/, '').replace(/-/g, '_'),
+    value,
+  ])
+);
+
+/**
+ * Injects color CSS variables onto a root element (typically :root / documentElement).
+ */
+export function applyColorVariables(element = document.documentElement) {
+  Object.entries(colorTokens).forEach(([property, value]) => {
+    element.style.setProperty(property, value);
+  });
+}
+
+export default colors;
