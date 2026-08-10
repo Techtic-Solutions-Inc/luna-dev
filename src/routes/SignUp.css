@@ -1,0 +1,139 @@
+.sign-up-page {
+  display: grid;
+  min-height: 100svh;
+  grid-template-columns: 1fr;
+  background: var(--color-background);
+}
+
+.sign-up-page__brand {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 14rem;
+  padding: var(--space-8) var(--space-6);
+  overflow: hidden;
+  color: var(--color-text-inverse);
+  background:
+    linear-gradient(145deg, rgba(26, 26, 46, 0.92), rgba(15, 52, 96, 0.88)),
+    radial-gradient(circle at 20% 20%, rgba(233, 69, 96, 0.35), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(25, 113, 194, 0.35), transparent 40%),
+    linear-gradient(160deg, #1a1a2e 0%, #0f3460 55%, #16213e 100%);
+}
+
+.sign-up-page__atmosphere {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 85%);
+  pointer-events: none;
+  animation: atmosphere-drift 28s linear infinite;
+}
+
+.sign-up-page__brand-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 28rem;
+}
+
+.sign-up-page__brand-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.sign-up-page__brand-heading {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(1.15rem, 2.8vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.sign-up-page__brand-copy {
+  margin: 0;
+  max-width: 26rem;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.sign-up-page__panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-6);
+  background:
+    linear-gradient(180deg, var(--color-neutral-50), var(--color-background));
+}
+
+.sign-up-page__panel-inner {
+  width: 100%;
+  max-width: 28rem;
+  animation: form-rise 480ms ease-out;
+}
+
+@keyframes atmosphere-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(32px, 32px, 0);
+  }
+}
+
+@keyframes form-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .sign-up-page {
+    grid-template-columns: minmax(18rem, 1.05fr) minmax(24rem, 0.95fr);
+  }
+
+  .sign-up-page__brand {
+    min-height: 100svh;
+    align-items: center;
+    padding: var(--space-12) var(--space-10);
+  }
+
+  .sign-up-page__panel {
+    padding: var(--space-12) var(--space-10);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sign-up-page__brand {
+    padding-left: clamp(3rem, 8vw, 6rem);
+    padding-right: clamp(2rem, 5vw, 4rem);
+  }
+
+  .sign-up-page__panel {
+    padding-left: clamp(2rem, 6vw, 5rem);
+    padding-right: clamp(2rem, 6vw, 5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sign-up-page__atmosphere,
+  .sign-up-page__panel-inner {
+    animation: none;
+  }
+}
