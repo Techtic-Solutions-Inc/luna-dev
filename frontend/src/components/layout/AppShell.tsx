@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaHome, FaUser, FaSignInAlt } from 'react-icons/fa';
+import { FaHome, FaUser, FaSignInAlt, FaInfoCircle } from 'react-icons/fa';
 import styled from 'styled-components';
 import { clearAuthToken, useAuth } from '../../hooks/useAuth';
 
@@ -145,6 +145,10 @@ const AppShell = ({ children }: AppShellProps) => {
           <StyledNavLink to="/" end>
             <FaHome aria-hidden="true" />
             Home
+          </StyledNavLink>
+          <StyledNavLink to="/about-us">
+            <FaInfoCircle aria-hidden="true" />
+            About Us
           </StyledNavLink>
           <StyledNavLink to="/profile">
             <FaUser aria-hidden="true" />

@@ -118,3 +118,54 @@ export interface SignupRequest {
   password: string;
   terms_accepted: boolean;
 }
+
+export interface AboutTeamMember {
+  id: string;
+  name: string;
+  role: string;
+  image_url: string;
+}
+
+export interface AboutContentSection {
+  title: string;
+  body: string;
+}
+
+export interface AboutMarketing {
+  headline_primary: string;
+  headline_secondary: string;
+  description: string;
+  tagline: string;
+}
+
+export interface AboutNavLink {
+  label: string;
+  href: string;
+}
+
+export interface AboutContact {
+  email: string;
+  waitlist_label: string;
+  waitlist_href: string;
+  links: AboutNavLink[];
+}
+
+export interface AboutLegalLink {
+  label: string;
+  href: string;
+}
+
+export interface AboutResponse {
+  title: string;
+  description: string;
+  sections: AboutContentSection[];
+  belief_headline: string;
+  belief_body: string;
+  team_headline: string;
+  team_subheadline: string;
+  marketing: AboutMarketing;
+  team_members: AboutTeamMember[];
+  contact: AboutContact;
+  legal_links: AboutLegalLink[];
+  footer_copyright: string;
+}
