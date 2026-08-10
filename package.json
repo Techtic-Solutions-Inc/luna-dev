@@ -1,0 +1,9 @@
+{
+  "name": "luna-dev",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "npm run build --prefix frontend",
+    "lint": "npm run lint --prefix frontend"
+  }
+}

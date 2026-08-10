@@ -1,6 +1,5 @@
 import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios';
 import type {
-  AboutResponse,
   AuthLoginResponse,
   LoginRequest,
   LoginResponse,
@@ -84,11 +83,6 @@ export const updateProfile = async (
     '/api/profile',
     payload,
   );
-  return response.data;
-};
-
-export const getAbout = async (): Promise<AboutResponse> => {
-  const response = await apiClient.get<AboutResponse>('/api/about');
   return response.data;
 };
 

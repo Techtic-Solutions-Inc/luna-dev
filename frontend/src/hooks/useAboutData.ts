@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getAbout } from '../lib/api/client';
-import { getApiErrorMessage } from '../lib/api/errors';
+import { getAboutContractGapMessage } from '../lib/api/contract-gaps';
 import type { AboutResponse } from '../types/api';
 
 export const ABOUT_QUERY_KEY = ['about'] as const;
@@ -14,12 +13,8 @@ interface UseAboutDataResult {
   queryKey: typeof ABOUT_QUERY_KEY;
 }
 
-const aboutCache = new Map<string, AboutResponse>();
-
-const cacheKeyFor = (queryKey: readonly string[]): string => queryKey.join(':');
-
 export const invalidateAboutQuery = (): void => {
-  aboutCache.delete(cacheKeyFor(ABOUT_QUERY_KEY));
+  // No-op until GET /api/about is added to the API contract and wired in the client.
 };
 
 export const useAboutData = (): UseAboutDataResult => {
@@ -30,33 +25,12 @@ export const useAboutData = (): UseAboutDataResult => {
   const refetch = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-
-    const key = cacheKeyFor(ABOUT_QUERY_KEY);
-    aboutCache.delete(key);
-
-    try {
-      const about = await getAbout();
-      aboutCache.set(key, about);
-      setData(about);
-    } catch (err) {
-      setError(getApiErrorMessage(err, 'Failed to load About Us content'));
-      setData(null);
-    } finally {
-      setIsLoading(false);
-    }
+    setData(null);
+    setError(getAboutContractGapMessage());
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
-    const key = cacheKeyFor(ABOUT_QUERY_KEY);
-    const cached = aboutCache.get(key);
-
-    if (cached) {
-      setData(cached);
-      setIsLoading(false);
-      setError(null);
-      return;
-    }
-
     void refetch();
   }, [refetch]);
 
