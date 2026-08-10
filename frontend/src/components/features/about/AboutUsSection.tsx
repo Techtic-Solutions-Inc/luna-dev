@@ -1,16 +1,8 @@
 import styled from 'styled-components';
-import type { AboutContentSection } from '../../types/api';
-import Card from '../ui/Card';
-
-interface AboutUsSectionProps {
-  title: string;
-  description: string;
-  sections: AboutContentSection[];
-  beliefHeadline: string;
-  beliefBody: string;
-  teamHeadline: string;
-  teamSubheadline: string;
-}
+import { useAboutContent } from '../../../hooks/useAboutContent';
+import Card from '../../ui/Card';
+import AboutStatus from './AboutStatus';
+import { SkeletonBlock, VisuallyHidden } from './styles';
 
 const Section = styled.section`
   display: flex;
@@ -135,42 +127,107 @@ const TeamSubheadline = styled.p`
   color: var(--text-secondary);
 `;
 
-const AboutUsSection = ({
-  title,
-  description,
-  sections,
-  beliefHeadline,
-  beliefBody,
-  teamHeadline,
-  teamSubheadline,
-}: AboutUsSectionProps) => (
-  <Section aria-labelledby="about-us-title">
-    <Hero>
-      <Title id="about-us-title">{title}</Title>
-      <Description>{description}</Description>
-    </Hero>
+const SkeletonStack = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-24);
+`;
 
-    {sections.length > 0 ? (
+const SkeletonHero = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-12);
+`;
+
+const AboutUsSectionLoading = () => (
+  <Section aria-busy="true" aria-live="polite" aria-labelledby="about-us-title">
+    <VisuallyHidden>Loading About Us content</VisuallyHidden>
+    <SkeletonStack>
+      <SkeletonHero>
+        <SkeletonBlock $height="3.5rem" $width="min(100%, 20rem)" />
+        <SkeletonBlock $height="1.25rem" $width="min(100%, 36rem)" />
+        <SkeletonBlock $height="1.25rem" $width="min(100%, 28rem)" />
+      </SkeletonHero>
       <StoryGrid>
-        {sections.map((section) => (
-          <StoryCard key={section.title} as="article">
-            <StoryTitle>{section.title}</StoryTitle>
-            <StoryBody>{section.body}</StoryBody>
-          </StoryCard>
-        ))}
+        <SkeletonBlock $height="10rem" $radius="var(--radius-10)" />
+        <SkeletonBlock $height="10rem" $radius="var(--radius-10)" />
+        <SkeletonBlock $height="10rem" $radius="var(--radius-10)" />
       </StoryGrid>
-    ) : null}
-
-    <Belief>
-      <BeliefHeadline>{beliefHeadline}</BeliefHeadline>
-      <BeliefBody>{beliefBody}</BeliefBody>
-    </Belief>
-
-    <TeamIntro>
-      <TeamHeadline id="meet-our-team">{teamHeadline}</TeamHeadline>
-      <TeamSubheadline>{teamSubheadline}</TeamSubheadline>
-    </TeamIntro>
+      <SkeletonBlock $height="12rem" $radius="var(--radius-16)" />
+      <SkeletonHero>
+        <SkeletonBlock $height="2rem" $width="min(100%, 16rem)" />
+        <SkeletonBlock $height="1rem" $width="min(100%, 24rem)" />
+      </SkeletonHero>
+    </SkeletonStack>
   </Section>
 );
+
+const AboutUsSection = () => {
+  const { data, isLoading, error, isEmpty, refetch } = useAboutContent();
+
+  if (isLoading) {
+    return <AboutUsSectionLoading />;
+  }
+
+  if (error) {
+    return (
+      <AboutStatus
+        variant="error"
+        message={error}
+        actionLabel="Try again"
+        ariaLabel="Retry loading About Us"
+        onAction={() => {
+          void refetch();
+        }}
+      />
+    );
+  }
+
+  if (isEmpty || !data) {
+    return (
+      <AboutStatus
+        variant="empty"
+        message="No About Us content is available."
+        actionLabel="Refresh"
+        actionVariant="secondary"
+        onAction={() => {
+          void refetch();
+        }}
+      />
+    );
+  }
+
+  const sections = data.sections ?? [];
+
+  return (
+    <Section aria-labelledby="about-us-title">
+      <Hero>
+        <Title id="about-us-title">{data.title}</Title>
+        <Description>{data.description}</Description>
+      </Hero>
+
+      {sections.length > 0 ? (
+        <StoryGrid>
+          {sections.map((section) => (
+            <StoryCard key={section.title} as="article">
+              <StoryTitle>{section.title}</StoryTitle>
+              <StoryBody>{section.body}</StoryBody>
+            </StoryCard>
+          ))}
+        </StoryGrid>
+      ) : null}
+
+      <Belief>
+        <BeliefHeadline>{data.belief_headline}</BeliefHeadline>
+        <BeliefBody>{data.belief_body}</BeliefBody>
+      </Belief>
+
+      <TeamIntro>
+        <TeamHeadline id="meet-our-team">{data.team_headline}</TeamHeadline>
+        <TeamSubheadline>{data.team_subheadline}</TeamSubheadline>
+      </TeamIntro>
+    </Section>
+  );
+};
 
 export default AboutUsSection;

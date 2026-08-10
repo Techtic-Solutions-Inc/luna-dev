@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-
-interface FooterProps {
-  copyright: string;
-}
+import { useAboutContent } from '../../../hooks/useAboutContent';
 
 const FooterRoot = styled.footer`
   display: flex;
@@ -22,10 +19,18 @@ const Copyright = styled.p`
   color: var(--text-secondary);
 `;
 
-const Footer = ({ copyright }: FooterProps) => (
-  <FooterRoot>
-    <Copyright>{copyright}</Copyright>
-  </FooterRoot>
-);
+const Footer = () => {
+  const { data, isLoading, error } = useAboutContent();
+
+  if (isLoading || error || !data?.footer_copyright) {
+    return null;
+  }
+
+  return (
+    <FooterRoot>
+      <Copyright>{data.footer_copyright}</Copyright>
+    </FooterRoot>
+  );
+};
 
 export default Footer;

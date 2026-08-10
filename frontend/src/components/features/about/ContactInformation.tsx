@@ -1,14 +1,11 @@
 import { type FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import type { AboutContact } from '../../types/api';
-import Button from '../ui/Button';
-import Card from '../ui/Card';
-import Input from '../ui/Input';
-
-interface ContactInformationProps {
-  contact: AboutContact;
-}
+import { useAboutContent } from '../../../hooks/useAboutContent';
+import Button from '../../ui/Button';
+import Card from '../../ui/Card';
+import Input from '../../ui/Input';
+import { SkeletonBlock, VisuallyHidden } from './styles';
 
 const Section = styled.section`
   display: flex;
@@ -125,8 +122,29 @@ const ExternalNavLink = styled.a`
 
 const isInternalPath = (href: string): boolean => href.startsWith('/');
 
-const ContactInformation = ({ contact }: ContactInformationProps) => {
+const ContactInformationLoading = () => (
+  <Section aria-busy="true" aria-live="polite" aria-labelledby="contact-information-heading">
+    <VisuallyHidden>Loading contact information</VisuallyHidden>
+    <SkeletonBlock $height="14rem" $radius="var(--radius-10)" />
+  </Section>
+);
+
+const ContactInformation = () => {
+  const { data, isLoading, error } = useAboutContent();
   const [email, setEmail] = useState('');
+
+  if (isLoading) {
+    return <ContactInformationLoading />;
+  }
+
+  if (error || !data?.contact) {
+    return null;
+  }
+
+  const contact = {
+    ...data.contact,
+    links: data.contact.links ?? [],
+  };
 
   const handleWaitlistSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -135,10 +153,7 @@ const ContactInformation = ({ contact }: ContactInformationProps) => {
       return;
     }
 
-    const url = new URL(
-      contact.waitlist_href,
-      window.location.origin,
-    );
+    const url = new URL(contact.waitlist_href, window.location.origin);
     url.searchParams.set('email', trimmed);
     window.location.assign(url.toString());
   };

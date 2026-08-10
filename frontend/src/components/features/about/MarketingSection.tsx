@@ -1,10 +1,7 @@
 import styled from 'styled-components';
-import type { AboutMarketing } from '../../types/api';
-import Card from '../ui/Card';
-
-interface MarketingSectionProps {
-  marketing: AboutMarketing;
-}
+import { useAboutContent } from '../../../hooks/useAboutContent';
+import Card from '../../ui/Card';
+import { SkeletonBlock, VisuallyHidden } from './styles';
 
 const Section = styled.section`
   display: flex;
@@ -70,17 +67,38 @@ const Tagline = styled.p`
   max-width: 32rem;
 `;
 
-const MarketingSection = ({ marketing }: MarketingSectionProps) => (
-  <Section aria-labelledby="marketing-headline">
-    <Panel>
-      <Headline id="marketing-headline">
-        <span>{marketing.headline_primary}</span>
-        <AccentLine>{marketing.headline_secondary}</AccentLine>
-      </Headline>
-      <Description>{marketing.description}</Description>
-      <Tagline>{marketing.tagline}</Tagline>
-    </Panel>
+const MarketingSectionLoading = () => (
+  <Section aria-busy="true" aria-live="polite" aria-labelledby="marketing-headline">
+    <VisuallyHidden>Loading marketing content</VisuallyHidden>
+    <SkeletonBlock $height="12rem" $radius="var(--radius-16)" />
   </Section>
 );
+
+const MarketingSection = () => {
+  const { data, isLoading, error } = useAboutContent();
+
+  if (isLoading) {
+    return <MarketingSectionLoading />;
+  }
+
+  if (error || !data?.marketing) {
+    return null;
+  }
+
+  const { marketing } = data;
+
+  return (
+    <Section aria-labelledby="marketing-headline">
+      <Panel>
+        <Headline id="marketing-headline">
+          <span>{marketing.headline_primary}</span>
+          <AccentLine>{marketing.headline_secondary}</AccentLine>
+        </Headline>
+        <Description>{marketing.description}</Description>
+        <Tagline>{marketing.tagline}</Tagline>
+      </Panel>
+    </Section>
+  );
+};
 
 export default MarketingSection;

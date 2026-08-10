@@ -1,10 +1,7 @@
 import styled from 'styled-components';
-import type { AboutTeamMember } from '../../types/api';
-import Card from '../ui/Card';
-
-interface TeamMembersListProps {
-  members: AboutTeamMember[];
-}
+import { useAboutContent } from '../../../hooks/useAboutContent';
+import Card from '../../ui/Card';
+import { SkeletonBlock, StatusCard, StatusText, VisuallyHidden } from './styles';
 
 const Section = styled.section`
   display: flex;
@@ -67,24 +64,60 @@ const MemberRole = styled.p`
   color: var(--text-secondary);
 `;
 
-const EmptyState = styled.p`
-  padding: var(--padding-24);
-  border-radius: var(--radius-10);
-  background: var(--color-38);
-  color: var(--text-secondary);
-  font-family: var(--font-body-sm-2-family);
-  font-size: var(--font-body-sm-2-size);
-  font-weight: var(--font-body-sm-2-weight);
-  line-height: var(--font-body-sm-2-line-height);
+const SkeletonTeam = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--gap-20);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 `;
 
-const TeamMembersList = ({ members }: TeamMembersListProps) => {
+const SkeletonTeamCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-12);
+`;
+
+const TeamMembersLoading = () => (
+  <Section aria-busy="true" aria-live="polite" aria-labelledby="meet-our-team">
+    <VisuallyHidden>Loading team members</VisuallyHidden>
+    <SkeletonTeam>
+      {Array.from({ length: 5 }, (_, index) => (
+        <SkeletonTeamCard key={index}>
+          <SkeletonBlock $aspect="1 / 1" $radius="var(--radius-10)" />
+          <SkeletonBlock $height="1.25rem" $width="70%" />
+          <SkeletonBlock $height="1rem" $width="50%" />
+        </SkeletonTeamCard>
+      ))}
+    </SkeletonTeam>
+  </Section>
+);
+
+const TeamMembers = () => {
+  const { data, isLoading, error, isEmpty } = useAboutContent();
+
+  if (isLoading) {
+    return <TeamMembersLoading />;
+  }
+
+  if (error || isEmpty || !data) {
+    return null;
+  }
+
+  const members = data.team_members ?? [];
+
   if (members.length === 0) {
     return (
       <Section aria-labelledby="meet-our-team">
-        <EmptyState role="status">
-          No team members are available at this time.
-        </EmptyState>
+        <StatusCard $variant="empty" role="status">
+          <StatusText>No team members are available at this time.</StatusText>
+        </StatusCard>
       </Section>
     );
   }
@@ -112,4 +145,4 @@ const TeamMembersList = ({ members }: TeamMembersListProps) => {
   );
 };
 
-export default TeamMembersList;
+export default TeamMembers;

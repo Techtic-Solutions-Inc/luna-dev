@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import type { AboutLegalLink } from '../../types/api';
-
-interface LegalLinksProps {
-  links: AboutLegalLink[];
-}
+import { useAboutContent } from '../../../hooks/useAboutContent';
 
 const Nav = styled.nav`
   display: flex;
@@ -52,7 +48,15 @@ const ExternalLink = styled.a`
 
 const isInternalPath = (href: string): boolean => href.startsWith('/');
 
-const LegalLinks = ({ links }: LegalLinksProps) => {
+const LegalLinks = () => {
+  const { data, isLoading, error } = useAboutContent();
+
+  if (isLoading || error) {
+    return null;
+  }
+
+  const links = data?.legal_links ?? [];
+
   if (links.length === 0) {
     return null;
   }
