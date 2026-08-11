@@ -1,6 +1,8 @@
 import axios, { type AxiosError, type InternalAxiosRequestConfig } from 'axios';
 import type {
   AuthLoginResponse,
+  BlogPost,
+  BlogPostsResponse,
   LoginRequest,
   LoginResponse,
   ProfileResponse,
@@ -84,6 +86,30 @@ export const updateProfile = async (
     payload,
   );
   return response.data;
+};
+
+const isBlogPostsResponse = (value: unknown): value is BlogPostsResponse => {
+  if (typeof value !== 'object' || value === null || !('data' in value)) {
+    return false;
+  }
+  return Array.isArray((value as BlogPostsResponse).data);
+};
+
+export const getBlogPosts = async (): Promise<BlogPost[]> => {
+  const response = await apiClient.get<BlogPost[] | BlogPostsResponse>(
+    '/api/blog',
+  );
+  const payload = response.data;
+
+  if (Array.isArray(payload)) {
+    return payload;
+  }
+
+  if (isBlogPostsResponse(payload)) {
+    return payload.data;
+  }
+
+  return [];
 };
 
 export default apiClient;

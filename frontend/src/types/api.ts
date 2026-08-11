@@ -118,3 +118,14 @@ export interface SignupRequest {
   password: string;
   terms_accepted: boolean;
 }
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
+export interface BlogPostsResponse {
+  data: BlogPost[];
+}

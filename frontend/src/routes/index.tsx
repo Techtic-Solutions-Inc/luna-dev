@@ -6,6 +6,7 @@ import AppShell from '../components/layout/AppShell';
 import ProfileForm from '../components/features/ProfileForm';
 import { ProtectedRoute } from '../hooks/useAuth';
 import ErrorBoundary from '../components/ErrorBoundary';
+import BlogPage from './blog';
 
 const AppRouter = () => (
   <Router>
@@ -14,6 +15,7 @@ const AppRouter = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/blog" element={<BlogPage />} />
           <Route
             path="/profile"
             element={
