@@ -1,0 +1,172 @@
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.input-field__label {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+
+.input-field__label--sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.input-field__required {
+  margin-left: 0.15em;
+  color: var(--color-brand-accent);
+}
+
+.input-field__control-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-field__control {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  line-height: 1.4;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.input-field__control::placeholder {
+  color: var(--color-text-muted);
+}
+
+.input-field__control:hover:not(:disabled) {
+  border-color: var(--color-border-strong);
+}
+
+.input-field__control:focus {
+  outline: none;
+  border-color: var(--color-brand-secondary);
+  box-shadow: var(--shadow-focus);
+}
+
+.input-field--error .input-field__control {
+  border-color: var(--color-error);
+  background: var(--color-error-bg);
+}
+
+.input-field--error .input-field__control:focus {
+  box-shadow: var(--shadow-error);
+}
+
+.input-field__error {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+}
+
+.input-field__hint {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.input-field--disabled {
+  opacity: 0.65;
+}
+
+.input-field__control:disabled {
+  cursor: not-allowed;
+  background: var(--color-neutral-100);
+}
+
+.input-field--auth .input-field__control {
+  min-height: 3.25rem;
+  padding: 0.875rem 1.25rem;
+  border: 1px solid var(--color-auth-border);
+  border-radius: var(--radius-full);
+  background: var(--color-auth-surface);
+  color: var(--color-auth-text);
+  font-size: var(--font-size-sm);
+}
+
+.input-field--auth .input-field__control::placeholder {
+  color: var(--color-auth-text-muted);
+}
+
+.input-field--auth .input-field__control:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.input-field--auth .input-field__control:focus {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 3px rgba(109, 90, 72, 0.35);
+}
+
+.input-field--auth.input-field--error .input-field__control {
+  border-color: #e08b8b;
+  background: rgba(201, 42, 42, 0.12);
+}
+
+.input-field--auth .input-field__error {
+  color: #f5b5b5;
+}
+
+.input-field--auth .input-field__hint {
+  color: var(--color-auth-text-muted);
+}
+
+.input-field--password .input-field__control {
+  padding-right: 3rem;
+}
+
+.input-field__toggle {
+  position: absolute;
+  right: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-auth-text-muted);
+  cursor: pointer;
+}
+
+.input-field__toggle:hover:not(:disabled) {
+  color: var(--color-auth-text);
+}
+
+.input-field__toggle:focus-visible {
+  outline: 2px solid var(--color-auth-link);
+  outline-offset: 2px;
+}
+
+.input-field__toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.input-field--auth.input-field--disabled .input-field__control:disabled {
+  background: rgba(255, 255, 255, 0.03);
+}

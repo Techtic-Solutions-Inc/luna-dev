@@ -1,0 +1,130 @@
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.button--full-width {
+  width: 100%;
+}
+
+.button--primary {
+  background: var(--color-brand-primary);
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-md);
+}
+
+.button--primary:hover:not(:disabled) {
+  background: var(--color-brand-primary-hover);
+  transform: translateY(-1px);
+}
+
+.button--primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.button--secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.button--secondary:hover:not(:disabled) {
+  border-color: var(--color-border-strong);
+  background: var(--color-neutral-50);
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--color-text-link);
+}
+
+.button--ghost:hover:not(:disabled) {
+  background: var(--color-neutral-100);
+}
+
+.button--auth {
+  min-height: 3.25rem;
+  border-radius: var(--radius-full);
+  background: var(--color-auth-button);
+  color: var(--color-auth-text);
+  box-shadow: none;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.button--auth:hover:not(:disabled) {
+  background: var(--color-auth-button-hover);
+  transform: none;
+}
+
+.button--auth:active:not(:disabled) {
+  transform: none;
+}
+
+.button--auth .button__spinner {
+  border-color: rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+}
+
+.button__spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: var(--radius-full);
+  animation: button-spin 0.7s linear infinite;
+}
+
+.button--secondary .button__spinner,
+.button--ghost .button__spinner {
+  border-color: rgba(26, 26, 46, 0.2);
+  border-top-color: var(--color-brand-primary);
+}
+
+.button--loading .button__label {
+  opacity: 0.92;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button__spinner {
+    transition: none;
+    animation: none;
+  }
+}

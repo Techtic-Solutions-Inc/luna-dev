@@ -1,0 +1,81 @@
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faBars,
+  faBell,
+  faCalendarDays,
+  faCheck,
+  faChevronDown,
+  faChevronLeft,
+  faChevronRight,
+  faCircleExclamation,
+  faCreditCard,
+  faDownload,
+  faEye,
+  faEyeSlash,
+  faFileLines,
+  faFolderOpen,
+  faHouse,
+  faLightbulb,
+  faPen,
+  faRightFromBracket,
+  faStar,
+  faSpinner,
+  faUser,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
+
+/**
+ * Registers commonly used Font Awesome icons for the design system.
+ * Import this module once at app bootstrap; use FontAwesomeIcon in components as needed.
+ */
+library.add(
+  faBars,
+  faBell,
+  faCalendarDays,
+  faCheck,
+  faChevronDown,
+  faChevronLeft,
+  faChevronRight,
+  faCircleExclamation,
+  faCreditCard,
+  faDownload,
+  faEye,
+  faEyeSlash,
+  faFileLines,
+  faFolderOpen,
+  faHouse,
+  faLightbulb,
+  faPen,
+  faRightFromBracket,
+  faStar,
+  faSpinner,
+  faUser,
+  faXmark,
+);
+
+export {
+  faBars,
+  faBell,
+  faCalendarDays,
+  faCheck,
+  faChevronDown,
+  faChevronLeft,
+  faChevronRight,
+  faCircleExclamation,
+  faCreditCard,
+  faDownload,
+  faEye,
+  faEyeSlash,
+  faFileLines,
+  faFolderOpen,
+  faHouse,
+  faLightbulb,
+  faPen,
+  faRightFromBracket,
+  faStar,
+  faSpinner,
+  faUser,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
+
+export { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

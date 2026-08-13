@@ -1,0 +1,210 @@
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.profile-form__state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  min-height: 12rem;
+  padding: var(--space-8);
+  border: 1px solid var(--color-studio-card-border);
+  border-radius: var(--radius-2xl);
+  background: var(--color-studio-card);
+  color: var(--color-studio-text-muted);
+  text-align: center;
+}
+
+.profile-form__state--error p {
+  margin: 0;
+  color: #f5b5b5;
+}
+
+.profile-form__spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--color-studio-accent);
+  border-radius: var(--radius-full);
+  animation: profile-form-spin 0.7s linear infinite;
+}
+
+.profile-form__banner {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+}
+
+.profile-form__banner--error {
+  background: rgba(201, 42, 42, 0.16);
+  color: #f5b5b5;
+}
+
+.profile-form__banner--success {
+  background: rgba(43, 138, 62, 0.18);
+  color: #b8f0c6;
+}
+
+.profile-form__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.profile-form__section-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+}
+
+.profile-form__grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.profile-form__grid--two {
+  grid-template-columns: 1fr;
+}
+
+.profile-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.profile-form__field label {
+  font-size: var(--font-size-sm);
+  color: var(--color-studio-text-muted);
+}
+
+.profile-form__field input,
+.profile-form__field textarea,
+.profile-form__field select {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-studio-input-border);
+  border-radius: var(--radius-full);
+  background: var(--color-studio-input-bg);
+  color: var(--color-studio-text);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+
+.profile-form__field textarea {
+  min-height: 7rem;
+  padding-block: var(--space-4);
+  border-radius: var(--radius-xl);
+  resize: vertical;
+}
+
+.profile-form__field select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23c8a47e' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  cursor: pointer;
+}
+
+.profile-form__field input:focus,
+.profile-form__field textarea:focus,
+.profile-form__field select:focus {
+  outline: none;
+  border-color: var(--color-studio-accent);
+  box-shadow: 0 0 0 3px rgba(200, 164, 126, 0.22);
+}
+
+.profile-form__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-top: var(--space-2);
+}
+
+.profile-form__change-password {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border: 1px solid var(--color-studio-input-border);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  color: var(--color-studio-text-muted);
+}
+
+.profile-form__change-password:hover {
+  border-color: var(--color-studio-accent-muted);
+  color: var(--color-studio-text);
+}
+
+.profile-form__action-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.profile-form__save.button {
+  min-height: 2.75rem;
+  border-radius: var(--radius-full);
+  background: var(--color-studio-accent);
+  color: #1a1410;
+  box-shadow: none;
+}
+
+.profile-form__save.button:hover:not(:disabled) {
+  background: var(--color-studio-accent-hover);
+  transform: none;
+}
+
+.profile-form__cancel.button {
+  min-height: 2.75rem;
+  border-radius: var(--radius-full);
+  border-color: var(--color-studio-input-border);
+  background: transparent;
+  color: var(--color-studio-text-muted);
+}
+
+.profile-form__cancel.button:hover:not(:disabled) {
+  border-color: var(--color-studio-accent-muted);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--color-studio-text);
+}
+
+@media (min-width: 768px) {
+  .profile-form__grid--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profile-form__actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .profile-form__action-group {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}
+
+@keyframes profile-form-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-form__spinner {
+    animation: none;
+  }
+}
