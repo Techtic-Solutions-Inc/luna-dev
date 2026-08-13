@@ -1,0 +1,74 @@
+export interface SignupRequest {
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  terms_accepted: boolean;
+}
+
+export interface SignupResponseData {
+  id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  name: string;
+  title: string;
+  message: string;
+  description: string;
+  link: string | null;
+  redirect: string;
+}
+
+export interface SignupResponse {
+  success: boolean;
+  message: string;
+  data: SignupResponseData;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponseData {
+  id: string;
+  email: string;
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  title: string;
+  message: string;
+  description: string;
+  link: string;
+  redirect: string;
+}
+
+export interface LoginResponse {
+  success: boolean;
+  message: string;
+  data: LoginResponseData;
+}
+
+export interface ErrorEnvelope {
+  detail?: string;
+  success?: boolean;
+  message?: string;
+  error?: {
+    code: string;
+    details: Record<string, unknown> | null;
+  };
+}
+
+export type ApiResult<T> =
+  | { ok: true; data: T }
+  | { ok: false; error: ErrorEnvelope; status: number };
+
+export function getErrorMessage(error: ErrorEnvelope): string {
+  if (typeof error.detail === 'string' && error.detail.length > 0) {
+    return error.detail;
+  }
+  if (typeof error.message === 'string' && error.message.length > 0) {
+    return error.message;
+  }
+  return 'Something went wrong. Please try again.';
+}
