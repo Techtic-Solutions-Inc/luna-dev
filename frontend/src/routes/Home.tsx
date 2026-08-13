@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { HomeSubscribeForm } from '../components/HomeSubscribeForm';
+import { IMAGES } from '../constants/images';
 import './Home.css';
 
 const NAV_LINKS = [
@@ -14,43 +15,37 @@ const TEMPLATE_CARDS = [
     id: 'house',
     alt: 'Suburban house exterior',
     quote: '[address + times]',
-    image:
-      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=700&q=80',
+    image: IMAGES.templateHouse,
   },
   {
     id: 'coffee',
     alt: 'Matcha and iced coffee with sunglasses',
     quote: "Phone's busy, I'm doing the best I ever have",
-    image:
-      'https://images.unsplash.com/photo-1495474472283-4d41bb188aea?auto=format&fit=crop&w=700&q=80',
+    image: IMAGES.templateCoffee,
   },
   {
     id: 'courtyard',
     alt: 'Modern courtyard with outdoor seating',
     quote: 'Doing showings in [insert neighborhood and city]!',
-    image:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80',
+    image: IMAGES.templateCourtyard,
   },
   {
     id: 'city',
     alt: 'Brick city apartment buildings',
     quote: "If I was moving to [City Name], here's where I'd visit first (as a local)",
-    image:
-      'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=700&q=80',
+    image: IMAGES.templateCity,
   },
   {
     id: 'desk',
     alt: 'Desk with headphones and notepad',
     quote: "here's what I'm working on today",
-    image:
-      'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=700&q=80',
+    image: IMAGES.templateDesk,
   },
   {
     id: 'skyline',
     alt: 'City skyline at dusk',
     quote: 'What You Need To Know About This Market',
-    image:
-      'https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=700&q=80',
+    image: IMAGES.templateSkyline,
   },
 ] as const;
 
@@ -61,8 +56,7 @@ const TESTIMONIALS = [
       'The Ultimate Mind has become my second brain for pricing strategy. It pulls comps and pushes back on my assumptions like a seasoned mentor would.',
     name: 'Marcus Donovan',
     role: 'Keller Williams • Denver, CO',
-    avatar:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80',
+    avatar: IMAGES.avatarMarcus,
   },
   {
     id: 'jordan-a',
@@ -70,8 +64,7 @@ const TESTIMONIALS = [
       'My listings actually look like they belong to a top-1% agent now. Three of my last four clients said the marketing is what sold them on hiring me.',
     name: 'Jordan Hayes',
     role: 'eXp Realty • Nashville, TN',
-    avatar:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80',
+    avatar: IMAGES.avatarJordan,
   },
   {
     id: 'jordan-b',
@@ -79,8 +72,7 @@ const TESTIMONIALS = [
       'Agentwise replaced my entire marketing workflow. What used to take a full Sunday now takes a coffee break — and the content is better than anything I was making in Canva.',
     name: 'Jordan Hayes',
     role: 'eXp Realty • Nashville, TN',
-    avatar:
-      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&q=80',
+    avatar: IMAGES.avatarJordanB,
   },
   {
     id: 'team',
@@ -88,8 +80,7 @@ const TESTIMONIALS = [
       'New agents, team leaders, and large brokerages are using Agentwise to spend less time marketing and more time closing without sacrificing quality.',
     name: 'Ava Mitchell',
     role: 'Team Lead • Austin, TX',
-    avatar:
-      'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80',
+    avatar: IMAGES.avatarAva,
   },
 ] as const;
 
@@ -463,7 +454,7 @@ export function Home() {
         >
           <div className="home-contact__media">
             <img
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80"
+              src={IMAGES.contactHero}
               alt="Real estate professional on a phone call"
             />
             <div className="home-contact__overlay">

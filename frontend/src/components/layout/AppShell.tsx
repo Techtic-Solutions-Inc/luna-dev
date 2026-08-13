@@ -14,6 +14,7 @@ import {
   faStar,
   faXmark,
 } from '../../theme/icons';
+import { IMAGES } from '../../constants/images';
 import './AppShell.css';
 
 interface AppShellProps {
@@ -45,8 +46,7 @@ const STUDIO_NAV = [
 
 const USER = {
   name: 'Joseph Stanley',
-  avatar:
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80',
+  avatar: IMAGES.avatarMarcus,
 } as const;
 
 export function AppShell({ children }: AppShellProps) {

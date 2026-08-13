@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { apiGet } from '../api/client';
+import { IMAGES } from '../constants/images';
 import type { ProfileResponse, UserProfile } from '../types/api';
 import { getErrorMessage } from '../types/api';
 
@@ -15,8 +16,7 @@ const DEFAULT_PROFILE: UserProfile = {
   state: 'District of Columbia',
   city: 'Washington',
   zip: '20004',
-  avatar_url:
-    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&q=80',
+  avatar_url: IMAGES.avatarMarcus,
   member_since: 'March 2024',
 };
 
