@@ -6,19 +6,19 @@ import type { EmailVerificationResponse, ErrorResponse } from '../types/api';
 
 interface EmailVerificationState {
   error: string;
-  isLoading: boolean;
-  isSuccess: boolean;
-  verifyEmail: (email: string) => Promise<void>;
+  loading: boolean;
+  success: boolean;
+  verifyEmail: (email: string) => Promise<boolean>;
 }
 
 export default function useEmailVerification(): EmailVerificationState {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
   const verifyEmail = useCallback(async (email: string) => {
-    setIsLoading(true);
-    setIsSuccess(false);
+    setLoading(true);
+    setSuccess(false);
     setError('');
 
     try {
@@ -26,7 +26,8 @@ export default function useEmailVerification(): EmailVerificationState {
         emailVerifyEndpoint.path,
         { email },
       );
-      setIsSuccess(true);
+      setSuccess(true);
+      return true;
     } catch (requestError: unknown) {
       if (axios.isAxiosError<ErrorResponse>(requestError)) {
         setError(
@@ -36,10 +37,11 @@ export default function useEmailVerification(): EmailVerificationState {
       } else {
         setError('We could not verify your email address. Please try again.');
       }
+      return false;
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   }, []);
 
-  return { error, isLoading, isSuccess, verifyEmail };
+  return { error, loading, success, verifyEmail };
 }

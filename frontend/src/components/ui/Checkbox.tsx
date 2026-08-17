@@ -31,7 +31,7 @@ export default function Checkbox({
         />
         <span
           aria-hidden="true"
-          className="mt-0.5 grid h-[18px] w-[18px] shrink-0 place-items-center rounded-[5px] border border-color-14 text-transparent transition peer-checked:border-accent peer-checked:bg-accent peer-checked:text-color-20 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent"
+          className="mt-0.5 grid h-[18px] w-[18px] shrink-0 place-items-center rounded-[5px] border border-color-14 text-color-20 opacity-0 transition peer-checked:border-accent peer-checked:bg-accent peer-checked:opacity-100 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent"
         >
           <svg
             viewBox="0 0 12 10"
