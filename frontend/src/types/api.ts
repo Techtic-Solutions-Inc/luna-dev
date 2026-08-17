@@ -30,3 +30,12 @@ export interface ErrorResponse {
     details: unknown;
   };
 }
+
+export interface EmailVerificationRequest {
+  email: string;
+}
+
+export interface EmailVerificationResponse {
+  success: boolean;
+  message: string;
+}

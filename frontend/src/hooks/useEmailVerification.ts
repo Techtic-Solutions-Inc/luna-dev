@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { useCallback, useState } from 'react';
 import apiClient from '../lib/api/client';
-import type { ErrorResponse } from '../types/api';
+import { emailVerifyEndpoint } from '../lib/api/contract';
+import type { EmailVerificationResponse, ErrorResponse } from '../types/api';
 
 interface EmailVerificationState {
   error: string;
@@ -21,7 +22,10 @@ export default function useEmailVerification(): EmailVerificationState {
     setError('');
 
     try {
-      await apiClient.post('/api/email/verify', { email });
+      await apiClient.post<EmailVerificationResponse>(
+        emailVerifyEndpoint.path,
+        { email },
+      );
       setIsSuccess(true);
     } catch (requestError: unknown) {
       if (axios.isAxiosError<ErrorResponse>(requestError)) {
