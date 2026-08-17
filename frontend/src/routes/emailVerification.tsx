@@ -129,10 +129,10 @@ export function EmailVerificationForm({
         </p>
       )}
 
-      <div className="mx-auto mt-5 w-full max-w-[230px]">
+      <div className="mt-5 flex w-full justify-center">
         {loading ? (
           <div
-            className="flex h-[53px] w-full items-center justify-center rounded-full bg-accent"
+            className="flex h-[53px] w-full max-w-[230px] shrink-0 items-center justify-center rounded-full bg-accent md:w-[230px]"
             aria-label="Verifying email address"
           >
             <Spinner label="Verifying email address" />
@@ -141,7 +141,7 @@ export function EmailVerificationForm({
           <Button
             type="submit"
             aria-label="Verify email address"
-            className={`h-[53px] text-[18px] font-bold bg-accent text-color-23 hover:bg-accent-hover hover:text-white ${focusStyles}`}
+            className={`h-[53px] w-full max-w-[230px] shrink-0 text-[18px] font-bold bg-accent text-color-23 hover:bg-accent-hover hover:text-white md:w-[230px] ${focusStyles}`}
           >
             Verify Email Address
           </Button>
@@ -208,7 +208,7 @@ export default function EmailVerification() {
             create an account on Agentwise, you can safely ignore this email.
           </p>
 
-          <aside className="mt-10 flex min-h-[113px] flex-col items-start gap-4 rounded-[6px] border border-[#564332] bg-color-36 px-4 py-4 text-left text-accent md:flex-row md:gap-[21px] md:px-[21px] md:py-[17px]">
+          <aside className="mt-10 flex min-h-[113px] flex-col items-start gap-4 rounded-[6px] border border-color-56 bg-color-36 px-4 py-4 text-left text-accent md:flex-row md:gap-[21px] md:px-[21px] md:py-[17px]">
             <FiAlertTriangle
               className="mt-0.5 h-8 w-8 shrink-0 fill-accent stroke-color-36"
               aria-hidden="true"

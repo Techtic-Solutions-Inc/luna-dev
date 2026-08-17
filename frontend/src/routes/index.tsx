@@ -3,7 +3,7 @@ import Home from '../components/features/Home';
 import NotFound from '../components/features/NotFound';
 import SignIn from '../components/features/SignIn';
 import SignUp from '../components/features/SignUp';
-import EmailVerification from './EmailVerification';
+import EmailVerification from './emailVerification';
 
 export default function AppRouter() {
   return (
