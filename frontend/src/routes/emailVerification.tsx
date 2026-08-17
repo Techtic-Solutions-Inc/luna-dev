@@ -1,10 +1,7 @@
 import { type FormEvent, useEffect, useState } from 'react';
-import { FaFacebookF, FaInstagram } from 'react-icons/fa';
-import { FiAlertTriangle, FiMail } from 'react-icons/fi';
+import { FiAlertTriangle } from 'react-icons/fi';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import Button from '../components/ui/Button';
-import Checkbox from '../components/ui/Checkbox';
-import InputField from '../components/ui/InputField';
 import Spinner from '../components/ui/Spinner';
 import useEmailVerification from '../hooks/useEmailVerification';
 
@@ -20,11 +17,7 @@ export function EmailVerificationForm({
   initialEmail,
 }: EmailVerificationFormProps) {
   const navigate = useNavigate();
-  const [email, setEmail] = useState(initialEmail);
-  const [privacyAccepted, setPrivacyAccepted] = useState(false);
-  const [termsAccepted, setTermsAccepted] = useState(false);
-  const [emailError, setEmailError] = useState('');
-  const [consentError, setConsentError] = useState('');
+  const [validationError, setValidationError] = useState('');
   const { error, loading, success, verifyEmail } = useEmailVerification();
 
   useEffect(() => {
@@ -35,104 +28,30 @@ export function EmailVerificationForm({
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const normalizedEmail = email.trim();
-    let isValid = true;
+    const normalizedEmail = initialEmail.trim();
 
-    if (!normalizedEmail) {
-      setEmailError('Email address is required.');
-      isValid = false;
-    } else if (!emailPattern.test(normalizedEmail)) {
-      setEmailError('Enter a valid email address.');
-      isValid = false;
-    } else {
-      setEmailError('');
-    }
-
-    if (!privacyAccepted || !termsAccepted) {
-      setConsentError(
-        'Please accept the Privacy Policy and Terms of Service.',
+    if (!emailPattern.test(normalizedEmail)) {
+      setValidationError(
+        'This verification link is invalid or incomplete. Please use the link from your verification email.',
       );
-      isValid = false;
-    } else {
-      setConsentError('');
+      return;
     }
 
-    if (isValid) {
-      await verifyEmail(normalizedEmail);
-    }
+    setValidationError('');
+    await verifyEmail(normalizedEmail);
   };
 
   return (
     <form
-      className="mx-auto mt-7 w-full max-w-[462px] text-left"
+      className="mx-auto mt-[33px] w-full max-w-[230px]"
       onSubmit={handleSubmit}
       noValidate
       aria-busy={loading}
     >
-      <InputField
-        id="verification-email"
-        label="Verify Email Address"
-        type="email"
-        inputMode="email"
-        autoComplete="email"
-        value={email}
-        error={emailError}
-        disabled={loading}
-        onChange={(event) => {
-          setEmail(event.target.value);
-          setEmailError('');
-        }}
-      />
-
-      <div className="mt-4 space-y-3">
-        <Checkbox
-          id="accept-privacy"
-          checked={privacyAccepted}
-          disabled={loading}
-          onChange={(event) => {
-            setPrivacyAccepted(event.target.checked);
-            setConsentError('');
-          }}
-        >
-          I agree to the{' '}
-          <Link
-            className={`text-accent underline underline-offset-2 hover:text-white ${focusStyles}`}
-            to="/privacy"
-          >
-            Privacy Policy
-          </Link>
-          .
-        </Checkbox>
-        <Checkbox
-          id="accept-terms"
-          checked={termsAccepted}
-          disabled={loading}
-          onChange={(event) => {
-            setTermsAccepted(event.target.checked);
-            setConsentError('');
-          }}
-        >
-          I agree to the{' '}
-          <Link
-            className={`text-accent underline underline-offset-2 hover:text-white ${focusStyles}`}
-            to="/terms"
-          >
-            Terms of Service
-          </Link>
-          .
-        </Checkbox>
-      </div>
-
-      {consentError && (
-        <p className="mt-3 text-xs leading-5 text-color-73" role="alert">
-          {consentError}
-        </p>
-      )}
-
-      <div className="mt-5 flex w-full justify-center">
+      <div className="flex h-[53px] w-full justify-center">
         {loading ? (
           <div
-            className="flex h-[53px] w-full max-w-[230px] shrink-0 items-center justify-center rounded-full bg-accent md:w-[230px]"
+            className="flex h-[53px] w-full items-center justify-center rounded-full bg-accent"
             aria-label="Verifying email address"
           >
             <Spinner label="Verifying email address" />
@@ -141,19 +60,19 @@ export function EmailVerificationForm({
           <Button
             type="submit"
             aria-label="Verify email address"
-            className={`h-[53px] w-full max-w-[230px] shrink-0 text-[18px] font-bold bg-accent text-color-23 hover:bg-accent-hover hover:text-white md:w-[230px] ${focusStyles}`}
+            className={`h-[53px] bg-accent text-[18px] font-bold text-white hover:bg-accent-hover ${focusStyles}`}
           >
             Verify Email Address
           </Button>
         )}
       </div>
 
-      {error && (
+      {(validationError || error) && (
         <p
-          className="mt-4 text-center text-sm leading-5 text-color-73"
+          className="relative left-1/2 mt-3 w-[min(90vw,430px)] -translate-x-1/2 text-center text-sm leading-5 text-color-73"
           role="alert"
         >
-          {error}
+          {validationError || error}
         </p>
       )}
       {success && (
@@ -181,39 +100,57 @@ export default function EmailVerification() {
           />
         </header>
 
-        <section className="flex min-h-[280px] shrink-0 flex-col items-center bg-[radial-gradient(circle_at_73%_42%,rgba(77,66,56,0.44),transparent_52%),linear-gradient(115deg,#160c15_0%,#171111_58%,#191612_100%)] px-4 py-8 text-center md:px-6 md:pb-0 md:pt-[41px]">
+        <section className="flex min-h-[280px] shrink-0 flex-col items-center bg-[radial-gradient(circle_at_73%_42%,rgba(77,66,56,0.44),transparent_52%),linear-gradient(115deg,#160c15_0%,#171111_58%,#191612_100%)] px-4 py-8 text-center sm:px-6 sm:pb-0 sm:pt-[41px]">
           <span className="grid h-[62px] w-[62px] shrink-0 place-items-center rounded-full bg-accent text-white">
-            <FiMail className="h-8 w-8 stroke-[1.7]" aria-hidden="true" />
+            <svg
+              viewBox="0 0 32 32"
+              className="h-8 w-8"
+              aria-hidden="true"
+            >
+              <rect
+                x="1"
+                y="5"
+                width="30"
+                height="23"
+                rx="3.5"
+                className="fill-white"
+              />
+              <path
+                d="m3 8 13 8 13-8"
+                className="fill-none stroke-accent stroke-[2]"
+              />
+            </svg>
           </span>
-          <h1 className="mt-[18px] font-['EB_Garamond'] text-[28px] font-medium leading-[36px] text-white md:text-[32px] md:leading-[42px]">
+          <h1 className="mt-[18px] font-['EB_Garamond'] text-[28px] font-medium leading-[36px] text-white sm:text-[32px] sm:leading-[42px]">
             Verify Your Email Address
           </h1>
-          <p className="mt-5 max-w-[620px] text-base leading-[26px] md:text-[18px] md:leading-[29px]">
+          <p className="mt-5 max-w-[620px] text-base leading-[26px] sm:text-[18px] sm:leading-[29px]">
             You&apos;re one step away from accessing your Agentwise workspace.
             Click the button below to confirm your email.
           </p>
         </section>
 
-        <section className="flex flex-1 flex-col px-4 pb-8 pt-8 text-center md:px-[31px] md:pb-[41px] md:pt-10">
-          <p className="text-base leading-7 md:text-[18px]">Hi {firstName},</p>
-          <p className="mx-auto mt-[30px] max-w-[548px] text-base leading-[26px] md:text-[18px] md:leading-[29px]">
+        <section className="flex flex-1 flex-col px-4 pb-8 pt-8 text-center sm:px-[31px] sm:pb-[41px] sm:pt-10">
+          <p className="text-base leading-7 sm:text-[18px]">Hi {firstName},</p>
+          <p className="mx-auto mt-[30px] max-w-[538px] text-base leading-[26px] sm:text-[18px] sm:leading-[29px]">
             Thanks for registering on the Agentwise portal. To activate your
-            account and get started, please verify your email address below.
+            account and get started, please verify your email address by
+            clicking the button below.
           </p>
 
           <EmailVerificationForm initialEmail={initialEmail} />
 
-          <p className="mx-auto mt-[21px] max-w-[555px] text-[15px] leading-[25px] md:text-base md:leading-[27px]">
+          <p className="mx-auto mt-[21px] max-w-[555px] text-[15px] leading-[25px] sm:text-base sm:leading-[27px]">
             This verification link will expire in 24 hours. If you didn&apos;t
             create an account on Agentwise, you can safely ignore this email.
           </p>
 
-          <aside className="mt-10 flex min-h-[113px] flex-col items-start gap-4 rounded-[6px] border border-color-56 bg-color-36 px-4 py-4 text-left text-accent md:flex-row md:gap-[21px] md:px-[21px] md:py-[17px]">
+          <aside className="mt-10 flex min-h-[113px] flex-col items-start gap-4 rounded-[6px] border border-color-56 bg-color-36 px-4 py-4 text-left text-accent sm:flex-row sm:gap-[21px] sm:px-[21px] sm:py-[17px]">
             <FiAlertTriangle
               className="mt-0.5 h-8 w-8 shrink-0 fill-accent stroke-color-36"
               aria-hidden="true"
             />
-            <p className="text-[15px] leading-[26px]">
+            <p className="text-[15px] leading-[26px] sm:pr-5">
               Never share this link with anyone. Agentwise staff will never ask
               you to forward this email. If you suspect unauthorised access,
               contact{' '}
@@ -247,31 +184,7 @@ export default function EmailVerification() {
             </Link>
           </nav>
 
-          <div
-            className="mt-3 flex justify-center gap-2"
-            aria-label="Agentwise social media"
-          >
-            <a
-              className={`grid h-8 w-8 place-items-center rounded-full text-color-14 hover:text-white ${focusStyles}`}
-              href="https://www.facebook.com/agentwisemarketing"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Agentwise on Facebook"
-            >
-              <FaFacebookF aria-hidden="true" />
-            </a>
-            <a
-              className={`grid h-8 w-8 place-items-center rounded-full text-color-14 hover:text-white ${focusStyles}`}
-              href="https://www.instagram.com/agentwisemarketing"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Agentwise on Instagram"
-            >
-              <FaInstagram aria-hidden="true" />
-            </a>
-          </div>
-
-          <p className="mt-3">
+          <p className="mt-[19px]">
             © 2026 Agentwise Inc. · All rights reserved.
             <br />
             You&apos;re receiving this because you registered at agentwise.io
