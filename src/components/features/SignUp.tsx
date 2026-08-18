@@ -78,7 +78,7 @@ export default function SignUp() {
         last_name: values.lastName.trim(),
         email: values.email.trim(),
         password: values.password,
-        accept_terms: values.acceptTerms,
+        terms_accepted: values.acceptTerms,
       });
       setRegisteredUser(response.data);
     } catch (error: unknown) {
