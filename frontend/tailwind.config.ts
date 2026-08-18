@@ -1,0 +1,33 @@
+import type { Config } from 'tailwindcss';
+import { colors, fontSize, spacing } from './src/theme/tokens';
+import { breakpoints } from './src/theme/breakpoints';
+
+export default {
+  content: ['./index.html', './src/**/*.{ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        primary: colors['color-primary'],
+        accent: colors.accent,
+        canvas: colors['color-16'],
+      },
+      spacing: {
+        md: spacing['spacing-md'],
+      },
+      fontSize: {
+        lg: [fontSize['font-size-lg'], { lineHeight: '28px' }],
+      },
+      fontFamily: {
+        body: ['Almarai', 'sans-serif'],
+        display: ['EB Garamond', 'serif'],
+        script: ['Kalam', 'cursive'],
+      },
+      screens: {
+        sm: breakpoints.mobile,
+        md: breakpoints.tablet,
+        lg: breakpoints.desktop,
+      },
+    },
+  },
+  plugins: [],
+} satisfies Config;
