@@ -175,7 +175,8 @@ describe('DashboardRoute states', () => {
     expect(
       await screen.findByText('No analytics are available yet.'),
     ).toBeInTheDocument();
-    expect(screen.getAllByText('No scheduled posts yet.').length).toBeGreaterThan(0);
+    expect(screen.getByText('No scheduled posts this week.')).toBeInTheDocument();
+    expect(screen.getByText('No scheduled posts yet.')).toBeInTheDocument();
     expect(screen.getByText('No announcements yet.')).toBeInTheDocument();
     expect(screen.getByText('No recent activity yet.')).toBeInTheDocument();
   });
@@ -189,13 +190,17 @@ describe('DashboardRoute states', () => {
     expect(screen.getByText('Your Tools')).toBeInTheDocument();
     expect(screen.getByText('Your Content Calendar')).toBeInTheDocument();
     expect(screen.getByText('Recent Activity')).toBeInTheDocument();
-    expect(screen.getByText('Announcements')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Announcements' }),
+    ).toBeInTheDocument();
     expect(screen.getByText('312')).toBeInTheDocument();
     expect(screen.getByText('247')).toBeInTheDocument();
     expect(
       screen.getByText('Spring listing template pack is live'),
     ).toBeInTheDocument();
-    expect(screen.getByText('Market update — Austin Q2')).toBeInTheDocument();
+    expect(screen.getAllByText('Market update — Austin Q2').length).toBeGreaterThan(
+      0,
+    );
   });
 
   it('posts a new announcement', async () => {
@@ -209,10 +214,13 @@ describe('DashboardRoute states', () => {
     fireEvent.click(screen.getByLabelText('Post announcement'));
 
     await waitFor(() => {
-      expect(mockedCreateAnnouncement).toHaveBeenCalledWith({
-        title: 'Live workshop',
-        description: '',
-      });
+      expect(mockedCreateAnnouncement).toHaveBeenCalledWith(
+        {
+          title: 'Live workshop',
+          description: '',
+        },
+        expect.anything(),
+      );
     });
   });
 });

@@ -38,7 +38,12 @@ export function useProfileDownloads(): UseProfileDownloadsResult {
   });
 
   const reDownloadMutation = useMutation({
-    mutationFn: (id: string) => reDownloadProfileFile({ id }),
+    mutationFn: (item: ProfileDownloadItem) =>
+      reDownloadProfileFile({
+        id: item.id,
+        url: item.url,
+        title: item.title,
+      }),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: profileDownloadsQueryKey,
@@ -53,15 +58,26 @@ export function useProfileDownloads(): UseProfileDownloadsResult {
     error: query.error ? getProfileDownloadsErrorMessage(query.error) : null,
     query,
     reDownload: async (id) => {
+      const item = query.data?.items.find((entry) => entry.id === id) ?? {
+        id,
+        title: '',
+        file_type: '',
+        size: '',
+        date: '',
+        created_at: '',
+        updated_at: '',
+        url: '',
+      };
+
       try {
-        await reDownloadMutation.mutateAsync(id);
+        await reDownloadMutation.mutateAsync(item);
         return true;
       } catch {
         return false;
       }
     },
     reDownloadingId: reDownloadMutation.isPending
-      ? (reDownloadMutation.variables ?? null)
+      ? (reDownloadMutation.variables?.id ?? null)
       : null,
     isReDownloading: reDownloadMutation.isPending,
     mutationError: reDownloadMutation.error

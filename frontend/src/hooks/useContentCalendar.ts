@@ -63,7 +63,10 @@ export function useContentCalendar(
   });
 
   const invalidateCalendar = async () => {
-    await queryClient.invalidateQueries({ queryKey: contentCalendarQueryKey });
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: contentCalendarQueryKey }),
+      queryClient.invalidateQueries({ queryKey: contentCalendarEntriesQueryKey }),
+    ]);
   };
 
   const createMutation = useMutation({

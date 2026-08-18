@@ -21,7 +21,7 @@ export default function ProfileLayout({
 }: ProfileLayoutProps) {
   return (
     <AppShell creditLoading={creditLoading}>
-      <div className="mx-auto w-full max-w-[1120px]">
+      <div className="mx-auto w-full max-w-[1120px] rounded-[24px] bg-color-103 px-5 py-6 md:px-8 md:py-8">
         <ProfileHero
           loading={loading}
           displayName={displayName}

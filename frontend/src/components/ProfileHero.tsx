@@ -119,12 +119,12 @@ export default function ProfileHero({
             <img
               src={avatarUrl}
               alt={`${displayName} profile photo`}
-              className="h-24 w-24 rounded-full object-cover"
+              className="h-24 w-24 rounded-full object-cover ring-2 ring-primary"
             />
           ) : (
             <span
               aria-hidden="true"
-              className="flex h-24 w-24 items-center justify-center rounded-full bg-[#3a322c] font-display text-[28px] text-[#F8F2EB]"
+              className="flex h-24 w-24 items-center justify-center rounded-full bg-[#3a322c] font-display text-[28px] text-[#F8F2EB] ring-2 ring-primary"
             >
               {getInitials(displayName)}
             </span>

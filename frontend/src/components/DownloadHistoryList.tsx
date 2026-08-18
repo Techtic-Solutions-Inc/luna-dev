@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { ProfileDownloadItem } from '../types/api';
 import { formatDownloadMeta } from '../lib/profileDownloadsDisplay';
-import { ChevronLeftIcon, ChevronRightIcon, FileIcon } from './icons';
+import { ChevronLeftIcon, ChevronRightIcon, ClipboardIcon } from './icons';
 import ReDownloadButton from './ReDownloadButton';
 
 export const DOWNLOAD_HISTORY_PAGE_SIZE = 5;
@@ -18,26 +18,27 @@ interface DownloadHistoryListProps {
 function HistorySkeleton() {
   return (
     <div
-      className="rounded-[16px] bg-[#25211e] p-5 md:p-6"
+      className="rounded-[16px] bg-color-101 p-5 md:px-6 md:py-6"
       aria-busy="true"
       aria-label="Loading download history"
     >
+      <span className="sr-only">Loading download history</span>
       <div className="mb-5 flex items-center justify-between">
         <div className="h-6 w-44 animate-pulse rounded bg-white/10" />
         <div className="h-8 w-12 animate-pulse rounded bg-white/10" />
       </div>
-      <div className="space-y-md">
+      <div className="grid grid-cols-1 gap-md">
         {Array.from({ length: DOWNLOAD_HISTORY_PAGE_SIZE }).map((_, index) => (
           <div
             key={index}
-            className="flex items-center gap-4 rounded-[12px] bg-[#1c1815] px-5 py-5"
+            className="flex min-h-[80px] items-center gap-4 rounded-[16px] bg-color-102 px-5 py-4"
           >
             <div className="h-11 w-11 shrink-0 animate-pulse rounded-full bg-white/10" />
             <div className="min-w-0 flex-1">
               <div className="h-5 w-2/3 animate-pulse rounded bg-white/10" />
               <div className="mt-3 h-3 w-48 animate-pulse rounded bg-white/10" />
             </div>
-            <div className="h-10 w-28 shrink-0 animate-pulse rounded-full bg-white/10" />
+            <div className="h-10 w-[146px] shrink-0 animate-pulse rounded-full bg-white/10" />
           </div>
         ))}
       </div>
@@ -78,7 +79,7 @@ export default function DownloadHistoryList({
   return (
     <section
       aria-labelledby="download-history-heading"
-      className="rounded-[16px] bg-[#25211e] p-5 md:px-6 md:py-6"
+      className="rounded-[16px] bg-color-101 p-5 md:px-6 md:py-6"
     >
       <div className="mb-5 flex items-end justify-between gap-4">
         <h2
@@ -105,19 +106,19 @@ export default function DownloadHistoryList({
           </p>
         )
       ) : (
-        <ul className="space-y-md">
+        <ul className="grid grid-cols-1 gap-md">
           {pageItems.map((item) => {
             const meta = formatDownloadMeta(item);
 
             return (
               <li key={item.id}>
-                <article className="flex flex-col gap-3 rounded-[12px] border border-white/5 bg-[#1c1815] px-4 py-4 sm:flex-row sm:items-center sm:gap-4 sm:px-5 sm:py-5">
+                <article className="box-border flex min-h-[80px] flex-col gap-3 rounded-[16px] bg-color-102 px-4 py-4 sm:flex-row sm:items-center sm:gap-4 sm:px-5">
                   <div className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
                     <span
                       aria-hidden="true"
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#14110f] text-[#F8F2EB]"
+                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-primary/35 bg-[#2a241f] text-[#F8F2EB]"
                     >
-                      <FileIcon className="h-[18px] w-[18px]" />
+                      <ClipboardIcon className="h-[18px] w-[18px]" />
                     </span>
                     <div className="min-w-0">
                       <h3 className="truncate text-lg font-bold leading-6 text-[#F8F2EB]">
@@ -143,8 +144,8 @@ export default function DownloadHistoryList({
       )}
 
       {items.length > 0 ? (
-        <div className="mt-5 flex items-center justify-between gap-3">
-          <p className="text-[12px] text-[#959595]">
+        <div className="mt-5 flex items-center justify-end gap-3">
+          <p className="text-[12px] text-[#F8F2EB]" aria-live="polite">
             Showing {showingCount} of {resolvedTotal.toLocaleString('en-US')}
           </p>
           <div className="flex items-center gap-1">

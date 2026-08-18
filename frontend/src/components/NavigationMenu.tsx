@@ -97,7 +97,7 @@ export default function NavigationMenu({
   const onLogout = () => {
     localStorage.removeItem('token');
     onClose?.();
-    navigate('/content-calendar');
+    navigate('/dashboard');
   };
 
   return (
@@ -107,7 +107,7 @@ export default function NavigationMenu({
     >
       <div className="mb-8 shrink-0 px-2">
         <NavLink
-          to="/content-calendar"
+          to="/dashboard"
           onClick={onClose}
           className="rounded-sm text-white focus-ring"
           aria-label="Agentwise home"

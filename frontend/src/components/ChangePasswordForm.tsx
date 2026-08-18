@@ -13,7 +13,7 @@ import {
 import { CloseIcon, EyeIcon, EyeOffIcon } from './icons';
 
 const inputClass =
-  'box-border h-[52px] w-full rounded-full border border-white/20 bg-[#2e2c29] px-5 pr-12 text-[14px] leading-5 text-[#F8F2EB] placeholder:text-[#959595] transition-colors duration-150 hover:border-white/30 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-60';
+  'box-border h-[52px] w-full rounded-full border border-color-98 bg-color-96 px-5 pr-12 text-[14px] leading-5 text-color-32 placeholder:text-color-14 transition-colors duration-150 hover:border-color-53 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-60';
 
 const secondaryButtonClass =
   'focus-ring inline-flex h-12 items-center justify-center rounded-full bg-white/30 px-8 text-[14px] text-white transition-colors duration-150 hover:bg-white/40 active:bg-white/35 disabled:cursor-not-allowed disabled:opacity-50';

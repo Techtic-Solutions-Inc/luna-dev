@@ -13,10 +13,10 @@ import type { ProfileContentItem, ProfileContentPayload } from '../types/api';
 import { CloseIcon } from './icons';
 
 const inputClass =
-  'box-border mt-2 h-12 w-full rounded-[12px] border border-white/10 bg-[#14100d] px-4 text-sm text-[#F8F2EB] transition-colors duration-150 placeholder:text-[#646261] hover:border-white/20 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
+  'box-border mt-2 h-12 w-full rounded-[12px] border border-color-22 bg-color-20 px-4 text-sm text-color-32 transition-colors duration-150 placeholder:text-color-94 hover:border-color-98 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
 
 const textareaClass =
-  'box-border mt-2 min-h-24 w-full rounded-[12px] border border-white/10 bg-[#14100d] px-4 py-3 text-sm text-[#F8F2EB] transition-colors duration-150 placeholder:text-[#646261] hover:border-white/20 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
+  'box-border mt-2 min-h-24 w-full rounded-[12px] border border-color-22 bg-color-20 px-4 py-3 text-sm text-color-32 transition-colors duration-150 placeholder:text-color-94 hover:border-color-98 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
 
 function toLocalInputValue(value: string): string {
   const date = new Date(value);

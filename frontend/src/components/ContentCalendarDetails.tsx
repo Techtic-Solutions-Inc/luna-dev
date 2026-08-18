@@ -25,10 +25,10 @@ const USAGE_POINTS = [
 ] as const;
 
 const inputClass =
-  'box-border h-12 w-full rounded-full border border-[#E0D1C0] bg-white px-4 text-sm text-[#231A17] transition-colors duration-200 placeholder:text-[#A69789] focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
+  'box-border h-12 w-full rounded-full border border-color-97 bg-white px-4 text-sm text-color-99 transition-colors duration-200 placeholder:text-color-100 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
 
 const textareaClass =
-  'mt-2 box-border min-h-24 w-full rounded-[20px] border border-[#E0D1C0] bg-white px-4 py-3 text-sm text-[#231A17] placeholder:text-[#A69789] focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
+  'mt-2 box-border min-h-24 w-full rounded-[20px] border border-color-97 bg-white px-4 py-3 text-sm text-color-99 placeholder:text-color-100 focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
 
 function toLocalInputValue(value: string): string {
   const date = new Date(value);

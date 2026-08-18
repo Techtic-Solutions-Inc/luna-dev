@@ -196,6 +196,16 @@ export function FileIcon(props: IconProps) {
   );
 }
 
+export function ClipboardIcon(props: IconProps) {
+  return (
+    <Base {...props}>
+      <rect x="7" y="6" width="10" height="14" rx="2" />
+      <rect x="9" y="3.2" width="6" height="3.4" rx="1" />
+      <path d="M9.5 11.2h5M9.5 14.4h3.2" />
+    </Base>
+  );
+}
+
 export function SlidersIcon(props: IconProps) {
   return (
     <Base {...props}>

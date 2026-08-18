@@ -201,11 +201,11 @@ export async function reDownloadProfileFile(
 ): Promise<void> {
   const response = await apiClient.post<
     ReDownloadResponse | Record<string, unknown>
-  >('/api/profile/downloads/re-download', payload);
+  >('/api/profile/downloads/re-download', { id: payload.id });
 
-  const url = extractDownloadUrl(response.data);
+  const url = extractDownloadUrl(response.data) || payload.url || '';
 
   if (url) {
-    triggerBrowserDownload(url);
+    triggerBrowserDownload(url, payload.title);
   }
 }

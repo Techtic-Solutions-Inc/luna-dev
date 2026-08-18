@@ -1,5 +1,6 @@
 import DownloadHistoryList from '../components/DownloadHistoryList';
 import ProfileLayout from '../components/ProfileLayout';
+import { useProfile } from '../hooks/useProfile';
 import { useProfileDownloads } from '../hooks/useProfileDownloads';
 
 export default function ProfileDownloadsRoute() {
@@ -13,11 +14,20 @@ export default function ProfileDownloadsRoute() {
     reDownloadingId,
     mutationError,
   } = useProfileDownloads();
+  const profile = useProfile();
 
   const alertMessage = error ?? mutationError;
+  const displayName =
+    profile.data?.name ||
+    `${profile.data?.first_name ?? ''} ${profile.data?.last_name ?? ''}`.trim();
 
   return (
-    <ProfileLayout creditLoading={loading}>
+    <ProfileLayout
+      creditLoading={loading}
+      displayName={displayName || undefined}
+      avatarUrl={profile.data?.avatar || undefined}
+      memberSince={profile.data?.created_at || undefined}
+    >
       {alertMessage ? (
         <div
           role="alert"

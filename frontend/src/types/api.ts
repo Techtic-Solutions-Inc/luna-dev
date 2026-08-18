@@ -113,6 +113,8 @@ export interface ProfileDownloadListResponse {
 
 export interface ReDownloadPayload {
   id: string;
+  url?: string;
+  title?: string;
 }
 
 export interface ReDownloadResponse {

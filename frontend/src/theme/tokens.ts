@@ -95,6 +95,14 @@ export const colors = {
   'color-93': '#bebbb9',
   'color-94': '#646261',
   'color-95': '#272727',
+  'color-96': '#2e2c29',
+  'color-97': '#e0d1c0',
+  'color-98': '#ffffff33',
+  'color-99': '#231a17',
+  'color-100': '#a69789',
+  'color-101': '#26231f',
+  'color-102': '#332e28',
+  'color-103': '#1f1b17',
 } as const;
 
 type FontToken = {

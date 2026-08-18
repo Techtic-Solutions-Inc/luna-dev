@@ -135,52 +135,64 @@ export default function DashboardOverview({
         </p>
       </header>
 
-      <form onSubmit={onGenerate} className="space-y-4">
-        <label className="relative block">
-          <span className="sr-only">
-            Generate captions, listing descriptions, email blasts, and Reels
-            scripts in your brand voice
-          </span>
-          <SearchIcon className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8A7F73]" />
-          <input
-            type="search"
-            value={prompt}
-            onChange={(event) => onPromptChange(event.target.value)}
-            placeholder="Generate captions, listing descriptions, email blasts, and Reels scripts in your brand voice."
-            aria-label="Generate captions, listing descriptions, email blasts, and Reels scripts in your brand voice"
-            className="box-border h-12 w-full rounded-full border border-white/10 bg-[#121110] py-3 pl-11 pr-4 text-[14px] text-[#F8F2EB] transition-colors duration-200 placeholder:text-[#7A7068] focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-          />
-        </label>
-        <div className="flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={() => navigate('/content-calendar')}
-            className="focus-ring inline-flex h-10 items-center rounded-full bg-primary px-5 text-[13px] text-[#0b0b0b] transition-colors duration-200 hover:bg-[#d4b089]"
-            aria-label="Plan my week"
-          >
-            <SparkIcon className="mr-2 h-3.5 w-3.5" />
-            Plan My Week
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate('/content-calendar')}
-            className="focus-ring inline-flex h-10 items-center rounded-full border border-white/10 bg-white/5 px-5 text-[13px] text-[#F8F2EB] transition-colors duration-200 hover:bg-white/10"
-            aria-label="Open my content calendar"
-          >
-            <CalendarIcon className="mr-2 h-3.5 w-3.5" />
-            My Content Calendar
-          </button>
-        </div>
-      </form>
+      <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#14100d] px-5 py-5 sm:px-6 sm:py-6">
+        <div
+          className="pointer-events-none absolute -right-10 top-0 h-64 w-64 rounded-full bg-[#f332f6]/20"
+          style={{ filter: 'blur(120px)' }}
+          aria-hidden="true"
+        />
+        <form onSubmit={onGenerate} className="relative space-y-4">
+          <label className="relative block">
+            <span className="sr-only">
+              Generate captions, listing descriptions, email blasts, and Reels
+              scripts in your brand voice
+            </span>
+            <SearchIcon className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#8A7F73]" />
+            <input
+              type="search"
+              value={prompt}
+              onChange={(event) => onPromptChange(event.target.value)}
+              placeholder="Generate captions, listing descriptions, email blasts, and Reels scripts in your brand voice."
+              aria-label="Generate captions, listing descriptions, email blasts, and Reels scripts in your brand voice"
+              className="box-border h-12 w-full rounded-full border border-white/10 bg-[#121110] py-3 pl-11 pr-4 text-[14px] text-[#F8F2EB] transition-colors duration-200 placeholder:text-[#7A7068] focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            />
+            <button type="submit" className="sr-only">
+              Generate with Ultimate Mind
+            </button>
+          </label>
+          <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={() => navigate('/content-calendar')}
+              className="focus-ring inline-flex h-10 items-center rounded-full bg-primary px-5 text-[13px] text-[#0b0b0b] transition-colors duration-200 hover:bg-[#d4b089]"
+              aria-label="Plan my week"
+            >
+              <SparkIcon className="mr-2 h-3.5 w-3.5" />
+              Plan My Week
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/content-calendar')}
+              className="focus-ring inline-flex h-10 items-center rounded-full border border-white/10 bg-white/5 px-5 text-[13px] text-[#F8F2EB] transition-colors duration-200 hover:bg-white/10"
+              aria-label="Open my content calendar"
+            >
+              <CalendarIcon className="mr-2 h-3.5 w-3.5" />
+              My Content Calendar
+            </button>
+          </div>
+        </form>
 
-      <ContentList
-        items={weekPosts}
-        variant="week"
-        dateStyle="month-day"
-        loading={calendar.loading}
-        emptyMessage="No scheduled posts this week."
-        onItemClick={onOpenItem}
-      />
+        <div className="relative mt-6">
+          <ContentList
+            items={weekPosts}
+            variant="week"
+            dateStyle="month-day"
+            loading={calendar.loading}
+            emptyMessage="No scheduled posts this week."
+            onItemClick={onOpenItem}
+          />
+        </div>
+      </div>
 
       {analytics.loading ? (
         <div

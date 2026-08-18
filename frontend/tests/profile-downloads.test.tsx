@@ -19,13 +19,26 @@ vi.mock('../src/lib/api/profileDownloads', async () => {
   };
 });
 
+vi.mock('../src/lib/api/profile', async () => {
+  const actual = await vi.importActual<typeof import('../src/lib/api/profile')>(
+    '../src/lib/api/profile',
+  );
+
+  return {
+    ...actual,
+    getProfile: vi.fn(),
+  };
+});
+
 import {
   getProfileDownloads,
   reDownloadProfileFile,
 } from '../src/lib/api/profileDownloads';
+import { getProfile } from '../src/lib/api/profile';
 
 const mockedGetProfileDownloads = vi.mocked(getProfileDownloads);
 const mockedReDownloadProfileFile = vi.mocked(reDownloadProfileFile);
+const mockedGetProfile = vi.mocked(getProfile);
 
 const sampleItem: ProfileDownloadItem = {
   id: '1',
@@ -74,6 +87,24 @@ describe('ProfileDownloadsRoute states', () => {
     mockedGetProfileDownloads.mockReset();
     mockedReDownloadProfileFile.mockReset();
     mockedReDownloadProfileFile.mockResolvedValue(undefined);
+    mockedGetProfile.mockReset();
+    mockedGetProfile.mockResolvedValue({
+      id: 'user-1',
+      first_name: 'Joseph',
+      last_name: 'Stanley',
+      email: 'joseph.stanley@example.com',
+      mobile_number: '',
+      bio: '',
+      street: '',
+      city: '',
+      state: '',
+      zip: '',
+      country: '',
+      time_zone: '',
+      name: 'Joseph Stanley',
+      avatar: '',
+      created_at: '2024-03-12T12:00:00.000Z',
+    });
   });
 
   it('renders loading skeletons', async () => {
@@ -126,6 +157,7 @@ describe('ProfileDownloadsRoute states', () => {
       screen.getByRole('heading', { name: 'Download History' }),
     ).toBeInTheDocument();
     expect(screen.getByText('312')).toBeInTheDocument();
+    expect(screen.getAllByText('Joseph Stanley').length).toBeGreaterThan(0);
     expect(screen.getByText('Guides · 4.2 MB · Jun 04, 2026')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Downloads' })).toHaveClass(
       'text-primary',
@@ -135,6 +167,7 @@ describe('ProfileDownloadsRoute states', () => {
         name: 'Re-download Luxury Listing Guide — 2026',
       }),
     ).toBeInTheDocument();
+    expect(screen.getByText('Showing 1 of 312')).toBeInTheDocument();
   });
 
   it('triggers a re-download request', async () => {
@@ -152,7 +185,37 @@ describe('ProfileDownloadsRoute states', () => {
     fireEvent.click(button);
 
     await waitFor(() => {
-      expect(mockedReDownloadProfileFile).toHaveBeenCalledWith({ id: '1' });
+      expect(mockedReDownloadProfileFile).toHaveBeenCalledWith({
+        id: '1',
+        url: '',
+        title: 'Luxury Listing Guide — 2026',
+      });
     });
+  });
+
+  it('paginates download history', async () => {
+    mockedGetProfileDownloads.mockResolvedValue({
+      items: [
+        sampleItem,
+        { ...sampleItem, id: '2', title: 'Open House Story Pack' },
+        { ...sampleItem, id: '3', title: 'Just Sold — Reel Template' },
+        { ...sampleItem, id: '4', title: 'Buyer Consultation Checklist' },
+        { ...sampleItem, id: '5', title: 'Neighborhood Postcard Set' },
+        { ...sampleItem, id: '6', title: 'Listing Video B-Roll' },
+      ],
+      total: 6,
+    });
+
+    renderProfileDownloads();
+
+    expect(await screen.findByText('Luxury Listing Guide — 2026')).toBeInTheDocument();
+    expect(screen.queryByText('Listing Video B-Roll')).not.toBeInTheDocument();
+    expect(screen.getByText('Showing 5 of 6')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Next page' }));
+
+    expect(await screen.findByText('Listing Video B-Roll')).toBeInTheDocument();
+    expect(screen.queryByText('Luxury Listing Guide — 2026')).not.toBeInTheDocument();
+    expect(screen.getByText('Showing 1 of 6')).toBeInTheDocument();
   });
 });

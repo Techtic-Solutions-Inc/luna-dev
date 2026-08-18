@@ -22,7 +22,7 @@ export default function ReDownloadButton({
       disabled={isDisabled}
       aria-label={`Re-download ${title}`}
       aria-busy={loading || undefined}
-      className="focus-ring inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-primary px-4 text-[13px] leading-none text-primary transition-colors duration-150 hover:bg-primary/10 active:bg-primary/15 disabled:cursor-not-allowed disabled:opacity-50"
+      className="focus-ring box-border inline-flex h-10 min-w-[146px] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-primary bg-transparent px-4 text-[13px] leading-none text-primary transition-colors duration-150 hover:bg-primary/10 active:bg-primary/15 disabled:cursor-not-allowed disabled:opacity-50"
     >
       <DownloadIcon className="h-3.5 w-3.5" />
       Re-download

@@ -2,6 +2,10 @@ import type { Config } from 'tailwindcss';
 import { colors, fontSize, spacing } from './src/theme/tokens';
 import { breakpoints } from './src/theme/breakpoints';
 
+const colorTokens = Object.fromEntries(
+  Object.entries(colors).filter(([key]) => key.startsWith('color-')),
+) as Record<string, string>;
+
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
@@ -10,6 +14,7 @@ export default {
         primary: colors['color-primary'],
         accent: colors.accent,
         canvas: colors['color-16'],
+        ...colorTokens,
       },
       spacing: {
         md: spacing['spacing-md'],
