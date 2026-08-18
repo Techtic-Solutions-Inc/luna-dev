@@ -39,7 +39,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r border-white/5 bg-[#090909] px-3 py-5 transition-transform lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div className="mb-8 flex items-center justify-between px-2">
-          <Link to="/" className="font-['EB_Garamond'] text-3xl text-white">
+          <Link to="/overview" className="font-['EB_Garamond'] text-3xl text-white">
             Agentwise
           </Link>
           <button
@@ -55,7 +55,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <nav aria-label="Primary navigation" className="space-y-1">
           {navItems.map(({ label, icon: Icon }, index) => (
             <Link
-              to="/"
+              to="/overview"
               key={label}
               onClick={onClose}
               className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-sm ${index === 0 ? 'bg-white/10 text-white' : 'text-[#959595] hover:bg-white/5 hover:text-white'}`}

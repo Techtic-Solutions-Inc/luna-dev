@@ -18,7 +18,7 @@ const marketingImages = [
 function AgentwiseLogo({ dark = false }: { dark?: boolean }) {
   return (
     <a
-      href="/home"
+      href="/"
       className={`inline-block text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d2aa80] ${dark ? 'text-[#d2aa80]' : 'text-white'}`}
       aria-label="Agentwise home"
     >

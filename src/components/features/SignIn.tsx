@@ -84,7 +84,13 @@ export default function SignIn() {
       setIsSuccess(true);
       const destination = response.data.data.redirect;
       window.setTimeout(() => {
-        navigate(destination.startsWith('/') ? destination : '/');
+        navigate(
+          typeof destination === 'string' &&
+            destination.startsWith('/') &&
+            destination !== '/'
+            ? destination
+            : '/overview',
+        );
       }, 700);
     } catch (error: unknown) {
       if (axios.isAxiosError<ErrorResponse>(error)) {

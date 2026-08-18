@@ -12,6 +12,6 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   return isAuthenticated ? (
     <>{children}</>
   ) : (
-    <Navigate to="/" replace state={{ from: location }} />
+    <Navigate to="/signin" replace state={{ from: location }} />
   );
 }
