@@ -4,6 +4,10 @@ import {
   pickString,
   unwrapData,
 } from '@/lib/api/errors';
+import {
+  isProfileApiReady,
+  ProfileApiUnavailableError,
+} from '@/lib/feature-flags';
 
 function normalizeProfile(raw: unknown) {
   if (typeof raw !== 'object' || raw === null) return null;
@@ -39,7 +43,14 @@ function normalizeProfile(raw: unknown) {
 
 export type NormalizedProfile = NonNullable<ReturnType<typeof normalizeProfile>>;
 
+function assertProfileApiReady(): void {
+  if (!isProfileApiReady) {
+    throw new ProfileApiUnavailableError();
+  }
+}
+
 export async function fetchProfile(): Promise<NormalizedProfile | null> {
+  assertProfileApiReady();
   const response = await apiClient.get('/api/profile');
   const data = unwrapData<unknown>(response.data);
   const profile = normalizeProfile(data ?? response.data);
@@ -52,6 +63,7 @@ import type { UpdateProfileRequest } from '@/types/api';
 export async function updateProfile(
   body: UpdateProfileRequest,
 ): Promise<NormalizedProfile | null> {
+  assertProfileApiReady();
   const response = await apiClient.put('/api/profile', body);
   const data = unwrapData<unknown>(response.data);
   const profile = normalizeProfile(data ?? response.data);
@@ -64,6 +76,7 @@ export async function changePassword(body: {
   new_password: string;
   confirm_password: string;
 }): Promise<void> {
+  assertProfileApiReady();
   await apiClient.post('/api/profile/change-password', body);
 }
 
@@ -98,6 +111,9 @@ export function syncProfileToStorage(profile: NormalizedProfile): void {
 }
 
 export function getProfileErrorMessage(error: unknown): string {
+  if (error instanceof ProfileApiUnavailableError) {
+    return error.message;
+  }
   return getApiErrorMessage(
     error,
     'Something went wrong while loading your profile.',

@@ -1,0 +1,13 @@
+{
+  "name": "real-estate-professional",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "build:prod": "npm run build --prefix frontend",
+    "lint": "npm run lint --prefix frontend",
+    "typecheck": "npm run typecheck --prefix frontend",
+    "preview": "npm run preview --prefix frontend",
+    "test": "npm run test --prefix frontend"
+  }
+}

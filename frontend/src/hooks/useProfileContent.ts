@@ -6,6 +6,7 @@ import {
   listProfileContent,
   updateProfileContent,
 } from '@/lib/api/profile-content';
+import { isProfileContentApiReady } from '@/lib/feature-flags';
 import type {
   CreateProfileContentRequest,
   UpdateProfileContentRequest,
@@ -19,6 +20,7 @@ export function useProfileContent() {
   const query = useQuery({
     queryKey: PROFILE_CONTENT_QUERY_KEY,
     queryFn: listProfileContent,
+    enabled: isProfileContentApiReady,
   });
 
   const invalidate = async () => {
@@ -48,7 +50,8 @@ export function useProfileContent() {
 
   return {
     data: query.data ?? [],
-    loading: query.isPending,
+    loading: isProfileContentApiReady && query.isPending,
+    apiReady: isProfileContentApiReady,
     error: query.error ? getProfileContentErrorMessage(query.error) : null,
     refetch: query.refetch,
     createContent: createMutation.mutateAsync,

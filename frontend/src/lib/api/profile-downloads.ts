@@ -1,6 +1,18 @@
 import { apiClient } from '@/lib/api/client';
 import { getApiErrorMessage, pickString, unwrapData } from '@/lib/api/errors';
+import {
+  isProfileDownloadsApiReady,
+  ProfileApiUnavailableError,
+} from '@/lib/feature-flags';
 import type { ProfileDownloadItem } from '@/types/api';
+
+function assertProfileDownloadsApiReady(): void {
+  if (!isProfileDownloadsApiReady) {
+    throw new ProfileApiUnavailableError(
+      'Download history is not available yet.',
+    );
+  }
+}
 
 function normalizeDownloadItem(raw: unknown): ProfileDownloadItem | null {
   if (typeof raw !== 'object' || raw === null) return null;
@@ -45,11 +57,13 @@ function normalizeDownloadList(payload: unknown): ProfileDownloadItem[] {
 }
 
 export async function listProfileDownloads(): Promise<ProfileDownloadItem[]> {
+  assertProfileDownloadsApiReady();
   const response = await apiClient.get('/api/profile/downloads');
   return normalizeDownloadList(response.data);
 }
 
 export async function reDownload(id: string): Promise<string> {
+  assertProfileDownloadsApiReady();
   const response = await apiClient.post('/api/profile/downloads/re-download', {
     id,
   });
@@ -58,6 +72,9 @@ export async function reDownload(id: string): Promise<string> {
 }
 
 export function getDownloadsErrorMessage(error: unknown): string {
+  if (error instanceof ProfileApiUnavailableError) {
+    return error.message;
+  }
   return getApiErrorMessage(
     error,
     'Something went wrong while loading your download history.',
@@ -65,6 +82,9 @@ export function getDownloadsErrorMessage(error: unknown): string {
 }
 
 export function getReDownloadErrorMessage(error: unknown): string {
+  if (error instanceof ProfileApiUnavailableError) {
+    return error.message;
+  }
   return getApiErrorMessage(
     error,
     'Something went wrong while re-downloading this file.',

@@ -15,7 +15,7 @@ const timeFormatter = new Intl.DateTimeFormat('en-US', {
 export const ROW_HEIGHT = 220;
 export const CARD_HEIGHT = 90;
 export const CARD_GAP = 8;
-export const DEFAULT_START_HOUR = 17;
+export const DEFAULT_START_HOUR = 16.75;
 export const DEFAULT_END_HOUR = 19;
 
 export function formatScheduledTime(date: Date): string {
@@ -105,10 +105,13 @@ export function positionPostsInColumn(
 
   const positioned: PositionedPost[] = [];
   let lastBottom = Number.NEGATIVE_INFINITY;
+  const startMinutes = startHour * 60;
 
   for (const post of sorted) {
     const minutesFromStart =
-      post.scheduledAt.getHours() * 60 + post.scheduledAt.getMinutes() - startHour * 60;
+      post.scheduledAt.getHours() * 60 +
+      post.scheduledAt.getMinutes() -
+      startMinutes;
     const rawTop = (minutesFromStart / 60) * ROW_HEIGHT;
     const top = Math.max(rawTop, lastBottom + CARD_GAP);
     positioned.push({ post, top });
@@ -146,16 +149,25 @@ export function groupEntriesByWeek(
 }
 
 export function getHourSlots(startHour: number, endHour: number): number[] {
-  const slots: number[] = [];
-  for (let hour = startHour; hour <= endHour; hour += 1) {
+  if (startHour > endHour) return [];
+
+  const slots: number[] = [startHour];
+  const firstWholeHour = Number.isInteger(startHour)
+    ? startHour + 1
+    : Math.ceil(startHour);
+
+  for (let hour = firstWholeHour; hour <= endHour; hour += 1) {
     slots.push(hour);
   }
+
   return slots;
 }
 
 export function formatHourLabel(hour: number): string {
+  const wholeHour = Math.floor(hour);
+  const minutes = Math.round((hour - wholeHour) * 60);
   const date = new Date();
-  date.setHours(hour, 0, 0, 0);
+  date.setHours(wholeHour, minutes, 0, 0);
   return timeFormatter.format(date);
 }
 
@@ -166,6 +178,17 @@ export const monthYearFormatter = new Intl.DateTimeFormat('en-US', {
 
 export function formatMonthYear(date: Date): string {
   return monthYearFormatter.format(date);
+}
+
+const weekDayFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: 'numeric',
+});
+
+export function formatWeekRange(weekStart: Date, weekEnd: Date): string {
+  const startLabel = weekDayFormatter.format(weekStart);
+  const endLabel = weekDayFormatter.format(weekEnd);
+  return `${startLabel} – ${endLabel}`;
 }
 
 export function formatMemberSince(dateString: string): string {

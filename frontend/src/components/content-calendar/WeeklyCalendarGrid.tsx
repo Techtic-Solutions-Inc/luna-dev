@@ -38,7 +38,9 @@ export function WeeklyCalendarGrid({
       return { startHour: DEFAULT_START_HOUR, endHour: DEFAULT_END_HOUR };
     }
 
-    const hours = scheduledPosts.map((post) => post.scheduledAt.getHours());
+    const hours = scheduledPosts.map(
+      (post) => post.scheduledAt.getHours() + post.scheduledAt.getMinutes() / 60,
+    );
     return {
       startHour: Math.min(DEFAULT_START_HOUR, ...hours),
       endHour: Math.max(DEFAULT_END_HOUR, ...hours),
@@ -50,8 +52,10 @@ export function WeeklyCalendarGrid({
     [hourRange.endHour, hourRange.startHour],
   );
 
-  const gridHeight =
-    Math.max(hourRange.endHour - hourRange.startHour, 1) * ROW_HEIGHT + CARD_HEIGHT;
+  const gridHeight = Math.max(
+    hourSlots.length * ROW_HEIGHT,
+    (hourRange.endHour - hourRange.startHour) * ROW_HEIGHT + CARD_HEIGHT,
+  );
 
   const handlePreviousWeek = () => {
     const next = new Date(weekStart);

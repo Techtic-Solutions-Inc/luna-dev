@@ -51,6 +51,15 @@ export function ContentCalendarContent({
     }
   }, [selectedEntryId]);
 
+  useEffect(() => {
+    if (!loading && !error && activeEntryId && !activeEntry) {
+      setActiveEntryId(null);
+      setDrawerMode('details');
+      onCloseDetails?.();
+      navigate('/content-calendar');
+    }
+  }, [loading, error, activeEntryId, activeEntry, navigate, onCloseDetails]);
+
   const handleCloseDrawer = () => {
     setActiveEntryId(null);
     setDrawerMode('details');
@@ -88,9 +97,14 @@ export function ContentCalendarContent({
 
   const handleDelete = async () => {
     if (!activeEntry) return;
-    await removeEntry(activeEntry.id);
-    handleCloseDrawer();
-    navigate('/content-calendar');
+
+    try {
+      await removeEntry(activeEntry.id);
+      handleCloseDrawer();
+      navigate('/content-calendar');
+    } catch {
+      // mutationError surfaces in the drawer
+    }
   };
 
   return (
@@ -126,6 +140,7 @@ export function ContentCalendarContent({
           mode={drawerMode}
           open
           loading={loading && !activeEntry}
+          error={null}
           isSaving={isSaving}
           isDeleting={isDeleting}
           mutationError={mutationError}

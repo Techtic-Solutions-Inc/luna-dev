@@ -12,12 +12,21 @@ import type {
   DashboardQuestionResponse,
 } from '@/types/api';
 
+function pickOptionalNumber(
+  source: Record<string, unknown>,
+  keys: string[],
+): number | undefined {
+  for (const key of keys) {
+    const value = source[key];
+    if (typeof value === 'number' && Number.isFinite(value)) return value;
+  }
+  return undefined;
+}
+
 function normalizeAnalytics(raw: unknown): DashboardAnalyticsData {
   const defaults: DashboardAnalyticsData = {
     downloads: 0,
     content_generated: 0,
-    credits_used: 1420,
-    credits_limit: 5000,
   };
 
   if (typeof raw !== 'object' || raw === null) return defaults;
@@ -31,20 +40,18 @@ function normalizeAnalytics(raw: unknown): DashboardAnalyticsData {
       'contentGenerated',
       'generated_content',
     ]),
-    credits_used:
-      pickNumber(source, [
-        'credits_used',
-        'creditsUsed',
-        'ai_credits_used',
-        'used',
-      ]) || defaults.credits_used,
-    credits_limit:
-      pickNumber(source, [
-        'credits_limit',
-        'creditsLimit',
-        'ai_credits_total',
-        'limit',
-      ]) || defaults.credits_limit,
+    credits_used: pickOptionalNumber(source, [
+      'credits_used',
+      'creditsUsed',
+      'ai_credits_used',
+      'used',
+    ]),
+    credits_limit: pickOptionalNumber(source, [
+      'credits_limit',
+      'creditsLimit',
+      'ai_credits_total',
+      'limit',
+    ]),
   };
 }
 

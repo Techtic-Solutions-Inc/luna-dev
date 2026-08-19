@@ -2,12 +2,13 @@ import { useEffect, useMemo, useState } from 'react';
 import { ContentHistoryEmptyState } from '@/components/profile/ContentHistoryEmptyState';
 import { ContentHistoryItem } from '@/components/profile/ContentHistoryItem';
 import { ContentHistoryLoadingSkeleton } from '@/components/profile/ContentHistoryLoadingSkeleton';
+import { ProfileFeatureUnavailableState } from '@/components/profile/ProfileFeatureUnavailableState';
 import { ErrorBanner } from '@/components/shared/ErrorBanner';
 import { PAGE_SIZE, PaginationFooter } from '@/components/shared/PaginationFooter';
 import { useProfileContent } from '@/hooks/useProfileContent';
 
 export function ContentHistoryList() {
-  const { data, loading, error, refetch } = useProfileContent();
+  const { data, loading, apiReady, error, refetch } = useProfileContent();
   const [page, setPage] = useState(1);
 
   const paginatedItems = useMemo(() => {
@@ -22,10 +23,20 @@ export function ContentHistoryList() {
     }
   }, [data.length, page]);
 
+  if (!apiReady) {
+    return (
+      <ProfileFeatureUnavailableState
+        variant="standalone"
+        title="Content history unavailable"
+        description="Generated content will appear here once the backend API is ready."
+      />
+    );
+  }
+
   return (
     <section
       aria-labelledby="content-history-heading"
-      className="mt-10 rounded-[16px] border border-white/5 bg-[#1f1b17] p-5 md:rounded-[20px] md:p-6"
+      className="mt-10 rounded-[16px] border border-white/5 bg-profile-surface p-5 md:rounded-[20px] md:p-6"
     >
       <div className="mb-6 flex items-end justify-between gap-4">
         <h2

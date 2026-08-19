@@ -82,8 +82,8 @@ export type ContentCalendarMutationResponse = ApiSuccessResponse<ContentCalendar
 export interface DashboardAnalyticsData {
   content_generated: number;
   downloads: number;
-  credits_used: number;
-  credits_limit: number;
+  credits_used?: number;
+  credits_limit?: number;
 }
 
 export interface DashboardAnnouncement {

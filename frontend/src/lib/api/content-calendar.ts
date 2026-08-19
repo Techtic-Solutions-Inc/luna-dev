@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { apiClient } from '@/lib/api/client';
 import {
   getApiErrorMessage,
@@ -10,6 +11,12 @@ import type {
   CreateContentCalendarEntryRequest,
   UpdateContentCalendarEntryRequest,
 } from '@/types/api';
+
+function isNotFoundOrMethodNotAllowed(error: unknown): boolean {
+  if (!axios.isAxiosError(error)) return false;
+  const status = error.response?.status;
+  return status === 404 || status === 405;
+}
 
 function normalizeCalendarEntry(raw: unknown): ContentCalendarEntry | null {
   if (typeof raw !== 'object' || raw === null) return null;
@@ -54,16 +61,13 @@ function normalizeCalendarList(payload: unknown): ContentCalendarEntry[] {
     .filter((item): item is ContentCalendarEntry => item !== null);
 }
 
-async function listEntriesPrimary(): Promise<ContentCalendarEntry[]> {
-  const response = await apiClient.get('/api/content-calendar/entries');
-  return normalizeCalendarList(response.data);
-}
-
 export async function listEntries(): Promise<ContentCalendarEntry[]> {
   try {
-    return await listEntriesPrimary();
-  } catch {
     const response = await apiClient.get('/api/content-calendar');
+    return normalizeCalendarList(response.data);
+  } catch (error) {
+    if (!isNotFoundOrMethodNotAllowed(error)) throw error;
+    const response = await apiClient.get('/api/content-calendar/entries');
     return normalizeCalendarList(response.data);
   }
 }
@@ -78,10 +82,11 @@ export async function createEntry(
   body: CreateContentCalendarEntryRequest,
 ): Promise<ContentCalendarEntry | null> {
   try {
-    const response = await apiClient.post('/api/content-calendar/entries', body);
-    return unwrapMutationData(response.data);
-  } catch {
     const response = await apiClient.post('/api/content-calendar', body);
+    return unwrapMutationData(response.data);
+  } catch (error) {
+    if (!isNotFoundOrMethodNotAllowed(error)) throw error;
+    const response = await apiClient.post('/api/content-calendar/entries', body);
     return unwrapMutationData(response.data);
   }
 }
@@ -91,19 +96,21 @@ export async function updateEntry(
   body: UpdateContentCalendarEntryRequest,
 ): Promise<ContentCalendarEntry | null> {
   try {
-    const response = await apiClient.put(`/api/content-calendar/entries/${id}`, body);
-    return unwrapMutationData(response.data);
-  } catch {
     const response = await apiClient.put(`/api/content-calendar/${id}`, body);
+    return unwrapMutationData(response.data);
+  } catch (error) {
+    if (!isNotFoundOrMethodNotAllowed(error)) throw error;
+    const response = await apiClient.put(`/api/content-calendar/entries/${id}`, body);
     return unwrapMutationData(response.data);
   }
 }
 
 export async function deleteEntry(id: string): Promise<void> {
   try {
-    await apiClient.delete(`/api/content-calendar/entries/${id}`);
-  } catch {
     await apiClient.delete(`/api/content-calendar/${id}`);
+  } catch (error) {
+    if (!isNotFoundOrMethodNotAllowed(error)) throw error;
+    await apiClient.delete(`/api/content-calendar/entries/${id}`);
   }
 }
 

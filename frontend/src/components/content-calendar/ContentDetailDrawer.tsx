@@ -100,30 +100,40 @@ export function ContentDetailDrawer({
         ref={drawerRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={loading ? undefined : 'calendar-drawer-title'}
-        aria-label={loading ? 'Loading content details' : undefined}
-        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-[640px] flex-col overflow-y-auto bg-[#F7F2EC] shadow-[-24px_0_60px_rgba(0,0,0,0.28)]"
+        aria-labelledby={entry ? 'calendar-drawer-title' : undefined}
+        aria-label={
+          loading
+            ? 'Loading content details'
+            : error && !entry
+              ? 'Content details error'
+              : undefined
+        }
+        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-[640px] flex-col overflow-y-auto bg-calendar-drawer shadow-[-24px_0_60px_rgba(0,0,0,0.28)]"
       >
-        <div className="sticky top-0 z-10 border-b border-[#E5DACE] bg-[#F7F2EC] px-6 py-5 sm:px-8">
+        <div className="sticky top-0 z-10 border-b border-calendar-border bg-calendar-drawer px-6 py-5 sm:px-8">
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0 space-y-3">
               {loading ? (
                 <>
-                  <div className="h-8 w-3/4 animate-pulse rounded bg-[#E5DACE]" />
-                  <div className="h-6 w-32 animate-pulse rounded-full bg-[#EADBCD]" />
+                  <div className="h-8 w-3/4 animate-pulse rounded bg-calendar-border" />
+                  <div className="h-6 w-32 animate-pulse rounded-full bg-calendar-drawer-accent" />
                 </>
               ) : entry ? (
                 <>
                   <h2
                     id="calendar-drawer-title"
-                    className="font-display text-[24px] font-medium leading-tight text-[#211815] sm:text-[28px]"
+                    className="font-display text-[24px] font-medium leading-tight text-calendar-drawer-heading sm:text-[28px]"
                   >
                     {entry.title}
                   </h2>
-                  <span className="inline-flex rounded-full bg-[#EADBCD] px-3 py-1 text-[12px] font-medium text-primary">
+                  <span className="inline-flex rounded-full bg-calendar-drawer-accent px-3 py-1 text-[12px] font-medium text-primary">
                     {formatPlatformLabel(entry)}
                   </span>
                 </>
+              ) : error ? (
+                <h2 className="font-display text-[24px] font-medium leading-tight text-calendar-drawer-heading sm:text-[28px]">
+                  Content unavailable
+                </h2>
               ) : null}
             </div>
             <button
@@ -131,7 +141,7 @@ export function ContentDetailDrawer({
               type="button"
               onClick={onClose}
               aria-label="Close content details"
-              className="focus-ring flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[#322722] transition-colors hover:bg-[#E5DACE]"
+              className="focus-ring flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-calendar-heading transition-colors hover:bg-calendar-border"
             >
               <CloseIcon className="h-5 w-5" />
             </button>
@@ -142,9 +152,7 @@ export function ContentDetailDrawer({
           {loading ? (
             <DetailLoadingSkeleton />
           ) : entry ? (
-            error ? (
-              <DetailErrorState message={error} onClose={onClose} />
-            ) : mode === 'editor' ? (
+            mode === 'editor' ? (
               <ContentEntryEditor
                 entry={entry}
                 onSave={onSave}
@@ -162,6 +170,8 @@ export function ContentDetailDrawer({
                 onNavigate={onNavigate}
               />
             )
+          ) : error ? (
+            <DetailErrorState message={error} onClose={onClose} />
           ) : null}
         </div>
       </aside>

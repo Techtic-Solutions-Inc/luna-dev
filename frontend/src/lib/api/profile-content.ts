@@ -1,10 +1,22 @@
 import { apiClient } from '@/lib/api/client';
 import { getApiErrorMessage, pickString, unwrapData } from '@/lib/api/errors';
+import {
+  isProfileContentApiReady,
+  ProfileApiUnavailableError,
+} from '@/lib/feature-flags';
 import type {
   CreateProfileContentRequest,
   ProfileContentItem,
   UpdateProfileContentRequest,
 } from '@/types/api';
+
+function assertProfileContentApiReady(): void {
+  if (!isProfileContentApiReady) {
+    throw new ProfileApiUnavailableError(
+      'Content history is not available yet.',
+    );
+  }
+}
 
 function normalizeContentItem(raw: unknown): ProfileContentItem | null {
   if (typeof raw !== 'object' || raw === null) return null;
@@ -48,6 +60,7 @@ function unwrapMutationData(payload: unknown): ProfileContentItem | null {
 }
 
 export async function listProfileContent(): Promise<ProfileContentItem[]> {
+  assertProfileContentApiReady();
   const response = await apiClient.get('/api/profile/content');
   return normalizeContentList(response.data);
 }
@@ -55,6 +68,7 @@ export async function listProfileContent(): Promise<ProfileContentItem[]> {
 export async function createProfileContent(
   body: CreateProfileContentRequest,
 ): Promise<ProfileContentItem | null> {
+  assertProfileContentApiReady();
   const response = await apiClient.post('/api/profile/content', body);
   return unwrapMutationData(response.data);
 }
@@ -63,15 +77,20 @@ export async function updateProfileContent(
   id: string,
   body: UpdateProfileContentRequest,
 ): Promise<ProfileContentItem | null> {
+  assertProfileContentApiReady();
   const response = await apiClient.put(`/api/profile/content/${id}`, body);
   return unwrapMutationData(response.data);
 }
 
 export async function deleteProfileContent(id: string): Promise<void> {
+  assertProfileContentApiReady();
   await apiClient.delete(`/api/profile/content/${id}`);
 }
 
 export function getProfileContentErrorMessage(error: unknown): string {
+  if (error instanceof ProfileApiUnavailableError) {
+    return error.message;
+  }
   return getApiErrorMessage(
     error,
     'Something went wrong while loading your content history.',

@@ -6,6 +6,7 @@ import {
   getProfileErrorMessage,
   updateProfile,
 } from '@/lib/api/profile';
+import { isProfileApiReady } from '@/lib/feature-flags';
 
 import type { UpdateProfileRequest } from '@/types/api';
 
@@ -17,6 +18,7 @@ export function useProfile() {
   const query = useQuery({
     queryKey: PROFILE_QUERY_KEY,
     queryFn: fetchProfile,
+    enabled: isProfileApiReady,
   });
 
   const updateMutation = useMutation({
@@ -32,7 +34,8 @@ export function useProfile() {
 
   return {
     data: query.data ?? null,
-    loading: query.isPending,
+    loading: isProfileApiReady && query.isPending,
+    apiReady: isProfileApiReady,
     error: query.error ? getProfileErrorMessage(query.error) : null,
     refetch: query.refetch,
     updateProfile: updateMutation.mutateAsync,

@@ -79,6 +79,14 @@ export function ContentEntryEditor({
     await onSave(values);
   };
 
+  const handleDelete = async () => {
+    try {
+      await onDelete();
+    } catch {
+      // Parent surfaces mutationError
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <FormField id="editor-title" label="Title" error={fieldErrors.title}>
@@ -171,7 +179,7 @@ export function ContentEntryEditor({
       <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
         <button
           type="button"
-          onClick={onDelete}
+          onClick={handleDelete}
           disabled={isDeleting || isSaving}
           className="focus-ring rounded-full border border-[#C78272]/30 px-5 py-2.5 text-sm text-[#AD5449] transition-colors hover:bg-[#FFF0EE] disabled:opacity-40"
         >

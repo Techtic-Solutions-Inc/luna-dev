@@ -3,6 +3,7 @@ import type { ProfileDownloadItem } from '@/types/api';
 import { DownloadHistoryItem } from '@/components/profile/DownloadHistoryItem';
 import { DownloadsEmptyState } from '@/components/profile/DownloadsEmptyState';
 import { DownloadsLoadingSkeleton } from '@/components/profile/DownloadsLoadingSkeleton';
+import { ProfileFeatureUnavailableState } from '@/components/profile/ProfileFeatureUnavailableState';
 import { ErrorBanner } from '@/components/shared/ErrorBanner';
 import { PAGE_SIZE, PaginationFooter } from '@/components/shared/PaginationFooter';
 import { useProfileDownloads } from '@/hooks/useProfileDownloads';
@@ -11,6 +12,7 @@ export function DownloadHistoryList() {
   const {
     data,
     loading,
+    apiReady,
     error,
     refetch,
     reDownload,
@@ -60,10 +62,20 @@ export function DownloadHistoryList() {
     }
   };
 
+  if (!apiReady) {
+    return (
+      <ProfileFeatureUnavailableState
+        variant="standalone"
+        title="Download history unavailable"
+        description="Download history will appear here once the backend API is ready."
+      />
+    );
+  }
+
   return (
     <section
       aria-labelledby="download-history-heading"
-      className="mt-10 rounded-[16px] border border-white/5 bg-[#1f1b17] p-5 md:rounded-[20px] md:p-6"
+      className="mt-10 rounded-[16px] border border-white/5 bg-profile-surface p-5 md:rounded-[20px] md:p-6"
     >
       <div className="mb-6 flex items-end justify-between gap-4">
         <h2

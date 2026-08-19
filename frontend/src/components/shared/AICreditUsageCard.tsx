@@ -5,12 +5,10 @@ interface AICreditUsageCardProps {
 }
 
 export function AICreditUsageCard({
-  used = 1420,
-  limit = 5000,
+  used,
+  limit,
   loading = false,
 }: AICreditUsageCardProps) {
-  const percentage = Math.min((used / limit) * 100, 100);
-
   if (loading) {
     return (
       <section
@@ -24,6 +22,26 @@ export function AICreditUsageCard({
       </section>
     );
   }
+
+  if (
+    used === undefined ||
+    limit === undefined ||
+    !Number.isFinite(used) ||
+    !Number.isFinite(limit) ||
+    limit <= 0
+  ) {
+    return (
+      <section
+        aria-label="AI credit usage unavailable"
+        className="rounded-[10px] border border-color-22 bg-color-20 px-3 py-3"
+      >
+        <h2 className="text-[11px] font-bold text-white">AI Credit Usage</h2>
+        <p className="mt-2 text-[11px] text-white/70">Usage data unavailable</p>
+      </section>
+    );
+  }
+
+  const percentage = Math.min((used / limit) * 100, 100);
 
   return (
     <section
