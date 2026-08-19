@@ -6,35 +6,191 @@
       "local_image_path": ".luna/figma/updated-dashboard.png",
       "width": 2880,
       "height": 5256,
-      "ticket_jira_key": "JAW-9190"
+      "ticket_jira_key": "JAW-9185",
+      "target_routes": ["/dashboard"],
+      "design_spec": {
+        "screen_purpose": "Post-login dashboard overview with hero, weekly content, stats, tools, and announcements",
+        "typography": [
+          {
+            "role": "page greeting",
+            "font_family": "EB Garamond",
+            "font_size": "42px",
+            "font_weight": 500,
+            "line_height": "1.12",
+            "color": "#FFFFFF"
+          },
+          {
+            "role": "section heading",
+            "font_family": "EB Garamond",
+            "font_size": "26px",
+            "font_weight": 500,
+            "color": "#FFFFFF"
+          },
+          {
+            "role": "body",
+            "font_family": "Almarai",
+            "font_size": "18px",
+            "font_weight": 400,
+            "line_height": "28px",
+            "color": "#A6A4A2"
+          },
+          {
+            "role": "primary button",
+            "font_family": "Almarai",
+            "font_size": "14px",
+            "font_weight": 400,
+            "color": "#FFFFFF"
+          }
+        ],
+        "colors": [
+          { "usage": "app background", "value": "#0B0B0B", "token": "bg-[#0b0b0b]" },
+          { "usage": "sidebar surface", "value": "#0B0B0B", "token": "bg-[#0B0B0B]" },
+          { "usage": "primary accent", "value": "#C8A47E", "token": "primary" },
+          { "usage": "credit card surface", "value": "#14100d", "token": "color-20" },
+          { "usage": "panel surface", "value": "#1f1b17", "token": "profile-surface" }
+        ]
+      }
     },
     {
       "frame_name": "Content Calander",
       "local_image_path": ".luna/figma/content-calander.png",
       "width": 2896,
       "height": 2102,
-      "ticket_jira_key": "JAW-9191"
+      "ticket_jira_key": "JAW-9191",
+      "target_routes": ["/content-calendar"],
+      "design_spec": {
+        "screen_purpose": "Weekly content calendar with time grid and scheduled post cards",
+        "typography": [
+          {
+            "role": "page title",
+            "font_family": "EB Garamond",
+            "font_size": "42px",
+            "font_weight": 500,
+            "color": "#FFFFFF"
+          },
+          {
+            "role": "calendar month",
+            "font_family": "EB Garamond",
+            "font_size": "22px",
+            "font_weight": 500,
+            "color": "#322722"
+          },
+          {
+            "role": "time label",
+            "font_family": "Almarai",
+            "font_size": "13px",
+            "font_weight": 400,
+            "color": "#858585"
+          }
+        ],
+        "colors": [
+          { "usage": "calendar panel", "value": "#FFFFFF", "token": "bg-white" },
+          { "usage": "calendar drawer", "value": "#F7F2EC", "token": "calendar-drawer" },
+          { "usage": "primary accent", "value": "#C8A47E", "token": "primary" },
+          { "usage": "platform pill", "value": "#EADBCD", "token": "calendar-drawer-accent" }
+        ]
+      }
     },
     {
       "frame_name": "Profile",
       "local_image_path": ".luna/figma/profile.png",
       "width": 2880,
       "height": 2436,
-      "ticket_jira_key": "JAW-9194"
+      "ticket_jira_key": "JAW-9194",
+      "target_routes": ["/profile"],
+      "design_spec": {
+        "screen_purpose": "Profile settings with personal details, timezone, and address form",
+        "typography": [
+          {
+            "role": "page title",
+            "font_family": "EB Garamond",
+            "font_size": "42px",
+            "font_weight": 500,
+            "color": "#FFFFFF"
+          },
+          {
+            "role": "user name",
+            "font_family": "EB Garamond",
+            "font_size": "28px",
+            "font_weight": 500,
+            "color": "#FFFFFF"
+          },
+          {
+            "role": "form label",
+            "font_family": "Almarai",
+            "font_size": "14px",
+            "font_weight": 400,
+            "color": "#A6A4A2"
+          }
+        ],
+        "colors": [
+          { "usage": "form surface", "value": "#1f1b17", "token": "profile-surface" },
+          { "usage": "primary button", "value": "#C8A47E", "token": "primary" },
+          { "usage": "tab active underline", "value": "#C8A47E", "token": "primary" }
+        ]
+      }
     },
     {
       "frame_name": "Profile - Downloads",
       "local_image_path": ".luna/figma/profile---downloads.png",
       "width": 2880,
       "height": 2088,
-      "ticket_jira_key": "JAW-9195"
+      "ticket_jira_key": "JAW-9195",
+      "target_routes": ["/profile/downloads"],
+      "design_spec": {
+        "screen_purpose": "Download history list with count badge and re-download actions",
+        "typography": [
+          {
+            "role": "section heading",
+            "font_family": "EB Garamond",
+            "font_size": "26px",
+            "font_weight": 500,
+            "color": "#FFFFFF"
+          },
+          {
+            "role": "count badge",
+            "font_family": "EB Garamond",
+            "font_size": "32px",
+            "font_weight": 500,
+            "color": "#C8A47E"
+          }
+        ],
+        "colors": [
+          { "usage": "list surface", "value": "#1f1b17", "token": "profile-surface" },
+          { "usage": "count accent", "value": "#C8A47E", "token": "primary" }
+        ]
+      }
     },
     {
       "frame_name": "Profile - Content Generated",
       "local_image_path": ".luna/figma/profile---content-generated.png",
       "width": 2880,
       "height": 2354,
-      "ticket_jira_key": "JAW-9196"
+      "ticket_jira_key": "JAW-9196",
+      "target_routes": ["/profile/content-generated"],
+      "design_spec": {
+        "screen_purpose": "Generated content history with pagination",
+        "typography": [
+          {
+            "role": "section heading",
+            "font_family": "EB Garamond",
+            "font_size": "26px",
+            "font_weight": 500,
+            "color": "#FFFFFF"
+          },
+          {
+            "role": "item title",
+            "font_family": "EB Garamond",
+            "font_size": "18px",
+            "font_weight": 500,
+            "color": "#FFFFFF"
+          }
+        ],
+        "colors": [
+          { "usage": "list surface", "value": "#1f1b17", "token": "profile-surface" },
+          { "usage": "count accent", "value": "#C8A47E", "token": "primary" }
+        ]
+      }
     }
   ]
 }
