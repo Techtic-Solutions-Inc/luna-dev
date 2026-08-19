@@ -4,7 +4,7 @@
   "source": "on-disk Figma frame exports",
   "figma_frame_images": {
     "Updated Dashboard": ".luna/figma/updated-dashboard.png",
-    "Content Calander": ".luna/figma/content-calander.png",
+    "Content Calendar": ".luna/figma/content-calander.png",
     "Profile": ".luna/figma/profile.png",
     "Profile - Downloads": ".luna/figma/profile---downloads.png",
     "Profile - Content Generated": ".luna/figma/profile---content-generated.png"
@@ -62,7 +62,7 @@
       }
     },
     {
-      "frame_name": "Content Calander",
+      "frame_name": "Content Calendar",
       "local_image_path": ".luna/figma/content-calander.png",
       "width": 2896,
       "height": 2102,
@@ -235,28 +235,28 @@
     },
     {
       "route": "/content-calendar",
-      "figma_frame": "Content Calander",
+      "figma_frame": "Content Calendar",
       "reference_image": ".luna/figma/content-calander.png",
       "viewports": [
         {
           "name": "desktop",
           "width": 1440,
           "height": 900,
-          "figma_frame": "Content Calander",
+          "figma_frame": "Content Calendar",
           "reference_image": ".luna/figma/content-calander.png"
         },
         {
           "name": "tablet",
           "width": 768,
           "height": 1024,
-          "figma_frame": "Content Calander",
+          "figma_frame": "Content Calendar",
           "reference_image": ".luna/figma/content-calander.png"
         },
         {
           "name": "mobile",
           "width": 390,
           "height": 844,
-          "figma_frame": "Content Calander",
+          "figma_frame": "Content Calendar",
           "reference_image": ".luna/figma/content-calander.png"
         }
       ]
