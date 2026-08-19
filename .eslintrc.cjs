@@ -43,6 +43,7 @@ module.exports = {
     'frontend',
     'coverage',
     'scripts',
+    'server',
     '*.config.cjs',
     '*.config.js',
   ],
