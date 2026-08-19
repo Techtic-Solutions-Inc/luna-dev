@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FiGrid, FiFolder, FiCalendar, FiZap, FiStar, FiCreditCard, FiLogOut, FiChevronRight, FiUser, FiBell } from 'react-icons/fi';
 import { useOptionalAppLayout } from '../../contexts/AppLayoutContext';
+import AICreditUsage from '../features/Dashboard/AICreditUsage';
 
 const SidebarContainer = styled.nav`
   width: 176px;
@@ -86,58 +87,6 @@ const Spacer = styled.div`
   flex: 1;
 `;
 
-const CreditBox = styled.div`
-  margin: 0 12px 12px;
-  padding: 12px;
-  background: #232323;
-  border-radius: 10px;
-`;
-
-const CreditTitle = styled.div`
-  font-family: 'Almarai', sans-serif;
-  font-size: 11px;
-  font-weight: 400;
-  color: #959595;
-  margin-bottom: 4px;
-`;
-
-const CreditRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-`;
-
-const CreditLabel = styled.span`
-  font-family: 'Almarai', sans-serif;
-  font-size: 11px;
-  font-weight: 400;
-  color: #e0e0e0;
-`;
-
-const CreditValue = styled.span`
-  font-family: 'Almarai', sans-serif;
-  font-size: 11px;
-  font-weight: 400;
-  color: #e0e0e0;
-`;
-
-const ProgressBar = styled.div`
-  width: 100%;
-  height: 4px;
-  background: #383838;
-  border-radius: 2px;
-  overflow: hidden;
-`;
-
-const ProgressFill = styled.div<{ $percent: number }>`
-  width: ${({ $percent }) => $percent}%;
-  height: 100%;
-  background: #c8a47e;
-  border-radius: 2px;
-  transition: width 0.3s ease;
-`;
-
 const UserSection = styled.div`
   display: flex;
   align-items: center;
@@ -186,7 +135,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
   const aiCreditsUsed = layoutContext?.sidebarData.aiCreditsUsed ?? props.aiCreditsUsed;
   const aiCreditsTotal = layoutContext?.sidebarData.aiCreditsTotal ?? props.aiCreditsTotal;
   const hasCredits = aiCreditsUsed !== undefined && aiCreditsTotal !== undefined;
-  const creditPercent = hasCredits && aiCreditsTotal > 0 ? (aiCreditsUsed / aiCreditsTotal) * 100 : 0;
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -244,20 +192,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
       <Spacer />
 
-      {hasCredits && (
-        <CreditBox>
-          <CreditTitle>AI Credit Usage</CreditTitle>
-          <CreditRow>
-            <CreditLabel>Current</CreditLabel>
-            <CreditValue>
-              {aiCreditsUsed.toLocaleString()} / {aiCreditsTotal.toLocaleString()}
-            </CreditValue>
-          </CreditRow>
-          <ProgressBar>
-            <ProgressFill $percent={creditPercent} />
-          </ProgressBar>
-        </CreditBox>
-      )}
+      {hasCredits && <AICreditUsage used={aiCreditsUsed} total={aiCreditsTotal} />}
 
       <UserSection onClick={() => handleNav('/profile')}>
         <UserAvatar aria-hidden="true">
