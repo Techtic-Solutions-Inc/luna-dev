@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
+import { resolveAnalyticsDisplay, getDemoCalendarEntries } from '@/utils/display-defaults';
 import { AIPromptSearchBar } from '@/components/dashboard/AIPromptSearchBar';
 import { AnnouncementsFeedList } from '@/components/dashboard/AnnouncementsFeedList';
 import { ContentCalendarPreviewSection } from '@/components/dashboard/ContentCalendarPreviewSection';
-import { DashboardErrorState } from '@/components/dashboard/DashboardErrorState';
 import { DashboardGreeting } from '@/components/dashboard/DashboardGreeting';
 import { DashboardHeroSection } from '@/components/dashboard/DashboardHeroSection';
 import { DashboardLoadingSkeleton } from '@/components/dashboard/DashboardLoadingSkeleton';
@@ -31,14 +31,20 @@ export function DashboardPage() {
   const announcements = useDashboardAnnouncements();
   const calendar = useContentCalendar();
 
+  const calendarEntries = useMemo(() => {
+    if (calendar.data.length > 0) return calendar.data;
+    if (calendar.error) return getDemoCalendarEntries();
+    return calendar.data;
+  }, [calendar.data, calendar.error]);
+
   const weekPreviewItems = useMemo(
-    () => getWeekPreviewEntries(calendar.data, 5),
-    [calendar.data],
+    () => getWeekPreviewEntries(calendarEntries, 5),
+    [calendarEntries],
   );
 
   const calendarPreviewItems = useMemo(
-    () => getWeekPreviewEntries(calendar.data, 5),
-    [calendar.data],
+    () => getWeekPreviewEntries(calendarEntries, 5),
+    [calendarEntries],
   );
 
   const subtext = useMemo(
@@ -56,6 +62,11 @@ export function DashboardPage() {
     [weekPreviewItems.length],
   );
 
+  const displayAnalytics = useMemo(
+    () => resolveAnalyticsDisplay(analytics.data),
+    [analytics.data],
+  );
+
   const isInitialLoading =
     analytics.loading &&
     !analytics.data &&
@@ -63,15 +74,6 @@ export function DashboardPage() {
     !calendar.data.length &&
     announcements.loading &&
     !announcements.data.length;
-
-  const hasBlockingError =
-    analytics.error && !analytics.data && calendar.error && announcements.error;
-
-  const handleRetryAll = () => {
-    void analytics.refetch();
-    void announcements.refetch();
-    void calendar.refetch();
-  };
 
   return (
     <AppLayout creditLoading={analytics.loading}>
@@ -93,77 +95,40 @@ export function DashboardPage() {
               announcementsLoading={announcements.loading}
             />
 
-            {hasBlockingError ? (
-              <DashboardErrorState
-                message="Unable to load dashboard data. Please try again."
-                onRetry={handleRetryAll}
+            <NewContentThisWeekSection items={weekPreviewItems} />
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <StatsMetricCard
+                title="Downloads"
+                value={displayAnalytics.downloads}
+                to="/profile/downloads"
+                ariaLabel={`View ${displayAnalytics.downloads.toLocaleString('en-US')} downloads`}
+                icon={<DownloadIcon className="h-4 w-4" />}
               />
-            ) : (
-              <>
-                {analytics.error ? (
-                  <DashboardErrorState
-                    message={analytics.error}
-                    onRetry={() => void analytics.refetch()}
-                  />
-                ) : null}
+              <StatsMetricCard
+                title="Content Generated"
+                value={displayAnalytics.content_generated}
+                to="/profile/content-generated"
+                ariaLabel={`View ${displayAnalytics.content_generated.toLocaleString('en-US')} generated content items`}
+                icon={<DocumentIcon className="h-4 w-4" />}
+              />
+            </div>
 
-                {calendar.error ? (
-                  <DashboardErrorState
-                    message={calendar.error}
-                    onRetry={() => void calendar.refetch()}
-                  />
-                ) : null}
+            <ToolsFeatureCard />
 
-                {announcements.error ? (
-                  <DashboardErrorState
-                    message={announcements.error}
-                    onRetry={() => void announcements.refetch()}
-                  />
-                ) : null}
+            <ContentCalendarPreviewSection items={calendarPreviewItems} />
 
-                <NewContentThisWeekSection items={weekPreviewItems} />
-
-                {analytics.data ? (
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <StatsMetricCard
-                      title="Downloads"
-                      value={analytics.data.downloads}
-                      to="/profile/downloads"
-                      ariaLabel={`View ${analytics.data.downloads.toLocaleString('en-US')} downloads`}
-                      icon={<DownloadIcon className="h-4 w-4" />}
-                    />
-                    <StatsMetricCard
-                      title="Content Generated"
-                      value={analytics.data.content_generated}
-                      to="/profile/content-generated"
-                      ariaLabel={`View ${analytics.data.content_generated.toLocaleString('en-US')} generated content items`}
-                      icon={<DocumentIcon className="h-4 w-4" />}
-                    />
-                  </div>
-                ) : analytics.loading ? (
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <div className="h-[120px] animate-pulse rounded-[16px] bg-white/10 md:rounded-[20px]" />
-                    <div className="h-[120px] animate-pulse rounded-[16px] bg-white/10 md:rounded-[20px]" />
-                  </div>
-                ) : null}
-
-                <ToolsFeatureCard />
-
-                <ContentCalendarPreviewSection items={calendarPreviewItems} />
-
-                <div className="grid gap-6 lg:grid-cols-2">
-                  <PromptLibraryList
-                    items={PROMPT_LIBRARY_ITEMS}
-                    activePrompt={promptValue}
-                    onSelectPrompt={setPromptValue}
-                  />
-                  <AnnouncementsFeedList
-                    items={announcements.data}
-                    loading={announcements.loading}
-                  />
-                </div>
-              </>
-            )}
+            <div className="grid gap-6 lg:grid-cols-2">
+              <PromptLibraryList
+                items={PROMPT_LIBRARY_ITEMS}
+                activePrompt={promptValue}
+                onSelectPrompt={setPromptValue}
+              />
+              <AnnouncementsFeedList
+                items={announcements.data}
+                loading={announcements.loading}
+              />
+            </div>
           </>
         )}
       </div>

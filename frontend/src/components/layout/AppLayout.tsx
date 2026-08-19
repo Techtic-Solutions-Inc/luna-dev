@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react';
+import { resolveSidebarCredits } from '@/utils/display-defaults';
 import { MenuIcon } from '@/components/icons';
 import { useDashboardAnalytics } from '@/hooks/useDashboardAnalytics';
 import { SidebarDrawer } from '@/components/layout/SidebarDrawer';
@@ -13,13 +14,17 @@ export function AppLayout({ children, creditLoading = false }: AppLayoutProps) {
   const { data: analytics, loading: analyticsLoading } = useDashboardAnalytics();
 
   const showCreditLoading = creditLoading || analyticsLoading;
+  const sidebarCredits = resolveSidebarCredits(
+    analytics?.credits_used,
+    analytics?.credits_limit,
+  );
 
   return (
     <div className="flex min-h-screen bg-[#0b0b0b]">
       <SidebarDrawer
         creditLoading={showCreditLoading}
-        creditsUsed={analytics?.credits_used}
-        creditsLimit={analytics?.credits_limit}
+        creditsUsed={sidebarCredits.used}
+        creditsLimit={sidebarCredits.limit}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />

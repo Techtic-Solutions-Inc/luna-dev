@@ -52,6 +52,7 @@ interface ProfileFormProps {
   }) => Promise<void>;
   isChangingPassword: boolean;
   changePasswordError: string | null;
+  previewMode?: boolean;
 }
 
 function buildInitialValues(profile: NormalizedProfile | null): ProfileFormValues {
@@ -84,6 +85,7 @@ export function ProfileForm({
   changePassword,
   isChangingPassword,
   changePasswordError,
+  previewMode = false,
 }: ProfileFormProps) {
   const initialValues = useMemo(() => buildInitialValues(profile), [profile]);
   const [values, setValues] = useState<ProfileFormValues>(initialValues);
@@ -164,7 +166,8 @@ export function ProfileForm({
 
   return (
     <>
-      <form onSubmit={handleSubmit} className={`${panelClassName} space-y-10 md:space-y-12`}>
+      <form onSubmit={previewMode ? (event) => event.preventDefault() : handleSubmit} className={`${panelClassName} space-y-10 md:space-y-12`}>
+        <fieldset disabled={previewMode} className="m-0 min-w-0 space-y-10 border-0 p-0 md:space-y-12">
         <section aria-labelledby="personal-details-heading" className="space-y-5">
           <h2
             id="personal-details-heading"
@@ -361,15 +364,18 @@ export function ProfileForm({
             </button>
           </div>
         </div>
+        </fieldset>
       </form>
 
-      <ChangePasswordModal
-        open={passwordOpen}
-        onClose={() => setPasswordOpen(false)}
-        onSubmit={changePassword}
-        isSubmitting={isChangingPassword}
-        error={changePasswordError}
-      />
+      {!previewMode ? (
+        <ChangePasswordModal
+          open={passwordOpen}
+          onClose={() => setPasswordOpen(false)}
+          onSubmit={changePassword}
+          isSubmitting={isChangingPassword}
+          error={changePasswordError}
+        />
+      ) : null}
     </>
   );
 }

@@ -53,11 +53,12 @@ export function WeeklyCalendarGrid({
     [hourRange.endHour, hourRange.startHour],
   );
 
+  const lastSlot =
+    hourSlots.length > 0 ? hourSlots[hourSlots.length - 1] : undefined;
   const gridHeight = Math.max(
     (hourRange.endHour - hourRange.startHour) * ROW_HEIGHT + CARD_HEIGHT,
-    hourSlots.length > 0
-      ? getHourOffsetPx(hourSlots[hourSlots.length - 1]!, hourRange.startHour) +
-          ROW_HEIGHT
+    lastSlot !== undefined
+      ? getHourOffsetPx(lastSlot, hourRange.startHour) + ROW_HEIGHT
       : 0,
   );
 

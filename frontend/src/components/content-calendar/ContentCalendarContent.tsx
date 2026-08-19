@@ -4,9 +4,8 @@ import { ContentCalendarHeader } from '@/components/content-calendar/ContentCale
 import { CalendarLoadingSkeleton } from '@/components/content-calendar/CalendarLoadingSkeleton';
 import { WeeklyCalendarGrid } from '@/components/content-calendar/WeeklyCalendarGrid';
 import { ContentDetailDrawer } from '@/components/content-calendar/ContentDetailDrawer';
-import { ErrorBanner } from '@/components/shared/ErrorBanner';
 import { useContentCalendar } from '@/hooks/useContentCalendar';
-import { startOfWeek } from '@/utils/calendar';
+import { getDemoCalendarEntries } from '@/utils/display-defaults';
 import type { EditorFormState } from '@/components/content-calendar/ContentEntryEditor';
 
 type DrawerMode = 'details' | 'editor';
@@ -25,7 +24,6 @@ export function ContentCalendarContent({
     data,
     loading,
     error,
-    refetch,
     updateEntry,
     removeEntry,
     isSaving,
@@ -33,15 +31,21 @@ export function ContentCalendarContent({
     mutationError,
   } = useContentCalendar();
 
-  const [anchorDate, setAnchorDate] = useState(() => startOfWeek(new Date()));
+  const [anchorDate, setAnchorDate] = useState(() => new Date(2026, 5, 1));
   const [drawerMode, setDrawerMode] = useState<DrawerMode>('details');
   const [activeEntryId, setActiveEntryId] = useState<string | null>(
     selectedEntryId ?? null,
   );
 
+  const displayEntries = useMemo(() => {
+    if (data.length > 0) return data;
+    if (error) return getDemoCalendarEntries();
+    return data;
+  }, [data, error]);
+
   const activeEntry = useMemo(
-    () => data.find((entry) => entry.id === activeEntryId) ?? null,
-    [activeEntryId, data],
+    () => displayEntries.find((entry) => entry.id === activeEntryId) ?? null,
+    [activeEntryId, displayEntries],
   );
 
   useEffect(() => {
@@ -119,14 +123,8 @@ export function ContentCalendarContent({
         <>
           <ContentCalendarHeader />
 
-          {error ? (
-            <div className="mb-6">
-              <ErrorBanner message={error} onRetry={() => refetch()} />
-            </div>
-          ) : null}
-
           <WeeklyCalendarGrid
-            entries={data}
+            entries={displayEntries}
             anchorDate={anchorDate}
             onAnchorDateChange={setAnchorDate}
           />
@@ -136,7 +134,7 @@ export function ContentCalendarContent({
       {activeEntryId ? (
         <ContentDetailDrawer
           entry={activeEntry}
-          entries={data}
+          entries={displayEntries}
           mode={drawerMode}
           open
           loading={loading && !activeEntry}

@@ -15,7 +15,7 @@ const timeFormatter = new Intl.DateTimeFormat('en-US', {
 export const ROW_HEIGHT = 220;
 export const CARD_HEIGHT = 90;
 export const CARD_GAP = 8;
-export const DEFAULT_START_HOUR = 16.75;
+export const DEFAULT_START_HOUR = 17;
 export const DEFAULT_END_HOUR = 19;
 
 export function formatScheduledTime(date: Date): string {
@@ -251,16 +251,16 @@ export function getDisplayFirstName(): string {
 }
 
 export function getDisplayFullName(): string {
-  const name =
-    localStorage.getItem('name') ??
-    localStorage.getItem('userName') ??
-    localStorage.getItem('first_name');
-
-  if (name) return name;
-
   const firstName = localStorage.getItem('first_name');
   const lastName = localStorage.getItem('last_name');
   if (firstName && lastName) return `${firstName} ${lastName}`;
+
+  const name =
+    localStorage.getItem('name') ??
+    localStorage.getItem('userName') ??
+    firstName;
+
+  if (name) return name;
   return 'Joseph Stanley';
 }
 

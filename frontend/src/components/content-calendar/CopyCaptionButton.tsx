@@ -42,7 +42,7 @@ export function CopyCaptionButton({
         {copyError ? (
           <span
             id="copy-caption-error-inline"
-            className="text-right text-[11px] text-destructive"
+            className="max-w-full break-words text-right text-[11px] text-destructive"
             role="alert"
           >
             {copyError}

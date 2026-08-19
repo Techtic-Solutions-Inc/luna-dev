@@ -38,7 +38,7 @@ export function DashboardHeroSection({
           <div>
             <h2
               id="dashboard-hero-heading"
-              className="font-display text-[22px] font-medium leading-tight text-white sm:text-[28px]"
+              className="font-display text-[22px] font-medium leading-tight text-primary sm:text-[28px]"
             >
               {headline}
             </h2>
