@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
       'process.env.API_BASE_URL': JSON.stringify(
         env.API_BASE_URL || env.VITE_API_BASE_URL || env.VITE_API_URL || '',
       ),
+      'process.env.API_TOKEN': JSON.stringify(env.API_TOKEN || env.VITE_API_TOKEN || ''),
     },
     resolve: {
       alias: {

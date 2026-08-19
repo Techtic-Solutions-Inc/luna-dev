@@ -1,12 +1,24 @@
 const TOKEN_KEY = 'token';
 const AUTH_CHANGE_EVENT = 'auth-changed';
+const TOKEN_KEYS = ['token', 'accessToken', 'access_token', 'authToken'] as const;
 
 function notifyAuthChanged(): void {
   window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
 }
 
 export function getToken(): string | null {
-  return window.localStorage.getItem(TOKEN_KEY);
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  for (const key of TOKEN_KEYS) {
+    const value = window.localStorage.getItem(key);
+    if (value) {
+      return value;
+    }
+  }
+
+  return null;
 }
 
 export function setToken(token: string): void {

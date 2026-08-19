@@ -127,7 +127,9 @@ export const GlobalStyle = createGlobalStyle`
   input,
   textarea,
   select {
-    outline: none;
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
   }
 
   input:focus,
@@ -136,11 +138,17 @@ export const GlobalStyle = createGlobalStyle`
   textarea:focus-visible,
   select:focus,
   select:focus-visible {
-    outline: none;
-    box-shadow: none;
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
   }
 
-  :focus-visible:not(input):not(textarea):not(select) {
+  button:focus,
+  button:focus-visible {
+    outline: none;
+  }
+
+  a:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }

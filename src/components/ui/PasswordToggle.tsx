@@ -10,7 +10,7 @@ export default function PasswordToggle({ visible, onToggle }: PasswordToggleProp
     <button
       type="button"
       onClick={onToggle}
-      className="text-color-14 hover:text-secondary"
+      className="text-color-14 outline-none hover:text-secondary focus:outline-none focus-visible:outline-none"
       aria-label={visible ? 'Hide password' : 'Show password'}
       aria-pressed={visible}
     >

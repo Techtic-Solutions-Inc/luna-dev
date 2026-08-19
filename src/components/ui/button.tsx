@@ -31,7 +31,7 @@ export default function Button({
       type={type}
       disabled={disabled || loading}
       aria-busy={loading}
-      className={`inline-flex w-full max-w-md items-center justify-center rounded-full px-6 py-3 font-almarai text-base font-bold disabled:cursor-not-allowed disabled:opacity-60 ${variantClassName[variant]} ${className}`}
+      className={`inline-flex w-full max-w-md items-center justify-center rounded-full px-6 py-3 font-almarai text-base font-bold outline-none focus:outline-none focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-60 ${variantClassName[variant]} ${className}`}
     >
       {loading ? <LoadingSpinner size={18} label="Loading" className="text-color-16" /> : children}
     </button>

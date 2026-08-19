@@ -6,7 +6,9 @@
   input,
   textarea,
   select {
-    outline: none;
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
   }
 
   input:focus,
@@ -15,7 +17,8 @@
   textarea:focus-visible,
   select:focus,
   select:focus-visible {
-    outline: none;
-    box-shadow: none;
+    outline: none !important;
+    outline-offset: 0 !important;
+    box-shadow: none !important;
   }
 }

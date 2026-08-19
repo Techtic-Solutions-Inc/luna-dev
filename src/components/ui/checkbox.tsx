@@ -28,7 +28,7 @@ export default function Checkbox({
           id={inputId}
           type="checkbox"
           {...props}
-          className="mt-0.5 h-4 w-4 shrink-0 accent-accent outline-none focus:outline-none focus-visible:outline-none"
+          className="mt-0.5 h-4 w-4 shrink-0 accent-accent outline-none focus:outline-none focus-visible:outline-none [outline:none] focus:[outline:none] focus-visible:[outline:none]"
           aria-invalid={Boolean(error)}
           aria-describedby={error ? errorId : undefined}
         />

@@ -37,7 +37,7 @@ export default function Input({
         <input
           id={inputId}
           {...props}
-          className={`w-full border bg-color-22 px-5 py-3 font-almarai text-base text-secondary placeholder:text-color-14 outline-none focus:outline-none focus-visible:outline-none ${
+          className={`w-full border bg-color-22 px-5 py-3 font-almarai text-base text-secondary placeholder:text-color-14 outline-none focus:outline-none focus-visible:outline-none [outline:none] focus:[outline:none] focus-visible:[outline:none] ${
             shapeClassName[shape]
           } ${suffix ? 'pr-12' : ''} ${error ? 'border-color-45' : 'border-color-22'} ${className}`}
           aria-invalid={Boolean(error)}
