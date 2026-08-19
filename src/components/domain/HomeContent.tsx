@@ -315,7 +315,7 @@ export default function HomeContent() {
 
       <section className="bg-color-16 px-5 py-16 tablet:px-10 desktop:px-16">
         <div className="grid overflow-hidden rounded-[32px] desktop:grid-cols-2">
-          <div className="bg-[#162920] px-8 py-12 desktop:px-12">
+          <div className="bg-color-96 px-8 py-12 desktop:px-12">
             <h2 className="font-garamond text-3xl text-secondary">Agentwise Ultimate Mind</h2>
             <p className="mt-4 font-almarai text-base leading-7 text-color-18">
               Your strategic advisor — trained on your business, your market, and your voice. Ask
@@ -329,7 +329,7 @@ export default function HomeContent() {
               className="mt-8 w-full rounded-token-16"
             />
           </div>
-          <div className="flex flex-col justify-center bg-[#113825] px-8 py-12 desktop:px-12">
+          <div className="flex flex-col justify-center bg-color-97 px-8 py-12 desktop:px-12">
             <h2 className="font-garamond text-4xl leading-tight text-secondary desktop:text-5xl">
               Here’s The Deal...
               <span className="block text-accent">Great Marketing Is</span>

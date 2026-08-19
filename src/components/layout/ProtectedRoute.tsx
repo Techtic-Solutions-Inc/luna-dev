@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import ErrorAlert from '@/components/ui/ErrorAlert';
 import { useAuth } from '@/hooks/useAuth';
 
 interface ProtectedRouteProps {
@@ -9,9 +10,17 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   if (!isAuthenticated) {
-    return <Navigate to="/sign-in" replace />;
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-color-16 px-6">
+        <ErrorAlert
+          message="Authentication failed. Sign in to continue."
+          onRetry={() => navigate('/sign-in')}
+        />
+      </div>
+    );
   }
 
   return children;

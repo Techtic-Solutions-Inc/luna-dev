@@ -25,7 +25,7 @@ export default function Textarea({
       <textarea
         id={inputId}
         {...props}
-        className={`min-h-[7.5rem] w-full resize-y rounded-token-16 border bg-color-22 px-5 py-3 font-almarai text-base text-secondary placeholder:text-color-14 focus:border-accent ${
+        className={`min-h-[7.5rem] w-full resize-y rounded-token-16 border bg-color-22 px-5 py-3 font-almarai text-base text-secondary placeholder:text-color-14 outline-none focus:outline-none focus-visible:outline-none ${
           error ? 'border-color-45' : 'border-color-22'
         } ${className}`}
         aria-invalid={Boolean(error)}

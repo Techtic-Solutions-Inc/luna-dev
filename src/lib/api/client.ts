@@ -17,8 +17,17 @@ import type {
   VerifyEmailResponse,
 } from '@/types/api';
 
+function getApiBaseUrl(): string {
+  return (
+    process.env.API_BASE_URL ||
+    import.meta.env.VITE_API_BASE_URL ||
+    import.meta.env.VITE_API_URL ||
+    ''
+  );
+}
+
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? import.meta.env.VITE_API_BASE_URL,
+  baseURL: getApiBaseUrl(),
 });
 
 apiClient.interceptors.request.use((config) => {

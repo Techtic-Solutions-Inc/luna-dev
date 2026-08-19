@@ -124,7 +124,23 @@ export const GlobalStyle = createGlobalStyle`
     color: inherit;
   }
 
-  :focus-visible {
+  input,
+  textarea,
+  select {
+    outline: none;
+  }
+
+  input:focus,
+  input:focus-visible,
+  textarea:focus,
+  textarea:focus-visible,
+  select:focus,
+  select:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+
+  :focus-visible:not(input):not(textarea):not(select) {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
   }

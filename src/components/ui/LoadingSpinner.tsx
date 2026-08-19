@@ -1,4 +1,4 @@
-import Spinner from '@/components/ui/Spinner';
+import { FiLoader } from '@/lib/icons';
 
 interface LoadingSpinnerProps {
   label?: string;
@@ -9,7 +9,22 @@ interface LoadingSpinnerProps {
 export default function LoadingSpinner({
   label = 'Loading',
   size = 24,
-  className,
+  className = 'text-accent',
 }: LoadingSpinnerProps) {
-  return <Spinner label={label} size={size} className={className} />;
+  return (
+    <div
+      className="flex items-center justify-center"
+      role="status"
+      aria-live="polite"
+      aria-label={label}
+    >
+      <FiLoader
+        className={`animate-spin ${className}`}
+        size={size}
+        aria-hidden="true"
+        focusable="false"
+      />
+      <span className="sr-only">{label}</span>
+    </div>
+  );
 }

@@ -112,6 +112,8 @@ export const colors = {
   'color-93': '#bebbb9',
   'color-94': '#646261',
   'color-95': '#272727',
+  'color-96': '#162920',
+  'color-97': '#113825',
 } as const;
 
 export const typography = {
