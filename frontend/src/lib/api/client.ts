@@ -28,6 +28,10 @@ apiClient.interceptors.response.use(
   (error: AxiosError<ApiErrorResponse>) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
+      // Redirect to login unless already there to avoid redirect loops
+      if (!window.location.pathname.startsWith('/login')) {
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   },
