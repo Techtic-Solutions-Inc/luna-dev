@@ -64,11 +64,24 @@ export function DownloadHistoryList() {
 
   if (!apiReady) {
     return (
-      <ProfileFeatureUnavailableState
-        variant="standalone"
-        title="Download history unavailable"
-        description="Download history will appear here once the backend API is ready."
-      />
+      <section
+        aria-labelledby="download-history-heading"
+        className="mt-10 rounded-[16px] border border-white/5 bg-profile-surface p-5 md:rounded-[20px] md:p-6"
+      >
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <h2
+            id="download-history-heading"
+            className="font-display text-[22px] font-medium text-white md:text-[26px]"
+          >
+            Download History
+          </h2>
+        </div>
+        <ProfileFeatureUnavailableState
+          variant="embedded"
+          title="Download history unavailable"
+          description="Download history will appear here once the backend API is ready."
+        />
+      </section>
     );
   }
 

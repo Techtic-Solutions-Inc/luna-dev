@@ -181,7 +181,7 @@ export function ContentEntryEditor({
           type="button"
           onClick={handleDelete}
           disabled={isDeleting || isSaving}
-          className="focus-ring rounded-full border border-[#C78272]/30 px-5 py-2.5 text-sm text-[#AD5449] transition-colors hover:bg-[#FFF0EE] disabled:opacity-40"
+          className="focus-ring rounded-full border border-calendar-destructive-border/30 px-5 py-2.5 text-sm text-calendar-destructive transition-colors hover:bg-calendar-destructive-hover disabled:opacity-40"
         >
           {isDeleting ? 'Deleting…' : 'Delete'}
         </button>

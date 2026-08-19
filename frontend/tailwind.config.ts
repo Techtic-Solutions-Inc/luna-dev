@@ -6,6 +6,7 @@ export default {
     extend: {
       colors: {
         primary: '#C8A47E',
+        'primary-hover': '#b48a5d',
         'color-20': '#14100d',
         'color-22': '#ffffff19',
         'light-panel': '#FFF7ED',
@@ -18,6 +19,9 @@ export default {
         'calendar-nav': '#76675B',
         'calendar-nav-hover': '#E4DACE',
         destructive: '#ff5630',
+        'calendar-destructive': '#AD5449',
+        'calendar-destructive-border': '#C78272',
+        'calendar-destructive-hover': '#FFF0EE',
         'profile-surface': '#1f1b17',
         'profile-surface-embedded': '#26231f',
         'profile-muted': '#A6A4A2',

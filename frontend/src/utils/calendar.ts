@@ -151,9 +151,14 @@ export function groupEntriesByWeek(
 export function getHourSlots(startHour: number, endHour: number): number[] {
   if (startHour > endHour) return [];
 
-  const slots: number[] = [startHour];
+  const slots: number[] = [];
+
+  if (!Number.isInteger(startHour)) {
+    slots.push(startHour);
+  }
+
   const firstWholeHour = Number.isInteger(startHour)
-    ? startHour + 1
+    ? startHour
     : Math.ceil(startHour);
 
   for (let hour = firstWholeHour; hour <= endHour; hour += 1) {
@@ -161,6 +166,10 @@ export function getHourSlots(startHour: number, endHour: number): number[] {
   }
 
   return slots;
+}
+
+export function getHourOffsetPx(hour: number, startHour: number): number {
+  return (hour - startHour) * ROW_HEIGHT;
 }
 
 export function formatHourLabel(hour: number): string {

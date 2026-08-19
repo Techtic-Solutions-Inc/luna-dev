@@ -1,17 +1,17 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@/components/icons';
 import { buildWeekDays, formatWeekRange, startOfWeek } from '@/utils/calendar';
 
-interface CalendarMonthNavigatorProps {
+interface CalendarWeekNavigatorProps {
   anchorDate: Date;
   onPrevious: () => void;
   onNext: () => void;
 }
 
-export function CalendarMonthNavigator({
+export function CalendarWeekNavigator({
   anchorDate,
   onPrevious,
   onNext,
-}: CalendarMonthNavigatorProps) {
+}: CalendarWeekNavigatorProps) {
   const weekStart = startOfWeek(anchorDate);
   const weekDays = buildWeekDays(weekStart);
   const weekEnd = weekDays[weekDays.length - 1] ?? anchorDate;

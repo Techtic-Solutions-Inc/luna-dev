@@ -23,16 +23,6 @@ export function ContentHistoryList() {
     }
   }, [data.length, page]);
 
-  if (!apiReady) {
-    return (
-      <ProfileFeatureUnavailableState
-        variant="standalone"
-        title="Content history unavailable"
-        description="Generated content will appear here once the backend API is ready."
-      />
-    );
-  }
-
   return (
     <section
       aria-labelledby="content-history-heading"
@@ -45,41 +35,51 @@ export function ContentHistoryList() {
         >
           Content History
         </h2>
-        {loading ? (
+        {apiReady && loading ? (
           <div
             className="h-8 w-14 animate-pulse rounded bg-white/10 md:h-9 md:w-16"
             aria-hidden="true"
           />
-        ) : (
+        ) : apiReady ? (
           <p className="font-display text-[28px] font-medium text-primary md:text-[32px]">
             {data.length}
           </p>
-        )}
+        ) : null}
       </div>
 
-      {loading ? <ContentHistoryLoadingSkeleton /> : null}
+      {!apiReady ? (
+        <ProfileFeatureUnavailableState
+          variant="embedded"
+          title="Content history unavailable"
+          description="Generated content will appear here once the backend API is ready."
+        />
+      ) : (
+        <>
+          {loading ? <ContentHistoryLoadingSkeleton /> : null}
 
-      {error ? (
-        <ErrorBanner message={error} onRetry={() => refetch()} />
-      ) : null}
+          {error ? (
+            <ErrorBanner message={error} onRetry={() => refetch()} />
+          ) : null}
 
-      {!loading && !error && data.length === 0 ? (
-        <ContentHistoryEmptyState />
-      ) : null}
+          {!loading && !error && data.length === 0 ? (
+            <ContentHistoryEmptyState />
+          ) : null}
 
-      {!loading && !error && data.length > 0 ? (
-        <div className="space-y-4">
-          {paginatedItems.map((item) => (
-            <ContentHistoryItem key={item.id} item={item} />
-          ))}
+          {!loading && !error && data.length > 0 ? (
+            <div className="space-y-4">
+              {paginatedItems.map((item) => (
+                <ContentHistoryItem key={item.id} item={item} />
+              ))}
 
-          <PaginationFooter
-            page={page}
-            total={data.length}
-            onPageChange={setPage}
-          />
-        </div>
-      ) : null}
+              <PaginationFooter
+                page={page}
+                total={data.length}
+                onPageChange={setPage}
+              />
+            </div>
+          ) : null}
+        </>
+      )}
     </section>
   );
 }

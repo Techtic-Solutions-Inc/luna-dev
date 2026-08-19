@@ -26,7 +26,7 @@ export function ContentCalendarPreviewSection({
         </div>
         <Link
           to="/content-calendar"
-          className="focus-ring shrink-0 text-sm text-primary underline underline-offset-4 transition-colors hover:text-[#b48a5d]"
+          className="focus-ring shrink-0 text-sm text-primary underline underline-offset-4 transition-colors hover:text-primary-hover"
         >
           Browse all
         </Link>
@@ -37,7 +37,7 @@ export function ContentCalendarPreviewSection({
           <p className="text-sm text-[#A6A4A2]">No scheduled posts yet.</p>
           <Link
             to="/content-calendar"
-            className="focus-ring mt-4 inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm text-white transition-colors hover:bg-[#b48a5d]"
+            className="focus-ring mt-4 inline-flex h-11 items-center rounded-full bg-primary px-5 text-sm text-white transition-colors hover:bg-primary-hover"
           >
             Open Content Calendar
           </Link>

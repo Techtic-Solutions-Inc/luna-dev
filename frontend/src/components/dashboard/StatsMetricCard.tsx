@@ -34,7 +34,7 @@ export function StatsMetricCard({
         </div>
         <ExternalLinkIcon className="h-4 w-4 shrink-0 text-[#858585] transition-colors group-hover:text-primary" />
       </div>
-      <p className="mt-3 font-display text-[36px] leading-none text-white sm:text-[42px]">
+      <p className="mt-3 font-display text-[36px] leading-none text-primary sm:text-[42px]">
         {value.toLocaleString('en-US')}
       </p>
     </Link>

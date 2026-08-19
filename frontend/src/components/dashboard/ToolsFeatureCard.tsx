@@ -33,7 +33,7 @@ export function ToolsFeatureCard() {
         </div>
         <Link
           to="/ultimate-mind"
-          className="focus-ring mt-4 inline-flex h-11 items-center gap-2 rounded-full bg-primary px-5 text-sm text-white transition-colors hover:bg-[#b48a5d] md:mt-0 md:shrink-0"
+          className="focus-ring mt-4 inline-flex h-11 items-center gap-2 rounded-full bg-primary px-5 text-sm text-white transition-colors hover:bg-primary-hover md:mt-0 md:shrink-0"
         >
           Start a session
           <ArrowRightIcon className="h-4 w-4" />

@@ -6,7 +6,7 @@ export function QuickActionButtons() {
     <div className="flex flex-wrap gap-3">
       <Link
         to="/content-calendar"
-        className="focus-ring inline-flex h-11 items-center gap-2 rounded-full bg-primary px-5 text-sm text-white transition-colors hover:bg-[#b48a5d]"
+        className="focus-ring inline-flex h-11 items-center gap-2 rounded-full bg-primary px-5 text-sm text-white transition-colors hover:bg-primary-hover"
       >
         <SparklesIcon className="h-4 w-4" />
         Plan My Week

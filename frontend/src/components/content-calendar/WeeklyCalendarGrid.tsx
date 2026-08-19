@@ -6,13 +6,14 @@ import {
   DEFAULT_END_HOUR,
   DEFAULT_START_HOUR,
   formatHourLabel,
+  getHourOffsetPx,
   getHourSlots,
   positionPostsInColumn,
   ROW_HEIGHT,
   startOfWeek,
   toScheduledPosts,
 } from '@/utils/calendar';
-import { CalendarMonthNavigator } from '@/components/content-calendar/CalendarMonthNavigator';
+import { CalendarWeekNavigator } from '@/components/content-calendar/CalendarWeekNavigator';
 import { CalendarEmptyState } from '@/components/content-calendar/CalendarEmptyState';
 import { ScheduledPostCard } from '@/components/content-calendar/ScheduledPostCard';
 
@@ -53,8 +54,11 @@ export function WeeklyCalendarGrid({
   );
 
   const gridHeight = Math.max(
-    hourSlots.length * ROW_HEIGHT,
     (hourRange.endHour - hourRange.startHour) * ROW_HEIGHT + CARD_HEIGHT,
+    hourSlots.length > 0
+      ? getHourOffsetPx(hourSlots[hourSlots.length - 1]!, hourRange.startHour) +
+          ROW_HEIGHT
+      : 0,
   );
 
   const handlePreviousWeek = () => {
@@ -72,7 +76,7 @@ export function WeeklyCalendarGrid({
   if (entries.length === 0) {
     return (
       <div className="rounded-[16px] bg-[#FFF7ED] p-5 md:rounded-[20px] md:p-6">
-        <CalendarMonthNavigator
+        <CalendarWeekNavigator
           anchorDate={weekDays[3] ?? anchorDate}
           onPrevious={handlePreviousWeek}
           onNext={handleNextWeek}
@@ -86,7 +90,7 @@ export function WeeklyCalendarGrid({
 
   return (
     <div className="rounded-[16px] bg-[#FFF7ED] p-5 md:rounded-[20px] md:p-6">
-      <CalendarMonthNavigator
+      <CalendarWeekNavigator
         anchorDate={weekDays[3] ?? anchorDate}
         onPrevious={handlePreviousWeek}
         onNext={handleNextWeek}
@@ -116,11 +120,11 @@ export function WeeklyCalendarGrid({
             style={{ minHeight: gridHeight }}
           >
             <div className="relative">
-              {hourSlots.map((hour, index) => (
+              {hourSlots.map((hour) => (
                 <div
                   key={hour}
                   className="absolute left-0 right-0 border-t border-[#E5DACE] pr-3 pt-1 text-right text-[13px] text-[#858585]"
-                  style={{ top: index * ROW_HEIGHT }}
+                  style={{ top: getHourOffsetPx(hour, hourRange.startHour) }}
                 >
                   {formatHourLabel(hour)}
                 </div>
@@ -141,13 +145,17 @@ export function WeeklyCalendarGrid({
                   key={day.toISOString()}
                   className="relative border-l border-[#E5DACE]"
                 >
-                  {hourSlots.map((hour, index) => (
-                    <div
-                      key={`${day.toISOString()}-${hour}`}
-                      className="absolute inset-x-0 border-t border-[#E5DACE]"
-                      style={{ top: index * ROW_HEIGHT, height: ROW_HEIGHT }}
-                    />
-                  ))}
+                  {hourSlots.map((hour) => {
+                    const top = getHourOffsetPx(hour, hourRange.startHour);
+
+                    return (
+                      <div
+                        key={`${day.toISOString()}-${hour}`}
+                        className="absolute inset-x-0 border-t border-[#E5DACE]"
+                        style={{ top, height: ROW_HEIGHT }}
+                      />
+                    );
+                  })}
 
                   {positioned.map(({ post, top }) => (
                     <div

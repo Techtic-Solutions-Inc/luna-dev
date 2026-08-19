@@ -4,18 +4,21 @@ import { AnnouncementsFeedList } from '@/components/dashboard/AnnouncementsFeedL
 import { ContentCalendarPreviewSection } from '@/components/dashboard/ContentCalendarPreviewSection';
 import { DashboardErrorState } from '@/components/dashboard/DashboardErrorState';
 import { DashboardGreeting } from '@/components/dashboard/DashboardGreeting';
+import { DashboardHeroSection } from '@/components/dashboard/DashboardHeroSection';
 import { DashboardLoadingSkeleton } from '@/components/dashboard/DashboardLoadingSkeleton';
+import { NewContentThisWeekSection } from '@/components/dashboard/NewContentThisWeekSection';
 import { PromptLibraryList } from '@/components/dashboard/PromptLibraryList';
 import { QuickActionButtons } from '@/components/dashboard/QuickActionButtons';
 import { StatsMetricCard } from '@/components/dashboard/StatsMetricCard';
 import { ToolsFeatureCard } from '@/components/dashboard/ToolsFeatureCard';
-import { WeeklyContentPreviewRow } from '@/components/dashboard/WeeklyContentPreviewRow';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { DocumentIcon, DownloadIcon } from '@/components/icons';
 import { useContentCalendar } from '@/hooks/useContentCalendar';
 import { useDashboardAnalytics } from '@/hooks/useDashboardAnalytics';
 import { useDashboardAnnouncements } from '@/hooks/useDashboardAnnouncements';
 import {
+  getDashboardHeroDescription,
+  getDashboardHeroHeadline,
   getDashboardSubtext,
   getWeekPreviewEntries,
   PROMPT_LIBRARY_ITEMS,
@@ -40,6 +43,16 @@ export function DashboardPage() {
 
   const subtext = useMemo(
     () => getDashboardSubtext(weekPreviewItems.length),
+    [weekPreviewItems.length],
+  );
+
+  const heroHeadline = useMemo(
+    () => getDashboardHeroHeadline(weekPreviewItems.length),
+    [weekPreviewItems.length],
+  );
+
+  const heroDescription = useMemo(
+    () => getDashboardHeroDescription(weekPreviewItems.length),
     [weekPreviewItems.length],
   );
 
@@ -69,10 +82,16 @@ export function DashboardPage() {
           <>
             <DashboardGreeting subtext={subtext} />
 
-            <div className="space-y-4">
-              <AIPromptSearchBar value={promptValue} onChange={setPromptValue} />
-              <QuickActionButtons />
-            </div>
+            <DashboardHeroSection
+              headline={heroHeadline}
+              description={heroDescription}
+              promptSearch={
+                <AIPromptSearchBar value={promptValue} onChange={setPromptValue} />
+              }
+              actionButtons={<QuickActionButtons />}
+              announcements={announcements.data}
+              announcementsLoading={announcements.loading}
+            />
 
             {hasBlockingError ? (
               <DashboardErrorState
@@ -102,7 +121,7 @@ export function DashboardPage() {
                   />
                 ) : null}
 
-                <WeeklyContentPreviewRow items={weekPreviewItems} />
+                <NewContentThisWeekSection items={weekPreviewItems} />
 
                 {analytics.data ? (
                   <div className="grid gap-4 md:grid-cols-2">
@@ -133,14 +152,14 @@ export function DashboardPage() {
                 <ContentCalendarPreviewSection items={calendarPreviewItems} />
 
                 <div className="grid gap-6 lg:grid-cols-2">
-                  <AnnouncementsFeedList
-                    items={announcements.data}
-                    loading={announcements.loading}
-                  />
                   <PromptLibraryList
                     items={PROMPT_LIBRARY_ITEMS}
                     activePrompt={promptValue}
                     onSelectPrompt={setPromptValue}
+                  />
+                  <AnnouncementsFeedList
+                    items={announcements.data}
+                    loading={announcements.loading}
                   />
                 </div>
               </>

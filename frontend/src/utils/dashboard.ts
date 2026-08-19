@@ -154,3 +154,19 @@ export function getDashboardSubtext(contentIdeasCount: number): string {
 
   return `Let's keep your Austin brand moving. Today you have ${ideasLabel}, a planned reel, and a draft waiting in the Mind.`;
 }
+
+export function getDashboardHeroHeadline(contentIdeasCount: number): string {
+  if (contentIdeasCount === 0) {
+    return 'Plan your week with content that feels like you.';
+  }
+
+  return 'Fresh ideas are ready for your Austin brand.';
+}
+
+export function getDashboardHeroDescription(contentIdeasCount: number): string {
+  if (contentIdeasCount === 0) {
+    return 'Generate captions, listing descriptions, email blasts, and Reels scripts in your brand voice — then schedule them across your calendar.';
+  }
+
+  return 'Use the prompt bar to refine this week\'s posts, then open your calendar to keep your brand rhythm consistent.';
+}

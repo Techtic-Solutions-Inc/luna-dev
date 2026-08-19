@@ -140,7 +140,7 @@ export function ContentCalendarContent({
           mode={drawerMode}
           open
           loading={loading && !activeEntry}
-          error={null}
+          error={!loading && !activeEntry ? error : null}
           isSaving={isSaving}
           isDeleting={isDeleting}
           mutationError={mutationError}
