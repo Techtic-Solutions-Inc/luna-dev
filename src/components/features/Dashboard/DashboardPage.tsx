@@ -1,5 +1,6 @@
-import AppShell from '../../layout/AppShell';
+import { useEffect } from 'react';
 import { useDashboard } from '../../../hooks/useDashboard';
+import { useAppLayout } from '../../../contexts/AppLayoutContext';
 import Spinner from '../../ui/Spinner';
 import GreetingBanner from './GreetingBanner';
 import ContentWeekPreview from './ContentWeekPreview';
@@ -71,61 +72,61 @@ const BottomGrid = styled.div`
 
 const DashboardPage: React.FC = () => {
   const { data, loading, error, refetch } = useDashboard();
+  const { setSidebarData } = useAppLayout();
+
+  useEffect(() => {
+    if (data?.user) {
+      setSidebarData({
+        userName: data.user.full_name || data.user.name,
+        aiCreditsUsed: data.user.ai_credits_used,
+        aiCreditsTotal: data.user.ai_credits_total,
+      });
+    }
+  }, [data, setSidebarData]);
 
   if (loading) {
     return (
-      <AppShell>
-        <PageWrapper>
-          <Spinner />
-        </PageWrapper>
-      </AppShell>
+      <PageWrapper>
+        <Spinner />
+      </PageWrapper>
     );
   }
 
   if (error) {
     return (
-      <AppShell>
-        <PageWrapper>
-          <ErrorWrapper>
-            <ErrorText>{error}</ErrorText>
-            <RetryButton onClick={refetch}>Retry</RetryButton>
-          </ErrorWrapper>
-        </PageWrapper>
-      </AppShell>
+      <PageWrapper>
+        <ErrorWrapper>
+          <ErrorText role="alert">{error}</ErrorText>
+          <RetryButton onClick={refetch}>Retry</RetryButton>
+        </ErrorWrapper>
+      </PageWrapper>
     );
   }
 
   if (!data) {
     return (
-      <AppShell>
-        <PageWrapper>
-          <ErrorWrapper>
-            <ErrorText>No dashboard data available</ErrorText>
-          </ErrorWrapper>
-        </PageWrapper>
-      </AppShell>
+      <PageWrapper>
+        <ErrorWrapper>
+          <ErrorText>No dashboard data available</ErrorText>
+        </ErrorWrapper>
+      </PageWrapper>
     );
   }
 
-  const { user, announcements, calendar_entries } = data;
+  const { user, announcements, calendar_entries, analytics } = data;
 
   return (
-    <AppShell>
-      <PageWrapper>
-        <GreetingBanner
-          firstName={user.first_name}
-          announcements={announcements}
-        />
-        <ContentWeekPreview entries={calendar_entries} />
-        <StatsCards />
-        <ToolsSection />
-        <ContentCalendarPreview entries={calendar_entries} />
-        <BottomGrid>
-          <PromptLibrary />
-          <AnnouncementsList announcements={announcements} />
-        </BottomGrid>
-      </PageWrapper>
-    </AppShell>
+    <PageWrapper>
+      <GreetingBanner firstName={user.first_name} announcements={announcements} />
+      <ContentWeekPreview entries={calendar_entries} />
+      <StatsCards analytics={analytics} />
+      <ToolsSection />
+      <ContentCalendarPreview entries={calendar_entries} />
+      <BottomGrid>
+        <PromptLibrary />
+        <AnnouncementsList announcements={announcements} />
+      </BottomGrid>
+    </PageWrapper>
   );
 };
 

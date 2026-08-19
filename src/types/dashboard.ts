@@ -36,6 +36,13 @@ export interface DashboardAnnouncementListResponse {
   data: { items: DashboardAnnouncement[] };
 }
 
+export interface DashboardAnalytics {
+  downloads?: number;
+  content_generated?: number;
+  total_downloads?: number;
+  total_content_generated?: number;
+}
+
 export interface DashboardOverviewResponse {
   success: boolean;
   message: string;
@@ -43,6 +50,6 @@ export interface DashboardOverviewResponse {
     user: DashboardUser;
     announcements: DashboardAnnouncement[];
     calendar_entries: import('./contentCalendar').ContentCalendarEntry[];
-    analytics: Record<string, unknown>;
+    analytics: DashboardAnalytics;
   };
 }

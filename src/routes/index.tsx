@@ -9,6 +9,7 @@ import EmailVerification from '../components/features/EmailVerification';
 import ContentCalendar from '../components/features/ContentCalendar/ContentCalendar';
 import ContentCalendarDetails from '../components/features/ContentCalendar/ContentCalendarDetails';
 import Profile from '../components/features/Profile/Profile';
+import DashboardPage from '../components/features/Dashboard/DashboardPage';
 import NotFound from '../components/features/NotFound';
 
 const AppRouter: React.FC = () => (
@@ -19,6 +20,16 @@ const AppRouter: React.FC = () => (
       <Route path="/signup" element={<SignUp />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/verify-email" element={<EmailVerification />} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <AppShell>
+              <DashboardPage />
+            </AppShell>
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/content-calendar"
         element={

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import type { ContentCalendarEntry } from '../../../types/contentCalendar';
+import { inferContentType, formatEntryDate } from './dashboardUtils';
 
 const Section = styled.section`
   margin-bottom: 32px;
@@ -132,8 +133,20 @@ const EmptyDay = styled.div`
   border: 1px dashed #383838;
 `;
 
+const EmptyState = styled.p`
+  font-family: 'Almarai', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #959595;
+  margin: 0;
+  text-align: center;
+  padding: 24px;
+  background: #232323;
+  border-radius: 12px;
+  border: 1px dashed #383838;
+`;
+
 const DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI'] as const;
-const CONTENT_TYPES = ['Reels', 'Reels', 'Story', 'Email', ''] as const;
 
 interface ContentWeekPreviewProps {
   entries: ContentCalendarEntry[];
@@ -141,6 +154,21 @@ interface ContentWeekPreviewProps {
 
 const ContentWeekPreview: React.FC<ContentWeekPreviewProps> = ({ entries }) => {
   const navigate = useNavigate();
+  const weekEntries = entries.slice(0, 5);
+
+  if (weekEntries.length === 0) {
+    return (
+      <Section aria-label="New content this week">
+        <SectionHeader>
+          <Title>New Content This Week</Title>
+          <BrowseLink onClick={() => navigate('/content-calendar')} type="button">
+            Browse all
+          </BrowseLink>
+        </SectionHeader>
+        <EmptyState>No content scheduled for this week.</EmptyState>
+      </Section>
+    );
+  }
 
   return (
     <Section aria-label="New content this week">
@@ -152,12 +180,13 @@ const ContentWeekPreview: React.FC<ContentWeekPreviewProps> = ({ entries }) => {
       </SectionHeader>
       <WeekGrid>
         {DAYS.map((day, i) => {
-          const entry = entries[i];
+          const entry = weekEntries[i];
+          const contentType = entry ? inferContentType(entry) : '';
           return (
             <DayColumn key={day}>
               <DayHeader>
-                <DayLabel>{day}</DayLabel>
-                {CONTENT_TYPES[i] && <TypeBadge $type={CONTENT_TYPES[i]}>{CONTENT_TYPES[i]}</TypeBadge>}
+                <DayLabel>{entry ? formatEntryDate(entry.date) || day : day}</DayLabel>
+                {contentType && <TypeBadge $type={contentType}>{contentType}</TypeBadge>}
               </DayHeader>
               {entry ? (
                 <ContentCard>

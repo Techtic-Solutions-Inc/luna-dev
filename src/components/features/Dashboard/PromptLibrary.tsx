@@ -1,77 +1,67 @@
 import styled from 'styled-components';
+import { FiFileText } from 'react-icons/fi';
 import { HiOutlineSparkles } from 'react-icons/hi2';
 
-const Card = styled.section`
+const Panel = styled.section`
   background: #232323;
   border-radius: 12px;
-  padding: 24px;
+  padding: 20px 24px;
 `;
 
-const Header = styled.div`
+const PanelHeader = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 `;
 
-const HeaderIcon = styled.span`
-  color: #c8a47e;
-  display: flex;
-  align-items: center;
-
-  svg {
-    width: 20px;
-    height: 20px;
-  }
-`;
-
-const Title = styled.h3`
-  font-family: 'EB Garamond', serif;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 26.1px;
+const Title = styled.h2`
+  font-family: 'Almarai', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
   color: #ffffff;
   margin: 0;
 `;
 
-const PromptList = styled.ul`
+const List = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 `;
 
 const PromptItem = styled.li`
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  gap: 12px;
+  background: #1a1a19;
+  border-radius: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: #2f271f;
+  }
+
+  &:focus-within {
+    outline: 2px solid #c8a47e;
+    outline-offset: -2px;
+  }
 `;
 
-const PromptLabel = styled.span`
+const TypeTag = styled.span`
   font-family: 'Almarai', sans-serif;
   font-size: 11px;
   font-weight: 400;
-  color: #c8a47e;
-`;
-
-const PromptRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-const SparkleIcon = styled.span`
-  color: #c8a47e;
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-
-  svg {
-    width: 14px;
-    height: 14px;
-  }
+  color: #959595;
+  background: #383838;
+  border-radius: 4px;
+  padding: 2px 8px;
+  white-space: nowrap;
 `;
 
 const PromptText = styled.span`
@@ -80,37 +70,33 @@ const PromptText = styled.span`
   font-weight: 400;
   line-height: 22px;
   color: #e0e0e0;
+  flex: 1;
+  min-width: 0;
 `;
 
 const PROMPTS = [
-  'What should I post this week to stand out in Austin?',
-  'Draft a positioning statement for my luxury buyer niche.',
-  'How do I price the new Travis Heights listing?',
-  'Build me a 30-day content plan around relocations.',
-];
+  { type: 'Post', text: 'What should I post this week to stand out in Austin?' },
+  { type: 'Reel', text: 'Write a Reel script for a new listing in [Neighborhood].' },
+  { type: 'Caption', text: 'Give me 5 caption options for this property photo.' },
+  { type: 'Email', text: 'Turn this open house into an email invite.' },
+] as const;
 
 const PromptLibrary: React.FC = () => (
-  <Card aria-label="Prompt library">
-    <Header>
-      <HeaderIcon>
-        <HiOutlineSparkles />
-      </HeaderIcon>
+  <Panel aria-label="Prompt library">
+    <PanelHeader>
+      <FiFileText size={16} color="#c8a47e" aria-hidden="true" />
       <Title>Prompt Library</Title>
-    </Header>
-    <PromptList>
+    </PanelHeader>
+    <List>
       {PROMPTS.map((prompt) => (
-        <PromptItem key={prompt}>
-          <PromptLabel>Post</PromptLabel>
-          <PromptRow>
-            <SparkleIcon aria-hidden="true">
-              <HiOutlineSparkles />
-            </SparkleIcon>
-            <PromptText>{prompt}</PromptText>
-          </PromptRow>
+        <PromptItem key={prompt.text} tabIndex={0} role="button" aria-label={prompt.text}>
+          <TypeTag>{prompt.type}</TypeTag>
+          <HiOutlineSparkles size={14} color="#c8a47e" aria-hidden="true" />
+          <PromptText>{prompt.text}</PromptText>
         </PromptItem>
       ))}
-    </PromptList>
-  </Card>
+    </List>
+  </Panel>
 );
 
 export default PromptLibrary;

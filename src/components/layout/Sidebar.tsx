@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FiGrid, FiFolder, FiCalendar, FiZap, FiStar, FiCreditCard, FiLogOut, FiChevronRight, FiUser, FiBell } from 'react-icons/fi';
+import { useOptionalAppLayout } from '../../contexts/AppLayoutContext';
 
 const SidebarContainer = styled.nav`
   width: 176px;
@@ -55,8 +56,9 @@ const NavItem = styled.button<{ $active?: boolean }>`
   padding: 9px 14px;
   border: none;
   border-radius: 8px;
-  background: ${({ $active }) => ($active ? '#c8a47e' : 'transparent')};
-  color: ${({ $active }) => ($active ? '#1a1a19' : '#e0e0e0')};
+  border-left: ${({ $active }) => ($active ? '3px solid #c8a47e' : '3px solid transparent')};
+  background: ${({ $active }) => ($active ? '#232323' : 'transparent')};
+  color: ${({ $active }) => ($active ? '#ffffff' : '#e0e0e0')};
   font-family: 'Almarai', sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -65,7 +67,7 @@ const NavItem = styled.button<{ $active?: boolean }>`
   transition: background-color 0.15s ease;
 
   &:hover {
-    background: ${({ $active }) => ($active ? '#c8a47e' : 'rgba(200, 164, 126, 0.12)')};
+    background: ${({ $active }) => ($active ? '#232323' : 'rgba(200, 164, 126, 0.12)')};
   }
 
   &:focus-visible {
@@ -178,16 +180,15 @@ interface SidebarProps {
   aiCreditsTotal?: number;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({
-  userName = 'Joseph Stanley',
-  aiCreditsUsed = 1420,
-  aiCreditsTotal = 5000,
-}) => {
+const Sidebar: React.FC<SidebarProps> = (props) => {
+  const layoutContext = useOptionalAppLayout();
+  const userName = layoutContext?.sidebarData.userName ?? props.userName;
+  const aiCreditsUsed = layoutContext?.sidebarData.aiCreditsUsed ?? props.aiCreditsUsed;
+  const aiCreditsTotal = layoutContext?.sidebarData.aiCreditsTotal ?? props.aiCreditsTotal;
+  const hasCredits = aiCreditsUsed !== undefined && aiCreditsTotal !== undefined;
+  const creditPercent = hasCredits && aiCreditsTotal > 0 ? (aiCreditsUsed / aiCreditsTotal) * 100 : 0;
   const location = useLocation();
   const navigate = useNavigate();
-  const creditPercent = aiCreditsTotal > 0 ? (aiCreditsUsed / aiCreditsTotal) * 100 : 0;
-
-  const isActive = (path: string) => location.pathname === path;
 
   const handleNav = (path: string) => {
     navigate(path);
@@ -197,6 +198,8 @@ const Sidebar: React.FC<SidebarProps> = ({
     localStorage.removeItem('token');
     navigate('/');
   };
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <SidebarContainer aria-label="Main navigation">
@@ -241,22 +244,26 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       <Spacer />
 
-      <CreditBox>
-        <CreditTitle>AI Credit Usage</CreditTitle>
-        <CreditRow>
-          <CreditLabel>Current</CreditLabel>
-          <CreditValue>{aiCreditsUsed.toLocaleString()} / {aiCreditsTotal.toLocaleString()}</CreditValue>
-        </CreditRow>
-        <ProgressBar>
-          <ProgressFill $percent={creditPercent} />
-        </ProgressBar>
-      </CreditBox>
+      {hasCredits && (
+        <CreditBox>
+          <CreditTitle>AI Credit Usage</CreditTitle>
+          <CreditRow>
+            <CreditLabel>Current</CreditLabel>
+            <CreditValue>
+              {aiCreditsUsed.toLocaleString()} / {aiCreditsTotal.toLocaleString()}
+            </CreditValue>
+          </CreditRow>
+          <ProgressBar>
+            <ProgressFill $percent={creditPercent} />
+          </ProgressBar>
+        </CreditBox>
+      )}
 
       <UserSection onClick={() => handleNav('/profile')}>
         <UserAvatar aria-hidden="true">
           <FiUser size={14} />
         </UserAvatar>
-        <UserName>{userName}</UserName>
+        <UserName>{userName ?? 'Profile'}</UserName>
         <FiChevronRight size={14} color="#959595" />
       </UserSection>
 

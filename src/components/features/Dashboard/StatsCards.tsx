@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { FiDownload, FiFileText, FiArrowUpRight } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+import type { DashboardAnalytics } from '../../../types/dashboard';
 
 const Grid = styled.section`
   display: grid;
@@ -73,33 +75,63 @@ const StatValue = styled.span`
   color: #ffffff;
 `;
 
-const StatsCards: React.FC = () => (
-  <Grid aria-label="Dashboard statistics">
-    <Card>
-      <CardHeader>
-        <CardLabel>
-          <FiDownload aria-hidden="true" />
-          Downloads
-        </CardLabel>
-        <ArrowIcon aria-label="View all downloads" type="button">
-          <FiArrowUpRight size={16} />
-        </ArrowIcon>
-      </CardHeader>
-      <StatValue>312</StatValue>
-    </Card>
-    <Card>
-      <CardHeader>
-        <CardLabel>
-          <FiFileText aria-hidden="true" />
-          Content Generated
-        </CardLabel>
-        <ArrowIcon aria-label="View all content generated" type="button">
-          <FiArrowUpRight size={16} />
-        </ArrowIcon>
-      </CardHeader>
-      <StatValue>247</StatValue>
-    </Card>
-  </Grid>
-);
+interface StatsCardsProps {
+  analytics: DashboardAnalytics;
+}
+
+function resolveDownloads(analytics: DashboardAnalytics): number | null {
+  if (typeof analytics.downloads === 'number') return analytics.downloads;
+  if (typeof analytics.total_downloads === 'number') return analytics.total_downloads;
+  return null;
+}
+
+function resolveContentGenerated(analytics: DashboardAnalytics): number | null {
+  if (typeof analytics.content_generated === 'number') return analytics.content_generated;
+  if (typeof analytics.total_content_generated === 'number') return analytics.total_content_generated;
+  return null;
+}
+
+const StatsCards: React.FC<StatsCardsProps> = ({ analytics }) => {
+  const navigate = useNavigate();
+  const downloads = resolveDownloads(analytics);
+  const contentGenerated = resolveContentGenerated(analytics);
+
+  return (
+    <Grid aria-label="Dashboard statistics">
+      <Card>
+        <CardHeader>
+          <CardLabel>
+            <FiDownload aria-hidden="true" />
+            Downloads
+          </CardLabel>
+          <ArrowIcon
+            aria-label="View all downloads"
+            type="button"
+            onClick={() => navigate('/profile/downloads')}
+          >
+            <FiArrowUpRight size={16} />
+          </ArrowIcon>
+        </CardHeader>
+        <StatValue>{downloads !== null ? downloads.toLocaleString() : '—'}</StatValue>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardLabel>
+            <FiFileText aria-hidden="true" />
+            Content Generated
+          </CardLabel>
+          <ArrowIcon
+            aria-label="View all content generated"
+            type="button"
+            onClick={() => navigate('/profile/content-generated')}
+          >
+            <FiArrowUpRight size={16} />
+          </ArrowIcon>
+        </CardHeader>
+        <StatValue>{contentGenerated !== null ? contentGenerated.toLocaleString() : '—'}</StatValue>
+      </Card>
+    </Grid>
+  );
+};
 
 export default StatsCards;

@@ -1,17 +1,31 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FiSearch, FiCalendar, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { HiOutlineSparkles } from 'react-icons/hi2';
 import type { DashboardAnnouncement } from '../../../types/dashboard';
+import { getGreeting } from './dashboardUtils';
 
-const BannerWrapper = styled.section`
+const Section = styled.section`
+  margin-bottom: 32px;
+`;
+
+const Greeting = styled.h1`
+  font-family: 'EB Garamond', serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 41.76px;
+  color: #ffffff;
+  margin: 0 0 20px;
+`;
+
+const BannerWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 340px;
   gap: 24px;
   background: linear-gradient(135deg, #2f271f 0%, #1a1a19 100%);
   border-radius: 16px;
   padding: 32px;
-  margin-bottom: 32px;
 
   @media (max-width: 1024px) {
     grid-template-columns: 1fr;
@@ -26,15 +40,6 @@ const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
-
-const Greeting = styled.h1`
-  font-family: 'EB Garamond', serif;
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 41.76px;
-  color: #ffffff;
-  margin: 0;
 `;
 
 const Headline = styled.p`
@@ -70,7 +75,7 @@ const SearchInput = styled.input`
   flex: 1;
   background: transparent;
   border: none;
-  color: #959595;
+  color: #e0e0e0;
   font-family: 'Almarai', sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -79,6 +84,10 @@ const SearchInput = styled.input`
 
   &::placeholder {
     color: #959595;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -135,7 +144,7 @@ const CalendarButton = styled.button`
   transition: background-color 0.15s ease;
 
   &:hover {
-    background: #444;
+    background: #444444;
   }
 
   &:focus-visible {
@@ -257,74 +266,86 @@ interface GreetingBannerProps {
 }
 
 const GreetingBanner: React.FC<GreetingBannerProps> = ({ firstName, announcements }) => {
+  const navigate = useNavigate();
   const [activeSlide, setActiveSlide] = useState(0);
   const totalSlides = Math.max(announcements.length, 1);
 
   const goNext = () => setActiveSlide((prev) => (prev + 1) % totalSlides);
   const goPrev = () => setActiveSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
 
-  const currentAnnouncement = announcements[activeSlide];
+  const currentAnnouncement = announcements.length > 0 ? announcements[activeSlide] : null;
 
   return (
-    <BannerWrapper aria-label="Dashboard greeting">
-      <LeftContent>
-        <Greeting>Good Morning, {firstName}.</Greeting>
-        {currentAnnouncement ? (
-          <>
-            <Headline>{currentAnnouncement.announcement_title}</Headline>
-            <Description>{currentAnnouncement.announcement_content}</Description>
-          </>
-        ) : (
-          <Description>Welcome to your dashboard. You have no new announcements.</Description>
-        )}
-        <SearchBar>
-          <FiSearch size={16} color="#959595" aria-hidden="true" />
-          <SearchInput
-            type="search"
-            placeholder="Generate captions, listing descriptions, email blasts, and Reels scripts in your brand voice."
-            aria-label="Search or generate content"
-          />
-        </SearchBar>
-        <ActionRow>
-          <PlanButton type="button" aria-label="Plan my week">
-            <HiOutlineSparkles />
-            Plan My Week
-          </PlanButton>
-          <CalendarButton type="button" aria-label="Open content calendar">
-            <FiCalendar />
-            My Content Calendar
-          </CalendarButton>
-        </ActionRow>
-      </LeftContent>
-      <RightPanel>
-        <AnnouncementHeader>
-          <AnnouncementLabel>Announcements</AnnouncementLabel>
-          <NavButtons>
-            <NavBtn onClick={goPrev} aria-label="Previous announcement">
-              <FiChevronLeft />
-            </NavBtn>
-            <NavBtn onClick={goNext} aria-label="Next announcement">
-              <FiChevronRight />
-            </NavBtn>
-          </NavButtons>
-        </AnnouncementHeader>
-        <AnnouncementCard>
-          <AnnouncementImage>
-            <AnnouncementImagePlaceholder />
-          </AnnouncementImage>
-        </AnnouncementCard>
-        <Dots>
-          {Array.from({ length: Math.min(totalSlides, 5) }).map((_, i) => (
-            <Dot
-              key={i}
-              $active={i === activeSlide}
-              onClick={() => setActiveSlide(i)}
-              aria-label={`Go to announcement ${i + 1}`}
+    <Section aria-label="Dashboard greeting">
+      <Greeting>
+        {getGreeting()}, {firstName}.
+      </Greeting>
+      <BannerWrapper>
+        <LeftContent>
+          {currentAnnouncement ? (
+            <>
+              <Headline>{currentAnnouncement.announcement_title}</Headline>
+              <Description>{currentAnnouncement.announcement_content}</Description>
+            </>
+          ) : (
+            <Description>Welcome to your dashboard. You have no new announcements.</Description>
+          )}
+          <SearchBar>
+            <FiSearch size={16} color="#959595" aria-hidden="true" />
+            <SearchInput
+              type="search"
+              placeholder="Generate captions, listing descriptions, email blasts, and Reels scripts in your brand voice."
+              aria-label="Search or generate content"
             />
-          ))}
-        </Dots>
-      </RightPanel>
-    </BannerWrapper>
+          </SearchBar>
+          <ActionRow>
+            <PlanButton type="button" aria-label="Plan my week">
+              <HiOutlineSparkles />
+              Plan My Week
+            </PlanButton>
+            <CalendarButton
+              type="button"
+              aria-label="Open content calendar"
+              onClick={() => navigate('/content-calendar')}
+            >
+              <FiCalendar />
+              My Content Calendar
+            </CalendarButton>
+          </ActionRow>
+        </LeftContent>
+        <RightPanel>
+          <AnnouncementHeader>
+            <AnnouncementLabel>Announcements</AnnouncementLabel>
+            <NavButtons>
+              <NavBtn onClick={goPrev} aria-label="Previous announcement" type="button">
+                <FiChevronLeft />
+              </NavBtn>
+              <NavBtn onClick={goNext} aria-label="Next announcement" type="button">
+                <FiChevronRight />
+              </NavBtn>
+            </NavButtons>
+          </AnnouncementHeader>
+          <AnnouncementCard>
+            <AnnouncementImage>
+              <AnnouncementImagePlaceholder />
+            </AnnouncementImage>
+          </AnnouncementCard>
+          {announcements.length > 1 && (
+            <Dots>
+              {announcements.slice(0, 5).map((_, i) => (
+                <Dot
+                  key={i}
+                  $active={i === activeSlide}
+                  onClick={() => setActiveSlide(i)}
+                  aria-label={`Go to announcement ${i + 1}`}
+                  type="button"
+                />
+              ))}
+            </Dots>
+          )}
+        </RightPanel>
+      </BannerWrapper>
+    </Section>
   );
 };
 

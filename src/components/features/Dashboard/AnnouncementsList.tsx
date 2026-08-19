@@ -1,18 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { FiBell } from 'react-icons/fi';
+import { FiVolume2 } from 'react-icons/fi';
 import type { DashboardAnnouncement } from '../../../types/dashboard';
+import { formatRelativeTime } from './dashboardUtils';
 
-const Card = styled.section`
+const Panel = styled.section`
   background: #232323;
   border-radius: 12px;
-  padding: 24px;
+  padding: 20px 24px;
 `;
 
-const Header = styled.div`
+const PanelHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 `;
 
 const HeaderLeft = styled.div`
@@ -21,27 +23,16 @@ const HeaderLeft = styled.div`
   gap: 8px;
 `;
 
-const HeaderIcon = styled.span`
-  color: #c8a47e;
-  display: flex;
-  align-items: center;
-
-  svg {
-    width: 20px;
-    height: 20px;
-  }
-`;
-
-const Title = styled.h3`
-  font-family: 'EB Garamond', serif;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 26.1px;
+const Title = styled.h2`
+  font-family: 'Almarai', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
   color: #ffffff;
   margin: 0;
 `;
 
-const ViewAll = styled.button`
+const ViewAllLink = styled.button`
   font-family: 'Almarai', sans-serif;
   font-size: 13px;
   font-weight: 400;
@@ -65,19 +56,23 @@ const List = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
 `;
 
 const ListItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
+  gap: 16px;
+  padding: 12px 0;
   border-bottom: 1px solid #383838;
 
   &:last-child {
     border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  &:first-child {
+    padding-top: 0;
   }
 `;
 
@@ -85,69 +80,64 @@ const ItemTitle = styled.span`
   font-family: 'Almarai', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 15.624px;
+  line-height: 22px;
   color: #e0e0e0;
+  flex: 1;
+  min-width: 0;
 `;
 
-const ItemDate = styled.span`
+const ItemTime = styled.time`
   font-family: 'Almarai', sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: #959595;
-  flex-shrink: 0;
-  margin-left: 12px;
+  white-space: nowrap;
 `;
 
-const EmptyMessage = styled.p`
+const EmptyState = styled.p`
   font-family: 'Almarai', sans-serif;
   font-size: 14px;
+  font-weight: 400;
   color: #959595;
-  text-align: center;
-  padding: 20px 0;
   margin: 0;
+  text-align: center;
+  padding: 16px 0;
 `;
-
-function formatRelativeDate(dateStr: string): string {
-  const date = new Date(dateStr);
-  const now = new Date();
-  const diffMs = now.getTime() - date.getTime();
-  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-  if (diffHours < 1) return 'Just now';
-  if (diffHours < 24) return `${diffHours}h ago`;
-  if (diffDays === 1) return 'Yesterday';
-  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-}
 
 interface AnnouncementsListProps {
   announcements: DashboardAnnouncement[];
 }
 
-const AnnouncementsList: React.FC<AnnouncementsListProps> = ({ announcements }) => (
-  <Card aria-label="Announcements">
-    <Header>
-      <HeaderLeft>
-        <HeaderIcon>
-          <FiBell />
-        </HeaderIcon>
-        <Title>Announcements</Title>
-      </HeaderLeft>
-      <ViewAll type="button">View all</ViewAll>
-    </Header>
-    {announcements.length === 0 ? (
-      <EmptyMessage>No announcements at the moment</EmptyMessage>
-    ) : (
-      <List>
-        {announcements.map((a) => (
-          <ListItem key={a.id}>
-            <ItemTitle>{a.announcement_title}</ItemTitle>
-            <ItemDate>{formatRelativeDate(a.created_at)}</ItemDate>
-          </ListItem>
-        ))}
-      </List>
-    )}
-  </Card>
-);
+const AnnouncementsList: React.FC<AnnouncementsListProps> = ({ announcements }) => {
+  const navigate = useNavigate();
+  const items = announcements.slice(0, 5);
+
+  return (
+    <Panel aria-label="Announcements">
+      <PanelHeader>
+        <HeaderLeft>
+          <FiVolume2 size={16} color="#c8a47e" aria-hidden="true" />
+          <Title>Announcements</Title>
+        </HeaderLeft>
+        <ViewAllLink type="button" onClick={() => navigate('/announcements')}>
+          View all
+        </ViewAllLink>
+      </PanelHeader>
+
+      {items.length === 0 ? (
+        <EmptyState>No announcements at this time.</EmptyState>
+      ) : (
+        <List>
+          {items.map((item) => (
+            <ListItem key={item.id}>
+              <ItemTitle>{item.announcement_title || item.title}</ItemTitle>
+              <ItemTime dateTime={item.created_at}>{formatRelativeTime(item.created_at)}</ItemTime>
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </Panel>
+  );
+};
 
 export default AnnouncementsList;
