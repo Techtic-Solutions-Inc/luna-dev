@@ -4,6 +4,18 @@ import styled from 'styled-components';
 import { isAxiosError } from 'axios';
 import AuthLayout from '../layout/AuthLayout';
 import Spinner from '../ui/Spinner';
+import {
+  AuthInput,
+  AuthErrorText,
+  AuthSubmitButton,
+  PasswordWrapper,
+  PasswordToggle,
+  EyeIcon,
+  HiddenCheckbox,
+  CheckboxBox,
+  CheckIcon,
+  AuthApiError,
+} from '../ui/FormPrimitives';
 import apiClient from '../../lib/api/client';
 import type { LoginRequest, LoginResponseData } from '../../types/auth';
 import type { ApiErrorResponse, ApiSuccessResponse } from '../../types/api';
@@ -60,85 +72,6 @@ const InputWrapper = styled.div`
   margin-bottom: 12px;
 `;
 
-const Input = styled.input<{ $hasError?: boolean }>`
-  width: 100%;
-  height: 48px;
-  padding: 0 16px;
-  font-family: 'Almarai', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid ${(p) => (p.$hasError ? '#ff2f2f' : 'rgba(255, 255, 255, 0.15)')};
-  border-radius: 10px;
-  outline: none;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.35);
-  }
-
-  &:focus {
-    border-color: ${(p) => (p.$hasError ? '#ff2f2f' : 'var(--accent)')};
-  }
-`;
-
-const PasswordWrapper = styled.div`
-  position: relative;
-  width: 100%;
-`;
-
-const ToggleButton = styled.button`
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  padding: 4px;
-  cursor: pointer;
-  color: rgba(255, 255, 255, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
-`;
-
-const EyeSvg = ({ open }: { open: boolean }) => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    {open ? (
-      <>
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-        <circle cx="12" cy="12" r="3" />
-      </>
-    ) : (
-      <>
-        <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94" />
-        <path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19" />
-        <line x1="1" y1="1" x2="23" y2="23" />
-      </>
-    )}
-  </svg>
-);
-
-const ErrorText = styled.span`
-  display: block;
-  font-family: 'Almarai', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: #ff2f2f;
-  margin-top: 4px;
-`;
-
 const OptionsRow = styled.div`
   width: 100%;
   display: flex;
@@ -154,37 +87,6 @@ const CheckboxLabel = styled.label`
   gap: 8px;
   cursor: pointer;
 `;
-
-const HiddenCheckbox = styled.input`
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-`;
-
-const CheckboxBox = styled.span<{ $checked: boolean }>`
-  width: 18px;
-  height: 18px;
-  min-width: 18px;
-  border: 1.5px solid ${(p) => (p.$checked ? 'var(--accent)' : 'rgba(255, 255, 255, 0.3)')};
-  border-radius: 4px;
-  background: ${(p) => (p.$checked ? 'var(--accent)' : 'transparent')};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s, border-color 0.15s;
-
-  ${HiddenCheckbox}:focus-visible + & {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-`;
-
-const CheckSvg = () => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-    <path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
 
 const RememberText = styled.span`
   font-family: 'Almarai', sans-serif;
@@ -207,33 +109,8 @@ const ForgotLink = styled(Link)`
   }
 `;
 
-const SubmitButton = styled.button<{ $loading?: boolean }>`
-  width: 100%;
-  height: 48px;
+const SubmitButton = styled(AuthSubmitButton)`
   margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: 'Almarai', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-  background: var(--accent);
-  border: none;
-  border-radius: 10px;
-  cursor: ${(p) => (p.$loading ? 'not-allowed' : 'pointer')};
-  opacity: ${(p) => (p.$loading ? 0.7 : 1)};
-  transition: opacity 0.2s;
-
-  &:hover:not(:disabled) {
-    opacity: 0.9;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
 `;
 
 const Divider = styled.div`
@@ -258,19 +135,6 @@ const FooterText = styled.p`
       color: #ffffff;
     }
   }
-`;
-
-const ApiError = styled.div`
-  width: 100%;
-  padding: 12px 16px;
-  margin-top: 12px;
-  font-family: 'Almarai', sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  color: #ff2f2f;
-  background: rgba(255, 47, 47, 0.08);
-  border-radius: 8px;
-  text-align: center;
 `;
 
 interface FieldErrors {
@@ -323,9 +187,13 @@ export default function SignIn() {
     try {
       const res = await apiClient.post<ApiSuccessResponse<LoginResponseData>>('/auth/login', body);
       const data = res.data.data;
-      const storage = remember ? localStorage : sessionStorage;
-      storage.setItem('token', data.token);
-      localStorage.setItem('token', data.token);
+      if (remember) {
+        localStorage.setItem('token', data.token);
+        sessionStorage.removeItem('token');
+      } else {
+        sessionStorage.setItem('token', data.token);
+        localStorage.removeItem('token');
+      }
       navigate('/');
     } catch (error: unknown) {
       if (isAxiosError<ApiErrorResponse>(error)) {
@@ -333,7 +201,7 @@ export default function SignIn() {
         if (data?.errors) {
           const serverErrors = { ...empty };
           for (const [key, msgs] of Object.entries(data.errors)) {
-            if (key in serverErrors) {
+            if (key in serverErrors && msgs.length > 0) {
               (serverErrors as Record<string, string>)[key] = msgs[0];
             }
           }
@@ -360,7 +228,7 @@ export default function SignIn() {
         <Description>Everything you need to create standout real estate content.</Description>
 
         <InputWrapper>
-          <Input
+          <AuthInput
             type="email"
             placeholder="Email"
             value={email}
@@ -371,12 +239,12 @@ export default function SignIn() {
             aria-invalid={!!errors.email}
             autoComplete="email"
           />
-          {errors.email && <ErrorText role="alert">{errors.email}</ErrorText>}
+          {errors.email && <AuthErrorText role="alert">{errors.email}</AuthErrorText>}
         </InputWrapper>
 
         <InputWrapper>
           <PasswordWrapper>
-            <Input
+            <AuthInput
               type={showPassword ? 'text' : 'password'}
               placeholder="Password"
               value={password}
@@ -388,15 +256,15 @@ export default function SignIn() {
               autoComplete="current-password"
               style={{ paddingRight: '48px' }}
             />
-            <ToggleButton
+            <PasswordToggle
               type="button"
               onClick={() => setShowPassword((v) => !v)}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
-              <EyeSvg open={showPassword} />
-            </ToggleButton>
+              <EyeIcon open={showPassword} />
+            </PasswordToggle>
           </PasswordWrapper>
-          {errors.password && <ErrorText role="alert">{errors.password}</ErrorText>}
+          {errors.password && <AuthErrorText role="alert">{errors.password}</AuthErrorText>}
         </InputWrapper>
 
         <OptionsRow>
@@ -408,7 +276,7 @@ export default function SignIn() {
               aria-label="Remember me"
             />
             <CheckboxBox $checked={remember}>
-              {remember && <CheckSvg />}
+              {remember && <CheckIcon />}
             </CheckboxBox>
             <RememberText>Remember me</RememberText>
           </CheckboxLabel>
@@ -419,7 +287,7 @@ export default function SignIn() {
           {loading ? <Spinner size={20} inline /> : 'Sign In'}
         </SubmitButton>
 
-        {apiError && <ApiError role="alert">{apiError}</ApiError>}
+        {apiError && <AuthApiError role="alert">{apiError}</AuthApiError>}
 
         <Divider />
 

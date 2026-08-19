@@ -1,8 +1,17 @@
-import { useState, type FormEvent } from 'react';
+import { useState, useRef, useEffect, useCallback, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { breakpoints } from '../../theme/breakpoints';
-import Spinner from '../ui/Spinner';
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import {
+  AuthInput,
+  AuthErrorText,
+  AuthSubmitButton,
+  HiddenCheckbox,
+  CheckboxBox,
+  CheckIcon,
+} from '../ui/FormPrimitives';
 
 /* ------------------------------------------------------------------ */
 /*  Shared helpers                                                     */
@@ -75,6 +84,113 @@ const NavLink = styled(Link)`
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   transition: color 0.2s;
+
+  &:hover {
+    color: #ffffff;
+  }
+`;
+
+const NavAnchor = styled.a`
+  font-family: 'Almarai', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #ffffff;
+  }
+`;
+
+const MobileNavAnchor = styled.a`
+  font-family: 'Almarai', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+
+  &:hover {
+    color: #ffffff;
+  }
+`;
+
+const FooterAnchor = styled.a`
+  font-family: 'Almarai', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #ffffff;
+  }
+`;
+
+const HamburgerBtn = styled.button`
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 4px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+`;
+
+const MobileNav = styled.div<{ $open: boolean }>`
+  display: none;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: ${(p) => (p.$open ? 'flex' : 'none')};
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.95);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+`;
+
+const MobileNavClose = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 4px;
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+`;
+
+const MobileNavLink = styled(Link)`
+  font-family: 'Almarai', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
 
   &:hover {
     color: #ffffff;
@@ -684,38 +800,6 @@ const FormField = styled.div<{ $full?: boolean }>`
   margin-bottom: 12px;
 `;
 
-const FormInput = styled.input<{ $hasError?: boolean }>`
-  width: 100%;
-  height: 48px;
-  padding: 0 16px;
-  font-family: 'Almarai', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid ${(p) => (p.$hasError ? '#ff2f2f' : 'rgba(255, 255, 255, 0.15)')};
-  border-radius: 10px;
-  outline: none;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.35);
-  }
-
-  &:focus {
-    border-color: ${(p) => (p.$hasError ? '#ff2f2f' : 'var(--accent)')};
-  }
-`;
-
-const FormError = styled.span`
-  display: block;
-  font-family: 'Almarai', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: #ff2f2f;
-  margin-top: 4px;
-`;
-
 const CheckboxRow = styled.label`
   display: flex;
   align-items: flex-start;
@@ -723,38 +807,6 @@ const CheckboxRow = styled.label`
   margin-bottom: 8px;
   cursor: pointer;
 `;
-
-const HiddenCheckbox = styled.input`
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-`;
-
-const CheckboxBox = styled.span<{ $checked: boolean; $hasError?: boolean }>`
-  width: 18px;
-  height: 18px;
-  min-width: 18px;
-  border: 1.5px solid ${(p) => (p.$hasError ? '#ff2f2f' : p.$checked ? 'var(--accent)' : 'rgba(255, 255, 255, 0.3)')};
-  border-radius: 4px;
-  background: ${(p) => (p.$checked ? 'var(--accent)' : 'transparent')};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s, border-color 0.15s;
-  margin-top: 1px;
-
-  ${HiddenCheckbox}:focus-visible + & {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
-`;
-
-const CheckSvg = () => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-    <path d="M2.5 6L5 8.5L9.5 3.5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
 
 const CheckboxLabel = styled.span`
   font-family: 'Almarai', sans-serif;
@@ -774,33 +826,8 @@ const CheckboxLabel = styled.span`
   }
 `;
 
-const SubmitButton = styled.button<{ $loading?: boolean }>`
-  width: 100%;
-  height: 48px;
+const ContactSubmitButton = styled(AuthSubmitButton)`
   margin-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: 'Almarai', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-  background: var(--accent);
-  border: none;
-  border-radius: 10px;
-  cursor: ${(p) => (p.$loading ? 'not-allowed' : 'pointer')};
-  opacity: ${(p) => (p.$loading ? 0.7 : 1)};
-  transition: opacity 0.2s;
-
-  &:hover:not(:disabled) {
-    opacity: 0.9;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
 `;
 
 const ApiMessage = styled.div<{ $error?: boolean }>`
@@ -937,23 +964,49 @@ export default function Home() {
   const [privacy, setPrivacy] = useState(false);
   const [terms, setTerms] = useState(false);
   const [errors, setErrors] = useState<ContactErrors>(emptyErrors);
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [apiError, setApiError] = useState('');
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const mobileNavCloseRef = useRef<HTMLButtonElement>(null);
+
+  const closeMobileNav = useCallback(() => setMobileNavOpen(false), []);
+
+  useEffect(() => {
+    if (mobileNavOpen && mobileNavCloseRef.current) {
+      mobileNavCloseRef.current.focus();
+    }
+  }, [mobileNavOpen]);
+
+  const mobileNavRef = useRef<HTMLDivElement>(null);
+
+  function handleMobileNavKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'Escape') {
+      closeMobileNav();
+      return;
+    }
+    if (e.key === 'Tab' && mobileNavRef.current) {
+      const focusable = mobileNavRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setApiError('');
-    setSuccess(false);
     const v = validateContact(firstName, lastName, email, phone, privacy, terms);
     setErrors(v);
     if (hasErrors(v)) return;
-
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setApiError('The subscribe endpoint is not yet available. Please try again later.');
-    }, 1200);
+    setApiError('The subscribe endpoint is not yet available. Please try again later.');
   }
 
   return (
@@ -963,13 +1016,51 @@ export default function Home() {
         <NavLogo to="/">Agentwise</NavLogo>
         <NavLinks>
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/">Content</NavLink>
-          <NavLink to="/">Pricing</NavLink>
-          <NavLink to="/">Blog</NavLink>
-          <NavLink to="/">Contact Us</NavLink>
+          <NavAnchor href="#steps">Content</NavAnchor>
+          <NavAnchor href="#ultimate-mind">Pricing</NavAnchor>
+          <NavAnchor href="#agents">Blog</NavAnchor>
+          <NavAnchor href="#contact">Contact Us</NavAnchor>
           <NavCta to="/signup">Get Started</NavCta>
         </NavLinks>
+        <HamburgerBtn
+          type="button"
+          onClick={() => setMobileNavOpen(true)}
+          aria-label="Open navigation menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </HamburgerBtn>
       </Nav>
+
+      <MobileNav
+        ref={mobileNavRef}
+        $open={mobileNavOpen}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Navigation menu"
+        onKeyDown={handleMobileNavKeyDown}
+      >
+        <MobileNavClose
+          ref={mobileNavCloseRef}
+          type="button"
+          onClick={closeMobileNav}
+          aria-label="Close navigation menu"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </MobileNavClose>
+        <MobileNavLink to="/" onClick={closeMobileNav}>Home</MobileNavLink>
+        <MobileNavAnchor href="#steps" onClick={closeMobileNav}>Content</MobileNavAnchor>
+        <MobileNavAnchor href="#ultimate-mind" onClick={closeMobileNav}>Pricing</MobileNavAnchor>
+        <MobileNavAnchor href="#agents" onClick={closeMobileNav}>Blog</MobileNavAnchor>
+        <MobileNavAnchor href="#contact" onClick={closeMobileNav}>Contact Us</MobileNavAnchor>
+        <NavCta to="/signup" onClick={closeMobileNav}>Get Started</NavCta>
+      </MobileNav>
 
       {/* HERO */}
       <HeroSection>
@@ -984,10 +1075,10 @@ export default function Home() {
             content tailored to your listings, your market, and your brand — all in minutes.
           </HeroDescription>
           <SocialRow>
-            <SocialIcon href="#" aria-label="Facebook">f</SocialIcon>
-            <SocialIcon href="#" aria-label="Twitter">𝕏</SocialIcon>
-            <SocialIcon href="#" aria-label="Instagram">◎</SocialIcon>
-            <SocialIcon href="#" aria-label="LinkedIn">in</SocialIcon>
+            <SocialIcon href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF size={14} /></SocialIcon>
+            <SocialIcon href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><FaXTwitter size={14} /></SocialIcon>
+            <SocialIcon href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram size={14} /></SocialIcon>
+            <SocialIcon href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedinIn size={14} /></SocialIcon>
           </SocialRow>
           <HeroNote>400+ Properties powered by Agentwise</HeroNote>
           <GetStartedBtn to="/signup">Get Started</GetStartedBtn>
@@ -1003,14 +1094,14 @@ export default function Home() {
           </GallerySubtext>
           <GalleryGrid>
             {galleryImages.map((url, i) => (
-              <GalleryImage key={i} $url={url} role="img" aria-label={`Marketing example ${i + 1}`} />
+              <GalleryImage key={url} $url={url} role="img" aria-label={`Marketing example ${i + 1}`} />
             ))}
           </GalleryGrid>
         </Container>
       </GallerySection>
 
       {/* THREE STEPS */}
-      <StepsSection>
+      <StepsSection id="steps">
         <Container>
           <StepsHeading>Stunning Marketing, In Three Simple Steps</StepsHeading>
 
@@ -1050,7 +1141,7 @@ export default function Home() {
       </StepsSection>
 
       {/* ULTIMATE MIND */}
-      <UltimateMindSection>
+      <UltimateMindSection id="ultimate-mind">
         <Container>
           <UmCard>
             <UmContent>
@@ -1089,7 +1180,7 @@ export default function Home() {
       </DealSection>
 
       {/* BUILT FOR AGENTS */}
-      <AgentsSection>
+      <AgentsSection id="agents">
         <Container>
           <AgentsGrid>
             <AgentsContent>
@@ -1144,7 +1235,7 @@ export default function Home() {
 
               <FormRow>
                 <FormField>
-                  <FormInput
+                  <AuthInput
                     type="text"
                     placeholder="First Name"
                     value={firstName}
@@ -1153,10 +1244,10 @@ export default function Home() {
                     aria-label="First Name"
                     aria-invalid={!!errors.firstName}
                   />
-                  {errors.firstName && <FormError role="alert">{errors.firstName}</FormError>}
+                  {errors.firstName && <AuthErrorText role="alert">{errors.firstName}</AuthErrorText>}
                 </FormField>
                 <FormField>
-                  <FormInput
+                  <AuthInput
                     type="text"
                     placeholder="Last Name"
                     value={lastName}
@@ -1165,12 +1256,12 @@ export default function Home() {
                     aria-label="Last Name"
                     aria-invalid={!!errors.lastName}
                   />
-                  {errors.lastName && <FormError role="alert">{errors.lastName}</FormError>}
+                  {errors.lastName && <AuthErrorText role="alert">{errors.lastName}</AuthErrorText>}
                 </FormField>
               </FormRow>
 
               <FormField $full>
-                <FormInput
+                <AuthInput
                   type="email"
                   placeholder="Email"
                   value={email}
@@ -1180,11 +1271,11 @@ export default function Home() {
                   aria-invalid={!!errors.email}
                   autoComplete="email"
                 />
-                {errors.email && <FormError role="alert">{errors.email}</FormError>}
+                {errors.email && <AuthErrorText role="alert">{errors.email}</AuthErrorText>}
               </FormField>
 
               <FormField $full>
-                <FormInput
+                <AuthInput
                   type="tel"
                   placeholder="Phone number"
                   value={phone}
@@ -1194,7 +1285,7 @@ export default function Home() {
                   aria-invalid={!!errors.phone}
                   autoComplete="tel"
                 />
-                {errors.phone && <FormError role="alert">{errors.phone}</FormError>}
+                {errors.phone && <AuthErrorText role="alert">{errors.phone}</AuthErrorText>}
               </FormField>
 
               <CheckboxRow>
@@ -1205,14 +1296,14 @@ export default function Home() {
                   aria-label="I agree to the Privacy Policy"
                 />
                 <CheckboxBox $checked={privacy} $hasError={!!errors.privacy}>
-                  {privacy && <CheckSvg />}
+                  {privacy && <CheckIcon />}
                 </CheckboxBox>
                 <CheckboxLabel>
                   I agree to the{' '}
                   <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
                 </CheckboxLabel>
               </CheckboxRow>
-              {errors.privacy && <FormError role="alert" style={{ marginBottom: '4px', marginLeft: '28px' }}>{errors.privacy}</FormError>}
+              {errors.privacy && <AuthErrorText role="alert" style={{ marginBottom: '4px', marginLeft: '28px' }}>{errors.privacy}</AuthErrorText>}
 
               <CheckboxRow>
                 <HiddenCheckbox
@@ -1222,21 +1313,20 @@ export default function Home() {
                   aria-label="I agree to the Terms of Service"
                 />
                 <CheckboxBox $checked={terms} $hasError={!!errors.terms}>
-                  {terms && <CheckSvg />}
+                  {terms && <CheckIcon />}
                 </CheckboxBox>
                 <CheckboxLabel>
                   I agree to the{' '}
                   <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a>
                 </CheckboxLabel>
               </CheckboxRow>
-              {errors.terms && <FormError role="alert" style={{ marginBottom: '4px', marginLeft: '28px' }}>{errors.terms}</FormError>}
+              {errors.terms && <AuthErrorText role="alert" style={{ marginBottom: '4px', marginLeft: '28px' }}>{errors.terms}</AuthErrorText>}
 
-              <SubmitButton type="submit" disabled={loading} $loading={loading}>
-                {loading ? <Spinner size={20} inline /> : 'Get Started'}
-              </SubmitButton>
+              <ContactSubmitButton type="submit">
+                Get Started
+              </ContactSubmitButton>
 
               {apiError && <ApiMessage $error role="alert">{apiError}</ApiMessage>}
-              {success && <ApiMessage role="status">Thank you! We&apos;ll be in touch soon.</ApiMessage>}
             </ContactForm>
           </ContactGrid>
         </Container>
@@ -1249,10 +1339,10 @@ export default function Home() {
             <FooterLogo>Agentwise</FooterLogo>
             <FooterLinks>
               <FooterLink to="/">Home</FooterLink>
-              <FooterLink to="/">Content</FooterLink>
-              <FooterLink to="/">Pricing</FooterLink>
-              <FooterLink to="/">Blog</FooterLink>
-              <FooterLink to="/">Contact Us</FooterLink>
+              <FooterAnchor href="#steps">Content</FooterAnchor>
+              <FooterAnchor href="#ultimate-mind">Pricing</FooterAnchor>
+              <FooterAnchor href="#agents">Blog</FooterAnchor>
+              <FooterAnchor href="#contact">Contact Us</FooterAnchor>
             </FooterLinks>
             <FooterEmail href="mailto:info@agentwisemarketing.com">
               info@agentwisemarketing.com

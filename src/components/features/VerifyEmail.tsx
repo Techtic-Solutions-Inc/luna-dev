@@ -149,8 +149,14 @@ export default function VerifyEmail() {
       setStatus('success');
     } catch (error: unknown) {
       setStatus('error');
-      if (isAxiosError<ApiErrorResponse>(error) && error.response?.data?.message) {
-        setErrorMessage(error.response.data.message);
+      if (isAxiosError<ApiErrorResponse>(error)) {
+        if (error.response?.status === 404) {
+          setErrorMessage('Email verification is not yet available. This endpoint has not been deployed.');
+        } else if (error.response?.data?.message) {
+          setErrorMessage(error.response.data.message);
+        } else {
+          setErrorMessage('Verification failed. The link may have expired or is invalid.');
+        }
       } else {
         setErrorMessage('Verification failed. The link may have expired or is invalid.');
       }

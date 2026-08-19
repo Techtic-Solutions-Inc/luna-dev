@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import styled from 'styled-components';
 import AuthLayout from '../layout/AuthLayout';
 import Spinner from '../ui/Spinner';
+import { AuthInput, AuthErrorText, AuthSubmitButton, AuthApiError } from '../ui/FormPrimitives';
 import apiClient from '../../lib/api/client';
 import type { ApiErrorResponse } from '../../types/api';
 import { isAxiosError } from 'axios';
@@ -58,66 +59,13 @@ const InputWrapper = styled.div`
   margin-bottom: 8px;
 `;
 
-const Input = styled.input<{ $hasError?: boolean }>`
-  width: 100%;
-  height: 48px;
-  padding: 0 16px;
-  font-family: 'Almarai', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid ${(p) => (p.$hasError ? '#ff2f2f' : 'rgba(255, 255, 255, 0.15)')};
-  border-radius: 10px;
-  outline: none;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.35);
-  }
-
-  &:focus {
-    border-color: ${(p) => (p.$hasError ? '#ff2f2f' : 'var(--accent)')};
-  }
-`;
-
-const ErrorText = styled.span`
-  display: block;
-  font-family: 'Almarai', sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: #ff2f2f;
+const ErrorText = styled(AuthErrorText)`
   margin-top: 6px;
   min-height: 18px;
 `;
 
-const SubmitButton = styled.button<{ $loading?: boolean }>`
-  width: 100%;
-  height: 48px;
+const SubmitButton = styled(AuthSubmitButton)`
   margin-top: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: 'Almarai', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-  background: var(--accent);
-  border: none;
-  border-radius: 10px;
-  cursor: ${(p) => (p.$loading ? 'not-allowed' : 'pointer')};
-  opacity: ${(p) => (p.$loading ? 0.7 : 1)};
-  transition: opacity 0.2s;
-
-  &:hover:not(:disabled) {
-    opacity: 0.9;
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
 `;
 
 const SuccessCard = styled.div`
@@ -143,19 +91,6 @@ const SuccessText = styled.p`
   font-weight: 400;
   line-height: 22px;
   color: rgba(255, 255, 255, 0.6);
-`;
-
-const ApiError = styled.div`
-  width: 100%;
-  padding: 12px 16px;
-  margin-top: 16px;
-  font-family: 'Almarai', sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  color: #ff2f2f;
-  background: rgba(255, 47, 47, 0.08);
-  border-radius: 8px;
-  text-align: center;
 `;
 
 function validateEmail(email: string): string {
@@ -184,8 +119,14 @@ export default function ForgotPassword() {
       await apiClient.post('/auth/forgot-password', { email: email.trim() });
       setSuccess(true);
     } catch (error: unknown) {
-      if (isAxiosError<ApiErrorResponse>(error) && error.response?.data?.message) {
-        setApiError(error.response.data.message);
+      if (isAxiosError<ApiErrorResponse>(error)) {
+        if (error.response?.status === 404) {
+          setApiError('This feature is not yet available. The password reset endpoint has not been deployed.');
+        } else if (error.response?.data?.message) {
+          setApiError(error.response.data.message);
+        } else {
+          setApiError('Something went wrong. Please try again.');
+        }
       } else {
         setApiError('Something went wrong. Please try again.');
       }
@@ -218,7 +159,7 @@ export default function ForgotPassword() {
           </Description>
 
           <InputWrapper>
-            <Input
+            <AuthInput
               type="email"
               placeholder="Email"
               value={email}
@@ -242,7 +183,7 @@ export default function ForgotPassword() {
             {loading ? <Spinner size={20} inline /> : 'Send me a link'}
           </SubmitButton>
 
-          {apiError && <ApiError role="alert">{apiError}</ApiError>}
+          {apiError && <AuthApiError role="alert" style={{ marginTop: '16px' }}>{apiError}</AuthApiError>}
         </Form>
       )}
     </AuthLayout>
