@@ -16,6 +16,8 @@ export default {
         'calendar-border': '#E5DACE',
         'calendar-heading': '#322722',
         'calendar-muted': '#756B63',
+        'calendar-day-label': '#A88B6C',
+        'calendar-time': '#858585',
         'calendar-nav': '#76675B',
         'calendar-nav-hover': '#E4DACE',
         destructive: '#ff5630',

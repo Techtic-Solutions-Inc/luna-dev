@@ -100,14 +100,10 @@ export function ContentDetailDrawer({
         ref={drawerRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={entry ? 'calendar-drawer-title' : undefined}
-        aria-label={
-          loading
-            ? 'Loading content details'
-            : error && !entry
-              ? 'Content details error'
-              : undefined
+        aria-labelledby={
+          entry || (error && !entry) ? 'calendar-drawer-title' : undefined
         }
+        aria-label={loading ? 'Loading content details' : undefined}
         className="fixed inset-y-0 right-0 z-50 flex w-full max-w-[640px] flex-col overflow-y-auto bg-calendar-drawer shadow-[-24px_0_60px_rgba(0,0,0,0.28)]"
       >
         <div className="sticky top-0 z-10 border-b border-calendar-border bg-calendar-drawer px-6 py-5 sm:px-8">
@@ -131,7 +127,10 @@ export function ContentDetailDrawer({
                   </span>
                 </>
               ) : error ? (
-                <h2 className="font-display text-[24px] font-medium leading-tight text-calendar-drawer-heading sm:text-[28px]">
+                <h2
+                  id="calendar-drawer-title"
+                  className="font-display text-[24px] font-medium leading-tight text-calendar-drawer-heading sm:text-[28px]"
+                >
                   Content unavailable
                 </h2>
               ) : null}

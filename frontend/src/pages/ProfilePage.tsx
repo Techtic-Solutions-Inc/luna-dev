@@ -1,4 +1,5 @@
 import { AppLayout } from '@/components/layout/AppLayout';
+import { ProfileFeatureUnavailableState } from '@/components/profile/ProfileFeatureUnavailableState';
 import { ProfileForm } from '@/components/profile/ProfileForm';
 import { ProfileHeader } from '@/components/profile/ProfileHeader';
 import { ProfileLoadingSkeleton } from '@/components/profile/ProfileLoadingSkeleton';
@@ -32,18 +33,9 @@ export function ProfilePage() {
         />
         <ProfileTabs />
         {!apiReady ? (
-          <ProfileForm
-            profile={demoProfile}
-            loading={false}
-            error={null}
-            updateError={null}
-            isUpdating={false}
-            onSave={async () => undefined}
-            onRetry={() => undefined}
-            changePassword={async () => undefined}
-            isChangingPassword={false}
-            changePasswordError={null}
-            previewMode
+          <ProfileFeatureUnavailableState
+            title="Profile settings unavailable"
+            description="Profile management will be available once the backend API is connected."
           />
         ) : (
           <>

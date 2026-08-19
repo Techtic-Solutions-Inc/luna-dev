@@ -172,6 +172,17 @@ export function getHourOffsetPx(hour: number, startHour: number): number {
   return (hour - startHour) * ROW_HEIGHT;
 }
 
+export function getSlotHeightPx(
+  hour: number,
+  nextHour: number | undefined,
+  endHour: number,
+): number {
+  if (nextHour !== undefined) {
+    return (nextHour - hour) * ROW_HEIGHT;
+  }
+  return (endHour - hour) * ROW_HEIGHT + CARD_HEIGHT;
+}
+
 export function formatHourLabel(hour: number): string {
   const wholeHour = Math.floor(hour);
   const minutes = Math.round((hour - wholeHour) * 60);

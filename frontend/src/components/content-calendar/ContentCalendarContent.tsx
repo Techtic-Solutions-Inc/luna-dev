@@ -48,6 +48,11 @@ export function ContentCalendarContent({
     [activeEntryId, displayEntries],
   );
 
+  const drawerError =
+    !loading && activeEntryId && !activeEntry
+      ? (error ?? 'This content entry could not be found.')
+      : null;
+
   useEffect(() => {
     if (selectedEntryId) {
       setActiveEntryId(selectedEntryId);
@@ -60,7 +65,7 @@ export function ContentCalendarContent({
       setActiveEntryId(null);
       setDrawerMode('details');
       onCloseDetails?.();
-      navigate('/content-calendar');
+      navigate('/content-calendar', { replace: true });
     }
   }, [loading, error, activeEntryId, activeEntry, navigate, onCloseDetails]);
 
@@ -138,7 +143,7 @@ export function ContentCalendarContent({
           mode={drawerMode}
           open
           loading={loading && !activeEntry}
-          error={!loading && !activeEntry ? error : null}
+          error={drawerError}
           isSaving={isSaving}
           isDeleting={isDeleting}
           mutationError={mutationError}

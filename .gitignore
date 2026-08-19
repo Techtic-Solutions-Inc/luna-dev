@@ -12,4 +12,14 @@ coverage/
 .DS_Store
 playwright-report/
 test-results/
+.luna/*
+!.luna/design_specification.json
+!.luna/figma_assets.json
+!.luna/figma/
+.luna/figma/*
+!.luna/figma/updated-dashboard.png
+!.luna/figma/content-calander.png
+!.luna/figma/profile.png
+!.luna/figma/profile---downloads.png
+!.luna/figma/profile---content-generated.png
 .luna/

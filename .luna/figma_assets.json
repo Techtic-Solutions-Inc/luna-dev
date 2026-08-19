@@ -1,0 +1,40 @@
+{
+  "assets": [
+    {
+      "frame_name": "Updated Dashboard",
+      "figma_node_id": "4543:3496",
+      "local_image_path": ".luna/figma/updated-dashboard.png",
+      "width": 2880,
+      "height": 5256,
+      "ticket_jira_key": "JAW-9190"
+    },
+    {
+      "frame_name": "Content Calander",
+      "local_image_path": ".luna/figma/content-calander.png",
+      "width": 2896,
+      "height": 2102,
+      "ticket_jira_key": "JAW-9191"
+    },
+    {
+      "frame_name": "Profile",
+      "local_image_path": ".luna/figma/profile.png",
+      "width": 2880,
+      "height": 2436,
+      "ticket_jira_key": "JAW-9194"
+    },
+    {
+      "frame_name": "Profile - Downloads",
+      "local_image_path": ".luna/figma/profile---downloads.png",
+      "width": 2880,
+      "height": 2088,
+      "ticket_jira_key": "JAW-9195"
+    },
+    {
+      "frame_name": "Profile - Content Generated",
+      "local_image_path": ".luna/figma/profile---content-generated.png",
+      "width": 2880,
+      "height": 2354,
+      "ticket_jira_key": "JAW-9196"
+    }
+  ]
+}
