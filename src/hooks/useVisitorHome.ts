@@ -6,20 +6,16 @@ import {
 } from '../lib/api/visitor';
 import { ContractGapError, parseApiError } from '../lib/api/errors';
 
-type VisitorHomeStatus = 'idle' | 'loading' | 'error';
-
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^[\d\s\-+().]{7,}$/;
 
 export function useVisitorHome() {
-  const [status, setStatus] = useState<VisitorHomeStatus>('idle');
   const [showGapBanner, setShowGapBanner] = useState(false);
   const [showSearchGapBanner, setShowSearchGapBanner] = useState(false);
   const [bannerError, setBannerError] = useState('');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const submitLead = useCallback(async (payload: VisitorSubscribePayload) => {
-    setStatus('loading');
     setShowGapBanner(false);
     setBannerError('');
     setFieldErrors({});
@@ -45,7 +41,6 @@ export function useVisitorHome() {
 
     if (Object.keys(errors).length > 0) {
       setFieldErrors(errors);
-      setStatus('idle');
       return;
     }
 
@@ -61,13 +56,11 @@ export function useVisitorHome() {
     } catch (error) {
       if (error instanceof ContractGapError) {
         setShowGapBanner(true);
-        setStatus('idle');
         return;
       }
       const parsed = parseApiError(error);
       setFieldErrors(parsed.fieldErrors);
       setBannerError(parsed.bannerMessage);
-      setStatus('error');
     }
   }, []);
 
@@ -86,13 +79,12 @@ export function useVisitorHome() {
     setBannerError('');
     setFieldErrors({});
     setShowGapBanner(false);
-    setStatus('idle');
   }, []);
 
   return {
     submitLead,
     attemptSearch,
-    isLoading: status === 'loading',
+    isLoading: false,
     showGapBanner,
     showSearchGapBanner,
     bannerError,

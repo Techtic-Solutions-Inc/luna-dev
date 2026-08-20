@@ -102,6 +102,7 @@ export const colors = {
   'color-93': '#bebbb9',
   'color-94': '#646261',
   'color-95': '#272727',
+  'color-96': '#1a2e1f',
 } as const;
 
 export const typography: Record<string, TypographyToken> = {

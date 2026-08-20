@@ -9,11 +9,11 @@ import { useVisitorHome } from '../../../hooks/useVisitorHome';
 import { PATHS } from '../../../routes/paths';
 
 const galleryItems = [
-  { title: 'Luxury listing', tone: 'from-[#3d3530] to-[#2a2520]' },
-  { title: 'Lifestyle content', tone: 'from-[#4a4038] to-[#353028]' },
-  { title: 'Market update', tone: 'from-[#2f3d35] to-[#1e2a22]' },
-  { title: 'Open house promo', tone: 'from-[#3a3040] to-[#252018]' },
-  { title: 'Neighborhood spotlight', tone: 'from-[#353840] to-[#222830]' },
+  { title: 'Luxury listing', tone: 'from-color-56 to-color-63' },
+  { title: 'Lifestyle content', tone: 'from-color-63 to-color-64' },
+  { title: 'Market update', tone: 'from-color-67 to-color-20' },
+  { title: 'Open house promo', tone: 'from-color-68 to-color-56' },
+  { title: 'Neighborhood spotlight', tone: 'from-color-69 to-color-72' },
 ];
 
 const steps = [
@@ -68,6 +68,60 @@ const navLinks = [
   { label: 'Pricing', href: '#pricing' },
 ];
 
+const blogPosts = [
+  {
+    title: '5 Listing Photos That Stop The Scroll',
+    excerpt:
+      'Simple framing and lighting tricks that make every property feel magazine-ready.',
+    date: 'Mar 12, 2024',
+  },
+  {
+    title: 'How Top Agents Use Content Loops',
+    excerpt:
+      'Repurpose one shoot into a week of posts without sounding repetitive.',
+    date: 'Feb 28, 2024',
+  },
+  {
+    title: 'Market Updates That Actually Convert',
+    excerpt: 'Turn local stats into stories buyers and sellers want to share.',
+    date: 'Feb 14, 2024',
+  },
+];
+
+const pricingPlans = [
+  {
+    name: 'Starter',
+    price: '$29',
+    period: '/mo',
+    description: 'Essential templates and downloads for solo agents.',
+    features: [
+      '50+ content templates',
+      'Monthly market updates',
+      'Email support',
+    ],
+  },
+  {
+    name: 'Pro',
+    price: '$79',
+    period: '/mo',
+    description: 'Full library plus Ultimate Mind for growing teams.',
+    features: [
+      'Unlimited templates',
+      'Ultimate Mind advisor',
+      'Brand customization',
+      'Priority support',
+    ],
+    highlighted: true,
+  },
+  {
+    name: 'Enterprise',
+    price: 'Custom',
+    period: '',
+    description: 'Multi-market rollout with dedicated onboarding.',
+    features: ['Team seats', 'Custom templates', 'Dedicated success manager'],
+  },
+];
+
 const ContentSearchBar = () => {
   const { attemptSearch, showSearchGapBanner } = useVisitorHome();
   const [query, setQuery] = useState('');
@@ -87,7 +141,7 @@ const ContentSearchBar = () => {
           placeholder="Search content library…"
           aria-label="Search content library"
           disabled
-          className="flex-1 rounded-full border border-color-24 bg-white px-5 py-3 text-sm text-color-20 placeholder:text-color-57 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex-1 rounded-full border border-color-24 bg-white px-5 py-3 text-sm text-color-20 placeholder:text-color-57 focus:outline-none focus-visible:outline-none focus-visible:border-color-37 disabled:cursor-not-allowed disabled:opacity-60"
         />
         <button
           type="submit"
@@ -224,179 +278,269 @@ const VisitorHomePage = () => (
       </div>
     </section>
 
-    {/* Marketing gallery */}
-    <section
-      id="content"
-      className="bg-white px-4 py-16 text-color-20 sm:px-8 lg:px-10"
-    >
-      <div className="mx-auto max-w-[1200px]">
-        <h2 className="text-center font-garamond text-3xl font-medium sm:text-4xl lg:text-[2.5rem]">
-          Marketing That Stops The Scroll
-        </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center font-almarai text-base leading-[26px] text-color-57">
-          Explore Ultimate Mind — content designed to convert, hand-created for
-          your business.
-        </p>
-        <ContentSearchBar />
-        <div className="mt-10 flex gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-5 lg:overflow-visible">
-          {galleryItems.map((item) => (
-            <div
-              key={item.title}
-              className={`flex h-56 w-44 shrink-0 flex-col justify-end rounded-2xl bg-gradient-to-b p-4 lg:h-64 lg:w-auto ${item.tone}`}
-            >
-              <p className="font-almarai text-sm text-white">{item.title}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Steps */}
-    <section
-      id="about"
-      className="px-4 py-16 sm:px-8 lg:px-10"
-      style={{
-        backgroundImage:
-          'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
-        backgroundSize: '48px 48px',
-      }}
-    >
-      <div className="mx-auto max-w-[1200px]">
-        <h2 className="text-center font-garamond text-3xl font-medium sm:text-4xl">
-          Stunning Marketing, In Three Simple Steps
-        </h2>
-        <div className="mt-14 space-y-16 lg:space-y-24">
-          {steps.map((step, index) => (
-            <div
-              key={step.num}
-              className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-16 ${
-                index % 2 === 1 ? 'lg:[direction:rtl]' : ''
-              }`}
-            >
-              <div className={index % 2 === 1 ? 'lg:[direction:ltr]' : ''}>
-                <p className="font-garamond text-5xl text-accent">{step.num}</p>
-                <h3 className="mt-4 font-almarai text-xl font-bold leading-snug sm:text-2xl">
-                  {step.title}
-                </h3>
-                <p className="mt-3 font-almarai text-base leading-[26px] text-color-93">
-                  {step.body}
-                </p>
-                <button
-                  type="button"
-                  className="mt-6 rounded-full border border-accent px-6 py-2.5 text-sm text-accent hover:bg-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                >
-                  {step.cta}
-                </button>
-              </div>
+    <main id="main-content" aria-label="Agentwise home">
+      {/* Marketing gallery */}
+      <section
+        id="content"
+        className="bg-white px-4 py-16 text-color-20 sm:px-8 lg:px-10"
+      >
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="text-center font-garamond text-3xl font-medium sm:text-4xl lg:text-[2.5rem]">
+            Marketing That Stops The Scroll
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center font-almarai text-base leading-[26px] text-color-57">
+            Explore Ultimate Mind — content designed to convert, hand-created
+            for your business.
+          </p>
+          <ContentSearchBar />
+          <div className="mt-10 flex gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-5 lg:overflow-visible">
+            {galleryItems.map((item) => (
               <div
-                className={`aspect-[4/3] rounded-2xl border border-white/10 bg-gradient-to-br from-color-63 to-color-20 ${
-                  index % 2 === 1 ? 'lg:[direction:ltr]' : ''
-                }`}
-                aria-hidden="true"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Ultimate Mind */}
-    <section className="px-4 py-8 sm:px-8 lg:px-10">
-      <div className="mx-auto grid max-w-[1200px] items-center gap-10 rounded-3xl bg-[#1a2e1f] px-6 py-12 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:py-16">
-        <div>
-          <h2 className="font-garamond text-3xl font-medium sm:text-4xl">
-            Agentwise Ultimate Mind
-          </h2>
-          <p className="mt-4 font-almarai text-base leading-[26px] text-color-93">
-            Your strategic advisor — trained on your business, your market, and
-            your voice. Ask anything.
-          </p>
-          <div
-            className="mt-8 aspect-video rounded-xl border border-white/10 bg-black/30"
-            aria-hidden="true"
-          />
-        </div>
-        <div>
-          <h3 className="font-garamond text-2xl font-medium leading-snug sm:text-3xl lg:text-4xl">
-            Here&apos;s The Deal…{' '}
-            <span className="text-accent">Great Marketing</span> Is Just The
-            Start.
-          </h3>
-          <p className="mt-4 font-almarai text-base leading-[26px] text-color-93">
-            Download your finished content and share it anywhere. Explore the
-            tools built specifically for real estate professionals.
-          </p>
-          <Link
-            to={PATHS.SIGN_UP}
-            className="mt-8 inline-block rounded-full bg-accent px-8 py-3 text-sm font-almarai text-white hover:brightness-110"
-          >
-            Learn More
-          </Link>
-        </div>
-      </div>
-    </section>
-
-    {/* Testimonials */}
-    <section className="bg-white px-4 py-16 text-color-20 sm:px-8 lg:px-10">
-      <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-        <div>
-          <h2 className="font-garamond text-3xl font-medium sm:text-4xl lg:text-[2.5rem]">
-            Built For <span className="text-accent">Agents Like You.</span>
-          </h2>
-          <p className="mt-4 font-almarai text-base leading-[26px] text-color-57">
-            Join thousands of real estate professionals creating standout
-            content with Agentwise.
-          </p>
-        </div>
-        <div className="space-y-4">
-          {testimonials.map((item) => (
-            <blockquote
-              key={item.name}
-              className="rounded-2xl border border-color-24 bg-color-48 p-6"
-            >
-              <StarRating count={item.rating} />
-              <p className="mt-3 font-almarai text-sm leading-relaxed text-color-20">
-                &ldquo;{item.quote}&rdquo;
-              </p>
-              <footer className="mt-4 flex items-center gap-3">
-                <div
-                  className="h-10 w-10 shrink-0 rounded-full bg-color-24"
-                  aria-hidden="true"
-                />
-                <div>
-                  <p className="font-almarai text-sm font-bold">{item.name}</p>
-                  <p className="text-xs text-color-57">{item.role}</p>
-                </div>
-              </footer>
-            </blockquote>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* Contact / Lead */}
-    <section id="contact" className="px-4 py-16 sm:px-8 lg:px-10">
-      <div className="mx-auto grid max-w-[1200px] gap-6 lg:grid-cols-2 lg:gap-10">
-        <div className="relative flex min-h-[320px] items-end overflow-hidden rounded-2xl bg-gradient-to-br from-color-63 to-color-20 p-8">
-          <p className="relative z-10 max-w-xs font-garamond text-2xl leading-snug sm:text-3xl">
-            EVERYONE&apos;S WAITING to buy until &apos;the market is right&apos;
-          </p>
-          <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
-        </div>
-        <div className="rounded-2xl bg-color-20 p-6 sm:p-8">
-          <h2 className="font-garamond text-2xl font-medium sm:text-3xl">
-            Let&apos;s Work Together
-          </h2>
-          <p className="mt-2 font-almarai text-sm text-color-93">
-            Join the waitlist and be first to access Agentwise when we launch in
-            your market.
-          </p>
-          <div className="mt-6">
-            <LeadCaptureForm />
+                key={item.title}
+                className={`flex h-56 w-44 shrink-0 flex-col justify-end rounded-2xl bg-gradient-to-b p-4 lg:h-64 lg:w-auto ${item.tone}`}
+              >
+                <p className="font-almarai text-sm text-white">{item.title}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Steps */}
+      <section
+        id="about"
+        className="px-4 py-16 sm:px-8 lg:px-10"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
+          backgroundSize: '48px 48px',
+        }}
+      >
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="text-center font-garamond text-3xl font-medium sm:text-4xl">
+            Stunning Marketing, In Three Simple Steps
+          </h2>
+          <div className="mt-14 space-y-16 lg:space-y-24">
+            {steps.map((step, index) => (
+              <div
+                key={step.num}
+                className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-16 ${
+                  index % 2 === 1 ? 'lg:[direction:rtl]' : ''
+                }`}
+              >
+                <div className={index % 2 === 1 ? 'lg:[direction:ltr]' : ''}>
+                  <p className="font-garamond text-5xl text-accent">
+                    {step.num}
+                  </p>
+                  <h3 className="mt-4 font-almarai text-xl font-bold leading-snug sm:text-2xl">
+                    {step.title}
+                  </h3>
+                  <p className="mt-3 font-almarai text-base leading-[26px] text-color-93">
+                    {step.body}
+                  </p>
+                  <button
+                    type="button"
+                    className="mt-6 rounded-full border border-accent px-6 py-2.5 text-sm text-accent hover:bg-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  >
+                    {step.cta}
+                  </button>
+                </div>
+                <div
+                  className={`aspect-[4/3] rounded-2xl border border-white/10 bg-gradient-to-br from-color-63 to-color-20 ${
+                    index % 2 === 1 ? 'lg:[direction:ltr]' : ''
+                  }`}
+                  aria-hidden="true"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Ultimate Mind */}
+      <section className="px-4 py-8 sm:px-8 lg:px-10">
+        <div className="mx-auto grid max-w-[1200px] items-center gap-10 rounded-3xl bg-color-96 px-6 py-12 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:py-16">
+          <div>
+            <h2 className="font-garamond text-3xl font-medium sm:text-4xl">
+              Agentwise Ultimate Mind
+            </h2>
+            <p className="mt-4 font-almarai text-base leading-[26px] text-color-93">
+              Your strategic advisor — trained on your business, your market,
+              and your voice. Ask anything.
+            </p>
+            <div
+              className="mt-8 aspect-video rounded-xl border border-white/10 bg-black/30"
+              aria-hidden="true"
+            />
+          </div>
+          <div>
+            <h3 className="font-garamond text-2xl font-medium leading-snug sm:text-3xl lg:text-4xl">
+              Here&apos;s The Deal…{' '}
+              <span className="text-accent">Great Marketing</span> Is Just The
+              Start.
+            </h3>
+            <p className="mt-4 font-almarai text-base leading-[26px] text-color-93">
+              Download your finished content and share it anywhere. Explore the
+              tools built specifically for real estate professionals.
+            </p>
+            <Link
+              to={PATHS.SIGN_UP}
+              className="mt-8 inline-block rounded-full bg-accent px-8 py-3 text-sm font-almarai text-white hover:brightness-110"
+            >
+              Learn More
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog */}
+      <section id="blog" className="px-4 py-16 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="text-center font-garamond text-3xl font-medium sm:text-4xl">
+            From The <span className="text-accent">Blog</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center font-almarai text-base leading-[26px] text-color-93">
+            Tips, trends, and playbooks for agents who want their marketing to
+            work as hard as they do.
+          </p>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {blogPosts.map((post) => (
+              <article
+                key={post.title}
+                className="rounded-2xl border border-white/10 bg-color-20 p-6"
+              >
+                <p className="text-xs text-color-57">{post.date}</p>
+                <h3 className="mt-2 font-almarai text-lg font-bold leading-snug text-white">
+                  {post.title}
+                </h3>
+                <p className="mt-2 font-almarai text-sm leading-relaxed text-color-93">
+                  {post.excerpt}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="bg-white px-4 py-16 text-color-20 sm:px-8 lg:px-10">
+        <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+          <div>
+            <h2 className="font-garamond text-3xl font-medium sm:text-4xl lg:text-[2.5rem]">
+              Built For <span className="text-accent">Agents Like You.</span>
+            </h2>
+            <p className="mt-4 font-almarai text-base leading-[26px] text-color-57">
+              Join thousands of real estate professionals creating standout
+              content with Agentwise.
+            </p>
+          </div>
+          <div className="space-y-4">
+            {testimonials.map((item) => (
+              <blockquote
+                key={item.name}
+                className="rounded-2xl border border-color-24 bg-color-48 p-6"
+              >
+                <StarRating count={item.rating} />
+                <p className="mt-3 font-almarai text-sm leading-relaxed text-color-20">
+                  &ldquo;{item.quote}&rdquo;
+                </p>
+                <footer className="mt-4 flex items-center gap-3">
+                  <div
+                    className="h-10 w-10 shrink-0 rounded-full bg-color-24"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p className="font-almarai text-sm font-bold">
+                      {item.name}
+                    </p>
+                    <p className="text-xs text-color-57">{item.role}</p>
+                  </div>
+                </footer>
+              </blockquote>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="px-4 py-16 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-[1200px]">
+          <h2 className="text-center font-garamond text-3xl font-medium sm:text-4xl">
+            Simple, Transparent <span className="text-accent">Pricing</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center font-almarai text-base leading-[26px] text-color-93">
+            Choose the plan that fits your business. Upgrade or cancel anytime.
+          </p>
+          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+            {pricingPlans.map((plan) => (
+              <article
+                key={plan.name}
+                className={`rounded-2xl border p-6 ${
+                  plan.highlighted
+                    ? 'border-accent bg-color-20'
+                    : 'border-white/10 bg-color-20/80'
+                }`}
+              >
+                <h3 className="font-garamond text-2xl font-medium text-white">
+                  {plan.name}
+                </h3>
+                <p className="mt-2 font-garamond text-3xl text-accent">
+                  {plan.price}
+                  {plan.period ? (
+                    <span className="text-base text-color-93">
+                      {plan.period}
+                    </span>
+                  ) : null}
+                </p>
+                <p className="mt-3 font-almarai text-sm leading-relaxed text-color-93">
+                  {plan.description}
+                </p>
+                <ul className="mt-6 space-y-2 font-almarai text-sm text-color-93">
+                  {plan.features.map((feature) => (
+                    <li key={feature}>• {feature}</li>
+                  ))}
+                </ul>
+                <Link
+                  to={PATHS.SIGN_UP}
+                  className={`mt-6 inline-block w-full rounded-full py-3 text-center text-sm font-almarai ${
+                    plan.highlighted
+                      ? 'bg-accent text-white hover:brightness-110'
+                      : 'border border-accent text-accent hover:bg-accent/10'
+                  }`}
+                >
+                  Get Started
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact / Lead */}
+      <section id="contact" className="px-4 py-16 sm:px-8 lg:px-10">
+        <div className="mx-auto grid max-w-[1200px] gap-6 lg:grid-cols-2 lg:gap-10">
+          <div className="relative flex min-h-[320px] items-end overflow-hidden rounded-2xl bg-gradient-to-br from-color-63 to-color-20 p-8">
+            <p className="relative z-10 max-w-xs font-garamond text-2xl leading-snug sm:text-3xl">
+              EVERYONE&apos;S WAITING to buy until &apos;the market is
+              right&apos;
+            </p>
+            <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
+          </div>
+          <div className="rounded-2xl bg-color-20 p-6 sm:p-8">
+            <h2 className="font-garamond text-2xl font-medium sm:text-3xl">
+              Let&apos;s Work Together
+            </h2>
+            <p className="mt-2 font-almarai text-sm text-color-93">
+              Join the waitlist and be first to access Agentwise when we launch
+              in your market.
+            </p>
+            <div className="mt-6">
+              <LeadCaptureForm />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
     {/* Footer */}
     <footer className="border-t border-white/10 px-4 py-10 sm:px-8 lg:px-10">
@@ -405,14 +549,13 @@ const VisitorHomePage = () => (
           <p className="font-garamond text-2xl italic">Agentwise</p>
           <div className="flex gap-3">
             {[SiX, FaLinkedinIn, SiInstagram].map((Icon, index) => (
-              <a
+              <span
                 key={index}
-                href="#"
-                aria-label="Social link"
-                className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-color-93 hover:bg-white/20 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                aria-label="Social link unavailable"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 text-color-93 opacity-60"
               >
                 <Icon />
-              </a>
+              </span>
             ))}
           </div>
         </div>
@@ -438,14 +581,10 @@ const VisitorHomePage = () => (
           </a>
         </div>
         <div className="mt-6 flex flex-col gap-2 text-xs text-color-57 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Agentwise Inc. · All rights reserved.</p>
+          <p>© 2024 Agentwise Inc. · All rights reserved.</p>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-white">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-white">
-              Privacy Policy
-            </a>
+            <span>Terms of Service</span>
+            <span>Privacy Policy</span>
           </div>
         </div>
       </div>

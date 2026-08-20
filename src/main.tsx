@@ -4,11 +4,19 @@ import './theme/breakpoints';
 import './index.css';
 import ErrorBoundary from './components/layout/ErrorBoundary';
 import AppRouter from './routes';
+import { Theme } from './theme';
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Root element #root not found');
+}
+
+createRoot(rootElement).render(
   <StrictMode>
-    <ErrorBoundary>
-      <AppRouter />
-    </ErrorBoundary>
+    <Theme>
+      <ErrorBoundary>
+        <AppRouter />
+      </ErrorBoundary>
+    </Theme>
   </StrictMode>,
 );

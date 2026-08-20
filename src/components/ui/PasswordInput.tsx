@@ -13,7 +13,7 @@ interface PasswordInputProps extends Omit<
 const PasswordInput = ({
   label,
   error,
-  dark = true,
+  dark = false,
   id,
   className = '',
   ...props
@@ -33,18 +33,20 @@ const PasswordInput = ({
           aria-describedby={error ? `${inputId}-error` : undefined}
           placeholder={label}
           type={visible ? 'text' : 'password'}
-          className={`w-full rounded-full border px-5 py-3.5 pr-12 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+          className={`w-full rounded-[6px] border px-4 py-3 pr-12 text-sm focus:outline-none focus-visible:outline-none ${
             dark
-              ? 'border-white/10 bg-white/5 text-white placeholder:text-color-57'
-              : 'border-color-24 bg-white text-color-20 placeholder:text-color-57'
-          } ${error ? 'border-color-45' : ''} ${className}`}
+              ? 'border-white/10 bg-white/5 text-white placeholder:text-color-57 focus-visible:border-accent'
+              : 'border-color-24 bg-secondary text-color-20 placeholder:text-color-57 focus-visible:border-color-37'
+          } ${error ? 'border-color-45 focus-visible:border-color-45' : ''} ${className}`}
           {...props}
         />
         <button
           type="button"
           aria-label={visible ? 'Hide password' : 'Show password'}
           aria-pressed={visible}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-color-57 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className={`absolute right-4 top-1/2 -translate-y-1/2 text-color-57 focus:outline-none focus-visible:ring-2 focus-visible:ring-color-37 ${
+            dark ? 'hover:text-white' : 'hover:text-color-20'
+          }`}
           onClick={() => setVisible((v) => !v)}
         >
           {visible ? <FiEyeOff size={18} /> : <FiEye size={18} />}

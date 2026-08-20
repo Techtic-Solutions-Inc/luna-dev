@@ -12,14 +12,8 @@ import { useEmailVerification } from '../../../hooks/useEmailVerification';
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const EmailVerificationPage = () => {
-  const {
-    submit,
-    isLoading,
-    showGapBanner,
-    bannerError,
-    fieldErrors,
-    resetErrors,
-  } = useEmailVerification();
+  const { submit, showGapBanner, bannerError, fieldErrors, resetErrors } =
+    useEmailVerification();
   const [email, setEmail] = useState('');
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -101,7 +95,6 @@ const EmailVerificationPage = () => {
               clearClientError('email');
             }}
             error={clientErrors.email ?? fieldErrors.email}
-            disabled={isLoading}
             dark
           />
 
@@ -112,14 +105,10 @@ const EmailVerificationPage = () => {
               setPrivacyAccepted(checked);
               clearClientError('privacy');
             }}
-            disabled={isLoading}
             error={clientErrors.privacy}
             label={
               <>
-                I accept the{' '}
-                <a href="#" className="underline hover:text-white">
-                  Privacy Policy
-                </a>
+                I accept the <span className="underline">Privacy Policy</span>
               </>
             }
           />
@@ -131,21 +120,15 @@ const EmailVerificationPage = () => {
               setTermsAccepted(checked);
               clearClientError('terms');
             }}
-            disabled={isLoading}
             error={clientErrors.terms}
             label={
               <>
-                I accept the{' '}
-                <a href="#" className="underline hover:text-white">
-                  Terms of Service
-                </a>
+                I accept the <span className="underline">Terms of Service</span>
               </>
             }
           />
 
-          <Button type="submit" isLoading={isLoading} disabled={isLoading}>
-            {isLoading ? 'Sending…' : 'Verify Email Address'}
-          </Button>
+          <Button type="submit">Verify Email Address</Button>
         </form>
 
         <p className="mt-4 text-center font-almarai text-xs leading-relaxed text-color-57">
@@ -177,43 +160,29 @@ const EmailVerificationPage = () => {
             className="mb-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1"
             aria-label="Footer"
           >
-            <a href="#" className="text-color-57 hover:text-white">
-              Help Center
-            </a>
+            <span className="text-color-57">Help Center</span>
             <span className="text-color-57" aria-hidden="true">
               |
             </span>
-            <a href="#" className="text-color-57 hover:text-white">
-              Privacy Policy
-            </a>
+            <span className="text-color-57">Privacy Policy</span>
             <span className="text-color-57" aria-hidden="true">
               |
             </span>
-            <a href="#" className="text-color-57 hover:text-white">
-              Terms of Service
-            </a>
+            <span className="text-color-57">Terms of Service</span>
           </nav>
           <p className="text-color-57">
-            © 2026 Agentwise Inc. · All rights reserved.
+            © 2024 Agentwise Inc. · All rights reserved.
           </p>
           <p className="mt-1 text-color-57">
             You&apos;re receiving this because you registered at agentwise.io
           </p>
           <div className="mt-4 flex justify-center gap-4 text-lg text-color-57">
-            <a
-              href="#"
-              aria-label="Facebook"
-              className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              <SiFacebook />
-            </a>
-            <a
-              href="#"
-              aria-label="Instagram"
-              className="hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-            >
-              <SiInstagram />
-            </a>
+            <span aria-label="Facebook (unavailable)" className="opacity-60">
+              <SiFacebook aria-hidden="true" />
+            </span>
+            <span aria-label="Instagram (unavailable)" className="opacity-60">
+              <SiInstagram aria-hidden="true" />
+            </span>
           </div>
         </footer>
       </div>

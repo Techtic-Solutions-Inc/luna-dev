@@ -3,7 +3,6 @@ import AppShell from '../components/layout/AppShell';
 import AuthLayout from '../components/layout/AuthLayout';
 import EmailDesignLayout from '../components/layout/EmailDesignLayout';
 import ProtectedRoute from '../components/layout/ProtectedRoute';
-import ForgotPasswordEmailPage from '../components/features/auth/ForgotPasswordEmailPage';
 import ForgotPasswordPage from '../components/features/auth/ForgotPasswordPage';
 import SignInPage from '../components/features/auth/SignInPage';
 import SignUpPage from '../components/features/auth/SignUpPage';
@@ -33,20 +32,13 @@ const AppRouter = () => (
           </AuthLayout>
         }
       />
+      {/* JAW-9188: forgot-password uses AppShell dashboard chrome, not AuthLayout */}
       <Route
         path={PATHS.FORGOT_PASSWORD}
         element={
-          <AuthLayout>
+          <AppShell>
             <ForgotPasswordPage />
-          </AuthLayout>
-        }
-      />
-      <Route
-        path={PATHS.FORGOT_PASSWORD_EMAIL}
-        element={
-          <EmailDesignLayout>
-            <ForgotPasswordEmailPage />
-          </EmailDesignLayout>
+          </AppShell>
         }
       />
       <Route

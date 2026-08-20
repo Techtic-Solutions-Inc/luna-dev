@@ -10,7 +10,7 @@ import { PATHS } from '../../../routes/paths';
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ForgotPasswordPage = () => {
-  const { submit, isLoading, showGapBanner, bannerError, fieldErrors } =
+  const { submit, showGapBanner, bannerError, fieldErrors } =
     useForgotPassword();
   const [email, setEmail] = useState('');
   const [clientError, setClientError] = useState('');
@@ -34,9 +34,9 @@ const ForgotPasswordPage = () => {
   const emailError = clientError || fieldErrors.email;
 
   return (
-    <>
+    <div className="mx-auto flex w-full max-w-md flex-col justify-center py-8">
       <div className="text-center">
-        <h1 className="font-garamond text-[2rem] font-medium leading-tight text-white md:text-[2.25rem]">
+        <h1 className="font-garamond text-2xl font-semibold leading-[31.32px] text-white">
           Reset Password
         </h1>
         <p className="mt-3 font-almarai text-sm leading-relaxed text-color-93">
@@ -62,11 +62,11 @@ const ForgotPasswordPage = () => {
             if (clientError) setClientError('');
           }}
           error={emailError}
-          disabled={isLoading}
+          dark
         />
 
-        <Button type="submit" isLoading={isLoading} className="mt-2">
-          {isLoading ? 'Sending…' : 'Send me a link'}
+        <Button type="submit" className="mt-2">
+          Send me a link
         </Button>
       </form>
 
@@ -74,12 +74,12 @@ const ForgotPasswordPage = () => {
         Remember your password?{' '}
         <Link
           to={PATHS.SIGN_IN}
-          className="text-white underline-offset-2 hover:underline"
+          className="text-accent underline-offset-2 hover:underline"
         >
           Sign in
         </Link>
       </p>
-    </>
+    </div>
   );
 };
 

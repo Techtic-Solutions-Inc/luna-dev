@@ -6,17 +6,9 @@ import Input from '../../ui/Input';
 import Button from '../../ui/Button';
 import { useVisitorHome } from '../../../hooks/useVisitorHome';
 
-const inputClassName = '!rounded-lg !py-3';
-
 const LeadCaptureForm = () => {
-  const {
-    submitLead,
-    isLoading,
-    showGapBanner,
-    bannerError,
-    fieldErrors,
-    resetErrors,
-  } = useVisitorHome();
+  const { submitLead, showGapBanner, bannerError, fieldErrors, resetErrors } =
+    useVisitorHome();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -67,9 +59,7 @@ const LeadCaptureForm = () => {
             clearClientError('first_name');
           }}
           error={clientErrors.first_name ?? fieldErrors.first_name}
-          disabled={isLoading}
           dark
-          className={inputClassName}
         />
         <Input
           name="last_name"
@@ -81,9 +71,7 @@ const LeadCaptureForm = () => {
             clearClientError('last_name');
           }}
           error={clientErrors.last_name ?? fieldErrors.last_name}
-          disabled={isLoading}
           dark
-          className={inputClassName}
         />
       </div>
 
@@ -98,9 +86,7 @@ const LeadCaptureForm = () => {
           clearClientError('email');
         }}
         error={clientErrors.email ?? fieldErrors.email}
-        disabled={isLoading}
         dark
-        className={inputClassName}
       />
 
       <Input
@@ -114,9 +100,7 @@ const LeadCaptureForm = () => {
           clearClientError('phone');
         }}
         error={clientErrors.phone ?? fieldErrors.phone}
-        disabled={isLoading}
         dark
-        className={inputClassName}
       />
 
       <Checkbox
@@ -126,14 +110,10 @@ const LeadCaptureForm = () => {
           setPrivacyAccepted(checked);
           clearClientError('privacy_accepted');
         }}
-        disabled={isLoading}
         error={clientErrors.privacy_accepted ?? fieldErrors.privacy_accepted}
         label={
           <>
-            I accept the{' '}
-            <a href="#" className="underline hover:text-white">
-              Privacy Policy
-            </a>
+            I accept the <span className="underline">Privacy Policy</span>
           </>
         }
       />
@@ -145,25 +125,16 @@ const LeadCaptureForm = () => {
           setTermsAccepted(checked);
           clearClientError('terms_accepted');
         }}
-        disabled={isLoading}
         error={clientErrors.terms_accepted ?? fieldErrors.terms_accepted}
         label={
           <>
-            I accept the{' '}
-            <a href="#" className="underline hover:text-white">
-              Terms of Service
-            </a>
+            I accept the <span className="underline">Terms of Service</span>
           </>
         }
       />
 
-      <Button
-        type="submit"
-        isLoading={isLoading}
-        disabled={isLoading}
-        className="mt-2 !w-full sm:!w-auto"
-      >
-        {isLoading ? 'Submitting…' : 'Join the waitlist now'}
+      <Button type="submit" className="mt-2 !w-full sm:!w-auto">
+        Join the waitlist now
       </Button>
     </form>
   );

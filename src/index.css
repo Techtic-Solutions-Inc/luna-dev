@@ -2,60 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary: #00000000;
-  --secondary: #ffffff;
-  --accent: #c8a47e;
-  --background: #637381;
-  --surface: #b71d18;
-  --text-primary: #000000;
-  --text-secondary: #828282;
-  --border: #ff5630;
-  --error: #ff563028;
-  --success: #ffffff0c;
-  --warning: #e0e0e0;
-  --info: #c8a47e19;
-  --color-20: #14100d;
-  --color-32: #f7f2ec;
-  --color-33: #0f0f0f;
-  --color-45: #ff2f2f;
-  --color-57: #858585;
-  --color-59: #030303;
-  --color-63: #44413e;
-  --color-93: #bebbb9;
-}
-
-@layer base {
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
-  html,
-  body,
-  #root {
-    margin: 0;
-    min-height: 100%;
-  }
-
-  body {
-    font-family: 'Almarai', sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-}
-
 @layer utilities {
-  .auth-gradient {
-    background:
-      radial-gradient(
-        ellipse 80% 60% at 70% 50%,
-        rgba(200, 164, 126, 0.12) 0%,
-        transparent 60%
-      ),
-      linear-gradient(135deg, #0a0a0a 0%, #14100d 50%, #1a1510 100%);
-  }
-
   .email-hero-gradient {
     background:
       radial-gradient(

@@ -51,10 +51,10 @@ const SignInPage = () => {
   return (
     <>
       <div className="text-center">
-        <h1 className="font-garamond text-[2rem] font-medium leading-tight text-white md:text-[2.25rem]">
+        <h1 className="font-garamond text-2xl font-semibold leading-[31.32px] text-color-20">
           Welcome To Agentwise
         </h1>
-        <p className="mt-3 font-public text-base text-color-93">
+        <p className="mt-3 font-almarai text-base leading-[17.856px] text-color-57">
           Everything you need to create standout real estate content.
         </p>
       </div>
@@ -99,7 +99,7 @@ const SignInPage = () => {
           />
           <Link
             to={PATHS.FORGOT_PASSWORD}
-            className="text-xs text-color-57 underline-offset-2 hover:text-white hover:underline"
+            className="text-xs text-color-57 underline-offset-2 hover:text-color-20 hover:underline"
           >
             Forgot your password?
           </Link>
@@ -110,7 +110,7 @@ const SignInPage = () => {
         </Button>
       </form>
 
-      <p className="mt-8 border-t border-white/10 pt-6 text-center text-sm text-color-57">
+      <p className="mt-8 border-t border-color-24 pt-6 text-center text-sm text-color-57">
         Not a member yet?{' '}
         <Link
           to={PATHS.SIGN_UP}

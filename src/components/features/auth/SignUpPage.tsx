@@ -14,8 +14,7 @@ const passwordPattern =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}/;
 
 const SignUpPage = () => {
-  const { submit, isLoading, showGapBanner, bannerError, fieldErrors } =
-    useSignup();
+  const { submit, showGapBanner, bannerError, fieldErrors } = useSignup();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -67,12 +66,12 @@ const SignUpPage = () => {
   return (
     <>
       <div className="text-center">
-        <h1 className="font-garamond text-[1.75rem] font-medium leading-tight text-white md:text-[2rem]">
+        <h1 className="font-garamond text-2xl font-semibold leading-[31.32px] text-color-20">
           Great Marketing Made Easier.
           <br />
           Specifically For Agents
         </h1>
-        <p className="mt-3 font-almarai text-sm text-color-93">
+        <p className="mt-3 font-almarai text-sm text-color-57">
           Create your account today
         </p>
       </div>
@@ -94,7 +93,6 @@ const SignUpPage = () => {
               clearClientError('first_name');
             }}
             error={clientErrors.first_name ?? fieldErrors.first_name}
-            disabled={isLoading}
           />
           <Input
             name="last_name"
@@ -106,7 +104,6 @@ const SignUpPage = () => {
               clearClientError('last_name');
             }}
             error={clientErrors.last_name ?? fieldErrors.last_name}
-            disabled={isLoading}
           />
         </div>
 
@@ -121,7 +118,6 @@ const SignUpPage = () => {
             clearClientError('email');
           }}
           error={clientErrors.email ?? fieldErrors.email}
-          disabled={isLoading}
         />
 
         <PasswordInput
@@ -134,7 +130,6 @@ const SignUpPage = () => {
             clearClientError('password');
           }}
           error={clientErrors.password ?? fieldErrors.password}
-          disabled={isLoading}
         />
 
         <Checkbox
@@ -148,28 +143,22 @@ const SignUpPage = () => {
           label={
             <>
               I have read and agree to the{' '}
-              <a href="#" className="underline">
-                Terms of Use
-              </a>{' '}
-              and{' '}
-              <a href="#" className="underline">
-                Privacy Policy
-              </a>
-              .
+              <span className="underline">Terms of Use</span> and{' '}
+              <span className="underline">Privacy Policy</span>.
             </>
           }
         />
 
-        <Button type="submit" isLoading={isLoading} className="mt-2">
-          {isLoading ? 'Signing up…' : 'Sign Up'}
+        <Button type="submit" className="mt-2">
+          Sign Up
         </Button>
       </form>
 
-      <p className="mt-8 border-t border-white/10 pt-6 text-center text-sm text-color-57">
+      <p className="mt-8 border-t border-color-24 pt-6 text-center text-sm text-color-57">
         Already have an account?{' '}
         <Link
           to={PATHS.SIGN_IN}
-          className="text-white underline-offset-2 hover:underline"
+          className="text-accent underline-offset-2 hover:underline"
         >
           Sign in
         </Link>

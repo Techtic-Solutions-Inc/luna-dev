@@ -7,7 +7,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input = ({
   label,
   error,
-  dark = true,
+  dark = false,
   id,
   className = '',
   ...props
@@ -24,11 +24,11 @@ const Input = ({
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${inputId}-error` : undefined}
         placeholder={label}
-        className={`w-full rounded-full border px-5 py-3.5 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+        className={`w-full rounded-[6px] border px-4 py-3 text-sm focus:outline-none focus-visible:outline-none ${
           dark
-            ? 'border-white/10 bg-white/5 text-white placeholder:text-color-57'
-            : 'border-color-24 bg-white text-color-20 placeholder:text-color-57'
-        } ${error ? 'border-color-45' : ''} ${className}`}
+            ? 'border-white/10 bg-white/5 text-white placeholder:text-color-57 focus-visible:border-accent'
+            : 'border-color-24 bg-secondary text-color-20 placeholder:text-color-57 focus-visible:border-color-37'
+        } ${error ? 'border-color-45 focus-visible:border-color-45' : ''} ${className}`}
         {...props}
       />
       {error ? (
