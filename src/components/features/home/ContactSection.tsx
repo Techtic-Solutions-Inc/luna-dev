@@ -114,6 +114,7 @@ const Submit = styled(Button).attrs({ variant: 'pill' as const })`
 `;
 
 type Status = 'idle' | 'loading' | 'error';
+type ErrorField = 'firstName' | 'lastName' | 'email' | 'phone' | 'agreements' | null;
 
 const ContactSection = () => {
   const [firstName, setFirstName] = useState('');
@@ -124,33 +125,42 @@ const ContactSection = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
   const [message, setMessage] = useState('');
+  const [errorField, setErrorField] = useState<ErrorField>(null);
 
   const hasError = status === 'error';
   const errorDescribedBy = hasError ? contactErrorId : undefined;
 
-  const validate = (): string => {
+  const clearError = () => {
+    if (status === 'error') {
+      setStatus('idle');
+      setMessage('');
+      setErrorField(null);
+    }
+  };
+
+  const validate = (): { message: string; field: ErrorField } | null => {
     if (!firstName.trim()) {
-      return 'Enter your first name.';
+      return { message: 'Enter your first name.', field: 'firstName' };
     }
     if (!lastName.trim()) {
-      return 'Enter your last name.';
+      return { message: 'Enter your last name.', field: 'lastName' };
     }
     if (!email.trim()) {
-      return 'Enter your email address.';
+      return { message: 'Enter your email address.', field: 'email' };
     }
     if (!emailPattern.test(email.trim())) {
-      return 'Enter a valid email address.';
+      return { message: 'Enter a valid email address.', field: 'email' };
     }
     if (!phone.trim()) {
-      return 'Enter your phone number.';
+      return { message: 'Enter your phone number.', field: 'phone' };
     }
     if (!phonePattern.test(phone.trim())) {
-      return 'Enter a valid phone number.';
+      return { message: 'Enter a valid phone number.', field: 'phone' };
     }
     if (!privacyAccepted || !termsAccepted) {
-      return 'Accept the Privacy Policy and Terms of Service.';
+      return { message: 'Accept the Privacy Policy and Terms of Service.', field: 'agreements' };
     }
-    return '';
+    return null;
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -158,14 +168,17 @@ const ContactSection = () => {
     const nextError = validate();
     if (nextError) {
       setStatus('error');
-      setMessage(nextError);
+      setErrorField(nextError.field);
+      setMessage(nextError.message);
       return;
     }
 
     setStatus('loading');
     setMessage('');
+    setErrorField(null);
     await waitForPaint();
     setStatus('error');
+    setErrorField(null);
     setMessage(
       'Contact submission is unavailable until the contact endpoint is published in the API contract.',
     );
@@ -196,14 +209,11 @@ const ContactSection = () => {
                       autoComplete="given-name"
                       placeholder="First Name"
                       value={firstName}
-                      aria-invalid={hasError}
+                      aria-invalid={hasError && errorField === 'firstName'}
                       aria-describedby={errorDescribedBy}
                       onChange={(event) => {
                         setFirstName(event.target.value);
-                        if (hasError) {
-                          setStatus('idle');
-                          setMessage('');
-                        }
+                        clearError();
                       }}
                     />
                   )}
@@ -220,14 +230,11 @@ const ContactSection = () => {
                       autoComplete="family-name"
                       placeholder="Last Name"
                       value={lastName}
-                      aria-invalid={hasError}
+                      aria-invalid={hasError && errorField === 'lastName'}
                       aria-describedby={errorDescribedBy}
                       onChange={(event) => {
                         setLastName(event.target.value);
-                        if (hasError) {
-                          setStatus('idle');
-                          setMessage('');
-                        }
+                        clearError();
                       }}
                     />
                   )}
@@ -246,14 +253,11 @@ const ContactSection = () => {
                     autoComplete="email"
                     placeholder="Email"
                     value={email}
-                    aria-invalid={hasError}
+                    aria-invalid={hasError && errorField === 'email'}
                     aria-describedby={errorDescribedBy}
                     onChange={(event) => {
                       setEmail(event.target.value);
-                      if (hasError) {
-                        setStatus('idle');
-                        setMessage('');
-                      }
+                      clearError();
                     }}
                   />
                 )}
@@ -271,14 +275,11 @@ const ContactSection = () => {
                     autoComplete="tel"
                     placeholder="Phone number"
                     value={phone}
-                    aria-invalid={hasError}
+                    aria-invalid={hasError && errorField === 'phone'}
                     aria-describedby={errorDescribedBy}
                     onChange={(event) => {
                       setPhone(event.target.value);
-                      if (hasError) {
-                        setStatus('idle');
-                        setMessage('');
-                      }
+                      clearError();
                     }}
                   />
                 )}
@@ -297,9 +298,12 @@ const ContactSection = () => {
                       id="home-privacy"
                       name="privacy"
                       checked={privacyAccepted}
-                      aria-invalid={hasError}
+                      aria-invalid={hasError && errorField === 'agreements'}
                       aria-describedby={errorDescribedBy}
-                      onChange={setPrivacyAccepted}
+                      onChange={(checked) => {
+                        setPrivacyAccepted(checked);
+                        clearError();
+                      }}
                     >
                       Privacy Policy
                     </Checkbox>
@@ -307,9 +311,12 @@ const ContactSection = () => {
                       id="home-terms"
                       name="terms"
                       checked={termsAccepted}
-                      aria-invalid={hasError}
+                      aria-invalid={hasError && errorField === 'agreements'}
                       aria-describedby={errorDescribedBy}
-                      onChange={setTermsAccepted}
+                      onChange={(checked) => {
+                        setTermsAccepted(checked);
+                        clearError();
+                      }}
                     >
                       Terms of Service
                     </Checkbox>
