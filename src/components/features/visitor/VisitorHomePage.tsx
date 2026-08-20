@@ -80,6 +80,7 @@ interface BlogPost {
   imageLabel?: string;
 }
 
+/** Blog posts and layout from .luna/figma/blog.png */
 const blogPosts: BlogPost[] = [
   {
     id: 'blog-1',
@@ -136,6 +137,7 @@ const blogPosts: BlogPost[] = [
   },
 ];
 
+/** Pricing tiers and copy from .luna/figma/pricing-2.png */
 const pricingFeatures = [
   'Full access to professional-level and personalized content library',
   'Access to Agentwise AI - Ultimate Mind',
@@ -486,9 +488,17 @@ const VisitorHomePage = () => {
           </div>
         </section>
 
-        {/* Blog — blog.png */}
-        <section id="blog" className="px-4 py-16 sm:px-8 lg:px-10">
-          <div className="mx-auto max-w-[1200px]">
+        {/* Blog — .luna/figma/blog.png */}
+        <section id="blog" className="relative px-4 py-16 sm:px-8 lg:px-10">
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(circle at 20% 30%, rgba(80,50,140,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(60,90,160,0.12) 0%, transparent 45%)',
+            }}
+            aria-hidden="true"
+          />
+          <div className="relative mx-auto max-w-[1200px]">
             <h2 className="text-center font-garamond text-4xl font-medium sm:text-5xl">
               Blogs
             </h2>
@@ -553,7 +563,7 @@ const VisitorHomePage = () => {
           </div>
         </section>
 
-        {/* Pricing — pricing-2.png */}
+        {/* Pricing — .luna/figma/pricing-2.png */}
         <section id="pricing" className="px-4 py-16 sm:px-8 lg:px-10">
           <div className="mx-auto max-w-[1200px]">
             <h2 className="text-center font-garamond text-3xl font-medium leading-snug sm:text-4xl lg:text-5xl">
