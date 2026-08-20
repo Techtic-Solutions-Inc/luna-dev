@@ -135,7 +135,7 @@ const INITIAL_VALUES: ContactFormValues = {
   lastName: '',
   email: '',
   phone: '',
-  teamSize: '',
+  agencyName: '',
   websiteLink: '',
   message: '',
   privacyPolicy: false,
@@ -177,7 +177,8 @@ const HomeContactForm = () => {
         last_name: values.lastName.trim(),
         email: values.email.trim(),
         phone: values.phone.trim(),
-        team_size: values.teamSize.trim() || undefined,
+        team_size: values.agencyName.trim() || undefined,
+        agency_name: values.agencyName.trim() || undefined,
         website_link: values.websiteLink.trim() || undefined,
         message: values.message.trim() || undefined,
       });
@@ -258,7 +259,7 @@ const HomeContactForm = () => {
               autoComplete="email"
             />
             <InputField
-              label="Phone number"
+              label="Phone Number"
               name="phone"
               type="tel"
               value={values.phone}
@@ -268,15 +269,15 @@ const HomeContactForm = () => {
               autoComplete="tel"
             />
             <InputField
-              label="How big is your team / business?"
-              name="teamSize"
-              value={values.teamSize}
-              onChange={(e) => handleChange('teamSize', e.target.value)}
-              error={errors.teamSize}
+              label="Agency Name"
+              name="agencyName"
+              value={values.agencyName}
+              onChange={(e) => handleChange('agencyName', e.target.value)}
+              error={errors.agencyName}
               isLoading={fieldsLoading}
             />
             <InputField
-              label="What is your website link / social media account?"
+              label="Website Link"
               name="websiteLink"
               value={values.websiteLink}
               onChange={(e) => handleChange('websiteLink', e.target.value)}
@@ -322,7 +323,7 @@ const HomeContactForm = () => {
               />
             </CheckboxGroup>
             <Button type="submit" variant="dark" size="lg" fullWidth isLoading={isSubmitting}>
-              Send us a message
+              Join the waitlist now
             </Button>
           </Form>
         </FormSide>

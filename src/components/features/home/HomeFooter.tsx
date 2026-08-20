@@ -143,7 +143,7 @@ const HomeFooter = () => (
       <FooterMiddle>
         <NavLinks aria-label="Footer navigation">
           <FooterLink to="/">About</FooterLink>
-          <FooterLink to="/">Content</FooterLink>
+          <FooterLink to="/">Contact</FooterLink>
           <FooterLink to="/">Pricing</FooterLink>
           <FooterLink to="/">Blog</FooterLink>
           <FooterLink to="/">Contact Us</FooterLink>

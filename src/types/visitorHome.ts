@@ -19,6 +19,7 @@ export interface HomeSubscribeRequest {
   email: string;
   phone: string;
   team_size?: string;
+  agency_name?: string;
   website_link?: string;
   message?: string;
 }
@@ -52,7 +53,7 @@ export interface ContactFormValues {
   lastName: string;
   email: string;
   phone: string;
-  teamSize: string;
+  agencyName: string;
   websiteLink: string;
   message: string;
   privacyPolicy: boolean;
@@ -64,7 +65,7 @@ export interface ContactFormErrors {
   lastName?: string;
   email?: string;
   phone?: string;
-  teamSize?: string;
+  agencyName?: string;
   websiteLink?: string;
   message?: string;
   privacyPolicy?: string;

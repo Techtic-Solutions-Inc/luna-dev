@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok } from 'react-icons/fa6';
+import { FiMail } from 'react-icons/fi';
 import { SectionContainer, SerifAccent } from './homeStyles';
 
 const HeroSection = styled.section`
@@ -199,6 +200,9 @@ const HomeHero = () => (
           </SocialLink>
           <SocialLink href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
             <FaLinkedinIn size={16} aria-hidden="true" />
+          </SocialLink>
+          <SocialLink href="mailto:hello@agentwisemarketing.com" aria-label="Email">
+            <FiMail size={16} aria-hidden="true" />
           </SocialLink>
         </SocialRow>
       </HeroContent>

@@ -211,7 +211,7 @@ const HomeHeader = () => {
           </Logo>
           <Nav aria-label="Primary navigation">
             <NavLink to="/">About</NavLink>
-            <NavLink to="/">Content</NavLink>
+            <NavLink to="/">Contact</NavLink>
             <NavLink to="/">Blog</NavLink>
             <NavLink to="/">Pricing</NavLink>
           </Nav>
@@ -264,7 +264,7 @@ const HomeHeader = () => {
                 About
               </MobileNavLink>
               <MobileNavLink to="/" onClick={closeMobileNav}>
-                Content
+                Contact
               </MobileNavLink>
               <MobileNavLink to="/" onClick={closeMobileNav}>
                 Blog

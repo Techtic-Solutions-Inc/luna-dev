@@ -36,6 +36,13 @@ export const GALLERY_FALLBACK_ITEMS: HomeSearchItem[] = [
       'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=700&q=85',
     description: 'City living feature',
   },
+  {
+    id: 'fallback-6',
+    title: 'Coastal property',
+    image_url:
+      'https://images.unsplash.com/photo-1605276374101-dee2a0ed3cd6?auto=format&fit=crop&w=700&q=85',
+    description: 'Waterfront listing feature',
+  },
 ];
 
 export const TESTIMONIALS = [

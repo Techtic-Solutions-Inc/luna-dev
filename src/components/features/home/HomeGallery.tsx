@@ -20,7 +20,7 @@ const GalleryGrid = styled.div`
   }
 
   @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: ${({ theme }) => theme.spacing['gap-20']};
   }
 `;
@@ -84,7 +84,7 @@ const HomeGallery = ({
 
         {isLoading && (
           <SkeletonGrid aria-busy="true" aria-label="Loading gallery">
-            {Array.from({ length: 5 }).map((_, index) => (
+            {Array.from({ length: 6 }).map((_, index) => (
               <LoadingSkeleton key={index} height="280px" borderRadius="16px" />
             ))}
           </SkeletonGrid>
