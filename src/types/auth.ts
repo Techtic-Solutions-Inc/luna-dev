@@ -20,9 +20,3 @@ export interface LoginResponseData {
 }
 
 export type LoginResponse = ApiSuccessResponse<LoginResponseData>;
-
-export interface ForgotPasswordRequest {
-  email: string;
-}
-
-export type ForgotPasswordResponse = ApiSuccessResponse<unknown>;

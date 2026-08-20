@@ -27,7 +27,7 @@ const Row = styled.div`
 `;
 
 const ForgotLink = styled(Link)`
-  color: ${colors.color93};
+  color: ${colors.accent};
   text-decoration: none;
   ${typographyStyle('caption4')}
 
@@ -158,7 +158,7 @@ export default function SignInForm() {
         />
         <ForgotLink to="/forgot-password">Forgot your password?</ForgotLink>
       </Row>
-      <Button type="submit" variant="accent" isLoading={isLoading}>
+      <Button type="submit" variant="accent" shape="pill" isLoading={isLoading}>
         Sign In
       </Button>
       <Divider />

@@ -1,64 +1,29 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import styled, { css } from 'styled-components';
-import { colors, radius, spacing } from '../../theme/tokens';
-import { typographyStyle } from '../../theme/typography';
+import styled from 'styled-components';
 import Spinner from './Spinner';
-
-type ButtonVariant = 'primary' | 'secondary' | 'accent';
+import { buttonChromeStyles, type ButtonShape, type ButtonVariant } from './buttonChrome';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
+  /** Default `rounded` matches JAW-9133 (radius10). Use `pill` for auth Figma frames. */
+  shape?: ButtonShape;
   isLoading?: boolean;
   children: ReactNode;
 };
 
-const StyledButton = styled.button<{ $variant: ButtonVariant }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: ${spacing.gap8};
+const StyledButton = styled.button<{ $variant: ButtonVariant; $shape: ButtonShape }>`
   width: 100%;
-  border: none;
-  cursor: pointer;
-  padding: ${spacing.padding14} ${spacing.padding24};
-  border-radius: ${radius.radius10000};
-  transition:
-    opacity 0.15s ease,
-    transform 0.15s ease;
-  ${typographyStyle('bodySm35')}
-
-  ${({ $variant }) => {
-    if ($variant === 'accent') {
-      return css`
-        background: ${colors.accent};
-        color: ${colors.secondary};
-      `;
-    }
-    if ($variant === 'secondary') {
-      return css`
-        background: transparent;
-        color: ${colors.secondary};
-        border: 1px solid ${colors.color49};
-      `;
-    }
-    return css`
-      background: ${colors.color16};
-      color: ${colors.secondary};
-    `;
-  }}
+  ${buttonChromeStyles}
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
   }
-
-  &:hover:not(:disabled) {
-    opacity: 0.92;
-  }
 `;
 
 export default function Button({
   variant = 'accent',
+  shape = 'rounded',
   isLoading = false,
   children,
   disabled,
@@ -69,6 +34,7 @@ export default function Button({
     <StyledButton
       type={type}
       $variant={variant}
+      $shape={shape}
       disabled={disabled || isLoading}
       aria-busy={isLoading}
       {...rest}

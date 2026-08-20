@@ -1,3 +1,8 @@
+/**
+ * AuthLayout visual source of truth: Sign In Figma (dark full-bleed split + collage),
+ * not the written color32 / secondary-card / dropShadow11 / 520px token table.
+ * Keep this split until product explicitly reverts to the card mapping.
+ */
 import type { ReactNode } from 'react';
 import styled from 'styled-components';
 import { breakpoints } from '../../theme/breakpoints';

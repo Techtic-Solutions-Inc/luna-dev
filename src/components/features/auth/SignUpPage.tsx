@@ -20,11 +20,8 @@ const Brand = styled.div`
 
 const Logo = styled.p`
   margin: 0;
-  font-family: 'Kalam', cursive;
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.1;
   color: ${colors.secondary};
+  ${typographyStyle('headingLg108')}
 `;
 
 const Tagline = styled.p`
@@ -191,7 +188,7 @@ export default function SignUpPage() {
             {errors.terms}
           </p>
         ) : null}
-        <Button type="submit" variant="accent">
+        <Button type="submit" variant="accent" shape="pill">
           Sign Up
         </Button>
         <Footer>

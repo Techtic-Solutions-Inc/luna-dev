@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { FormEvent } from 'react';
 import styled from 'styled-components';
 import { colors, spacing } from '../../../theme/tokens';
@@ -7,7 +6,6 @@ import AuthLayout from '../../layout/AuthLayout';
 import Alert from '../../ui/Alert';
 import Button from '../../ui/Button';
 import Input from '../../ui/Input';
-import { useForgotPassword } from '../../../hooks/useForgotPassword';
 
 const Brand = styled.div`
   display: flex;
@@ -19,11 +17,8 @@ const Brand = styled.div`
 
 const Logo = styled.p`
   margin: 0;
-  font-family: 'Kalam', cursive;
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.1;
   color: ${colors.secondary};
+  ${typographyStyle('headingLg108')}
 `;
 
 const Tagline = styled.p`
@@ -46,7 +41,7 @@ const Description = styled.p`
   text-align: center;
   color: ${colors.color93};
   ${typographyStyle('bodySm38')}
-  max-width: 380px;
+  max-width: ${spacing.gap465};
 `;
 
 const Form = styled.form`
@@ -56,50 +51,10 @@ const Form = styled.form`
   gap: ${spacing.gap16};
 `;
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState('');
-  const [clientError, setClientError] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const { submit, isLoading, error, fieldErrors, clearError } = useForgotPassword();
-
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    clearError();
-    setSuccessMessage(null);
-
-    const nextEmail = email.trim();
-    if (!nextEmail) {
-      setClientError('Email is required');
-      return;
-    }
-    if (!EMAIL_PATTERN.test(nextEmail)) {
-      setClientError('Enter a valid email address');
-      return;
-    }
-
-    const result = await submit({ email: nextEmail });
-    if (result) {
-      setClientError(null);
-      setSuccessMessage(result.message);
-    }
   };
-
-  let formAlert: string | null = null;
-  if (error) {
-    if (error.statusCode === 400 && Object.keys(fieldErrors).length > 0) {
-      formAlert = null;
-    } else {
-      formAlert = typeof error.message === 'string' ? error.message : null;
-      if (!formAlert) {
-        formAlert = 'Unable to connect. Check your connection and try again.';
-      }
-    }
-  }
-
-  const inputError = clientError ?? fieldErrors.email ?? undefined;
 
   return (
     <AuthLayout showCollageOverlays={false}>
@@ -113,32 +68,23 @@ export default function ForgotPasswordPage() {
         reset your password.
       </Description>
       <Form onSubmit={onSubmit} noValidate>
-        {successMessage ? <Alert variant="success">{successMessage}</Alert> : null}
-        {formAlert ? <Alert variant="error">{formAlert}</Alert> : null}
-
-        {!successMessage ? (
-          <>
-            <Input
-              id="forgot-email"
-              name="email"
-              type="email"
-              label="Email"
-              hideLabel
-              placeholder="Email"
-              autoComplete="email"
-              value={email}
-              disabled={isLoading}
-              error={inputError}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                setClientError(null);
-              }}
-            />
-            <Button type="submit" variant="accent" isLoading={isLoading}>
-              Send me a link
-            </Button>
-          </>
-        ) : null}
+        <Alert variant="error">
+          Password reset is unavailable until the reset-link API contract is ready. Sign in if you
+          already have access, or try again later.
+        </Alert>
+        <Input
+          id="forgot-email"
+          name="email"
+          type="email"
+          label="Email"
+          hideLabel
+          placeholder="Email"
+          autoComplete="email"
+          disabled
+        />
+        <Button type="submit" variant="accent" shape="pill" disabled>
+          Send me a link
+        </Button>
       </Form>
     </AuthLayout>
   );
