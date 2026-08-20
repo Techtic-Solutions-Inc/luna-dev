@@ -129,10 +129,6 @@ const ContactSection = () => {
 
   const hasError = status === 'error';
 
-  const fieldInvalid = (field: Exclude<ErrorField, null>) => hasError && errorField === field;
-  const fieldDescribedBy = (field: Exclude<ErrorField, null>) =>
-    fieldInvalid(field) ? contactErrorId : undefined;
-
   const clearError = () => {
     if (status === 'error') {
       setStatus('idle');
@@ -212,8 +208,10 @@ const ContactSection = () => {
                       autoComplete="given-name"
                       placeholder="First Name"
                       value={firstName}
-                      aria-invalid={fieldInvalid('firstName')}
-                      aria-describedby={fieldDescribedBy('firstName')}
+                      aria-invalid={hasError && errorField === 'firstName'}
+                      aria-describedby={
+                        hasError && errorField === 'firstName' ? contactErrorId : undefined
+                      }
                       onChange={(event) => {
                         setFirstName(event.target.value);
                         clearError();
@@ -233,8 +231,10 @@ const ContactSection = () => {
                       autoComplete="family-name"
                       placeholder="Last Name"
                       value={lastName}
-                      aria-invalid={fieldInvalid('lastName')}
-                      aria-describedby={fieldDescribedBy('lastName')}
+                      aria-invalid={hasError && errorField === 'lastName'}
+                      aria-describedby={
+                        hasError && errorField === 'lastName' ? contactErrorId : undefined
+                      }
                       onChange={(event) => {
                         setLastName(event.target.value);
                         clearError();
@@ -256,8 +256,10 @@ const ContactSection = () => {
                     autoComplete="email"
                     placeholder="Email"
                     value={email}
-                    aria-invalid={fieldInvalid('email')}
-                    aria-describedby={fieldDescribedBy('email')}
+                    aria-invalid={hasError && errorField === 'email'}
+                    aria-describedby={
+                      hasError && errorField === 'email' ? contactErrorId : undefined
+                    }
                     onChange={(event) => {
                       setEmail(event.target.value);
                       clearError();
@@ -278,8 +280,10 @@ const ContactSection = () => {
                     autoComplete="tel"
                     placeholder="Phone number"
                     value={phone}
-                    aria-invalid={fieldInvalid('phone')}
-                    aria-describedby={fieldDescribedBy('phone')}
+                    aria-invalid={hasError && errorField === 'phone'}
+                    aria-describedby={
+                      hasError && errorField === 'phone' ? contactErrorId : undefined
+                    }
                     onChange={(event) => {
                       setPhone(event.target.value);
                       clearError();
@@ -301,11 +305,17 @@ const ContactSection = () => {
                       id="home-privacy"
                       name="privacy"
                       checked={privacyAccepted}
-                      aria-invalid={fieldInvalid('agreements')}
-                      aria-describedby={fieldDescribedBy('agreements')}
+                      aria-invalid={hasError && errorField === 'agreements'}
+                      aria-describedby={
+                        hasError && errorField === 'agreements' ? contactErrorId : undefined
+                      }
                       onChange={(checked) => {
                         setPrivacyAccepted(checked);
-                        clearError();
+                        if (status === 'error') {
+                          setStatus('idle');
+                          setMessage('');
+                          setErrorField(null);
+                        }
                       }}
                     >
                       Privacy Policy
@@ -314,11 +324,17 @@ const ContactSection = () => {
                       id="home-terms"
                       name="terms"
                       checked={termsAccepted}
-                      aria-invalid={fieldInvalid('agreements')}
-                      aria-describedby={fieldDescribedBy('agreements')}
+                      aria-invalid={hasError && errorField === 'agreements'}
+                      aria-describedby={
+                        hasError && errorField === 'agreements' ? contactErrorId : undefined
+                      }
                       onChange={(checked) => {
                         setTermsAccepted(checked);
-                        clearError();
+                        if (status === 'error') {
+                          setStatus('idle');
+                          setMessage('');
+                          setErrorField(null);
+                        }
                       }}
                     >
                       Terms of Service
