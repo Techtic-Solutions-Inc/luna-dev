@@ -2,16 +2,18 @@ import { useState, type FormEvent } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { waitForPaint } from '../../lib/waitForPaint';
 import { breakpoints } from '../../theme/breakpoints';
 import { tokens } from '../../theme/tokens';
 import AuthCollage from '../layout/AuthCollage';
 import { AuthFormCard, AuthLogo, AuthPane, AuthShell, AuthTagline } from '../layout/AuthLayout';
+import AuthInput, { AuthPasswordInput } from '../ui/AuthInput';
 import Button from '../ui/Button';
 import Checkbox from '../ui/Checkbox';
-import Input from '../ui/Input';
 import Spinner from '../ui/Spinner';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const signupErrorId = 'signup-error';
 
 const Title = styled.h1`
   margin: ${tokens.spacing['gap-32']} 0 ${tokens.spacing['gap-12']};
@@ -63,22 +65,9 @@ const VisuallyHidden = styled.label`
   border: 0;
 `;
 
-const PillInput = styled(Input)`
-  min-height: 52px;
-  padding: ${tokens.spacing['padding-14']} ${tokens.spacing['padding-20']};
-  border-radius: ${tokens.radius['radius-10000']};
-  border: 1px solid var(--color-63);
-  background: var(--color-71);
-  color: var(--secondary);
+const PillInput = AuthInput;
 
-  &::placeholder {
-    color: var(--color-93);
-  }
-`;
-
-const PasswordInput = styled(PillInput)`
-  padding-right: ${tokens.spacing['padding-50']};
-`;
+const PasswordInput = AuthPasswordInput;
 
 const Toggle = styled.button`
   position: absolute;
@@ -111,16 +100,9 @@ const Legal = styled.div`
   }
 `;
 
-const Submit = styled(Button)`
+const Submit = styled(Button).attrs({ variant: 'pill' as const })`
   width: 100%;
-  min-height: 52px;
-  border-radius: ${tokens.radius['radius-10000']};
-  background: var(--accent);
   color: var(--secondary);
-  font-family: ${tokens.typography['body-sm-35'].fontFamily}, sans-serif;
-  font-size: ${tokens.typography.body.fontSize};
-  font-weight: ${tokens.typography['body-sm-35'].fontWeight};
-  line-height: ${tokens.typography.body.lineHeight};
 `;
 
 const Message = styled.p<{ $tone: 'error' | 'success' }>`
@@ -150,7 +132,8 @@ const SpinnerLight = styled.div`
   color: var(--secondary);
 `;
 
-type Status = 'idle' | 'loading' | 'error' | 'success';
+type Status = 'idle' | 'loading' | 'error';
+type ErrorField = 'firstName' | 'lastName' | 'email' | 'password' | 'terms' | null;
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
@@ -161,52 +144,67 @@ const SignUp = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
   const [message, setMessage] = useState('');
+  const [errorField, setErrorField] = useState<ErrorField>(null);
+
+  const hasError = status === 'error';
+  const errorDescribedBy = hasError ? signupErrorId : undefined;
 
   const clearError = () => {
     if (status === 'error') {
       setStatus('idle');
       setMessage('');
+      setErrorField(null);
     }
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!firstName.trim()) {
       setStatus('error');
+      setErrorField('firstName');
       setMessage('Enter your first name.');
       return;
     }
     if (!lastName.trim()) {
       setStatus('error');
+      setErrorField('lastName');
       setMessage('Enter your last name.');
       return;
     }
     if (!email.trim()) {
       setStatus('error');
+      setErrorField('email');
       setMessage('Enter your email address.');
       return;
     }
     if (!emailPattern.test(email.trim())) {
       setStatus('error');
+      setErrorField('email');
       setMessage('Enter a valid email address.');
       return;
     }
     if (!password) {
       setStatus('error');
+      setErrorField('password');
       setMessage('Create a password.');
       return;
     }
     if (!termsAccepted) {
       setStatus('error');
+      setErrorField('terms');
       setMessage('Agree to the Terms of Use and Privacy Policy.');
       return;
     }
 
     setStatus('loading');
     setMessage('');
-    setStatus('success');
-    setMessage('Your account was created.');
+    setErrorField(null);
+    await waitForPaint();
+    setStatus('error');
+    setMessage(
+      'Sign up is unavailable until the signup endpoint is published in the API contract.',
+    );
   };
 
   return (
@@ -218,144 +216,143 @@ const SignUp = () => {
           <Title>Great Marketing Made Easier. Specifically For Agents</Title>
           <Subtitle>Create your account today</Subtitle>
 
-          {status === 'success' ? (
-            <Message $tone="success" role="status">
-              {message}
-            </Message>
-          ) : (
-            <form onSubmit={onSubmit} noValidate>
-              <NameRow>
-                <Field>
-                  <VisuallyHidden htmlFor="first-name">First Name</VisuallyHidden>
-                  {status === 'loading' ? (
-                    <Skeleton aria-hidden="true" />
-                  ) : (
-                    <PillInput
-                      id="first-name"
-                      name="first_name"
-                      autoComplete="given-name"
-                      placeholder="First Name"
-                      value={firstName}
-                      onChange={(event) => {
-                        setFirstName(event.target.value);
-                        clearError();
-                      }}
-                    />
-                  )}
-                </Field>
-                <Field>
-                  <VisuallyHidden htmlFor="last-name">Last Name</VisuallyHidden>
-                  {status === 'loading' ? (
-                    <Skeleton aria-hidden="true" />
-                  ) : (
-                    <PillInput
-                      id="last-name"
-                      name="last_name"
-                      autoComplete="family-name"
-                      placeholder="Last Name"
-                      value={lastName}
-                      onChange={(event) => {
-                        setLastName(event.target.value);
-                        clearError();
-                      }}
-                    />
-                  )}
-                </Field>
-              </NameRow>
-
+          <form onSubmit={(event) => void onSubmit(event)} noValidate>
+            <NameRow>
               <Field>
-                <VisuallyHidden htmlFor="signup-email">Email</VisuallyHidden>
+                <VisuallyHidden htmlFor="first-name">First Name</VisuallyHidden>
                 {status === 'loading' ? (
                   <Skeleton aria-hidden="true" />
                 ) : (
                   <PillInput
-                    id="signup-email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="Email"
-                    value={email}
-                    aria-invalid={status === 'error'}
+                    id="first-name"
+                    name="first_name"
+                    autoComplete="given-name"
+                    placeholder="First Name"
+                    value={firstName}
+                    aria-invalid={hasError && errorField === 'firstName'}
+                    aria-describedby={errorDescribedBy}
                     onChange={(event) => {
-                      setEmail(event.target.value);
+                      setFirstName(event.target.value);
                       clearError();
                     }}
                   />
                 )}
               </Field>
-
               <Field>
-                <VisuallyHidden htmlFor="signup-password">Create a Password</VisuallyHidden>
+                <VisuallyHidden htmlFor="last-name">Last Name</VisuallyHidden>
                 {status === 'loading' ? (
                   <Skeleton aria-hidden="true" />
                 ) : (
-                  <>
-                    <PasswordInput
-                      id="signup-password"
-                      name="password"
-                      type={showPassword ? 'text' : 'password'}
-                      autoComplete="new-password"
-                      placeholder="Create a Password"
-                      value={password}
-                      onChange={(event) => {
-                        setPassword(event.target.value);
-                        clearError();
-                      }}
-                    />
-                    <Toggle
-                      type="button"
-                      aria-label={showPassword ? 'Hide password' : 'Show password'}
-                      onClick={() => setShowPassword((open) => !open)}
-                    >
-                      {showPassword ? (
-                        <FiEyeOff aria-hidden="true" />
-                      ) : (
-                        <FiEye aria-hidden="true" />
-                      )}
-                    </Toggle>
-                  </>
+                  <PillInput
+                    id="last-name"
+                    name="last_name"
+                    autoComplete="family-name"
+                    placeholder="Last Name"
+                    value={lastName}
+                    aria-invalid={hasError && errorField === 'lastName'}
+                    aria-describedby={errorDescribedBy}
+                    onChange={(event) => {
+                      setLastName(event.target.value);
+                      clearError();
+                    }}
+                  />
                 )}
               </Field>
+            </NameRow>
 
-              <Legal>
-                <Checkbox
-                  id="terms"
-                  name="terms_accepted"
-                  checked={termsAccepted}
-                  onChange={(checked) => {
-                    setTermsAccepted(checked);
+            <Field>
+              <VisuallyHidden htmlFor="signup-email">Email</VisuallyHidden>
+              {status === 'loading' ? (
+                <Skeleton aria-hidden="true" />
+              ) : (
+                <PillInput
+                  id="signup-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="Email"
+                  value={email}
+                  aria-invalid={hasError && errorField === 'email'}
+                  aria-describedby={errorDescribedBy}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
                     clearError();
                   }}
-                >
-                  I have read and agree to the{' '}
-                  <a href="https://agentwise.io" target="_blank" rel="noreferrer">
-                    Terms of Use
-                  </a>{' '}
-                  and{' '}
-                  <a href="https://agentwise.io" target="_blank" rel="noreferrer">
-                    Privacy Policy
-                  </a>
-                  .
-                </Checkbox>
-              </Legal>
+                />
+              )}
+            </Field>
 
-              {status === 'error' ? (
-                <Message $tone="error" role="alert">
-                  {message}
-                </Message>
-              ) : null}
+            <Field>
+              <VisuallyHidden htmlFor="signup-password">Create a Password</VisuallyHidden>
+              {status === 'loading' ? (
+                <Skeleton aria-hidden="true" />
+              ) : (
+                <>
+                  <PasswordInput
+                    id="signup-password"
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    autoComplete="new-password"
+                    placeholder="Create a Password"
+                    value={password}
+                    aria-invalid={hasError && errorField === 'password'}
+                    aria-describedby={errorDescribedBy}
+                    onChange={(event) => {
+                      setPassword(event.target.value);
+                      clearError();
+                    }}
+                  />
+                  <Toggle
+                    type="button"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    onClick={() => setShowPassword((open) => !open)}
+                  >
+                    {showPassword ? <FiEyeOff aria-hidden="true" /> : <FiEye aria-hidden="true" />}
+                  </Toggle>
+                </>
+              )}
+            </Field>
 
-              <Submit type="submit" disabled={status === 'loading'}>
-                {status === 'loading' ? (
-                  <SpinnerLight>
-                    <Spinner />
-                  </SpinnerLight>
-                ) : (
-                  'Sign Up'
-                )}
-              </Submit>
-            </form>
-          )}
+            <Legal>
+              <Checkbox
+                id="terms"
+                name="terms_accepted"
+                checked={termsAccepted}
+                aria-invalid={hasError && errorField === 'terms'}
+                aria-describedby={errorDescribedBy}
+                onChange={(checked) => {
+                  setTermsAccepted(checked);
+                  clearError();
+                }}
+              >
+                I have read and agree to the{' '}
+                <a href="https://agentwise.io" target="_blank" rel="noreferrer">
+                  Terms of Use
+                </a>{' '}
+                and{' '}
+                <a href="https://agentwise.io" target="_blank" rel="noreferrer">
+                  Privacy Policy
+                </a>
+                .
+              </Checkbox>
+            </Legal>
+
+            {hasError ? (
+              <Message $tone="error" id={signupErrorId} role="alert">
+                {message}
+              </Message>
+            ) : null}
+
+            <Submit type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? (
+                <SpinnerLight>
+                  <Spinner />
+                </SpinnerLight>
+              ) : (
+                'Sign Up'
+              )}
+            </Submit>
+          </form>
 
           <Footer>
             Already have an account? <TextLink to="/sign-in">Sign in</TextLink>

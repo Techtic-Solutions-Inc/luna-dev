@@ -2,14 +2,16 @@ import { useState, type FormEvent } from 'react';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { FiAlertTriangle, FiMail } from 'react-icons/fi';
 import styled from 'styled-components';
+import { waitForPaint } from '../../lib/waitForPaint';
 import { breakpoints } from '../../theme/breakpoints';
 import { tokens } from '../../theme/tokens';
 import Button from '../ui/Button';
 import Checkbox from '../ui/Checkbox';
-import Input from '../ui/Input';
+import { AuthDarkInput } from '../ui/AuthInput';
 import Spinner from '../ui/Spinner';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const verifyErrorId = 'verify-error';
 
 const Page = styled.div`
   min-height: 100vh;
@@ -122,13 +124,6 @@ const FieldLabel = styled.label`
   line-height: ${tokens.typography['caption-4'].lineHeight};
 `;
 
-const DarkInput = styled(Input)`
-  background: var(--color-33);
-  border-color: var(--color-49);
-  color: var(--secondary);
-  border-radius: ${tokens.radius['radius-8']};
-`;
-
 const Checks = styled.fieldset`
   border: 0;
   margin: 0 0 ${tokens.spacing['gap-24']};
@@ -151,15 +146,9 @@ const Actions = styled.div`
   margin-bottom: ${tokens.spacing['gap-24']};
 `;
 
-const Submit = styled(Button)`
+const Submit = styled(Button).attrs({ variant: 'gold' as const })`
   width: 100%;
   min-height: 52px;
-  border-radius: ${tokens.radius['radius-10000']};
-  background: linear-gradient(90deg, var(--accent) 0%, var(--color-56) 100%);
-  color: var(--secondary);
-  font-family: ${tokens.typography['body-sm-35'].fontFamily}, sans-serif;
-  font-size: ${tokens.typography.body.fontSize};
-  font-weight: ${tokens.typography['body-sm-35'].fontWeight};
 
   @media (min-width: ${breakpoints.tablet}) {
     width: auto;
@@ -208,15 +197,6 @@ const ErrorText = styled.p`
   font-family: ${tokens.typography['caption-4'].fontFamily}, sans-serif;
   font-size: ${tokens.typography['caption-4'].fontSize};
   line-height: ${tokens.typography['caption-4'].lineHeight};
-`;
-
-const SuccessText = styled.p`
-  margin: 0 0 ${tokens.spacing['gap-24']};
-  color: var(--color-17);
-  text-align: center;
-  font-family: ${tokens.typography['body-sm-38'].fontFamily}, sans-serif;
-  font-size: ${tokens.typography['body-sm-38'].fontSize};
-  line-height: ${tokens.typography['body-3'].lineHeight};
 `;
 
 const Footer = styled.footer`
@@ -272,7 +252,8 @@ const SpinnerOnDark = styled.div`
   color: var(--secondary);
 `;
 
-type Status = 'idle' | 'loading' | 'error' | 'success';
+type Status = 'idle' | 'loading' | 'error';
+type ErrorField = 'email' | 'agreements' | null;
 
 const EmailVerification = () => {
   const [email, setEmail] = useState('');
@@ -280,32 +261,50 @@ const EmailVerification = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [errorField, setErrorField] = useState<ErrorField>(null);
 
-  const validate = (): string => {
+  const hasError = status === 'error';
+  const errorDescribedBy = hasError ? verifyErrorId : undefined;
+
+  const validate = (): { message: string; field: ErrorField } | null => {
     const trimmed = email.trim();
     if (!trimmed) {
-      return 'Enter the email address to verify.';
+      return { message: 'Enter the email address to verify.', field: 'email' };
     }
     if (!emailPattern.test(trimmed)) {
-      return 'Enter a valid email address.';
+      return { message: 'Enter a valid email address.', field: 'email' };
     }
     if (!privacyAccepted || !termsAccepted) {
-      return 'Accept the Privacy Policy and Terms of Service.';
+      return { message: 'Accept the Privacy Policy and Terms of Service.', field: 'agreements' };
     }
-    return '';
+    return null;
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const clearError = () => {
+    if (status === 'error') {
+      setStatus('idle');
+      setErrorMessage('');
+      setErrorField(null);
+    }
+  };
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const nextError = validate();
     if (nextError) {
       setStatus('error');
-      setErrorMessage(nextError);
+      setErrorField(nextError.field);
+      setErrorMessage(nextError.message);
       return;
     }
     setStatus('loading');
     setErrorMessage('');
-    setStatus('success');
+    setErrorField(null);
+    await waitForPaint();
+    setStatus('error');
+    setErrorMessage(
+      'Email verification is unavailable until the verify endpoint is published in the API contract.',
+    );
   };
 
   return (
@@ -327,77 +326,78 @@ const EmailVerification = () => {
           </Lead>
         </Hero>
 
-        {status === 'success' ? (
-          <SuccessText role="status">
-            A verification message was prepared for {email.trim()}.
-          </SuccessText>
-        ) : (
-          <form onSubmit={onSubmit} noValidate>
-            <Greeting>Hi,</Greeting>
-            <BodyCopy>
-              Thanks for registering on the Agentwise portal. To activate your account and get
-              started, please verify your email address by clicking the button below.
-            </BodyCopy>
+        <form onSubmit={(event) => void onSubmit(event)} noValidate>
+          <Greeting>Hi,</Greeting>
+          <BodyCopy>
+            Thanks for registering on the Agentwise portal. To activate your account and get
+            started, please verify your email address by clicking the button below.
+          </BodyCopy>
 
-            <Field>
-              <FieldLabel htmlFor="verify-email">Verify Email Address</FieldLabel>
-              <DarkInput
-                id="verify-email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                value={email}
-                aria-invalid={status === 'error'}
-                aria-describedby={status === 'error' ? 'verify-error' : undefined}
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                  if (status === 'error') {
-                    setStatus('idle');
-                    setErrorMessage('');
-                  }
-                }}
-              />
-            </Field>
+          <Field>
+            <FieldLabel htmlFor="verify-email">Verify Email Address</FieldLabel>
+            <AuthDarkInput
+              id="verify-email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              value={email}
+              aria-invalid={hasError && errorField === 'email'}
+              aria-describedby={errorDescribedBy}
+              onChange={(event) => {
+                setEmail(event.target.value);
+                clearError();
+              }}
+            />
+          </Field>
 
-            <Checks>
-              <Legend>Agreements</Legend>
-              <Checkbox
-                id="verify-privacy"
-                name="privacy"
-                checked={privacyAccepted}
-                onChange={setPrivacyAccepted}
-              >
-                Privacy Policy
-              </Checkbox>
-              <Checkbox
-                id="verify-terms"
-                name="terms"
-                checked={termsAccepted}
-                onChange={setTermsAccepted}
-              >
-                Terms of Service
-              </Checkbox>
-            </Checks>
+          <Checks>
+            <Legend>Agreements</Legend>
+            <Checkbox
+              id="verify-privacy"
+              name="privacy"
+              checked={privacyAccepted}
+              aria-invalid={hasError && errorField === 'agreements'}
+              aria-describedby={errorDescribedBy}
+              onChange={(checked) => {
+                setPrivacyAccepted(checked);
+                clearError();
+              }}
+            >
+              Privacy Policy
+            </Checkbox>
+            <Checkbox
+              id="verify-terms"
+              name="terms"
+              checked={termsAccepted}
+              aria-invalid={hasError && errorField === 'agreements'}
+              aria-describedby={errorDescribedBy}
+              onChange={(checked) => {
+                setTermsAccepted(checked);
+                clearError();
+              }}
+            >
+              Terms of Service
+            </Checkbox>
+          </Checks>
 
-            {status === 'error' ? (
-              <ErrorText id="verify-error" role="alert">
-                {errorMessage}
-              </ErrorText>
-            ) : null}
+          {hasError ? (
+            <ErrorText id={verifyErrorId} role="alert">
+              {errorMessage}
+            </ErrorText>
+          ) : null}
 
-            <Actions>
-              <Submit type="submit" disabled={status === 'loading'}>
-                {status === 'loading' ? (
-                  <SpinnerOnDark>
-                    <Spinner />
-                  </SpinnerOnDark>
-                ) : (
-                  'Verify Email Address'
-                )}
-              </Submit>
-            </Actions>
-          </form>
-        )}
+          <Actions>
+            <Submit type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? (
+                <SpinnerOnDark>
+                  <Spinner />
+                </SpinnerOnDark>
+              ) : (
+                'Verify Email Address'
+              )}
+            </Submit>
+          </Actions>
+        </form>
 
         <Note>
           This verification link will expire in 24 hours. If you didn&apos;t create an account on

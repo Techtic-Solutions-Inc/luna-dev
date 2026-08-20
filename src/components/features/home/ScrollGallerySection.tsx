@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react';
 import styled from 'styled-components';
+import { waitForPaint } from '../../../lib/waitForPaint';
 import { breakpoints } from '../../../theme/breakpoints';
 import { tokens } from '../../../theme/tokens';
+import Spinner from '../../ui/Spinner';
 import { contentCards } from './content';
 import {
   BodyCopy,
@@ -13,7 +15,6 @@ import {
   Section,
   SerifDisplay,
 } from './shared';
-import Spinner from '../../ui/Spinner';
 
 const GallerySection = styled(Section)`
   padding-top: 0;
@@ -81,7 +82,11 @@ const CardBg = styled.div<{ $gradient: string }>`
 const CardOverlay = styled.div`
   position: relative;
   padding: ${tokens.spacing['padding-16']};
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.75) 100%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-16) 75%, transparent) 100%
+  );
 `;
 
 const CardTitle = styled.h3`
@@ -118,40 +123,43 @@ const StatusRow = styled.div`
   margin-bottom: ${tokens.spacing['gap-12']};
 `;
 
-type CardAction = 'download' | 'customize' | null;
-
 const ScrollGallerySection = () => {
   const [query, setQuery] = useState('');
+  const [appliedQuery, setAppliedQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [cardAction, setCardAction] = useState<{ id: string; action: CardAction } | null>(null);
-  const [success, setSuccess] = useState('');
 
   const results = useMemo(() => {
-    const trimmed = query.trim().toLowerCase();
+    const trimmed = appliedQuery.trim().toLowerCase();
     if (!trimmed) {
       return contentCards;
     }
     return contentCards.filter((card) => card.title.toLowerCase().includes(trimmed));
-  }, [query]);
+  }, [appliedQuery]);
 
-  const runSearch = () => {
-    setSuccess('');
-    setLoading(true);
+  const runSearch = async () => {
     setError('');
-    setLoading(false);
-    if (query.trim() && results.length === 0) {
+    setLoading(true);
+    await waitForPaint();
+    const trimmed = query.trim();
+    const normalized = trimmed.toLowerCase();
+    const filtered = normalized
+      ? contentCards.filter((card) => card.title.toLowerCase().includes(normalized))
+      : contentCards;
+    setAppliedQuery(trimmed);
+    if (normalized && filtered.length === 0) {
       setError('No content matched your search.');
     }
+    setLoading(false);
   };
 
-  const handleAction = (id: string, action: CardAction) => {
-    setError('');
-    setSuccess('');
-    setCardAction({ id, action });
-    setCardAction(null);
-    setSuccess(action === 'download' ? 'Download started.' : 'Customize opened for this template.');
+  const handleAction = () => {
+    setError(
+      'Template actions are unavailable until download and customize endpoints are published in the API contract.',
+    );
   };
+
+  const showEmpty = !loading && !error && results.length === 0;
 
   return (
     <GridBackdrop id="content">
@@ -173,28 +181,24 @@ const ScrollGallerySection = () => {
               onChange={(event) => {
                 setQuery(event.target.value);
                 setError('');
-                setSuccess('');
               }}
               onKeyDown={(event) => {
                 if (event.key === 'Enter') {
                   event.preventDefault();
-                  runSearch();
+                  void runSearch();
                 }
               }}
             />
-            <GoldButton type="button" onClick={runSearch} disabled={loading}>
+            <GoldButton type="button" onClick={() => void runSearch()} disabled={loading}>
               {loading ? <Spinner /> : 'Search'}
             </GoldButton>
           </SearchRow>
 
-          <StatusRow>
-            {error ? <ErrorText role="alert">{error}</ErrorText> : null}
-            {success ? <BodyCopy role="status">{success}</BodyCopy> : null}
-          </StatusRow>
+          <StatusRow>{error ? <ErrorText role="alert">{error}</ErrorText> : null}</StatusRow>
 
-          {results.length === 0 ? (
+          {showEmpty ? (
             <EmptyState role="status">No templates to show. Try another search term.</EmptyState>
-          ) : (
+          ) : error ? null : (
             <Cards aria-label="Content templates">
               {results.map((card) => (
                 <Card key={card.id}>
@@ -202,18 +206,10 @@ const ScrollGallerySection = () => {
                   <CardOverlay>
                     <CardTitle>{card.title}</CardTitle>
                     <CardActions>
-                      <ActionBtn
-                        type="button"
-                        disabled={cardAction?.id === card.id && cardAction.action === 'download'}
-                        onClick={() => handleAction(card.id, 'download')}
-                      >
+                      <ActionBtn type="button" onClick={handleAction}>
                         Download
                       </ActionBtn>
-                      <ActionBtn
-                        type="button"
-                        disabled={cardAction?.id === card.id && cardAction.action === 'customize'}
-                        onClick={() => handleAction(card.id, 'customize')}
-                      >
+                      <ActionBtn type="button" onClick={handleAction}>
                         Customize
                       </ActionBtn>
                     </CardActions>

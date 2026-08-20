@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Button from '../../ui/Button';
 import { breakpoints } from '../../../theme/breakpoints';
 import { tokens } from '../../../theme/tokens';
 
@@ -25,6 +26,24 @@ export const WideContainer = styled.div`
 
   @media (min-width: ${breakpoints.tablet}) {
     padding: 0 ${tokens.spacing['padding-32']};
+  }
+`;
+
+export const HeroDisplay = styled.h1`
+  margin: 0;
+  font-family: ${tokens.typography['heading-xl-89'].fontFamily}, serif;
+  font-size: ${tokens.typography['heading-lg-31'].fontSize};
+  font-weight: ${tokens.typography['heading-xl-89'].fontWeight};
+  line-height: ${tokens.typography['heading-lg-31'].lineHeight};
+
+  @media (min-width: ${breakpoints.tablet}) {
+    font-size: ${tokens.typography['heading-xl-53'].fontSize};
+    line-height: ${tokens.typography['heading-xl-53'].lineHeight};
+  }
+
+  @media (min-width: ${breakpoints.desktop}) {
+    font-size: ${tokens.typography['heading-xl-89'].fontSize};
+    line-height: ${tokens.typography['heading-xl-89'].lineHeight};
   }
 `;
 
@@ -59,46 +78,9 @@ export const BodyCopy = styled.p`
   line-height: ${tokens.typography['body-3'].lineHeight};
 `;
 
-export const GoldButton = styled.button`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: ${tokens.spacing['padding-12']} ${tokens.spacing['padding-32']};
-  border: 0;
-  border-radius: ${tokens.radius['radius-10000']};
-  background: linear-gradient(90deg, var(--accent) 0%, var(--color-56) 100%);
-  color: var(--secondary);
-  cursor: pointer;
-  text-decoration: none;
-  font-family: ${tokens.typography['body-sm-35'].fontFamily}, sans-serif;
-  font-size: ${tokens.typography.body.fontSize};
-  font-weight: ${tokens.typography['body-sm-35'].fontWeight};
-  line-height: ${tokens.typography.body.lineHeight};
+export const GoldButton = styled(Button).attrs({ variant: 'gold' as const })``;
 
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-`;
-
-export const GhostButton = styled.button`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: ${tokens.spacing['padding-10']} ${tokens.spacing['padding-20']};
-  border: 1px solid var(--color-49);
-  border-radius: ${tokens.radius['radius-10000']};
-  background: transparent;
-  color: var(--secondary);
-  cursor: pointer;
-  text-decoration: none;
-  font-family: ${tokens.typography['body-sm-38'].fontFamily}, sans-serif;
-  font-size: ${tokens.typography['body-sm-38'].fontSize};
-  font-weight: ${tokens.typography['body-sm-38'].fontWeight};
-  line-height: ${tokens.typography['body-sm-38'].lineHeight};
-`;
+export const GhostButton = styled(Button).attrs({ variant: 'ghost' as const })``;
 
 export const Section = styled.section`
   padding: ${tokens.spacing['padding-50']} 0;

@@ -8,32 +8,32 @@ export const contentCards: ContentCard[] = [
   {
     id: 'coffee-homes',
     title: 'Coffee & Homes',
-    gradient: 'linear-gradient(180deg, #6c5082 0%, #1c101d 100%)',
+    gradient: 'linear-gradient(180deg, var(--color-68) 0%, var(--color-43) 100%)',
   },
   {
     id: 'modern-living',
     title: 'Modern Living',
-    gradient: 'linear-gradient(180deg, #3b6c4f 0%, #14100d 100%)',
+    gradient: 'linear-gradient(180deg, var(--color-67) 0%, var(--color-20) 100%)',
   },
   {
     id: 'luxury-estates',
     title: 'Luxury Estates',
-    gradient: 'linear-gradient(180deg, #376292 0%, #0b0b0b 100%)',
+    gradient: 'linear-gradient(180deg, var(--color-69) 0%, var(--color-16) 100%)',
   },
   {
     id: 'open-house',
     title: 'Open House',
-    gradient: 'linear-gradient(180deg, #c8a47e 0%, #473e33 100%)',
+    gradient: 'linear-gradient(180deg, var(--accent) 0%, var(--color-56) 100%)',
   },
   {
     id: 'market-update',
     title: 'Market Update',
-    gradient: 'linear-gradient(180deg, #44413e 0%, #191919 100%)',
+    gradient: 'linear-gradient(180deg, var(--color-63) 0%, var(--color-66) 100%)',
   },
   {
     id: 'neighborhood',
     title: 'Neighborhood',
-    gradient: 'linear-gradient(180deg, #6c5082 0%, #232323 100%)',
+    gradient: 'linear-gradient(180deg, var(--color-68) 0%, var(--color-41) 100%)',
   },
 ];
 

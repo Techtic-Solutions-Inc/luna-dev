@@ -1,30 +1,25 @@
 import { useState, type FormEvent } from 'react';
 import styled from 'styled-components';
+import { waitForPaint } from '../../../lib/waitForPaint';
 import { breakpoints } from '../../../theme/breakpoints';
 import { tokens } from '../../../theme/tokens';
+import AuthInput from '../../ui/AuthInput';
+import Button from '../../ui/Button';
 import Checkbox from '../../ui/Checkbox';
-import Input from '../../ui/Input';
 import Spinner from '../../ui/Spinner';
-import {
-  ErrorText,
-  GoldButton,
-  Section,
-  Skeleton,
-  SuccessText,
-  VisuallyHidden,
-  WideContainer,
-} from './shared';
+import { ErrorText, Section, Skeleton, VisuallyHidden, WideContainer } from './shared';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^\+?[\d\s()-]{7,}$/;
+const contactErrorId = 'contact-error';
 
 const ContactSectionWrap = styled(Section)`
   background:
     linear-gradient(
       90deg,
-      rgba(11, 11, 11, 0.92) 0%,
-      rgba(11, 11, 11, 0.72) 45%,
-      rgba(11, 11, 11, 0.92) 100%
+      color-mix(in srgb, var(--color-16) 92%, transparent) 0%,
+      color-mix(in srgb, var(--color-16) 72%, transparent) 45%,
+      color-mix(in srgb, var(--color-16) 92%, transparent) 100%
     ),
     linear-gradient(135deg, var(--color-43) 0%, var(--color-16) 100%);
 `;
@@ -69,7 +64,7 @@ const FormCard = styled.div`
   padding: ${tokens.spacing['padding-24']};
   border-radius: ${tokens.radius['radius-16']};
   border: 1px solid var(--color-49);
-  background: rgba(15, 15, 15, 0.88);
+  background: color-mix(in srgb, var(--color-33) 88%, transparent);
 `;
 
 const FormTitle = styled.h3`
@@ -94,18 +89,6 @@ const NameRow = styled.div`
   }
 `;
 
-const DarkInput = styled(Input)`
-  min-height: 52px;
-  border-radius: ${tokens.radius['radius-10000']};
-  border: 1px solid var(--color-63);
-  background: var(--color-71);
-  color: var(--secondary);
-
-  &::placeholder {
-    color: var(--color-93);
-  }
-`;
-
 const Checks = styled.fieldset`
   border: 0;
   margin: 0 0 ${tokens.spacing['gap-16']};
@@ -122,11 +105,15 @@ const Legend = styled.legend`
   clip: rect(0 0 0 0);
 `;
 
-const Submit = styled(GoldButton)`
+const Submit = styled(Button).attrs({ variant: 'pill' as const })`
   width: 100%;
+  min-height: 52px;
+  background: var(--color-33);
+  border: 1px solid var(--color-49);
+  color: var(--secondary);
 `;
 
-type Status = 'idle' | 'loading' | 'error' | 'success';
+type Status = 'idle' | 'loading' | 'error';
 
 const ContactSection = () => {
   const [firstName, setFirstName] = useState('');
@@ -137,6 +124,9 @@ const ContactSection = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [status, setStatus] = useState<Status>('idle');
   const [message, setMessage] = useState('');
+
+  const hasError = status === 'error';
+  const errorDescribedBy = hasError ? contactErrorId : undefined;
 
   const validate = (): string => {
     if (!firstName.trim()) {
@@ -163,7 +153,7 @@ const ContactSection = () => {
     return '';
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const nextError = validate();
     if (nextError) {
@@ -171,10 +161,14 @@ const ContactSection = () => {
       setMessage(nextError);
       return;
     }
+
     setStatus('loading');
     setMessage('');
-    setStatus('success');
-    setMessage('Thanks for reaching out. We will contact you shortly.');
+    await waitForPaint();
+    setStatus('error');
+    setMessage(
+      'Contact submission is unavailable until the contact endpoint is published in the API contract.',
+    );
   };
 
   return (
@@ -188,75 +182,25 @@ const ContactSection = () => {
           <FormCard>
             <FormTitle>Let&apos;s Work Together</FormTitle>
 
-            {status === 'success' ? (
-              <SuccessText role="status">{message}</SuccessText>
-            ) : (
-              <form onSubmit={onSubmit} noValidate>
-                <NameRow>
-                  <Field>
-                    <VisuallyHidden htmlFor="home-first-name">First Name</VisuallyHidden>
-                    {status === 'loading' ? (
-                      <Skeleton aria-hidden="true" />
-                    ) : (
-                      <DarkInput
-                        id="home-first-name"
-                        name="firstName"
-                        type="text"
-                        autoComplete="given-name"
-                        placeholder="First Name"
-                        value={firstName}
-                        aria-invalid={status === 'error'}
-                        onChange={(event) => {
-                          setFirstName(event.target.value);
-                          if (status === 'error') {
-                            setStatus('idle');
-                            setMessage('');
-                          }
-                        }}
-                      />
-                    )}
-                  </Field>
-                  <Field>
-                    <VisuallyHidden htmlFor="home-last-name">Last Name</VisuallyHidden>
-                    {status === 'loading' ? (
-                      <Skeleton aria-hidden="true" />
-                    ) : (
-                      <DarkInput
-                        id="home-last-name"
-                        name="lastName"
-                        type="text"
-                        autoComplete="family-name"
-                        placeholder="Last Name"
-                        value={lastName}
-                        aria-invalid={status === 'error'}
-                        onChange={(event) => {
-                          setLastName(event.target.value);
-                          if (status === 'error') {
-                            setStatus('idle');
-                            setMessage('');
-                          }
-                        }}
-                      />
-                    )}
-                  </Field>
-                </NameRow>
-
+            <form onSubmit={(event) => void onSubmit(event)} noValidate>
+              <NameRow>
                 <Field>
-                  <VisuallyHidden htmlFor="home-email">Email</VisuallyHidden>
+                  <VisuallyHidden htmlFor="home-first-name">First Name</VisuallyHidden>
                   {status === 'loading' ? (
                     <Skeleton aria-hidden="true" />
                   ) : (
-                    <DarkInput
-                      id="home-email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      placeholder="Email"
-                      value={email}
-                      aria-invalid={status === 'error'}
+                    <AuthInput
+                      id="home-first-name"
+                      name="firstName"
+                      type="text"
+                      autoComplete="given-name"
+                      placeholder="First Name"
+                      value={firstName}
+                      aria-invalid={hasError}
+                      aria-describedby={errorDescribedBy}
                       onChange={(event) => {
-                        setEmail(event.target.value);
-                        if (status === 'error') {
+                        setFirstName(event.target.value);
+                        if (hasError) {
                           setStatus('idle');
                           setMessage('');
                         }
@@ -264,23 +208,23 @@ const ContactSection = () => {
                     />
                   )}
                 </Field>
-
                 <Field>
-                  <VisuallyHidden htmlFor="home-phone">Phone number</VisuallyHidden>
+                  <VisuallyHidden htmlFor="home-last-name">Last Name</VisuallyHidden>
                   {status === 'loading' ? (
                     <Skeleton aria-hidden="true" />
                   ) : (
-                    <DarkInput
-                      id="home-phone"
-                      name="phone"
-                      type="tel"
-                      autoComplete="tel"
-                      placeholder="Phone number"
-                      value={phone}
-                      aria-invalid={status === 'error'}
+                    <AuthInput
+                      id="home-last-name"
+                      name="lastName"
+                      type="text"
+                      autoComplete="family-name"
+                      placeholder="Last Name"
+                      value={lastName}
+                      aria-invalid={hasError}
+                      aria-describedby={errorDescribedBy}
                       onChange={(event) => {
-                        setPhone(event.target.value);
-                        if (status === 'error') {
+                        setLastName(event.target.value);
+                        if (hasError) {
                           setStatus('idle');
                           setMessage('');
                         }
@@ -288,43 +232,101 @@ const ContactSection = () => {
                     />
                   )}
                 </Field>
+              </NameRow>
 
-                <Checks>
-                  <Legend>Agreements</Legend>
-                  {status === 'loading' ? (
-                    <>
-                      <Skeleton aria-hidden="true" />
-                      <Skeleton aria-hidden="true" />
-                    </>
-                  ) : (
-                    <>
-                      <Checkbox
-                        id="home-privacy"
-                        name="privacy"
-                        checked={privacyAccepted}
-                        onChange={setPrivacyAccepted}
-                      >
-                        Privacy Policy
-                      </Checkbox>
-                      <Checkbox
-                        id="home-terms"
-                        name="terms"
-                        checked={termsAccepted}
-                        onChange={setTermsAccepted}
-                      >
-                        Terms of Service
-                      </Checkbox>
-                    </>
-                  )}
-                </Checks>
+              <Field>
+                <VisuallyHidden htmlFor="home-email">Email</VisuallyHidden>
+                {status === 'loading' ? (
+                  <Skeleton aria-hidden="true" />
+                ) : (
+                  <AuthInput
+                    id="home-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="Email"
+                    value={email}
+                    aria-invalid={hasError}
+                    aria-describedby={errorDescribedBy}
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                      if (hasError) {
+                        setStatus('idle');
+                        setMessage('');
+                      }
+                    }}
+                  />
+                )}
+              </Field>
 
-                {status === 'error' ? <ErrorText role="alert">{message}</ErrorText> : null}
+              <Field>
+                <VisuallyHidden htmlFor="home-phone">Phone number</VisuallyHidden>
+                {status === 'loading' ? (
+                  <Skeleton aria-hidden="true" />
+                ) : (
+                  <AuthInput
+                    id="home-phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    placeholder="Phone number"
+                    value={phone}
+                    aria-invalid={hasError}
+                    aria-describedby={errorDescribedBy}
+                    onChange={(event) => {
+                      setPhone(event.target.value);
+                      if (hasError) {
+                        setStatus('idle');
+                        setMessage('');
+                      }
+                    }}
+                  />
+                )}
+              </Field>
 
-                <Submit type="submit" disabled={status === 'loading'}>
-                  {status === 'loading' ? <Spinner /> : 'Get Started'}
-                </Submit>
-              </form>
-            )}
+              <Checks>
+                <Legend>Agreements</Legend>
+                {status === 'loading' ? (
+                  <>
+                    <Skeleton aria-hidden="true" />
+                    <Skeleton aria-hidden="true" />
+                  </>
+                ) : (
+                  <>
+                    <Checkbox
+                      id="home-privacy"
+                      name="privacy"
+                      checked={privacyAccepted}
+                      aria-invalid={hasError}
+                      aria-describedby={errorDescribedBy}
+                      onChange={setPrivacyAccepted}
+                    >
+                      Privacy Policy
+                    </Checkbox>
+                    <Checkbox
+                      id="home-terms"
+                      name="terms"
+                      checked={termsAccepted}
+                      aria-invalid={hasError}
+                      aria-describedby={errorDescribedBy}
+                      onChange={setTermsAccepted}
+                    >
+                      Terms of Service
+                    </Checkbox>
+                  </>
+                )}
+              </Checks>
+
+              {hasError ? (
+                <ErrorText id={contactErrorId} role="alert">
+                  {message}
+                </ErrorText>
+              ) : null}
+
+              <Submit type="submit" disabled={status === 'loading'}>
+                {status === 'loading' ? <Spinner /> : 'Send me a quick email'}
+              </Submit>
+            </form>
           </FormCard>
         </Grid>
       </WideContainer>

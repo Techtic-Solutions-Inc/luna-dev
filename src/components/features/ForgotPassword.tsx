@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from 'react';
 import styled from 'styled-components';
+import { waitForPaint } from '../../lib/waitForPaint';
 import { breakpoints } from '../../theme/breakpoints';
 import { tokens } from '../../theme/tokens';
 import AuthCollage from '../layout/AuthCollage';
+import { AuthInputMutedPlaceholder } from '../ui/AuthInput';
 import Button from '../ui/Button';
-import Input from '../ui/Input';
 import Spinner from '../ui/Spinner';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -98,18 +99,7 @@ const Field = styled.div`
   margin-bottom: ${tokens.spacing['gap-16']};
 `;
 
-const PillInput = styled(Input)`
-  min-height: 52px;
-  padding: ${tokens.spacing['padding-14']} ${tokens.spacing['padding-20']};
-  border-radius: ${tokens.radius['radius-10000']};
-  border: 1px solid var(--color-63);
-  background: var(--color-71);
-  color: var(--secondary);
-
-  &::placeholder {
-    color: var(--color-57);
-  }
-`;
+const PillInput = AuthInputMutedPlaceholder;
 
 const Skeleton = styled.div`
   min-height: 52px;
@@ -117,16 +107,9 @@ const Skeleton = styled.div`
   background: var(--color-22);
 `;
 
-const Submit = styled(Button)`
+const Submit = styled(Button).attrs({ variant: 'pill' as const })`
   width: 100%;
-  min-height: 52px;
-  border-radius: ${tokens.radius['radius-10000']};
-  background: var(--accent);
   color: var(--secondary);
-  font-family: ${tokens.typography['body-sm-35'].fontFamily}, sans-serif;
-  font-size: ${tokens.typography.body.fontSize};
-  font-weight: ${tokens.typography['body-sm-35'].fontWeight};
-  line-height: ${tokens.typography.body.lineHeight};
 `;
 
 const Message = styled.p<{ $tone: 'error' | 'success' }>`
@@ -150,7 +133,7 @@ const ForgotPassword = () => {
   const [status, setStatus] = useState<Status>('idle');
   const [message, setMessage] = useState('');
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const trimmed = email.trim();
 
@@ -168,8 +151,11 @@ const ForgotPassword = () => {
 
     setStatus('loading');
     setMessage('');
-    setStatus('success');
-    setMessage('A reset link has been sent to your email address.');
+    await waitForPaint();
+    setStatus('error');
+    setMessage(
+      'Password reset is unavailable until the reset-password endpoint is published in the API contract.',
+    );
   };
 
   return (
@@ -184,54 +170,48 @@ const ForgotPassword = () => {
             to reset your password.
           </Instructions>
 
-          {status === 'success' ? (
-            <Message $tone="success" role="status">
-              {message}
-            </Message>
-          ) : (
-            <form onSubmit={onSubmit} noValidate>
-              <Field>
-                <VisuallyHidden htmlFor="reset-email">Email</VisuallyHidden>
-                {status === 'loading' ? (
-                  <Skeleton aria-hidden="true" />
-                ) : (
-                  <PillInput
-                    id="reset-email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="Email"
-                    value={email}
-                    aria-invalid={status === 'error'}
-                    aria-describedby={status === 'error' ? 'reset-email-error' : undefined}
-                    onChange={(event) => {
-                      setEmail(event.target.value);
-                      if (status === 'error') {
-                        setStatus('idle');
-                        setMessage('');
-                      }
-                    }}
-                  />
-                )}
-              </Field>
+          <form onSubmit={(event) => void onSubmit(event)} noValidate>
+            <Field>
+              <VisuallyHidden htmlFor="reset-email">Email</VisuallyHidden>
+              {status === 'loading' ? (
+                <Skeleton aria-hidden="true" />
+              ) : (
+                <PillInput
+                  id="reset-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="Email"
+                  value={email}
+                  aria-invalid={status === 'error'}
+                  aria-describedby={status === 'error' ? 'reset-email-error' : undefined}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    if (status === 'error') {
+                      setStatus('idle');
+                      setMessage('');
+                    }
+                  }}
+                />
+              )}
+            </Field>
 
-              {status === 'error' ? (
-                <Message $tone="error" id="reset-email-error" role="alert">
-                  {message}
-                </Message>
-              ) : null}
+            {status === 'error' ? (
+              <Message $tone="error" id="reset-email-error" role="alert">
+                {message}
+              </Message>
+            ) : null}
 
-              <Submit type="submit" disabled={status === 'loading'}>
-                {status === 'loading' ? (
-                  <SpinnerLight>
-                    <Spinner />
-                  </SpinnerLight>
-                ) : (
-                  'Send me a link'
-                )}
-              </Submit>
-            </form>
-          )}
+            <Submit type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? (
+                <SpinnerLight>
+                  <Spinner />
+                </SpinnerLight>
+              ) : (
+                'Send me a link'
+              )}
+            </Submit>
+          </form>
         </FormCard>
       </Pane>
       <AuthCollage />

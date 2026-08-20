@@ -7,7 +7,7 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const isAuthenticated = Boolean(localStorage.getItem('token') ?? sessionStorage.getItem('token'));
-  return isAuthenticated ? children : <Navigate to="/" replace />;
+  return isAuthenticated ? children : <Navigate to="/sign-in" replace />;
 };
 
 export default ProtectedRoute;

@@ -1,19 +1,20 @@
 import { useState, type FormEvent } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { login, readApiErrorMessage } from '../../lib/api/auth';
 import { breakpoints } from '../../theme/breakpoints';
 import { tokens } from '../../theme/tokens';
 import AuthCollage from '../layout/AuthCollage';
 import { AuthFormCard, AuthLogo, AuthPane, AuthShell, AuthTagline } from '../layout/AuthLayout';
+import AuthInput, { AuthPasswordInput } from '../ui/AuthInput';
 import Button from '../ui/Button';
 import Checkbox from '../ui/Checkbox';
-import Input from '../ui/Input';
 import Spinner from '../ui/Spinner';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const rememberKey = 'rememberMe';
+const signinErrorId = 'signin-error';
 
 const Title = styled.h1`
   margin: ${tokens.spacing['gap-40']} 0 ${tokens.spacing['gap-12']};
@@ -53,23 +54,6 @@ const VisuallyHidden = styled.label`
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-`;
-
-const PillInput = styled(Input)`
-  min-height: 52px;
-  padding: ${tokens.spacing['padding-14']} ${tokens.spacing['padding-20']};
-  border-radius: ${tokens.radius['radius-10000']};
-  border: 1px solid var(--color-63);
-  background: var(--color-71);
-  color: var(--secondary);
-
-  &::placeholder {
-    color: var(--color-93);
-  }
-`;
-
-const PasswordInput = styled(PillInput)`
-  padding-right: ${tokens.spacing['padding-50']};
 `;
 
 const Toggle = styled.button`
@@ -114,22 +98,15 @@ const ForgotLink = styled(Link)`
   }
 `;
 
-const Submit = styled(Button)`
+const Submit = styled(Button).attrs({ variant: 'pill' as const })`
   width: 100%;
-  min-height: 52px;
-  border-radius: ${tokens.radius['radius-10000']};
-  background: var(--accent);
   color: var(--color-16);
-  font-family: ${tokens.typography['body-sm-35'].fontFamily}, sans-serif;
-  font-size: ${tokens.typography.body.fontSize};
-  font-weight: ${tokens.typography['body-sm-35'].fontWeight};
-  line-height: ${tokens.typography.body.lineHeight};
 `;
 
-const Message = styled.p<{ $tone: 'error' | 'success' }>`
+const Message = styled.p`
   margin: 0 0 ${tokens.spacing['gap-16']};
   text-align: left;
-  color: ${(props) => (props.$tone === 'error' ? 'var(--color-45)' : 'var(--color-17)')};
+  color: var(--color-45);
   font-family: ${tokens.typography['caption-4'].fontFamily}, sans-serif;
   font-size: ${tokens.typography['caption-4'].fontSize};
   font-weight: ${tokens.typography['caption-4'].fontWeight};
@@ -170,20 +147,27 @@ const persistToken = (token: string, remember: boolean) => {
   }
 };
 
-type Status = 'idle' | 'loading' | 'error' | 'success';
+type Status = 'idle' | 'loading' | 'error';
+type ErrorField = 'email' | 'password' | null;
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(() => localStorage.getItem(rememberKey) === 'true');
   const [status, setStatus] = useState<Status>('idle');
   const [message, setMessage] = useState('');
+  const [errorField, setErrorField] = useState<ErrorField>(null);
+
+  const hasError = status === 'error';
+  const errorDescribedBy = hasError ? signinErrorId : undefined;
 
   const clearError = () => {
     if (status === 'error') {
       setStatus('idle');
       setMessage('');
+      setErrorField(null);
     }
   };
 
@@ -198,31 +182,35 @@ const SignIn = () => {
 
     if (!trimmed) {
       setStatus('error');
+      setErrorField('email');
       setMessage('Enter a valid email address.');
       return;
     }
     if (!emailPattern.test(trimmed)) {
       setStatus('error');
+      setErrorField('email');
       setMessage('Enter a valid email address.');
       return;
     }
     if (!password) {
       setStatus('error');
+      setErrorField('password');
       setMessage('Enter your password.');
       return;
     }
 
     setStatus('loading');
     setMessage('');
+    setErrorField(null);
 
     try {
       const result = await login({ email: trimmed, password });
       const token = result.data.token || result.data.accessToken;
       persistToken(token, rememberMe);
-      setStatus('success');
-      setMessage(result.message);
+      navigate('/dashboard', { replace: true });
     } catch (error: unknown) {
       setStatus('error');
+      setErrorField(null);
       setMessage(readApiErrorMessage(error));
     }
   };
@@ -236,96 +224,88 @@ const SignIn = () => {
           <Title>Welcome To Agentwise</Title>
           <Subtitle>Everything you need to create standout real estate content.</Subtitle>
 
-          {status === 'success' ? (
-            <Message $tone="success" role="status">
-              {message}
-            </Message>
-          ) : (
-            <form onSubmit={onSubmit} noValidate>
-              <Field>
-                <VisuallyHidden htmlFor="signin-email">Email</VisuallyHidden>
-                {status === 'loading' ? (
-                  <Skeleton aria-hidden="true" />
-                ) : (
-                  <PillInput
-                    id="signin-email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="Email"
-                    value={email}
-                    aria-invalid={status === 'error'}
-                    aria-describedby={status === 'error' ? 'signin-error' : undefined}
+          <form onSubmit={(event) => void onSubmit(event)} noValidate>
+            <Field>
+              <VisuallyHidden htmlFor="signin-email">Email</VisuallyHidden>
+              {status === 'loading' ? (
+                <Skeleton aria-hidden="true" />
+              ) : (
+                <AuthInput
+                  id="signin-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="Email"
+                  value={email}
+                  aria-invalid={hasError && errorField === 'email'}
+                  aria-describedby={errorDescribedBy}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    clearError();
+                  }}
+                />
+              )}
+            </Field>
+
+            <Field>
+              <VisuallyHidden htmlFor="signin-password">Password</VisuallyHidden>
+              {status === 'loading' ? (
+                <Skeleton aria-hidden="true" />
+              ) : (
+                <>
+                  <AuthPasswordInput
+                    id="signin-password"
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    autoComplete="current-password"
+                    placeholder="Password"
+                    value={password}
+                    aria-invalid={hasError && errorField === 'password'}
+                    aria-describedby={errorDescribedBy}
                     onChange={(event) => {
-                      setEmail(event.target.value);
+                      setPassword(event.target.value);
                       clearError();
                     }}
                   />
-                )}
-              </Field>
+                  <Toggle
+                    type="button"
+                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    onClick={() => setShowPassword((open) => !open)}
+                  >
+                    {showPassword ? <FiEyeOff aria-hidden="true" /> : <FiEye aria-hidden="true" />}
+                  </Toggle>
+                </>
+              )}
+            </Field>
 
-              <Field>
-                <VisuallyHidden htmlFor="signin-password">Password</VisuallyHidden>
-                {status === 'loading' ? (
-                  <Skeleton aria-hidden="true" />
-                ) : (
-                  <>
-                    <PasswordInput
-                      id="signin-password"
-                      name="password"
-                      type={showPassword ? 'text' : 'password'}
-                      autoComplete="current-password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(event) => {
-                        setPassword(event.target.value);
-                        clearError();
-                      }}
-                    />
-                    <Toggle
-                      type="button"
-                      aria-label={showPassword ? 'Hide password' : 'Show password'}
-                      onClick={() => setShowPassword((open) => !open)}
-                    >
-                      {showPassword ? (
-                        <FiEyeOff aria-hidden="true" />
-                      ) : (
-                        <FiEye aria-hidden="true" />
-                      )}
-                    </Toggle>
-                  </>
-                )}
-              </Field>
+            <Row>
+              <Checkbox
+                id="remember-me"
+                name="remember_me"
+                checked={rememberMe}
+                onChange={onRemember}
+              >
+                Remember me
+              </Checkbox>
+              <ForgotLink to="/forgot-password">Forgot your password?</ForgotLink>
+            </Row>
 
-              <Row>
-                <Checkbox
-                  id="remember-me"
-                  name="remember_me"
-                  checked={rememberMe}
-                  onChange={onRemember}
-                >
-                  Remember me
-                </Checkbox>
-                <ForgotLink to="/forgot-password">Forgot your password?</ForgotLink>
-              </Row>
+            {hasError ? (
+              <Message id={signinErrorId} role="alert">
+                {message}
+              </Message>
+            ) : null}
 
-              {status === 'error' ? (
-                <Message $tone="error" id="signin-error" role="alert">
-                  {message}
-                </Message>
-              ) : null}
-
-              <Submit type="submit" disabled={status === 'loading'}>
-                {status === 'loading' ? (
-                  <SpinnerDark>
-                    <Spinner />
-                  </SpinnerDark>
-                ) : (
-                  'Sign In'
-                )}
-              </Submit>
-            </form>
-          )}
+            <Submit type="submit" disabled={status === 'loading'}>
+              {status === 'loading' ? (
+                <SpinnerDark>
+                  <Spinner />
+                </SpinnerDark>
+              ) : (
+                'Sign In'
+              )}
+            </Submit>
+          </form>
 
           <Divider />
           <Footer>

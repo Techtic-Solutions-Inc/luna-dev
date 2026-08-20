@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { InputHTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
 import { tokens } from '../../theme/tokens';
 
@@ -29,15 +29,27 @@ interface CheckboxProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   children: ReactNode;
+  'aria-invalid'?: InputHTMLAttributes<HTMLInputElement>['aria-invalid'];
+  'aria-describedby'?: string;
 }
 
-const Checkbox = ({ id, name, checked, onChange, children }: CheckboxProps) => (
+const Checkbox = ({
+  id,
+  name,
+  checked,
+  onChange,
+  children,
+  'aria-invalid': ariaInvalid,
+  'aria-describedby': ariaDescribedBy,
+}: CheckboxProps) => (
   <Label htmlFor={id}>
     <Box
       id={id}
       name={name}
       type="checkbox"
       checked={checked}
+      aria-invalid={ariaInvalid}
+      aria-describedby={ariaDescribedBy}
       onChange={(event) => onChange(event.target.checked)}
     />
     {children}
