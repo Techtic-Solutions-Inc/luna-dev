@@ -141,7 +141,7 @@ const ContentSearchBar = () => {
           placeholder="Search content library…"
           aria-label="Search content library"
           disabled
-          className="flex-1 rounded-full border border-color-24 bg-white px-5 py-3 text-sm text-color-20 placeholder:text-color-57 focus:outline-none focus-visible:outline-none focus-visible:border-color-37 disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex-1 rounded-full border border-color-24 bg-white px-5 py-3 text-sm text-color-20 placeholder:text-color-57 focus:[outline:none] focus-visible:[outline:none] focus:border-color-37 focus-visible:border-color-37 disabled:cursor-not-allowed disabled:opacity-60"
         />
         <button
           type="submit"
