@@ -2,11 +2,20 @@ import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SiFacebook, SiInstagram, SiTiktok, SiX } from 'react-icons/si';
 import { FaLinkedinIn } from 'react-icons/fa6';
-import { FiCheck, FiStar } from 'react-icons/fi';
+import { FiCheck, FiStar, FiX } from 'react-icons/fi';
 import LeadCaptureForm from './LeadCaptureForm';
 import ContractGapBanner from '../../ui/ContractGapBanner';
 import { useVisitorHome } from '../../../hooks/useVisitorHome';
 import { PATHS } from '../../../routes/paths';
+import {
+  blogExcerpt,
+  blogPosts,
+  pricingComparison,
+  pricingFeatures,
+  pricingPlanDescription,
+  pricingPlans,
+  type BlogPost,
+} from '../../../content/visitorMarketing';
 
 const galleryItems = [
   { title: 'Luxury listing', tone: 'from-color-56 to-color-63' },
@@ -67,113 +76,6 @@ const navLinks = [
   { label: 'Blog', href: '#blog' },
   { label: 'Pricing', href: '#pricing' },
 ];
-
-const blogExcerpt =
-  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.";
-
-interface BlogPost {
-  id: string;
-  category: string;
-  title: string;
-  featured?: boolean;
-  tone: string;
-  imageLabel?: string;
-}
-
-/** Blog posts and layout from .luna/figma/blog.png */
-const blogPosts: BlogPost[] = [
-  {
-    id: 'blog-1',
-    category: 'Marketing',
-    title: 'Hates To See Me Coming',
-    featured: true,
-    tone: 'from-color-56 to-color-63',
-    imageLabel: 'update one more contract or update your upstairs bathroom',
-  },
-  {
-    id: 'blog-2',
-    category: 'Instagram Growth and Strategy',
-    title: 'Hates To See Me Coming',
-    featured: true,
-    tone: 'from-color-63 to-color-64',
-  },
-  {
-    id: 'blog-3',
-    category: 'Marketing',
-    title: 'Hates To See Me Coming',
-    tone: 'from-color-67 to-color-20',
-  },
-  {
-    id: 'blog-4',
-    category: 'Marketing',
-    title: 'Hates To See Me Coming',
-    tone: 'from-color-68 to-color-56',
-    imageLabel: 'JUST SOLD',
-  },
-  {
-    id: 'blog-5',
-    category: 'Marketing',
-    title: 'Hates To See Me Coming',
-    tone: 'from-color-69 to-color-72',
-  },
-  {
-    id: 'blog-6',
-    category: 'Marketing',
-    title: 'Hates To See Me Coming',
-    tone: 'from-color-56 to-color-20',
-    imageLabel: 'JUST SOLD',
-  },
-  {
-    id: 'blog-7',
-    category: 'Marketing',
-    title: 'Hates To See Me Coming',
-    tone: 'from-color-63 to-color-67',
-  },
-  {
-    id: 'blog-8',
-    category: 'Marketing',
-    title: 'Hates To See Me Coming',
-    tone: 'from-color-64 to-color-68',
-  },
-];
-
-/** Pricing tiers and copy from .luna/figma/pricing-2.png */
-const pricingFeatures = [
-  'Full access to professional-level and personalized content library',
-  'Access to Agentwise AI - Ultimate Mind',
-  '20 AI-generated template design downloads for your business',
-  'Access to training library and marketing round tables',
-];
-
-const pricingPlans = [
-  {
-    id: 'starter',
-    name: 'Starter Plan',
-    monthlyPrice: 29,
-    badge: 'Solo Agent',
-  },
-  {
-    id: 'growth',
-    name: 'Growth Plan',
-    monthlyPrice: 59,
-    badge: 'Consistent Presence',
-  },
-  {
-    id: 'pro',
-    name: 'Pro Plan',
-    monthlyPrice: 99,
-    badge: 'Industry Leader',
-  },
-  {
-    id: 'enterprise',
-    name: 'Enterprise Plan',
-    monthlyPrice: 250,
-    badge: 'Team Advantage',
-  },
-];
-
-const planDescription =
-  'Perfect for the starter agent who needs great content.';
 
 const BlogCard = ({ post }: { post: BlogPost }) => (
   <article>
@@ -617,7 +519,7 @@ const VisitorHomePage = () => {
                     <span className="text-base text-color-93">/Month</span>
                   </p>
                   <p className="mt-3 font-almarai text-sm leading-relaxed text-color-57">
-                    {planDescription}
+                    {pricingPlanDescription}
                   </p>
                   <ul className="mt-6 flex-1 space-y-3 font-almarai text-sm text-color-93">
                     {pricingFeatures.map((feature) => (
@@ -638,6 +540,71 @@ const VisitorHomePage = () => {
                   </Link>
                 </article>
               ))}
+            </div>
+            <div className="mt-16 rounded-2xl border border-white/10 bg-color-20 p-6 sm:p-8">
+              <h3 className="text-center font-garamond text-2xl font-medium sm:text-3xl">
+                {pricingComparison.title}
+              </h3>
+              <div className="mt-8 overflow-x-auto">
+                <table className="w-full min-w-[480px] border-collapse text-left font-almarai text-sm">
+                  <thead>
+                    <tr className="border-b border-white/10 text-color-93">
+                      <th className="py-3 pr-4 font-normal">
+                        Included features
+                      </th>
+                      {pricingComparison.columns.map((col) => (
+                        <th key={col.id} className="py-3 px-4 font-normal">
+                          {col.label}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pricingComparison.rows.map((row) => (
+                      <tr
+                        key={row.feature}
+                        className="border-b border-white/10 text-color-93"
+                      >
+                        <td className="py-3 pr-4 text-white">{row.feature}</td>
+                        <td className="py-3 px-4">
+                          {typeof row.pro === 'boolean' ? (
+                            row.pro ? (
+                              <FiCheck
+                                className="text-accent"
+                                aria-label="Included"
+                              />
+                            ) : (
+                              <FiX
+                                className="text-color-45"
+                                aria-label="Not included"
+                              />
+                            )
+                          ) : (
+                            row.pro
+                          )}
+                        </td>
+                        <td className="py-3 px-4">
+                          {typeof row.closer === 'boolean' ? (
+                            row.closer ? (
+                              <FiCheck
+                                className="text-accent"
+                                aria-label="Included"
+                              />
+                            ) : (
+                              <FiX
+                                className="text-color-45"
+                                aria-label="Not included"
+                              />
+                            )
+                          ) : (
+                            row.closer
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </section>

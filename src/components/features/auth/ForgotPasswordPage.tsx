@@ -7,7 +7,7 @@ import Input from '../../ui/Input';
 import { useForgotPassword } from '../../../hooks/useForgotPassword';
 import { PATHS } from '../../../routes/paths';
 
-/** JAW-9188: dashboard chrome via AppShell — not AuthLayout (see routes/index.tsx). */
+/** JAW-9188: AppShell dashboard chrome (not AuthLayout) — see routes/layoutConfig.ts */
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ForgotPasswordPage = () => {

@@ -11,6 +11,7 @@ import DashboardPlaceholder from '../components/features/DashboardPlaceholder';
 import Home from '../components/features/Home';
 import NotFound from '../components/features/NotFound';
 import { PATHS } from './paths';
+import { ROUTE_LAYOUT } from './layoutConfig';
 
 const AppRouter = () => (
   <BrowserRouter>
@@ -32,13 +33,19 @@ const AppRouter = () => (
           </AuthLayout>
         }
       />
-      {/* JAW-9188: forgot-password uses AppShell dashboard chrome, not AuthLayout */}
+      {/* JAW-9188: dashboard chrome, not AuthLayout — see layoutConfig.ts */}
       <Route
         path={PATHS.FORGOT_PASSWORD}
         element={
-          <AppShell>
-            <ForgotPasswordPage />
-          </AppShell>
+          ROUTE_LAYOUT.forgotPassword === 'AppShell' ? (
+            <AppShell>
+              <ForgotPasswordPage />
+            </AppShell>
+          ) : (
+            <AuthLayout>
+              <ForgotPasswordPage />
+            </AuthLayout>
+          )
         }
       />
       <Route
