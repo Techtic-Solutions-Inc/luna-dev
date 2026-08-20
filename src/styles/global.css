@@ -1,0 +1,51 @@
+@import './fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply type-body bg-color-16 text-white antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Visible, on-brand focus ring for every keyboard-reachable control. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-color-16;
+  }
+
+  ::selection {
+    @apply bg-color-26 text-white;
+  }
+}
+
+@layer components {
+  /* Full-bleed backdrop shared by the marketing and error screens. */
+  .surface-aurora {
+    @apply relative isolate overflow-hidden bg-color-16 bg-aurora-glow;
+  }
+
+  .surface-aurora::before {
+    @apply pointer-events-none absolute inset-0 -z-10 bg-grid-lines bg-grid;
+    content: '';
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

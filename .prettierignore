@@ -1,0 +1,7 @@
+dist
+build
+node_modules
+coverage
+.luna
+package-lock.json
+*.tsbuildinfo
