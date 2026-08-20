@@ -71,7 +71,7 @@ const SignUpPage = () => {
           <br />
           Specifically For Agents
         </h1>
-        <p className="mt-3 font-almarai text-sm text-color-57">
+        <p className="mt-3 font-almarai text-base leading-[17.856px] text-color-57">
           Create your account today
         </p>
       </div>
@@ -141,11 +141,7 @@ const SignUpPage = () => {
           }}
           error={clientErrors.terms_accepted ?? fieldErrors.terms_accepted}
           label={
-            <>
-              I have read and agree to the{' '}
-              <span className="underline">Terms of Use</span> and{' '}
-              <span className="underline">Privacy Policy</span>.
-            </>
+            <>I have read and agree to the Terms of Use and Privacy Policy.</>
           }
         />
 

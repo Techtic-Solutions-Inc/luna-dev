@@ -26,7 +26,10 @@ const Checkbox = ({
         className="mt-1 h-4 w-4 shrink-0 accent-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-color-37 disabled:cursor-not-allowed disabled:opacity-60"
         aria-invalid={Boolean(error)}
       />
-      <label htmlFor={id} className="text-sm leading-snug text-color-57">
+      <label
+        htmlFor={id}
+        className="font-public text-xs leading-normal text-color-57"
+      >
         {label}
       </label>
     </div>

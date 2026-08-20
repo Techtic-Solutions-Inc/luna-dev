@@ -7,6 +7,7 @@ import Input from '../../ui/Input';
 import { useForgotPassword } from '../../../hooks/useForgotPassword';
 import { PATHS } from '../../../routes/paths';
 
+/** JAW-9188: dashboard chrome via AppShell — not AuthLayout (see routes/index.tsx). */
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const ForgotPasswordPage = () => {
@@ -39,7 +40,7 @@ const ForgotPasswordPage = () => {
         <h1 className="font-garamond text-2xl font-semibold leading-[31.32px] text-white">
           Reset Password
         </h1>
-        <p className="mt-3 font-almarai text-sm leading-relaxed text-color-93">
+        <p className="mt-3 font-almarai text-base leading-[17.856px] text-color-93">
           Enter the email address you used to create your account and we&apos;ll
           send you a link to reset your password.
         </p>

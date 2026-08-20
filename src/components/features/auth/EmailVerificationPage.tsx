@@ -61,7 +61,7 @@ const EmailVerificationPage = () => {
           <FiMail className="text-2xl text-white" aria-hidden="true" />
         </div>
 
-        <h1 className="font-garamond text-[1.75rem] font-medium leading-tight sm:text-[2rem]">
+        <h1 className="font-garamond text-[1.75rem] font-semibold leading-[31.32px] sm:text-[2rem]">
           Verify Your Email Address
         </h1>
         <p className="mx-auto mt-3 max-w-md font-public text-sm leading-relaxed text-color-57">
@@ -106,11 +106,7 @@ const EmailVerificationPage = () => {
               clearClientError('privacy');
             }}
             error={clientErrors.privacy}
-            label={
-              <>
-                I accept the <span className="underline">Privacy Policy</span>
-              </>
-            }
+            label={<>I accept the Privacy Policy</>}
           />
 
           <Checkbox
@@ -121,11 +117,7 @@ const EmailVerificationPage = () => {
               clearClientError('terms');
             }}
             error={clientErrors.terms}
-            label={
-              <>
-                I accept the <span className="underline">Terms of Service</span>
-              </>
-            }
+            label={<>I accept the Terms of Service</>}
           />
 
           <Button type="submit">Verify Email Address</Button>

@@ -111,11 +111,7 @@ const LeadCaptureForm = () => {
           clearClientError('privacy_accepted');
         }}
         error={clientErrors.privacy_accepted ?? fieldErrors.privacy_accepted}
-        label={
-          <>
-            I accept the <span className="underline">Privacy Policy</span>
-          </>
-        }
+        label={<>I accept the Privacy Policy</>}
       />
 
       <Checkbox
@@ -126,11 +122,7 @@ const LeadCaptureForm = () => {
           clearClientError('terms_accepted');
         }}
         error={clientErrors.terms_accepted ?? fieldErrors.terms_accepted}
-        label={
-          <>
-            I accept the <span className="underline">Terms of Service</span>
-          </>
-        }
+        label={<>I accept the Terms of Service</>}
       />
 
       <Button type="submit" className="mt-2 !w-full sm:!w-auto">
