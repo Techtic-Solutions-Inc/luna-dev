@@ -122,7 +122,7 @@ const HomeFooter = () => (
   <Footer>
     <SectionContainer>
       <FooterTop>
-        <Logo to="/home" aria-label="Agentwise home">
+        <Logo to="/" aria-label="Agentwise home">
           Agentwise
         </Logo>
         <SocialRow aria-label="Social media links">
@@ -142,11 +142,11 @@ const HomeFooter = () => (
       </FooterTop>
       <FooterMiddle>
         <NavLinks aria-label="Footer navigation">
-          <FooterLink to="/home">About</FooterLink>
-          <FooterLink to="/home">Content</FooterLink>
-          <FooterLink to="/home">Pricing</FooterLink>
-          <FooterLink to="/home">Blog</FooterLink>
-          <FooterLink to="/home">Contact Us</FooterLink>
+          <FooterLink to="/">About</FooterLink>
+          <FooterLink to="/">Content</FooterLink>
+          <FooterLink to="/">Pricing</FooterLink>
+          <FooterLink to="/">Blog</FooterLink>
+          <FooterLink to="/">Contact Us</FooterLink>
         </NavLinks>
         <FooterEmail href="mailto:hello@agentwisemarketing.com">
           hello@agentwisemarketing.com

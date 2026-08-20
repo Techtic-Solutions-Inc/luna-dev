@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest --passWithNoTests",
-    "typecheck": "tsc -b --noEmit"
+    "typecheck": "tsc -b --noEmit",
+    "mock-api": "node scripts/mock-api.mjs"
   },
   "dependencies": {
     "axios": "^1.19.0",

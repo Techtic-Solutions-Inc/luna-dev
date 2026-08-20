@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
-type ButtonVariant = 'primary' | 'outline' | 'dark' | 'ghost';
+type ButtonVariant = 'primary' | 'outline' | 'outline-light' | 'dark' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -48,6 +48,17 @@ const variantStyles = {
 
     &:hover:not(:disabled) {
       background-color: ${({ theme }) => theme.colors['color-26']};
+    }
+  `,
+  'outline-light': css`
+    background-color: transparent;
+    color: ${({ theme }) => theme.colors.secondary};
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
+
+    &:hover:not(:disabled) {
+      background-color: ${({ theme }) => theme.colors['color-22']};
+      border-color: ${({ theme }) => theme.colors.accent};
+      color: ${({ theme }) => theme.colors.accent};
     }
   `,
   dark: css`

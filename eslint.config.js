@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: ['dist/**', 'build/**', 'node_modules/**', '.luna/**', 'jest.config.cjs', '.eslintrc.cjs'],
+    ignores: ['dist/**', 'build/**', 'node_modules/**', '.luna/**', 'jest.config.cjs', '.eslintrc.cjs', 'scripts/**'],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

@@ -6,8 +6,17 @@ import { SectionContainer, SerifAccent } from './homeStyles';
 const HeroSection = styled.section`
   position: relative;
   overflow: hidden;
-  padding: ${({ theme }) => `${theme.spacing['padding-60']} 0`};
+  padding: ${({ theme }) => `${theme.spacing['padding-60']} 0 ${theme.spacing['padding-40']}`};
   background-color: ${({ theme }) => theme.colors['color-16']};
+  background-image:
+    radial-gradient(circle at 85% 17%, ${({ theme }) => theme.colors['color-68']}66 0%, transparent 25%),
+    radial-gradient(circle at 2% 95%, ${({ theme }) => theme.colors['color-67']}66 0%, transparent 36%),
+    linear-gradient(
+      110deg,
+      ${({ theme }) => theme.colors['color-43']} 0%,
+      ${({ theme }) => theme.colors['color-33']} 52%,
+      ${({ theme }) => theme.colors['color-16']} 100%
+    );
 
   &::before {
     content: '';
@@ -22,34 +31,34 @@ const HeroSection = styled.section`
   }
 `;
 
-const HeroGrid = styled(SectionContainer)`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: ${({ theme }) => theme.spacing['gap-48']};
+const HeroInner = styled(SectionContainer)`
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-
-  @media (min-width: ${({ theme }) => theme.breakpoints.desktop}) {
-    grid-template-columns: 1fr 1fr;
-    gap: ${({ theme }) => theme.spacing['gap-60']};
-  }
+  text-align: center;
+  gap: ${({ theme }) => theme.spacing['gap-40']};
 `;
 
 const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: ${({ theme }) => theme.spacing['gap-24']};
+  max-width: 820px;
 `;
 
 const HeroTitle = styled.h1`
   font-family: ${({ theme }) => theme.typography['heading-xl-45'].fontFamily};
   font-size: clamp(36px, 5vw, ${({ theme }) => theme.typography['heading-xl-45'].fontSize});
   font-weight: ${({ theme }) => theme.typography['heading-xl-45'].fontWeight};
-  line-height: 1.15;
+  line-height: 1.12;
   color: ${({ theme }) => theme.colors.secondary};
 `;
 
 const HeroSubtitle = styled.p`
-  max-width: 480px;
+  max-width: 560px;
   font-family: ${({ theme }) => theme.typography['body-21'].fontFamily};
   font-size: ${({ theme }) => theme.typography['body-21'].fontSize};
   line-height: ${({ theme }) => theme.typography['body-55'].lineHeight};
@@ -59,6 +68,7 @@ const HeroSubtitle = styled.p`
 const SocialRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: ${({ theme }) => theme.spacing['gap-12']};
 `;
 
@@ -81,6 +91,8 @@ const SocialLink = styled.a`
 
 const HeroVisual = styled.div`
   position: relative;
+  width: 100%;
+  max-width: 720px;
   display: flex;
   justify-content: center;
 `;
@@ -88,10 +100,13 @@ const HeroVisual = styled.div`
 const DashboardMock = styled.div`
   position: relative;
   width: 100%;
-  max-width: 520px;
-  padding: ${({ theme }) => theme.spacing['padding-16']};
+  padding: ${({ theme }) => theme.spacing['padding-24']};
   border-radius: ${({ theme }) => theme.radius['radius-16']};
-  background: linear-gradient(145deg, ${({ theme }) => theme.colors['color-41']} 0%, ${({ theme }) => theme.colors['color-33']} 100%);
+  background: linear-gradient(
+    145deg,
+    ${({ theme }) => theme.colors['color-41']} 0%,
+    ${({ theme }) => theme.colors['color-33']} 100%
+  );
   box-shadow: ${({ theme }) => theme.shadows['drop-shadow-20']};
 `;
 
@@ -107,6 +122,7 @@ const MockGreeting = styled.div`
   font-family: ${({ theme }) => theme.typography['heading-md-10'].fontFamily};
   font-size: ${({ theme }) => theme.typography['heading-md-10'].fontSize};
   color: ${({ theme }) => theme.colors.secondary};
+  text-align: left;
 `;
 
 const MockSubGreeting = styled.span`
@@ -158,9 +174,17 @@ const UltimateMindBadge = styled(FloatingCard)`
   font-size: ${({ theme }) => theme.typography['body-sm-2'].fontSize};
 `;
 
+const AccentLabel = styled.span`
+  display: block;
+  margin-top: ${({ theme }) => theme.spacing['gap-16']};
+  font-family: ${({ theme }) => theme.typography['caption-4'].fontFamily};
+  font-size: ${({ theme }) => theme.typography['caption-4'].fontSize};
+  color: ${({ theme }) => theme.colors.accent};
+`;
+
 const HomeHero = () => (
   <HeroSection aria-labelledby="hero-heading">
-    <HeroGrid>
+    <HeroInner>
       <HeroContent>
         <HeroTitle id="hero-heading">
           Stunning Real Estate Marketing,{' '}
@@ -184,12 +208,8 @@ const HomeHero = () => (
             <FaLinkedinIn size={16} aria-hidden="true" />
           </SocialLink>
         </SocialRow>
-        <div>
-          <Button variant="primary" size="lg">
-            Get Started
-          </Button>
-        </div>
       </HeroContent>
+
       <HeroVisual>
         <DashboardMock aria-hidden="true">
           <MockHeader>
@@ -208,14 +228,19 @@ const HomeHero = () => (
             <MockCard />
           </MockGrid>
         </DashboardMock>
-        <FloatingCard $top="-12px" $right="-20px">
+        <FloatingCard $top="-12px" $right="-12px">
           YOU POSTED 15 TIMES THIS WEEK
         </FloatingCard>
-        <UltimateMindBadge $bottom="-16px" $left="-24px">
+        <UltimateMindBadge $bottom="-16px" $left="-12px">
           Agentwise Ultimate Mind
         </UltimateMindBadge>
       </HeroVisual>
-    </HeroGrid>
+
+      <AccentLabel>— with Agentwise, your AI-powered marketing assistant —</AccentLabel>
+      <Button variant="primary" size="lg">
+        Get Started
+      </Button>
+    </HeroInner>
   </HeroSection>
 );
 

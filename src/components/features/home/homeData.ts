@@ -1,3 +1,43 @@
+import type { HomeSearchItem } from '../../../types/visitorHome';
+
+export const GALLERY_FALLBACK_ITEMS: HomeSearchItem[] = [
+  {
+    id: 'fallback-1',
+    title: 'Modern home exterior',
+    image_url:
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=85',
+    description: 'Just listed marketing template',
+  },
+  {
+    id: 'fallback-2',
+    title: 'Luxury kitchen',
+    image_url:
+      'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=700&q=85',
+    description: 'Dream home showcase',
+  },
+  {
+    id: 'fallback-3',
+    title: 'Living room staging',
+    image_url:
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=700&q=85',
+    description: 'Interior design post',
+  },
+  {
+    id: 'fallback-4',
+    title: 'Poolside retreat',
+    image_url:
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=85',
+    description: 'Luxury listing highlight',
+  },
+  {
+    id: 'fallback-5',
+    title: 'Urban loft',
+    image_url:
+      'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=700&q=85',
+    description: 'City living feature',
+  },
+];
+
 export const TESTIMONIALS = [
   {
     id: 't1',

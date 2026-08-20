@@ -291,7 +291,7 @@ const HomeContactForm = () => {
               />
             </CheckboxGroup>
             <Button type="submit" variant="dark" size="lg" fullWidth isLoading={isSubmitting}>
-              Send us a message
+              Join the waitlist now
             </Button>
           </Form>
         </FormSide>
