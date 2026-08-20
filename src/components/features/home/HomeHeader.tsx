@@ -9,8 +9,8 @@ const HeaderBar = styled.header`
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: ${({ theme }) => theme.colors['color-16']};
-  border-bottom: 1px solid ${({ theme }) => theme.colors['color-41']};
+  background-color: transparent;
+  border-bottom: none;
 `;
 
 const HeaderInner = styled(SectionContainer)`
@@ -141,6 +141,7 @@ const HomeHeader = () => {
   const hamburgerRef = useRef<HTMLButtonElement>(null);
   const mobileNavRef = useRef<HTMLDivElement>(null);
   const mobileNavCloseRef = useRef<HTMLButtonElement>(null);
+  const wasMobileNavOpenRef = useRef(false);
 
   const closeMobileNav = useCallback(() => {
     setMobileNavOpen(false);
@@ -153,10 +154,14 @@ const HomeHeader = () => {
   useEffect(() => {
     if (!mobileNavOpen) {
       document.body.style.overflow = '';
-      hamburgerRef.current?.focus();
+      if (wasMobileNavOpenRef.current) {
+        hamburgerRef.current?.focus();
+        wasMobileNavOpenRef.current = false;
+      }
       return;
     }
 
+    wasMobileNavOpenRef.current = true;
     document.body.style.overflow = 'hidden';
     mobileNavCloseRef.current?.focus();
 

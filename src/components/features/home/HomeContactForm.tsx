@@ -10,6 +10,7 @@ import {
 import Button from '../../ui/Button';
 import Checkbox from '../../ui/Checkbox';
 import InputField from '../../ui/InputField';
+import TextareaField from '../../ui/TextareaField';
 import { hasFormErrors, validateContactForm } from './validateContactForm';
 import { SerifAccent } from './homeStyles';
 
@@ -134,6 +135,9 @@ const INITIAL_VALUES: ContactFormValues = {
   lastName: '',
   email: '',
   phone: '',
+  teamSize: '',
+  websiteLink: '',
+  message: '',
   privacyPolicy: false,
   termsOfService: false,
 };
@@ -173,6 +177,9 @@ const HomeContactForm = () => {
         last_name: values.lastName.trim(),
         email: values.email.trim(),
         phone: values.phone.trim(),
+        team_size: values.teamSize.trim() || undefined,
+        website_link: values.websiteLink.trim() || undefined,
+        message: values.message.trim() || undefined,
       });
 
       await acceptHomeTerms({
@@ -260,6 +267,30 @@ const HomeContactForm = () => {
               isLoading={fieldsLoading}
               autoComplete="tel"
             />
+            <InputField
+              label="How big is your team / business?"
+              name="teamSize"
+              value={values.teamSize}
+              onChange={(e) => handleChange('teamSize', e.target.value)}
+              error={errors.teamSize}
+              isLoading={fieldsLoading}
+            />
+            <InputField
+              label="What is your website link / social media account?"
+              name="websiteLink"
+              value={values.websiteLink}
+              onChange={(e) => handleChange('websiteLink', e.target.value)}
+              error={errors.websiteLink}
+              isLoading={fieldsLoading}
+            />
+            <TextareaField
+              label="Your Message"
+              name="message"
+              value={values.message}
+              onChange={(e) => handleChange('message', e.target.value)}
+              error={errors.message}
+              isLoading={fieldsLoading}
+            />
             <CheckboxGroup>
               <Checkbox
                 name="privacyPolicy"
@@ -291,7 +322,7 @@ const HomeContactForm = () => {
               />
             </CheckboxGroup>
             <Button type="submit" variant="dark" size="lg" fullWidth isLoading={isSubmitting}>
-              Join the waitlist now
+              Send us a message
             </Button>
           </Form>
         </FormSide>

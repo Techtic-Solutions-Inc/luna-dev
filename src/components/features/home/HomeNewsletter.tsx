@@ -39,7 +39,7 @@ const HomeNewsletter = () => (
   <Banner aria-label="Newsletter signup banner">
     <BannerInner>
       <BannerText>
-        Join <strong>10,000+</strong> other agents on the waitlist to get early access
+        Join <strong>15,000+</strong> other agents on the newsletter in just one click
       </BannerText>
       <Button variant="primary" size="sm">
         Get Started

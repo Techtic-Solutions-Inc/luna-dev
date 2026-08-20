@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok } from 'react-icons/fa6';
-import Button from '../../ui/Button';
 import { SectionContainer, SerifAccent } from './homeStyles';
 
 const HeroSection = styled.section`
   position: relative;
   overflow: hidden;
-  padding: ${({ theme }) => `${theme.spacing['padding-60']} 0 ${theme.spacing['padding-40']}`};
+  padding: ${({ theme }) => `${theme.spacing['padding-40']} 0 ${theme.spacing['padding-40']}`};
+  margin-top: -72px;
+  padding-top: calc(72px + ${({ theme }) => theme.spacing['padding-60']});
   background-color: ${({ theme }) => theme.colors['color-16']};
   background-image:
     radial-gradient(circle at 85% 17%, ${({ theme }) => theme.colors['color-68']}66 0%, transparent 25%),
@@ -174,14 +175,6 @@ const UltimateMindBadge = styled(FloatingCard)`
   font-size: ${({ theme }) => theme.typography['body-sm-2'].fontSize};
 `;
 
-const AccentLabel = styled.span`
-  display: block;
-  margin-top: ${({ theme }) => theme.spacing['gap-16']};
-  font-family: ${({ theme }) => theme.typography['caption-4'].fontFamily};
-  font-size: ${({ theme }) => theme.typography['caption-4'].fontSize};
-  color: ${({ theme }) => theme.colors.accent};
-`;
-
 const HomeHero = () => (
   <HeroSection aria-labelledby="hero-heading">
     <HeroInner>
@@ -235,11 +228,6 @@ const HomeHero = () => (
           Agentwise Ultimate Mind
         </UltimateMindBadge>
       </HeroVisual>
-
-      <AccentLabel>— with Agentwise, your AI-powered marketing assistant —</AccentLabel>
-      <Button variant="primary" size="lg">
-        Get Started
-      </Button>
     </HeroInner>
   </HeroSection>
 );
