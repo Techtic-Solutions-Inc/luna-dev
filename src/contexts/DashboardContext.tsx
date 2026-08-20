@@ -1,27 +1,39 @@
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import { isAxiosError } from 'axios';
 import { getContentCalendar, getDashboard } from '../lib/api/dashboard';
 import type { ApiErrorEnvelope, ContentCalendarEntry, DashboardOverview } from '../types/api';
+import { DashboardContext } from './dashboardContext';
 
-interface DashboardContextValue {
-  data: DashboardOverview | null;
-  calendarEntries: ContentCalendarEntry[];
-  loading: boolean;
-  error: string | null;
-  refetch: () => Promise<void>;
-}
+const parseDashboardError = (
+  err: unknown,
+): { message: string; fieldErrors: Record<string, string> } => {
+  if (isAxiosError<ApiErrorEnvelope>(err) && err.response?.data) {
+    const { message, errors } = err.response.data;
+    const fieldErrors: Record<string, string> = {};
 
-export const DashboardContext = createContext<DashboardContextValue | null>(null);
+    if (errors) {
+      Object.entries(errors).forEach(([key, messages]) => {
+        if (messages.length > 0) {
+          fieldErrors[key] = messages[0];
+        }
+      });
+    }
 
-const extractErrorMessage = (err: unknown): string => {
-  if (isAxiosError<ApiErrorEnvelope>(err)) {
-    return err.response?.data?.message ?? err.message;
+    return {
+      message: message ?? err.message,
+      fieldErrors,
+    };
   }
+
   if (err instanceof Error) {
-    return err.message;
+    return { message: err.message, fieldErrors: {} };
   }
-  return 'Unable to load dashboard data. Please try again.';
+
+  return {
+    message: 'Unable to load dashboard data. Please try again.',
+    fieldErrors: {},
+  };
 };
 
 export const DashboardProvider = ({ children }: { children: ReactNode }) => {
@@ -29,11 +41,13 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
   const [calendarEntries, setCalendarEntries] = useState<ContentCalendarEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const refetch = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
+      setFieldErrors({});
 
       const [dashboardResult, calendarResult] = await Promise.allSettled([
         getDashboard(),
@@ -56,7 +70,9 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
         );
       }
     } catch (err) {
-      setError(extractErrorMessage(err));
+      const parsed = parseDashboardError(err);
+      setError(parsed.message);
+      setFieldErrors(parsed.fieldErrors);
     } finally {
       setLoading(false);
     }
@@ -67,8 +83,8 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
   }, [refetch]);
 
   const value = useMemo(
-    () => ({ data, calendarEntries, loading, error, refetch }),
-    [data, calendarEntries, loading, error, refetch],
+    () => ({ data, calendarEntries, loading, error, fieldErrors, refetch }),
+    [data, calendarEntries, loading, error, fieldErrors, refetch],
   );
 
   return <DashboardContext.Provider value={value}>{children}</DashboardContext.Provider>;

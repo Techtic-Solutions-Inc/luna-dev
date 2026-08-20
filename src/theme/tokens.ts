@@ -1003,6 +1003,54 @@ export const shadows = {
   'drop-shadow-40': '0 8px 16px #919eab28',
 } as const;
 
+export const fontFamilies = {
+  almarai: "'Almarai', sans-serif",
+  garamond: "'EB Garamond', serif",
+  publicSans: "'Public Sans', sans-serif",
+  inter: "'Inter', sans-serif",
+  kalam: "'Kalam', cursive",
+  spaceGrotesk: "'Space Grotesk', sans-serif",
+} as const;
+
+const parseFontName = (fontFamily: string): string =>
+  fontFamily.match(/^'([^']+)'/)?.[1] ?? fontFamily.split(',')[0].trim().replace(/^'|'$/g, '');
+
+const buildGoogleFontsHref = (): string => {
+  const familyWeights = new Map<string, Set<number>>();
+
+  for (const { fontFamily, fontWeight } of Object.values(typography)) {
+    const name = parseFontName(fontFamily);
+    if (!familyWeights.has(name)) {
+      familyWeights.set(name, new Set());
+    }
+    familyWeights.get(name)!.add(fontWeight);
+  }
+
+  const componentWeights: Record<string, number[]> = {
+    Almarai: [700, 800],
+    'EB Garamond': [500, 600, 700],
+    'Public Sans': [600, 700],
+  };
+
+  for (const [name, weights] of Object.entries(componentWeights)) {
+    if (!familyWeights.has(name)) {
+      familyWeights.set(name, new Set());
+    }
+    weights.forEach((weight) => familyWeights.get(name)!.add(weight));
+  }
+
+  const families = [...familyWeights.entries()]
+    .map(([name, weights]) => {
+      const sorted = [...weights].sort((a, b) => a - b);
+      return `family=${name.replace(/ /g, '+')}:wght@${sorted.join(';')}`;
+    })
+    .join('&');
+
+  return `https://fonts.googleapis.com/css2?${families}&display=swap`;
+};
+
+export const googleFontsHref = buildGoogleFontsHref();
+
 export const legacyTypography = {
   body: 'Almarai, 16px, 400',
   caption: 'Public Sans, 12px, 400',

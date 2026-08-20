@@ -7,7 +7,7 @@ import RecentActivityFeed from './dashboard/RecentActivityFeed';
 import ToolsSection from './dashboard/ToolsSection';
 
 const Dashboard = () => {
-  const { data, calendarEntries, loading, error, refetch } = useDashboard();
+  const { data, calendarEntries, loading, error, fieldErrors, refetch } = useDashboard();
 
   if (loading) {
     return (
@@ -23,9 +23,18 @@ const Dashboard = () => {
         className="flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center"
         role="alert"
       >
-        <p className="font-almarai text-base text-[var(--color-57)]">
+        <p className="font-almarai text-base text-text-secondary">
           {error ?? 'Unable to load dashboard data. Please try again later.'}
         </p>
+        {Object.keys(fieldErrors).length > 0 && (
+          <ul className="max-w-md space-y-1 text-left font-almarai text-sm text-border">
+            {Object.entries(fieldErrors).map(([field, message]) => (
+              <li key={field}>
+                <span className="font-bold capitalize">{field.replace(/_/g, ' ')}:</span> {message}
+              </li>
+            ))}
+          </ul>
+        )}
         <button
           type="button"
           onClick={() => void refetch()}

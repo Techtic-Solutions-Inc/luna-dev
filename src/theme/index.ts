@@ -6,6 +6,8 @@ export {
   spacing,
   radius,
   shadows,
+  fontFamilies,
+  googleFontsHref,
   legacyTypography,
   legacyRadius,
   legacyShadows,

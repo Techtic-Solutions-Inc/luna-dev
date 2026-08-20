@@ -1,8 +1,36 @@
 import { createGlobalStyle, ThemeProvider as StyledThemeProvider } from 'styled-components';
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { appTheme } from './appTheme';
 import { breakpoints } from './breakpoints';
-import { colors, radius, shadows, typography } from './tokens';
+import { colors, googleFontsHref, radius, shadows, typography } from './tokens';
+
+const FontLoader = () => {
+  useEffect(() => {
+    const linkId = 'design-token-fonts';
+    if (document.getElementById(linkId)) {
+      return;
+    }
+
+    const preconnectGoogle = document.createElement('link');
+    preconnectGoogle.rel = 'preconnect';
+    preconnectGoogle.href = 'https://fonts.googleapis.com';
+    document.head.appendChild(preconnectGoogle);
+
+    const preconnectGstatic = document.createElement('link');
+    preconnectGstatic.rel = 'preconnect';
+    preconnectGstatic.href = 'https://fonts.gstatic.com';
+    preconnectGstatic.crossOrigin = '';
+    document.head.appendChild(preconnectGstatic);
+
+    const link = document.createElement('link');
+    link.id = linkId;
+    link.rel = 'stylesheet';
+    link.href = googleFontsHref;
+    document.head.appendChild(link);
+  }, []);
+
+  return null;
+};
 
 const colorVarEntries = Object.entries(colors).map(
   ([key, value]) => [`--${key}`, value] as [string, string],
@@ -80,6 +108,7 @@ interface ThemeProps {
 
 export const Theme = ({ children }: ThemeProps) => (
   <StyledThemeProvider theme={appTheme}>
+    <FontLoader />
     <GlobalStyle />
     {children}
   </StyledThemeProvider>
