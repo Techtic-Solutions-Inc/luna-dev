@@ -77,9 +77,9 @@ export const defaultGallery: GalleryCard[] = [
 ];
 
 export const homeNavItems = [
-  { label: 'About', href: '#about' },
+  { label: 'Apply', href: '#contact' },
   { label: 'Content', href: '#content' },
-  { label: 'Shop', href: '#shop' },
+  { label: 'Blog', href: '#about' },
   { label: 'Pricing', href: '#pricing' },
 ] as const;
 

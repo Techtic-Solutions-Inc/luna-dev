@@ -1,6 +1,6 @@
 import { type FormEvent, useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa6';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 import { useAuth } from '../../hooks/useAuth';
 import { getApiErrorMessage } from '../../lib/api/client';
@@ -35,6 +35,7 @@ const collage = [
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function SignIn() {
+  const navigate = useNavigate();
   const { isAuthenticated, login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -61,6 +62,7 @@ export default function SignIn() {
     setLoading(true);
     try {
       await login({ email: email.trim(), password }, remember);
+      void navigate('/dashboard', { replace: true });
     } catch (error) {
       setFormError(getApiErrorMessage(error));
     } finally {

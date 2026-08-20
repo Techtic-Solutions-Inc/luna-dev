@@ -7,6 +7,7 @@ export interface StoredUser {
 }
 
 const TOKEN_KEY = 'token';
+const ACCESS_TOKEN_KEY = 'accessToken';
 const USER_KEY = 'user';
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -17,22 +18,37 @@ function asString(value: unknown): string | undefined {
   return typeof value === 'string' && value.trim() !== '' ? value : undefined;
 }
 
+function readTokenFromStorage(storage: Storage): string | null {
+  return storage.getItem(TOKEN_KEY) ?? storage.getItem(ACCESS_TOKEN_KEY);
+}
+
 export function getToken(): string | null {
-  return localStorage.getItem(TOKEN_KEY) ?? sessionStorage.getItem(TOKEN_KEY);
+  return readTokenFromStorage(localStorage) ?? readTokenFromStorage(sessionStorage);
+}
+
+export function formatBearerToken(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+  const token = trimmed.startsWith('Bearer ') ? trimmed.slice(7).trim() : trimmed;
+  return token ? `Bearer ${token}` : null;
 }
 
 export function persistSession(token: string, user: StoredUser, remember: boolean): void {
   clearSession();
+  const normalized = token.startsWith('Bearer ') ? token.slice(7).trim() : token.trim();
   const store = remember ? localStorage : sessionStorage;
-  store.setItem(TOKEN_KEY, token);
+  store.setItem(TOKEN_KEY, normalized);
+  store.setItem(ACCESS_TOKEN_KEY, normalized);
   store.setItem(USER_KEY, JSON.stringify(user));
 }
 
 export function clearSession(): void {
-  localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem(USER_KEY);
-  sessionStorage.removeItem(TOKEN_KEY);
-  sessionStorage.removeItem(USER_KEY);
+  for (const storage of [localStorage, sessionStorage]) {
+    storage.removeItem(TOKEN_KEY);
+    storage.removeItem(ACCESS_TOKEN_KEY);
+    storage.removeItem(USER_KEY);
+  }
 }
 
 export function readStoredUser(): StoredUser | null {
@@ -56,11 +72,11 @@ export function readStoredUser(): StoredUser | null {
 
 export function writeStoredUser(user: StoredUser): void {
   const serialized = JSON.stringify(user);
-  if (localStorage.getItem(TOKEN_KEY)) {
+  if (localStorage.getItem(TOKEN_KEY) || localStorage.getItem(ACCESS_TOKEN_KEY)) {
     localStorage.setItem(USER_KEY, serialized);
     return;
   }
-  if (sessionStorage.getItem(TOKEN_KEY)) {
+  if (sessionStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(ACCESS_TOKEN_KEY)) {
     sessionStorage.setItem(USER_KEY, serialized);
   }
 }

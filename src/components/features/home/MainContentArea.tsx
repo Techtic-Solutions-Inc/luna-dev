@@ -1,4 +1,4 @@
-import { type ComponentType, useState } from 'react';
+import { type ComponentType, useCallback, useEffect, useRef, useState } from 'react';
 import {
   FaFacebookF,
   FaGoogle,
@@ -154,6 +154,60 @@ export default function MainContentArea() {
   const { query, setQuery, items, loading, error, search } = useHomeSearch();
   const [menuOpen, setMenuOpen] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const menuTriggerRef = useRef<HTMLButtonElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
+  const menuCloseRef = useRef<HTMLButtonElement>(null);
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    menuTriggerRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    menuCloseRef.current?.focus();
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeMenu();
+        return;
+      }
+
+      if (event.key !== 'Tab' || !menuPanelRef.current) return;
+
+      const focusable = menuPanelRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [menuOpen, closeMenu]);
 
   const galleryCards =
     items.length > 0 ? galleryFromSearch(items) : hasSearched ? [] : defaultGallery;
@@ -225,48 +279,74 @@ export default function MainContentArea() {
               </Link>
             </div>
             <button
+              ref={menuTriggerRef}
               type="button"
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-secondary text-secondary md:hidden"
               aria-label={menuOpen ? 'Close navigation' : 'Open navigation'}
               aria-expanded={menuOpen}
+              aria-controls="mobile-nav-dialog"
               onClick={() => setMenuOpen((open) => !open)}
             >
               <span aria-hidden="true">{menuOpen ? '✕' : '☰'}</span>
             </button>
           </div>
           {menuOpen ? (
-            <nav
-              aria-label="Mobile navigation"
-              className="space-y-3 border-t border-[var(--color-41)] px-6 py-4 md:hidden"
-            >
-              {homeNavItems.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="block font-almarai text-sm text-secondary"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
+            <>
               <button
                 type="button"
-                className="block font-almarai text-sm text-secondary"
-                onClick={() => {
-                  setMenuOpen(false);
-                  scrollToId('contact');
-                }}
+                className="fixed inset-0 z-30 bg-[var(--color-16)]/60 md:hidden"
+                aria-label="Close navigation overlay"
+                onClick={closeMenu}
+              />
+              <div
+                ref={menuPanelRef}
+                id="mobile-nav-dialog"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Mobile navigation"
+                className="relative z-40 border-t border-[var(--color-41)] bg-[var(--color-16)] px-6 py-4 md:hidden"
               >
-                Get Started
-              </button>
-              <Link
-                to="/signin"
-                className="block font-almarai text-sm text-accent"
-                onClick={() => setMenuOpen(false)}
-              >
-                Log in
-              </Link>
-            </nav>
+                <div className="mb-3 flex justify-end">
+                  <button
+                    ref={menuCloseRef}
+                    type="button"
+                    className="font-almarai text-sm text-[var(--color-57)]"
+                    onClick={closeMenu}
+                  >
+                    Close
+                  </button>
+                </div>
+                <nav aria-label="Mobile navigation" className="space-y-3">
+                  {homeNavItems.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      className="block font-almarai text-sm text-secondary"
+                      onClick={closeMenu}
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                  <button
+                    type="button"
+                    className="block font-almarai text-sm text-secondary"
+                    onClick={() => {
+                      closeMenu();
+                      scrollToId('contact');
+                    }}
+                  >
+                    Get Started
+                  </button>
+                  <Link
+                    to="/signin"
+                    className="block font-almarai text-sm text-accent"
+                    onClick={closeMenu}
+                  >
+                    Log in
+                  </Link>
+                </nav>
+              </div>
+            </>
           ) : null}
         </header>
 
@@ -531,7 +611,7 @@ export default function MainContentArea() {
                 { label: 'About', href: '#about' },
                 { label: 'Content', href: '#content' },
                 { label: 'Pricing', href: '#pricing' },
-                { label: 'Shop', href: '#shop' },
+                { label: 'Blog', href: '#about' },
                 { label: 'Contact Us', href: '#contact' },
               ].map((item) => (
                 <a

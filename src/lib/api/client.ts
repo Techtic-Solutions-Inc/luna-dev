@@ -1,4 +1,4 @@
-import axios, { isAxiosError } from 'axios';
+import axios, { AxiosHeaders, isAxiosError } from 'axios';
 import type {
   ApiErrorResponse,
   ContentCalendarResponse,
@@ -9,18 +9,36 @@ import type {
   HomeTermsAcceptanceRequest,
   HomeTermsAcceptanceResponse,
 } from '../../types/api';
-import type { LoginRequest, LoginResponse } from '../../types/auth';
-import { getToken } from '../session';
+import type { LoginRequest, LoginResponse, LoginResponseData } from '../../types/auth';
+import { formatBearerToken, getToken } from '../session';
+
+function resolveApiBaseUrl(): string {
+  const configured =
+    import.meta.env.VITE_API_URL?.trim() || import.meta.env.VITE_API_BASE_URL?.trim() || '';
+  return configured.replace(/\/$/, '');
+}
 
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: resolveApiBaseUrl(),
 });
 
-apiClient.interceptors.request.use((config) => {
-  const token = getToken();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+function applyAuthHeader(config: { headers: unknown }): void {
+  const authorization = formatBearerToken(getToken());
+  if (!authorization) return;
+
+  if (config.headers instanceof AxiosHeaders) {
+    config.headers.set('Authorization', authorization);
+    return;
   }
+
+  config.headers = {
+    ...(config.headers as Record<string, string> | undefined),
+    Authorization: authorization,
+  };
+}
+
+apiClient.interceptors.request.use((config) => {
+  applyAuthHeader(config);
   return config;
 });
 
@@ -35,6 +53,22 @@ export function getApiErrorMessage(error: unknown): string {
     return error.message;
   }
   return 'Something went wrong. Please try again.';
+}
+
+function extractLoginData(payload: LoginResponse): LoginResponseData {
+  if (payload.data && typeof payload.data === 'object') {
+    return payload.data;
+  }
+  return payload as unknown as LoginResponseData;
+}
+
+export function extractAccessToken(payload: LoginResponse): string {
+  const data = extractLoginData(payload);
+  const token = data.token || data.accessToken;
+  if (!token?.trim()) {
+    throw new Error('No access token returned.');
+  }
+  return token.trim();
 }
 
 export const login = async (payload: LoginRequest): Promise<LoginResponse> => {

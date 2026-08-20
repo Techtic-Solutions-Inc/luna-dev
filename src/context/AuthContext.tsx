@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState, type ReactNode } from 'react';
-import { login as loginRequest } from '../lib/api/client';
+import { extractAccessToken, login as loginRequest } from '../lib/api/client';
 import {
   clearSession,
   getToken,
@@ -23,16 +23,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const login = useCallback(async (payload: LoginRequest, remember: boolean) => {
     const response = await loginRequest(payload);
-    const token = response.data.token || response.data.accessToken;
-    if (!token) {
-      throw new Error('No access token returned.');
-    }
+    const token = extractAccessToken(response);
+    const profile = response.data;
     const nextUser: StoredUser = {
-      id: response.data.id,
-      name: response.data.name,
-      first_name: response.data.first_name,
-      last_name: response.data.last_name,
-      email: response.data.email,
+      id: profile.id,
+      name: profile.name,
+      first_name: profile.first_name,
+      last_name: profile.last_name,
+      email: profile.email,
     };
     persistSession(token, nextUser, remember);
     setUser(nextUser);

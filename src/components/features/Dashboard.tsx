@@ -3,13 +3,14 @@ import Button from '../ui/Button';
 import Spinner from '../ui/Spinner';
 import { useAuth } from '../../hooks/useAuth';
 import useDashboard from '../../hooks/useDashboard';
+import { EMPTY_DASHBOARD_DATA } from '../../lib/dashboard';
 import DashboardOverview from './dashboard/DashboardOverview';
 import ContentCalendar from './dashboard/ContentCalendar';
 import ToolsSection from './dashboard/ToolsSection';
 import RecentActivityFeed from './dashboard/RecentActivityFeed';
 
 export default function Dashboard() {
-  const { updateUser, updateCredits } = useAuth();
+  const { user, updateUser, updateCredits } = useAuth();
   const {
     data,
     calendarEntries,
@@ -17,45 +18,31 @@ export default function Dashboard() {
     calendarLoading,
     dashboardError,
     calendarError,
-    refetch,
+    refetchDashboard,
     refetchCalendar,
   } = useDashboard();
 
-  useEffect(() => {
-    if (!data?.profile) return;
-    updateUser({
-      id: data.profile.id,
-      name: data.profile.name,
-      first_name: data.profile.first_name,
-      last_name: data.profile.last_name,
-      email: data.profile.email,
-    });
-  }, [data, updateUser]);
+  const resolvedData = data ?? EMPTY_DASHBOARD_DATA;
 
   useEffect(() => {
-    updateCredits(data?.credits ?? null);
-  }, [data, updateCredits]);
+    if (!resolvedData.profile) return;
+    updateUser({
+      id: resolvedData.profile.id,
+      name: resolvedData.profile.name,
+      first_name: resolvedData.profile.first_name,
+      last_name: resolvedData.profile.last_name,
+      email: resolvedData.profile.email,
+    });
+  }, [resolvedData, updateUser]);
+
+  useEffect(() => {
+    updateCredits(resolvedData.credits ?? null);
+  }, [resolvedData, updateCredits]);
 
   if (dashboardLoading && !data) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <Spinner label="Loading dashboard" size="lg" />
-      </div>
-    );
-  }
-
-  if (dashboardError || !data) {
-    return (
-      <div
-        className="flex min-h-[60vh] flex-col items-center justify-center gap-4 text-center"
-        role="alert"
-      >
-        <p className="font-almarai text-base text-[var(--color-57)]">
-          {dashboardError ?? 'Unable to load dashboard data.'}
-        </p>
-        <Button onClick={() => void refetch()} aria-label="Retry loading dashboard">
-          Try again
-        </Button>
       </div>
     );
   }
@@ -67,7 +54,24 @@ export default function Dashboard() {
         style={{ background: 'var(--color-68)' }}
         aria-hidden="true"
       />
-      <DashboardOverview data={data} calendarEntries={calendarEntries} />
+      {dashboardError ? (
+        <div
+          className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[var(--border)] bg-[var(--error)] px-5 py-4"
+          role="alert"
+        >
+          <p className="font-almarai text-sm text-secondary">
+            Unable to load dashboard data. {dashboardError}
+          </p>
+          <Button onClick={() => void refetchDashboard()} aria-label="Retry loading dashboard">
+            Try again
+          </Button>
+        </div>
+      ) : null}
+      <DashboardOverview
+        data={resolvedData}
+        calendarEntries={calendarEntries}
+        profileName={user?.first_name || user?.name}
+      />
       <ToolsSection />
       <ContentCalendar
         entries={calendarEntries}
@@ -75,7 +79,7 @@ export default function Dashboard() {
         error={calendarError}
         onRetry={() => void refetchCalendar()}
       />
-      <RecentActivityFeed announcements={data.announcements} calendarEntries={calendarEntries} />
+      <RecentActivityFeed announcements={resolvedData.announcements} calendarEntries={calendarEntries} />
     </div>
   );
 }

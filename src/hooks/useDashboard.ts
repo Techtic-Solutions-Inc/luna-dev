@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { fetchContentCalendar, fetchDashboard, getApiErrorMessage } from '../lib/api/client';
-import { normalizeCalendarEntries, normalizeDashboardData } from '../lib/dashboard';
+import { normalizeCalendarEntries, normalizeDashboardData, EMPTY_DASHBOARD_DATA } from '../lib/dashboard';
 import type { ContentCalendarEntry, DashboardData } from '../types/api';
 
 export interface DashboardState {
@@ -30,7 +30,7 @@ export default function useDashboard(): DashboardState {
       const dashboard = await fetchDashboard();
       setData(normalizeDashboardData(dashboard.data));
     } catch (err) {
-      setData(null);
+      setData((current) => current ?? EMPTY_DASHBOARD_DATA);
       setDashboardError(getApiErrorMessage(err));
     } finally {
       setDashboardLoading(false);

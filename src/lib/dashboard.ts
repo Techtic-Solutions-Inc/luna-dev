@@ -269,3 +269,13 @@ export function creditPercent(credits: CreditUsage): number {
   if (credits.total <= 0) return 0;
   return Math.min(100, Math.max(0, (credits.current / credits.total) * 100));
 }
+
+export const EMPTY_DASHBOARD_DATA: DashboardData = {
+  profile: null,
+  announcements: [],
+  calendarEntries: [],
+  activities: [],
+  downloads: null,
+  contentGenerated: null,
+  credits: null,
+};
