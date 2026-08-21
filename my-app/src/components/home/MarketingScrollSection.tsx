@@ -12,26 +12,32 @@ import SearchInput from '../ui/SearchInput';
 import AppLink from '../ui/AppLink';
 
 const MarketingSection = styled(Section)`
-  background: ${({ theme }) => theme.colors['color-16']};
+  background: ${({ theme }) => theme.colors.secondary};
 `;
 
 const SectionHeader = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: ${({ theme }) => theme.spacing['gap-16']};
-  margin-bottom: ${({ theme }) => theme.spacing['gap-40']};
+  margin: 0 auto ${({ theme }) => theme.spacing['gap-40']};
   max-width: 720px;
 `;
 
 const SectionTitle = styled(SerifHeading)`
   font-size: clamp(28px, 4vw, 36px);
   line-height: 1.25;
-  color: ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors['color-16']};
+`;
+
+const SectionBody = styled(BodyText)`
+  color: ${({ theme }) => theme.colors['color-57']};
 `;
 
 const SearchWrap = styled.div`
   max-width: 480px;
-  margin-bottom: ${({ theme }) => theme.spacing['gap-32']};
+  margin: 0 auto ${({ theme }) => theme.spacing['gap-32']};
 `;
 
 const CardsRow = styled.div`
@@ -61,6 +67,7 @@ const Card = styled.div`
 
 const BrowseLink = styled.div`
   margin-top: ${({ theme }) => theme.spacing['gap-24']};
+  text-align: center;
 `;
 
 interface MarketingScrollProps {
@@ -84,10 +91,10 @@ const MarketingScroll = ({
         <SectionTitle id="marketing-heading">
           Marketing That <AccentText>Stops The Scroll</AccentText>
         </SectionTitle>
-        <BodyText>
+        <SectionBody>
           Hand-designed by our creative team. Hundreds of ready-made templates help real estate
           professionals create content faster with scroll-stopping visuals.
-        </BodyText>
+        </SectionBody>
       </SectionHeader>
       <SearchWrap>
         {isLoading ? (

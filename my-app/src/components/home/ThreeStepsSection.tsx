@@ -11,7 +11,11 @@ import {
 import AppLink from '../ui/AppLink';
 
 const StepsSection = styled(Section)`
-  background: ${({ theme }) => theme.colors['color-16']};
+  background-color: ${({ theme }) => theme.colors['color-16']};
+  background-image:
+    linear-gradient(${({ theme }) => theme.colors['color-63']}33 1px, transparent 1px),
+    linear-gradient(90deg, ${({ theme }) => theme.colors['color-63']}33 1px, transparent 1px);
+  background-size: 48px 48px;
 `;
 
 const StepsTitle = styled(SerifHeading)`

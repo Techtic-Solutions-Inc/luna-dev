@@ -60,13 +60,6 @@ const getApiErrorMessage = (error: unknown): string => {
 const Home = () => {
   const [isPageLoading, setIsPageLoading] = useState(true);
 
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterError, setNewsletterError] = useState('');
-  const [newsletterStatus, setNewsletterStatus] = useState<
-    'idle' | 'loading' | 'success' | 'error'
-  >('idle');
-  const [newsletterMessage, setNewsletterMessage] = useState('');
-
   const [searchError, setSearchError] = useState('');
   const [resultsCount, setResultsCount] = useState<number | null>(null);
   const [isSearching, setIsSearching] = useState(false);
@@ -89,34 +82,9 @@ const Home = () => {
     return () => window.clearTimeout(timer);
   }, []);
 
-  const handleNewsletterSubmit = useCallback(async () => {
-    const trimmedEmail = newsletterEmail.trim();
-    if (!trimmedEmail) {
-      setNewsletterError('Email is required.');
-      setNewsletterStatus('error');
-      setNewsletterMessage('Please enter your email address.');
-      return;
-    }
-    if (!EMAIL_PATTERN.test(trimmedEmail)) {
-      setNewsletterError('Please enter a valid email address.');
-      setNewsletterStatus('error');
-      setNewsletterMessage('Invalid email format.');
-      return;
-    }
-
-    setNewsletterError('');
-    setNewsletterStatus('loading');
-
-    try {
-      const response = await submitEmail({ email: trimmedEmail });
-      setNewsletterStatus('success');
-      setNewsletterMessage(response.message || 'Thank you for subscribing to Agentwise.');
-      setNewsletterEmail('');
-    } catch (error) {
-      setNewsletterStatus('error');
-      setNewsletterMessage(getApiErrorMessage(error));
-    }
-  }, [newsletterEmail]);
+  const handleHeroGetStarted = useCallback(() => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
 
   const handleSearch = useCallback(async (query: string) => {
     if (!query) {
@@ -236,14 +204,7 @@ const Home = () => {
   return (
     <Page>
       <HomeHeader />
-      <HeroSection
-        newsletterEmail={newsletterEmail}
-        newsletterError={newsletterError}
-        newsletterStatus={newsletterStatus}
-        newsletterMessage={newsletterMessage}
-        onNewsletterEmailChange={setNewsletterEmail}
-        onNewsletterSubmit={() => void handleNewsletterSubmit()}
-      />
+      <HeroSection onGetStarted={handleHeroGetStarted} />
       <MarketingScrollSection
         searchError={searchError}
         resultsCount={resultsCount}

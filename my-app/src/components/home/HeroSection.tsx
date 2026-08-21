@@ -4,7 +4,6 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaTiktok,
-  FaTwitter,
 } from 'react-icons/fa';
 import {
   AccentText,
@@ -14,10 +13,8 @@ import {
   PrimaryButton,
   Section,
   SerifHeading,
-  StatusBanner,
   WideContainer,
 } from './shared';
-import EmailInput from '../ui/EmailInput';
 
 const HeroSection = styled(Section)`
   position: relative;
@@ -116,10 +113,7 @@ const NewsletterText = styled(BodyText)`
 
 const EmailRow = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing['gap-16']};
-  width: min(100%, 520px);
-  align-items: flex-end;
+  justify-content: center;
 `;
 
 const socialLinks = [
@@ -127,26 +121,13 @@ const socialLinks = [
   { icon: FaInstagram, label: 'Instagram', href: 'https://instagram.com', color: '#dd2a7b' },
   { icon: FaTiktok, label: 'TikTok', href: 'https://tiktok.com', color: '#ffffff' },
   { icon: FaLinkedinIn, label: 'LinkedIn', href: 'https://linkedin.com', color: '#0072ce' },
-  { icon: FaTwitter, label: 'Twitter', href: 'https://twitter.com', color: '#1da1f2' },
 ];
 
 interface HeroProps {
-  newsletterEmail: string;
-  newsletterError: string;
-  newsletterStatus: 'idle' | 'loading' | 'success' | 'error';
-  newsletterMessage: string;
-  onNewsletterEmailChange: (value: string) => void;
-  onNewsletterSubmit: () => void;
+  onGetStarted: () => void;
 }
 
-const Hero = ({
-  newsletterEmail,
-  newsletterError,
-  newsletterStatus,
-  newsletterMessage,
-  onNewsletterEmailChange,
-  onNewsletterSubmit,
-}: HeroProps) => (
+const Hero = ({ onGetStarted }: HeroProps) => (
   <HeroSection aria-labelledby="hero-heading">
     <Container>
       <HeroGrid>
@@ -185,30 +166,13 @@ const Hero = ({
     </Container>
     <NewsletterBand>
       <NewsletterText>
-        Join 1,000+ other agents on the newsletter: <strong>Agentwise</strong>
+        Join 15,248+ other agents on the newsletter at <strong>Agentwise</strong>
       </NewsletterText>
       <EmailRow>
-        <EmailInput
-          label="Email"
-          placeholder="Enter your email address"
-          value={newsletterEmail}
-          onChange={(event) => onNewsletterEmailChange(event.target.value)}
-          error={newsletterError}
-        />
-        <PrimaryButton
-          type="button"
-          onClick={onNewsletterSubmit}
-          disabled={newsletterStatus === 'loading'}
-          aria-label="Subscribe to newsletter"
-        >
-          {newsletterStatus === 'loading' ? 'Submitting...' : 'Get Started'}
+        <PrimaryButton type="button" onClick={onGetStarted} aria-label="Get started with Agentwise">
+          Get Started
         </PrimaryButton>
       </EmailRow>
-      {newsletterStatus === 'success' || newsletterStatus === 'error' ? (
-        <StatusBanner $variant={newsletterStatus === 'success' ? 'success' : 'error'} role="status">
-          {newsletterMessage}
-        </StatusBanner>
-      ) : null}
     </NewsletterBand>
   </HeroSection>
 );

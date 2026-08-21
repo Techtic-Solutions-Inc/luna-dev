@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FiUser } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import { Container, PrimaryButton } from './shared';
 
 const HeaderBar = styled.header`
@@ -62,17 +62,26 @@ const Actions = styled.div`
   gap: ${({ theme }) => theme.spacing['gap-16']};
 `;
 
-const ProfileButton = styled.button`
+const LoginLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid ${({ theme }) => theme.colors['color-63']};
-  background: ${({ theme }) => theme.colors['color-26']};
+  padding: ${({ theme }) => theme.spacing['padding-10']}
+    ${({ theme }) => theme.spacing['padding-24']};
+  border: 1px solid ${({ theme }) => theme.colors.secondary};
+  border-radius: ${({ theme }) => theme.borderRadius['radius-100']};
+  background: transparent;
   color: ${({ theme }) => theme.colors.secondary};
-  cursor: pointer;
+  font-family: ${({ theme }) => theme.typography.body.fontFamily};
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
 
   &:focus-visible {
     outline: 2px solid ${({ theme }) => theme.colors.accent};
@@ -112,9 +121,9 @@ const HomeHeader = () => (
         <CompactButton type="button" aria-label="Get started with Agentwise">
           Get Started
         </CompactButton>
-        <ProfileButton type="button" aria-label="Open profile menu">
-          <FiUser aria-hidden="true" size={18} />
-        </ProfileButton>
+        <LoginLink to="/signin" aria-label="Log in to Agentwise">
+          Login
+        </LoginLink>
       </Actions>
     </HeaderInner>
   </HeaderBar>

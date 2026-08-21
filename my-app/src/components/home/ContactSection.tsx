@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   AccentText,
   BodyText,
-  OutlineButton,
+  PrimaryButton,
   Section,
   SerifHeading,
   StatusBanner,
@@ -14,7 +14,17 @@ import Checkbox from '../ui/Checkbox';
 import InstagramFeed from '../ui/InstagramFeed';
 
 const ContactSection = styled(Section)`
-  padding: 0;
+  padding: ${({ theme }) => theme.spacing['padding-60']}
+    ${({ theme }) => theme.spacing['padding-24']};
+`;
+
+const ContactCard = styled.div`
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  border-radius: ${({ theme }) => theme.borderRadius['radius-24']};
+  overflow: hidden;
+  background: ${({ theme }) => theme.colors['color-16']};
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
 `;
 
 const Layout = styled.div`
@@ -228,6 +238,7 @@ const Contact = ({
 
   return (
     <ContactSection id="contact" aria-labelledby="contact-heading">
+      <ContactCard>
       <Layout>
         <PhotoSide>
           {isLoading ? (
@@ -366,13 +377,13 @@ const Contact = ({
                     error={errors.termsOfService}
                   />
                 </CheckboxGroup>
-                <OutlineButton
+                <PrimaryButton
                   type="submit"
                   disabled={submitStatus === 'loading' || termsStatus === 'loading'}
-                  aria-label="Join the waitlist now"
+                  aria-label="Let's get started"
                 >
-                  {submitStatus === 'loading' ? 'Submitting...' : 'Join the waitlist now'}
-                </OutlineButton>
+                  {submitStatus === 'loading' ? 'Submitting...' : "Let's Get Started"}
+                </PrimaryButton>
                 {submitStatus === 'success' || submitStatus === 'error' ? (
                   <StatusBanner
                     $variant={submitStatus === 'success' ? 'success' : 'error'}
@@ -393,6 +404,7 @@ const Contact = ({
           )}
         </FormSide>
       </Layout>
+      </ContactCard>
     </ContactSection>
   );
 };

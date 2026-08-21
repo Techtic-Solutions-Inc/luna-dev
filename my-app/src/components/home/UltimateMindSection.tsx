@@ -9,7 +9,6 @@ import {
   SerifHeading,
   SkeletonBlock,
 } from './shared';
-import AppLink from '../ui/AppLink';
 
 const UltimateSection = styled(Section)`
   padding: ${({ theme }) => theme.spacing['padding-60']} 0;
@@ -58,6 +57,7 @@ const LinkRow = styled.div`
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing['gap-24']};
   align-items: center;
+  margin-top: ${({ theme }) => theme.spacing['gap-8']};
 `;
 
 interface UltimateMindProps {
@@ -89,9 +89,6 @@ const UltimateMind = ({ isLoading = false }: UltimateMindProps) => (
               <PrimaryButton type="button" aria-label="Learn more about Agentwise Ultimate Mind">
                 Learn More
               </PrimaryButton>
-              <AppLink to="#about" variant="primary">
-                Explore Ultimate Mind
-              </AppLink>
             </LinkRow>
           </Content>
         </UltimateCard>

@@ -10,7 +10,7 @@ import {
 } from './shared';
 
 const TestimonialsSection = styled(Section)`
-  background: ${({ theme }) => theme.colors['color-16']};
+  background: ${({ theme }) => theme.colors.secondary};
 `;
 
 const Layout = styled.div`
@@ -32,7 +32,11 @@ const Intro = styled.div`
 const Title = styled(SerifHeading)`
   font-size: clamp(28px, 3.5vw, 36px);
   line-height: 1.25;
-  color: ${({ theme }) => theme.colors.accent};
+  color: ${({ theme }) => theme.colors['color-16']};
+`;
+
+const IntroBody = styled(BodyText)`
+  color: ${({ theme }) => theme.colors['color-57']};
 `;
 
 const Grid = styled.div`
@@ -51,8 +55,8 @@ const Card = styled.article`
   gap: ${({ theme }) => theme.spacing['gap-16']};
   padding: ${({ theme }) => theme.spacing['padding-24']};
   border-radius: ${({ theme }) => theme.borderRadius['radius-16']};
-  border: 1px solid ${({ theme }) => theme.colors['color-63']};
-  background: ${({ theme }) => theme.colors['color-24']};
+  border: 1px solid ${({ theme }) => theme.colors['color-60']};
+  background: ${({ theme }) => theme.colors['color-61']};
 `;
 
 const Stars = styled.div`
@@ -62,7 +66,7 @@ const Stars = styled.div`
 `;
 
 const Quote = styled(BodyText)`
-  color: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors['color-16']};
 `;
 
 const AuthorRow = styled.div`
@@ -84,7 +88,7 @@ const AuthorName = styled.p`
   font-size: 14px;
   font-weight: 700;
   line-height: 20px;
-  color: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors['color-16']};
   margin: 0;
 `;
 
@@ -131,10 +135,10 @@ const Testimonials = ({ isLoading = false }: TestimonialsProps) => (
           <Title id="testimonials-heading">
             Built For Agents <AccentText>Like You.</AccentText>
           </Title>
-          <BodyText>
+          <IntroBody>
             Real estate professionals across the country use Agentwise to create stunning marketing
             that attracts, engages, and converts.
-          </BodyText>
+          </IntroBody>
         </Intro>
         {isLoading ? (
           <Grid aria-hidden="true">
