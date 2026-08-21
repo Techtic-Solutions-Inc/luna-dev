@@ -231,7 +231,7 @@ const Home = () => {
             <div className="flex-1 flex flex-col gap-gap-16 tablet:gap-gap-24">
               <h1
                 id="hero-heading"
-                className="font-garamond text-heading-xl-37 tablet:text-heading-xl-45 text-secondary text-balance"
+                className="font-garamond text-heading-xl-45 text-secondary text-balance"
               >
                 Stunning Real Estate Marketing,{' '}
                 <span className="text-accent">Personalized To Your Market</span> In Minutes
@@ -306,7 +306,7 @@ const Home = () => {
         <div className="relative mx-auto max-w-[1440px]">
           <h2
             id="steps-heading"
-            className="font-garamond text-heading-xl-37 tablet:text-heading-xl-45 text-secondary text-center mb-gap-32 tablet:mb-gap-50 text-balance capitalize"
+            className="font-garamond text-heading-xl-37 text-secondary text-center mb-gap-32 tablet:mb-gap-50 text-balance capitalize"
           >
             Stunning marketing, in three simple steps
           </h2>
