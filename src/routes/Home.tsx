@@ -5,8 +5,8 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaTiktok,
-  FaXTwitter,
 } from 'react-icons/fa6';
+import { SiMedium } from 'react-icons/si';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import StepCard from '../components/features/StepCard';
@@ -54,31 +54,30 @@ const STEPS = [
 const TESTIMONIALS = [
   {
     id: '1',
-    name: 'Monica Erickson',
-    role: 'Sales Representative',
+    name: 'Marcus Donovan',
+    role: 'Keller Williams — Denver, CO',
     text: 'Agentwise transformed how I market my listings. The templates are gorgeous and the personalization is spot-on every time.',
     rating: 5,
+    avatar:
+      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face',
   },
   {
     id: '2',
-    name: 'James Whitfield',
-    role: 'Broker Associate',
+    name: 'Jordan Hayes',
+    role: 'eXp Realty — Nashville, TN',
     text: "I used to spend hours on social media content. Now I create a week's worth of posts in under 30 minutes.",
     rating: 5,
+    avatar:
+      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face',
   },
   {
     id: '3',
     name: 'Sarah Chen',
-    role: 'Luxury Agent',
+    role: 'Luxury Agent — Miami, FL',
     text: 'The quality of content is unmatched. My engagement has tripled since I started using Agentwise.',
     rating: 5,
-  },
-  {
-    id: '4',
-    name: 'David Martinez',
-    role: 'Team Lead',
-    text: 'Our entire team uses Agentwise. It keeps our brand consistent and saves us countless hours every week.',
-    rating: 5,
+    avatar:
+      'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face',
   },
 ];
 
@@ -91,7 +90,7 @@ const socialIcons = [
     color: 'bg-gradient-to-br from-color-26 to-color-90',
   },
   { icon: FaTiktok, label: 'TikTok', href: 'https://tiktok.com', color: 'bg-color-16' },
-  { icon: FaXTwitter, label: 'X (Twitter)', href: 'https://x.com', color: 'bg-color-16' },
+  { icon: SiMedium, label: 'Medium', href: 'https://medium.com', color: 'bg-color-16' },
   { icon: FaLinkedinIn, label: 'LinkedIn', href: 'https://linkedin.com', color: 'bg-color-13' },
 ];
 
@@ -100,8 +99,8 @@ interface FormData {
   lastName: string;
   email: string;
   phone: string;
-  experience: string;
-  goal: string;
+  city: string;
+  budget: string;
   message: string;
   privacyPolicy: boolean;
   termsOfService: boolean;
@@ -148,9 +147,9 @@ const validateForm = (data: FormData): FormErrors => {
 };
 
 const StepsSkeleton = () => (
-  <div className="flex flex-col gap-gap-50" aria-busy="true" aria-label="Loading steps">
+  <div className="flex flex-col gap-gap-24 tablet:gap-gap-32" aria-busy="true" aria-label="Loading steps">
     {Array.from({ length: 3 }).map((_, i) => (
-      <div key={i} className="flex flex-col tablet:flex-row gap-gap-32">
+      <div key={i} className="flex flex-col desktop:flex-row gap-gap-24 tablet:gap-gap-32">
         <div className="flex-1 flex flex-col gap-gap-16">
           <Skeleton className="h-8 w-24" />
           <Skeleton className="h-12 w-full max-w-md" />
@@ -170,8 +169,8 @@ const Home = () => {
     lastName: '',
     email: '',
     phone: '',
-    experience: '',
-    goal: '',
+    city: '',
+    budget: '',
     message: '',
     privacyPolicy: false,
     termsOfService: false,
@@ -215,38 +214,29 @@ const Home = () => {
 
       {/* Hero Section */}
       <section
-        className="relative pt-[100px] pb-padding-60 px-padding-16 tablet:px-padding-40 overflow-hidden"
+        className="relative pt-padding-60 tablet:pt-[100px] pb-padding-32 tablet:pb-padding-60 px-padding-16 tablet:px-padding-24 desktop:px-padding-40 overflow-hidden"
         aria-labelledby="hero-heading"
       >
         <div
-          className="absolute inset-0 opacity-30 pointer-events-none"
+          className="absolute inset-0 opacity-30 pointer-events-none bg-[radial-gradient(ellipse_at_70%_30%,theme(colors.color-38/20)_0%,transparent_60%),radial-gradient(ellipse_at_20%_80%,theme(colors.accent/13)_0%,transparent_50%)]"
           aria-hidden="true"
-          style={{
-            background:
-              'radial-gradient(ellipse at 70% 30%, #7200ff33 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, #c8a47e22 0%, transparent 50%)',
-          }}
         />
         <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
+          className="absolute inset-0 opacity-10 pointer-events-none bg-[linear-gradient(theme(colors.color-20)_1px,transparent_1px),linear-gradient(90deg,theme(colors.color-20)_1px,transparent_1px)] bg-[length:60px_60px]"
           aria-hidden="true"
-          style={{
-            backgroundImage:
-              'linear-gradient(#ffffff08 1px, transparent 1px), linear-gradient(90deg, #ffffff08 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
         />
 
         <div className="relative mx-auto max-w-[1440px]">
-          <div className="flex flex-col desktop:flex-row desktop:items-center gap-gap-40 desktop:gap-gap-60">
-            <div className="flex-1 flex flex-col gap-gap-24">
+          <div className="flex flex-col desktop:flex-row desktop:items-center gap-gap-24 tablet:gap-gap-32 desktop:gap-gap-60">
+            <div className="flex-1 flex flex-col gap-gap-16 tablet:gap-gap-24">
               <h1
                 id="hero-heading"
-                className="font-garamond text-[42px] leading-[1.15] tablet:text-heading-xl-45 text-secondary text-balance"
+                className="font-garamond text-heading-xl-37 tablet:text-heading-xl-45 text-secondary text-balance"
               >
                 Stunning Real Estate Marketing,{' '}
                 <span className="text-accent">Personalized To Your Market</span> In Minutes
               </h1>
-              <p className="font-almarai text-body-34 text-color-14 max-w-xl">
+              <p className="font-almarai text-body-34 text-text-secondary max-w-xl">
                 The all-in-one marketing platform for residential real estate agents — AI-personalized
                 content, a custom business dashboard, and a strategic AI advisor that knows your market.
               </p>
@@ -266,7 +256,7 @@ const Home = () => {
                       color,
                     ].join(' ')}
                   >
-                    <Icon size={16} />
+                    <Icon size={16} aria-hidden="true" />
                   </a>
                 ))}
               </div>
@@ -287,16 +277,14 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="mt-gap-60 text-center flex flex-col items-center gap-gap-24">
-            <p className="font-almarai text-body-34 text-color-14">
+          <div className="mt-gap-32 tablet:mt-gap-60 text-center flex flex-col items-center gap-gap-16 tablet:gap-gap-24">
+            <p className="font-almarai text-body-34 text-text-secondary">
               Join{' '}
-              <span className="text-accent font-bold">Hundreds</span> of other agents on the
+              <span className="text-accent font-bold">10,000+</span> real estate agents on the
               waitlist for Agentwise
             </p>
-            <Link to="/signup">
-              <Button size="lg" aria-label="Get started with Agentwise">
-                Get Started
-              </Button>
+            <Link to="/signup" aria-label="Get started with Agentwise">
+              <Button size="lg">Get Started</Button>
             </Link>
           </div>
         </div>
@@ -307,23 +295,18 @@ const Home = () => {
 
       {/* Three Steps Section */}
       <section
-        className="relative py-padding-60 px-padding-16 tablet:px-padding-32 desktop:px-padding-40 overflow-hidden"
+        className="relative py-padding-32 tablet:py-padding-60 px-padding-16 tablet:px-padding-24 desktop:px-padding-40 overflow-hidden"
         aria-labelledby="steps-heading"
       >
         <div
-          className="absolute inset-0 opacity-10 pointer-events-none"
+          className="absolute inset-0 opacity-10 pointer-events-none bg-[linear-gradient(theme(colors.color-20)_1px,transparent_1px),linear-gradient(90deg,theme(colors.color-20)_1px,transparent_1px)] bg-[length:60px_60px]"
           aria-hidden="true"
-          style={{
-            backgroundImage:
-              'linear-gradient(#ffffff08 1px, transparent 1px), linear-gradient(90deg, #ffffff08 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
         />
 
         <div className="relative mx-auto max-w-[1440px]">
           <h2
             id="steps-heading"
-            className="font-garamond text-[32px] tablet:text-heading-xl-37 text-secondary text-center mb-gap-50 text-balance capitalize"
+            className="font-garamond text-heading-xl-37 tablet:text-heading-xl-45 text-secondary text-center mb-gap-32 tablet:mb-gap-50 text-balance capitalize"
           >
             Stunning marketing, in three simple steps
           </h2>
@@ -331,7 +314,7 @@ const Home = () => {
           {!stepsLoaded ? (
             <StepsSkeleton />
           ) : (
-            <div className="flex flex-col gap-gap-50">
+            <div className="flex flex-col gap-gap-32 tablet:gap-gap-50">
               {STEPS.map((step) => (
                 <StepCard key={step.stepNumber} {...step} />
               ))}
@@ -342,17 +325,17 @@ const Home = () => {
 
       {/* Ultimate Mind Section */}
       <section
-        className="py-padding-60 px-padding-16 tablet:px-padding-40"
+        className="py-padding-32 tablet:py-padding-60 px-padding-16 tablet:px-padding-24 desktop:px-padding-40"
         aria-labelledby="ultimate-mind-heading"
       >
         <div className="mx-auto max-w-[1440px]">
-          <div className="flex flex-col desktop:flex-row gap-gap-32 rounded-radius-20 overflow-hidden">
-            <Card className="flex-1 bg-color-69 p-padding-32 tablet:p-padding-40">
-              <div className="flex flex-col gap-gap-24">
+          <div className="flex flex-col desktop:flex-row gap-gap-24 tablet:gap-gap-32 rounded-radius-20 overflow-hidden">
+            <Card className="flex-1 bg-color-69 p-padding-24 tablet:p-padding-32 desktop:p-padding-40">
+              <div className="flex flex-col gap-gap-16 tablet:gap-gap-24">
                 <h3 className="font-garamond text-heading-lg-26 text-secondary">
                   Agentwise Ultimate Mind
                 </h3>
-                <p className="font-almarai text-body-34 text-color-14">
+                <p className="font-almarai text-body-34 text-text-secondary">
                   Your strategic AI advisor that understands your market, tracks trends, and
                   helps you make smarter marketing decisions every day.
                 </p>
@@ -365,7 +348,7 @@ const Home = () => {
               </div>
             </Card>
 
-            <div className="flex-1 flex flex-col justify-center gap-gap-24 bg-color-45 p-padding-32 tablet:p-padding-40 rounded-radius-20">
+            <div className="flex-1 flex flex-col justify-center gap-gap-16 tablet:gap-gap-24 bg-color-45 p-padding-24 tablet:p-padding-32 desktop:p-padding-40 rounded-radius-20">
               <h3
                 id="ultimate-mind-heading"
                 className="font-garamond text-heading-xl-37 text-secondary text-balance"
@@ -373,15 +356,17 @@ const Home = () => {
                 Here&apos;s The Deal...{' '}
                 <span className="text-accent">Great Marketing Is Just The Start.</span>
               </h3>
-              <p className="font-almarai text-body-34 text-color-14">
+              <p className="font-almarai text-body-34 text-text-secondary">
                 Agentwise helps you build and personalize a brand for your real estate career.
                 Our AI learns your market, your brand, and your goals — then delivers a complete
                 marketing strategy tailored to you.
               </p>
               <div>
-                <Button variant="primary" size="md" aria-label="Learn more about Ultimate Mind">
-                  Learn More
-                </Button>
+                <Link to="/signup">
+                  <Button variant="primary" size="md" aria-label="Join Agentwise now">
+                    Join Now
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -390,27 +375,27 @@ const Home = () => {
 
       {/* Testimonials Section */}
       <section
-        className="bg-color-50 py-padding-60 px-padding-16 tablet:px-padding-40"
+        className="bg-color-50 py-padding-32 tablet:py-padding-60 px-padding-16 tablet:px-padding-24 desktop:px-padding-40"
         aria-labelledby="testimonials-heading"
       >
         <div className="mx-auto max-w-[1440px]">
-          <div className="flex flex-col desktop:flex-row gap-gap-40">
-            <div className="desktop:w-1/3 flex flex-col gap-gap-24">
+          <div className="flex flex-col desktop:flex-row gap-gap-24 tablet:gap-gap-40">
+            <div className="desktop:w-1/3 flex flex-col gap-gap-16 tablet:gap-gap-24">
               <h2
                 id="testimonials-heading"
-                className="font-garamond text-heading-xl-37 text-color-16 text-balance"
+                className="font-garamond text-heading-xl-37 tablet:text-heading-xl-45 text-color-16 text-balance"
               >
                 Built For{' '}
                 <span className="text-accent">Agents Like You.</span>
               </h2>
-              <p className="font-almarai text-body-34 text-color-14">
+              <p className="font-almarai text-body-34 text-text-secondary">
                 Join thousands of real estate professionals who trust Agentwise to elevate their
                 marketing and grow their business.
               </p>
             </div>
 
             <div
-              className="desktop:w-2/3 columns-1 tablet:columns-2 gap-gap-24"
+              className="desktop:w-2/3 grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-gap-24"
               role="list"
               aria-label="Customer testimonials"
             >
@@ -418,7 +403,7 @@ const Home = () => {
                 <Card
                   key={testimonial.id}
                   role="listitem"
-                  className="break-inside-avoid mb-gap-24 p-padding-24 bg-secondary shadow-drop-shadow-40"
+                  className="p-padding-24 bg-secondary shadow-drop-shadow-40"
                 >
                   <div
                     className="flex gap-1 mb-gap-12"
@@ -433,9 +418,17 @@ const Home = () => {
                   <blockquote className="font-almarai text-body-15 text-color-16 mb-gap-16">
                     &ldquo;{testimonial.text}&rdquo;
                   </blockquote>
-                  <footer>
-                    <p className="font-almarai text-body-115 text-color-16">{testimonial.name}</p>
-                    <p className="font-almarai text-body-sm-106 text-color-14">{testimonial.role}</p>
+                  <footer className="flex items-center gap-gap-12">
+                    <img
+                      src={testimonial.avatar}
+                      alt=""
+                      className="h-10 w-10 rounded-full object-cover"
+                      loading="lazy"
+                    />
+                    <div>
+                      <p className="font-almarai text-body-115 text-color-16">{testimonial.name}</p>
+                      <p className="font-almarai text-body-sm-106 text-color-14">{testimonial.role}</p>
+                    </div>
                   </footer>
                 </Card>
               ))}
@@ -447,11 +440,11 @@ const Home = () => {
       {/* Contact Section */}
       <section
         id="contact"
-        className="py-padding-60 px-padding-16 tablet:px-padding-40"
+        className="py-padding-32 tablet:py-padding-60 px-padding-16 tablet:px-padding-24 desktop:px-padding-40"
         aria-labelledby="contact-heading"
       >
         <div className="mx-auto max-w-[1440px]">
-          <div className="flex flex-col desktop:flex-row gap-gap-32">
+          <div className="flex flex-col desktop:flex-row gap-gap-24 tablet:gap-gap-32">
             <div className="flex-1 relative rounded-radius-20 overflow-hidden min-h-[400px]">
               <img
                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=800&fit=crop"
@@ -471,7 +464,7 @@ const Home = () => {
               </div>
             </div>
 
-            <Card className="flex-1 p-padding-32 tablet:p-padding-40 bg-color-37">
+            <Card className="flex-1 p-padding-24 tablet:p-padding-32 desktop:p-padding-40 bg-color-37">
               <h2
                 id="contact-heading"
                 className="font-garamond text-heading-xl-37 text-secondary mb-gap-32"
@@ -484,7 +477,7 @@ const Home = () => {
                   <p className="font-garamond text-heading-lg-26 text-accent mb-gap-16">
                     Thank you!
                   </p>
-                  <p className="font-almarai text-body-34 text-color-14">
+                  <p className="font-almarai text-body-34 text-text-secondary">
                     We&apos;ve received your message and will be in touch soon.
                   </p>
                 </div>
@@ -545,22 +538,22 @@ const Home = () => {
                   />
 
                   <InputField
-                    label="How long have you been an Agent?"
-                    name="experience"
+                    label="What city is your primary market?"
+                    name="city"
                     type="text"
-                    placeholder="How long have you been an Agent?"
+                    placeholder="What city is your primary market?"
                     hideLabel
-                    value={formData.experience}
+                    value={formData.city}
                     onChange={handleInputChange}
                   />
 
                   <InputField
-                    label="What do you want to do for marketing and real estate?"
-                    name="goal"
+                    label="What is your current monthly marketing budget?"
+                    name="budget"
                     type="text"
-                    placeholder="What do you want to do for marketing and real estate?"
+                    placeholder="What is your current monthly marketing budget?"
                     hideLabel
-                    value={formData.goal}
+                    value={formData.budget}
                     onChange={handleInputChange}
                   />
 
@@ -575,7 +568,8 @@ const Home = () => {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full rounded-radius-10 border border-color-20 bg-color-16 px-padding-16 py-padding-12 font-almarai text-body-77 text-secondary placeholder:text-color-14 hover:border-color-14 focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-colors resize-none"
+                      aria-label="Your message"
+                      className="w-full rounded-radius-10 border border-color-20 bg-color-16 px-padding-16 py-padding-12 font-almarai text-body-77 text-secondary placeholder:text-text-secondary hover:border-color-14 focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-colors resize-none"
                     />
                   </div>
 
@@ -589,6 +583,7 @@ const Home = () => {
                         I agree to the{' '}
                         <a
                           href="#privacy"
+                          aria-label="Read the Privacy Policy"
                           className="text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                         >
                           Privacy Policy
@@ -607,6 +602,7 @@ const Home = () => {
                         I agree to the{' '}
                         <a
                           href="#terms"
+                          aria-label="Read the Terms of Service"
                           className="text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                         >
                           Terms of Service
@@ -623,7 +619,7 @@ const Home = () => {
 
                   <Button
                     type="submit"
-                    variant="outline"
+                    variant="primary"
                     size="lg"
                     fullWidth
                     disabled={formState === 'submitting'}

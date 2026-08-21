@@ -57,15 +57,19 @@ const mapCalendarToLibrary = (
 
 const hasAuthToken = (): boolean => Boolean(localStorage.getItem('token'));
 
+export const CONTENT_LIBRARY_ERROR_MESSAGE =
+  'Unable to load content library. Please try again.';
+
 export const useContentLibrary = () => {
   const isAuthenticated = hasAuthToken();
 
-  return useQuery({
+  const query = useQuery({
     queryKey: ['content', 'library'],
     queryFn: async (): Promise<ContentLibraryItem[]> => {
       if (!isAuthenticated) {
         return STATIC_LIBRARY_ITEMS;
       }
+
       const response = await fetchContentCalendar();
       return mapCalendarToLibrary(response.data.items);
     },
@@ -73,6 +77,12 @@ export const useContentLibrary = () => {
     staleTime: 5 * 60 * 1000,
     retry: isAuthenticated ? 2 : 0,
   });
+
+  return {
+    ...query,
+    items: query.data ?? [],
+    errorMessage: query.isError ? CONTENT_LIBRARY_ERROR_MESSAGE : null,
+  };
 };
 
 export default useContentLibrary;

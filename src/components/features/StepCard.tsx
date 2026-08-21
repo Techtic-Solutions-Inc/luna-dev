@@ -19,12 +19,12 @@ const StepCard = ({
 }: StepCardProps) => (
   <article
     className={[
-      'flex flex-col gap-gap-32 tablet:gap-gap-50 tablet:items-center',
-      reversed ? 'tablet:flex-row-reverse' : 'tablet:flex-row',
+      'flex flex-col gap-gap-24 desktop:gap-gap-50 desktop:items-center',
+      reversed ? 'desktop:flex-row-reverse' : 'desktop:flex-row',
     ].join(' ')}
     aria-labelledby={`step-${stepNumber}-title`}
   >
-    <div className="flex-1 flex flex-col gap-gap-20">
+    <div className="flex-1 flex flex-col gap-gap-16 desktop:gap-gap-20">
       <span
         className="inline-flex self-start items-center justify-center rounded-radius-8 bg-accent px-padding-12 py-padding-6 font-almarai text-body-sm-106 font-bold text-color-16"
         aria-label={`Step ${stepNumber}`}
@@ -37,11 +37,14 @@ const StepCard = ({
       >
         {title}
       </h3>
-      <p className="font-almarai text-body-34 text-color-14 max-w-lg">{description}</p>
+      <p className="font-almarai text-body-34 text-text-secondary max-w-lg">{description}</p>
     </div>
 
     <div className="flex-1 w-full">
-      <Card variant="gradient" className="shadow-drop-shadow-18 p-padding-16">
+      <Card
+        variant="gradient"
+        className="rounded-radius-20 shadow-drop-shadow-18 p-padding-16"
+      >
         <img
           src={imageSrc}
           alt={imageAlt}
