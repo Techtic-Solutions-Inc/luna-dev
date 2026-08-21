@@ -229,13 +229,13 @@ const Home = () => {
         <div className="relative mx-auto max-w-[1440px]">
           <div className="flex flex-col desktop:flex-row desktop:items-center gap-gap-24 tablet:gap-gap-32 desktop:gap-gap-60">
             <div className="flex-1 flex flex-col gap-gap-16 tablet:gap-gap-24">
-              <h1
+              <h2
                 id="hero-heading"
                 className="font-garamond text-heading-xl-45 text-secondary text-balance"
               >
                 Stunning Real Estate Marketing,{' '}
                 <span className="text-accent">Personalized To Your Market</span> In Minutes
-              </h1>
+              </h2>
               <p className="font-almarai text-body-34 text-text-secondary max-w-xl">
                 The all-in-one marketing platform for residential real estate agents — AI-personalized
                 content, a custom business dashboard, and a strategic AI advisor that knows your market.

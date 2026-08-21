@@ -31,12 +31,12 @@ const StepCard = ({
       >
         Step {String(stepNumber).padStart(2, '0')}
       </span>
-      <h1
+      <h3
         id={`step-${stepNumber}-title`}
         className="font-garamond text-heading-xl-37 text-secondary capitalize"
       >
         {title}
-      </h1>
+      </h3>
       <p className="font-almarai text-body-34 text-text-secondary max-w-lg">{description}</p>
     </div>
 
