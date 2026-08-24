@@ -32,10 +32,14 @@ export function Card({
       ? RADIUS_CLASSES[16]
       : RADIUS_CLASSES.none;
   const surface = gradient
-    ? 'bg-card-gradient shadow-accent'
+    ? 'bg-card-gradient shadow-accent overflow-hidden'
     : 'bg-color-103 shadow-soft';
 
   return (
-    <Tag className={`${radiusClass} ${surface} ${className}`.trim()}>{children}</Tag>
+    <Tag
+      className={`${gradient ? RADIUS_CLASSES[16] : radiusClass} ${surface} ${className}`.trim()}
+    >
+      {children}
+    </Tag>
   );
 }

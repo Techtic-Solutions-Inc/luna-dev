@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FALLBACK_HOME_CONTENT, parseHomeContent } from '../data/homeContent';
+import { parseHomeContent } from '../data/homeContent';
+import { fetchVisitorHome } from '../lib/api/visitor';
 import { HOME_QUERY_KEY, type HomeContent } from '../types/home';
 
 export type HomeStatus = 'loading' | 'success' | 'empty' | 'error';
@@ -60,21 +61,7 @@ export function useHomeContent(): UseHomeContentResult {
 
     const load = async () => {
       try {
-        const response = await fetch('/api/visitor/home', {
-          method: 'GET',
-          signal: controller.signal,
-          headers: { Accept: 'application/json' },
-        });
-        if (!response.ok) {
-          throw new Error('Request failed');
-        }
-        const contentType = response.headers.get('content-type') ?? '';
-        if (!contentType.includes('application/json')) {
-          setData(FALLBACK_HOME_CONTENT);
-          setStatus('success');
-          return;
-        }
-        const json: unknown = await response.json();
+        const json = await fetchVisitorHome(controller.signal);
         const parsed = parseHomeContent(json);
         if (!parsed) {
           setData(null);

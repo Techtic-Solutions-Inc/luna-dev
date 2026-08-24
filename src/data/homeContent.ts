@@ -73,7 +73,7 @@ export const FALLBACK_HOME_CONTENT: HomeContent = {
     'New agents, team leaders, and large brokerages are using Agentwise to spend less time marketing and more time closing without sacrificing quality.',
   ],
   links: [
-    { label: 'About', href: '/about' },
+    { label: 'App', href: '/about' },
     { label: 'Learn More', href: '/learn-more' },
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms of Service', href: '/terms' },

@@ -1,5 +1,21 @@
 import { useState, type FormEvent } from 'react';
 
+const TEAM_SIZES = [
+  'Team Size',
+  'Just me',
+  '2–5 agents',
+  '6–15 agents',
+  '16+ agents',
+] as const;
+
+const GOALS = [
+  'Goal',
+  'Generate more leads',
+  'Improve social presence',
+  'Save time on marketing',
+  'Build my personal brand',
+] as const;
+
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [disabled, setDisabled] = useState(false);
@@ -24,7 +40,7 @@ export function ContactForm() {
       </div>
       <h2
         id="contact-heading"
-        className="text-center font-garamond text-[34px] font-medium leading-tight text-white md:text-[42px]"
+        className="text-center font-garamond text-section-heading font-medium leading-tight text-white"
       >
         Let’s Work Together
       </h2>
@@ -55,24 +71,26 @@ export function ContactForm() {
             </label>
             <input id="phone" name="phone" type="tel" className="field-input" placeholder="Phone number" />
           </div>
-          <label className="sr-only" htmlFor="tenure">
-            How long have you been in Real Estate?
+          <label className="sr-only" htmlFor="teamSize">
+            Team Size
           </label>
-          <input
-            id="tenure"
-            name="tenure"
-            className="field-input"
-            placeholder="How long have you been in Real Estate?"
-          />
-          <label className="sr-only" htmlFor="marketing">
-            What do you currently do for marketing your business?
+          <select id="teamSize" name="teamSize" required className="field-input" defaultValue="">
+            {TEAM_SIZES.map((option, index) => (
+              <option key={option} value={index === 0 ? '' : option} disabled={index === 0}>
+                {option}
+              </option>
+            ))}
+          </select>
+          <label className="sr-only" htmlFor="goal">
+            Goal
           </label>
-          <input
-            id="marketing"
-            name="marketing"
-            className="field-input"
-            placeholder="What do you currently do for marketing your business?"
-          />
+          <select id="goal" name="goal" required className="field-input" defaultValue="">
+            {GOALS.map((option, index) => (
+              <option key={option} value={index === 0 ? '' : option} disabled={index === 0}>
+                {option}
+              </option>
+            ))}
+          </select>
           <label className="sr-only" htmlFor="message">
             Your Message
           </label>

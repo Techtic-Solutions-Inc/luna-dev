@@ -6,8 +6,8 @@ export function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/home" replace />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="/about" element={<PlaceholderPage title="About" />} />
         <Route path="/content" element={<PlaceholderPage title="Content" />} />
         <Route path="/blog" element={<PlaceholderPage title="Blog" />} />

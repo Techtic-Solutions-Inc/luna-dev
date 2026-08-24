@@ -48,21 +48,21 @@ const TESTIMONIALS = [
       'The Ultimate Mind has become my second brain for pricing strategy. It pulls comps and pushes back on my assumptions like a seasoned mentor would.',
     name: 'Marcus Donovan',
     role: 'Realty Horizons · Denver, CO',
-    avatar: '/assets/figma/attlgjgqkngefohwz-large-img6232-3-I2295-3482-323-1647.png',
+    avatar: '/assets/figma/frame-2147227827-2270-16929.png',
   },
   {
     quote:
       'Agentwise replaced my entire marketing workflow. What used to take a full Sunday now takes a coffee break — and the content is better than anything I was making in Canva.',
     name: 'Jordan Hayes',
     role: 'eXp Realty · Nashville, TN',
-    avatar: '/assets/figma/attlgjgqkngefohwz-large-img6232-2-I2295-3482-323-1644.png',
+    avatar: '/assets/figma/frame-2147227828-2270-16985.png',
   },
   {
     quote:
       'My listings actually look like they belong to a top-1% agent now. Three of my last four clients said the marketing is what sold them on hiring me.',
-    name: 'Jordan Hayes',
-    role: 'eXp Realty · Nashville, TN',
-    avatar: '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-323-1646.png',
+    name: 'Sarah Chen',
+    role: 'Luxury Agent · Miami, FL',
+    avatar: '/assets/figma/frame-2147227827-2270-16929.png',
   },
 ] as const;
 
@@ -80,15 +80,15 @@ function Stars() {
 
 function StepBadge({ step }: { step: string }) {
   return (
-    <span className="inline-flex rounded-1000 border border-accent px-4 py-1 font-almarai text-almarai-14 text-accent">
+    <p className="inline-flex w-fit rounded-1000 border border-accent px-4 py-1 font-almarai text-almarai-14 text-accent">
       {step}
-    </span>
+    </p>
   );
 }
 
 function HomeSkeleton() {
   return (
-    <div className="space-y-section px-5 py-section md:px-12" aria-busy="true" aria-label="Loading home">
+    <div className="space-y-section p-section-pad" aria-busy="true" aria-label="Loading home">
       <div className="grid gap-section md:grid-cols-2">
         <div className="space-y-4">
           <div className="skeleton h-16 w-3/4" />
@@ -151,12 +151,18 @@ export default function Home() {
 
           {showContent ? (
             <>
-              <section className="relative mx-auto grid max-w-wide items-center gap-section px-5 pb-12 pt-6 md:grid-cols-2 md:px-12 md:pb-20 md:pt-10">
+              <section
+                className="relative mx-auto grid max-w-wide items-center gap-section p-section-pad md:grid-cols-2"
+                aria-labelledby="hero-heading"
+              >
                 <div>
-                  <h1 className="font-garamond text-[42px] font-normal leading-[1.08] text-accent md:text-page-title">
+                  <h1
+                    id="hero-heading"
+                    className="font-garamond text-[42px] font-normal leading-[1.08] text-accent md:text-[64px] lg:text-page-title"
+                  >
                     Stunning Real Estate Marketing, Personalized To Your Market In Minutes.
                   </h1>
-                  <p className="mt-6 max-w-xl font-almarai text-almarai-16-26 text-color-134 md:text-body-18">
+                  <p className="mt-6 max-w-xl font-almarai text-body-18 text-color-134">
                     The all-in-one marketing platform for residential real estate agents.
                     AI-personalized content, a custom business dashboard, and a strategic AI advisor
                     that knows your market.
@@ -175,9 +181,9 @@ export default function Home() {
               </section>
 
               <section className="relative px-5 pb-16 text-center md:px-12 md:pb-24">
-                <p className="font-almarai text-almarai-18-28 text-white">
-                  Join <span className="text-accent">Hundreds</span> of other agents on the waitlist
-                  for Agentwise
+                <p className="font-almarai text-body-18 text-white">
+                  Join <span className="text-accent">10,000+</span> other agents on the waitlist for
+                  Agentwise
                 </p>
                 <Link to="/signup" className="btn-primary mt-6">
                   Get Started
@@ -190,9 +196,16 @@ export default function Home() {
 
       {showContent ? (
         <>
-          <section className="bg-white py-16 md:py-24">
+          <section
+            id="content"
+            className="bg-white py-16 md:py-24"
+            aria-labelledby="content-library-heading"
+          >
             <div className="mx-auto max-w-wide">
-              <h2 className="px-5 text-center font-garamond text-[34px] font-medium text-color-105 md:text-section-heading">
+              <h2
+                id="content-library-heading"
+                className="px-5 text-center font-garamond text-section-heading font-medium text-color-105"
+              >
                 Marketing That Stops The Scroll
               </h2>
               <p className="mx-auto mt-4 max-w-2xl px-5 text-center font-almarai text-body-18 text-background">
@@ -210,21 +223,27 @@ export default function Home() {
             </div>
           </section>
 
-          <section className="relative overflow-hidden bg-color-136 py-16 md:py-24">
+          <section
+            className="relative overflow-hidden bg-color-136 py-16 md:py-24"
+            aria-labelledby="steps-heading"
+          >
             <div className="pointer-events-none absolute inset-0 grid-overlay opacity-40" />
             <div className="relative mx-auto max-w-wide px-5 md:px-12">
-              <h2 className="text-center font-garamond text-[34px] font-medium capitalize text-white md:text-section-heading">
+              <h2
+                id="steps-heading"
+                className="text-center font-garamond text-section-heading font-medium capitalize text-white"
+              >
                 {marketing?.title ?? 'Stunning marketing, in three simple steps'}
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-center font-almarai text-body-18 text-color-134">
                 {marketing?.description ?? 'Browse the continuously updated collection.'}
               </p>
 
-              <div className="mt-16 space-y-section">
-                <div className="grid items-center gap-section md:grid-cols-2">
+              <div className="mt-section space-y-section">
+                <article className="grid items-center gap-section md:grid-cols-2">
                   <div className="md:order-1">
                     <StepBadge step="Step 01" />
-                    <h3 className="mt-5 font-garamond text-[32px] font-medium leading-tight text-white md:text-[42px]">
+                    <h3 className="mt-5 font-garamond text-section-heading font-medium leading-tight text-white">
                       Browse The Continuously{' '}
                       <span className="text-accent">Updated Collection.</span>
                     </h3>
@@ -238,9 +257,9 @@ export default function Home() {
                     alt="Agentwise content library with hundreds of templates"
                     className="h-auto w-full object-contain md:order-2"
                   />
-                </div>
+                </article>
 
-                <div className="grid items-center gap-section md:grid-cols-2">
+                <article className="grid items-center gap-section md:grid-cols-2">
                   <img
                     src="/assets/figma/frame-2147227817-2270-14193.png"
                     alt="Agentwise Ultimate Mind personalizing content to a market"
@@ -248,7 +267,7 @@ export default function Home() {
                   />
                   <div className="md:order-2">
                     <StepBadge step="Step 02" />
-                    <h3 className="mt-5 font-garamond text-[32px] font-medium leading-tight text-white md:text-[42px]">
+                    <h3 className="mt-5 font-garamond text-section-heading font-medium leading-tight text-white">
                       We Personalize It To Your{' '}
                       <span className="text-accent">Business And Market.</span>
                     </h3>
@@ -257,12 +276,12 @@ export default function Home() {
                       neighborhood — automatically. What used to take hours now takes seconds.
                     </p>
                   </div>
-                </div>
+                </article>
 
-                <div className="grid items-center gap-section md:grid-cols-2">
+                <article className="grid items-center gap-section md:grid-cols-2">
                   <div className="md:order-1">
                     <StepBadge step="Step 03" />
-                    <h3 className="mt-5 font-garamond text-[32px] font-medium leading-tight text-white md:text-[42px]">
+                    <h3 className="mt-5 font-garamond text-section-heading font-medium leading-tight text-white">
                       Post, Attract, Engage, And <span className="text-accent">Stand Out.</span>
                     </h3>
                     <p className="mt-4 font-almarai text-body-18 text-color-134">
@@ -275,10 +294,10 @@ export default function Home() {
                     alt="Finished Agentwise content ready to post"
                     className="h-auto w-full object-contain md:order-2"
                   />
-                </div>
+                </article>
               </div>
 
-              <div className="mt-20 grid gap-6 md:grid-cols-2">
+              <div className="mt-12 grid gap-5 md:mt-20 md:grid-cols-2 md:gap-6">
                 <MarketingContent
                   title="Agentwise Ultimate Mind"
                   description="A bold, strategic AI advisor trained on your market, your business, and the realities of residential real estate. Brainstorm campaigns, pressure-test pricing, develop your growth plan, and get a second opinion 24/7 from a partner who actually knows your business."
@@ -288,7 +307,7 @@ export default function Home() {
                   ctaLabel="Learn More"
                 />
                 <article className="flex flex-col justify-center rounded-16 bg-mind-gradient bg-grid-green bg-grid p-section-pad shadow-hero md:p-12">
-                  <h3 className="font-garamond text-[34px] font-medium leading-tight text-white md:text-[48px]">
+                  <h3 className="font-garamond text-section-heading font-medium leading-tight text-white">
                     Here&apos;s The Deal...
                     <span className="block text-accent">Great Marketing Is</span>
                     Just The Start.
@@ -296,18 +315,24 @@ export default function Home() {
                   <p className="mt-6 font-almarai text-body-18 text-white">
                     A custom business dashboard and a personalized AI advisor built into every plan.
                   </p>
-                  <Link to="/signup" className="btn-primary mt-8 w-fit">
-                    Join Now
+                  <Link to="/learn-more" className="btn-primary mt-8 w-fit">
+                    Learn More
                   </Link>
                 </article>
               </div>
             </div>
           </section>
 
-          <section className="bg-white py-16 text-color-105 md:py-24">
-            <div className="mx-auto grid max-w-wide gap-section px-5 md:grid-cols-[0.9fr_1.1fr] md:px-12">
+          <section
+            className="bg-white py-12 text-color-105 md:py-24"
+            aria-labelledby="testimonials-heading"
+          >
+            <div className="mx-auto grid max-w-wide gap-8 px-5 md:grid-cols-[0.9fr_1.1fr] md:gap-section md:px-12">
               <div>
-                <h2 className="font-garamond text-[42px] font-medium leading-tight md:text-[56px]">
+                <h2
+                  id="testimonials-heading"
+                  className="font-garamond text-section-heading font-medium leading-tight"
+                >
                   Built For
                   <span className="block text-accent">Agents Like</span>
                   You.
@@ -317,17 +342,22 @@ export default function Home() {
                   time marketing and more time closing without sacrificing quality.
                 </p>
               </div>
-              <div className="grid gap-5 sm:grid-cols-2">
+              <div
+                className="grid grid-cols-1 gap-5 md:grid-cols-2"
+                role="list"
+                aria-label="Customer testimonials"
+              >
                 {TESTIMONIALS.map((item) => (
                   <article
                     key={`${item.name}-${item.quote.slice(0, 24)}`}
+                    role="listitem"
                     className="rounded-16 border border-color-128/40 bg-white p-6 shadow-soft"
                   >
                     <Stars />
-                    <p className="mt-4 font-garamond text-lg italic leading-7 text-color-132">
+                    <blockquote className="mt-4 font-almarai text-body-18 italic leading-7 text-color-132">
                       &ldquo;{item.quote}&rdquo;
-                    </p>
-                    <div className="mt-5 flex items-center gap-3">
+                    </blockquote>
+                    <footer className="mt-5 flex items-center gap-3">
                       <img
                         src={item.avatar}
                         alt=""
@@ -337,7 +367,7 @@ export default function Home() {
                         <p className="font-almarai text-almarai-16-bold text-color-105">{item.name}</p>
                         <p className="font-almarai text-almarai-14 text-color-134">{item.role}</p>
                       </div>
-                    </div>
+                    </footer>
                   </article>
                 ))}
               </div>
@@ -353,10 +383,10 @@ export default function Home() {
                   className="absolute inset-0 h-full w-full object-cover object-left"
                 />
                 <figcaption className="relative z-10 flex h-full min-h-[420px] flex-col items-center justify-center bg-color-105/20 px-6 text-center">
-                  <p className="font-garamond text-[36px] font-medium uppercase tracking-wide text-white md:text-5xl">
+                  <p className="font-garamond text-section-heading font-medium uppercase tracking-wide text-white">
                     Everyone&apos;s Waiting
                   </p>
-                  <p className="mt-3 font-garamond text-xl italic text-white md:text-2xl">
+                  <p className="mt-3 font-garamond text-body-18 italic text-white">
                     to buy until &ldquo;the market is right&rdquo;
                   </p>
                 </figcaption>

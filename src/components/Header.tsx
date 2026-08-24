@@ -4,8 +4,8 @@ import { Logo } from './Logo';
 import { SearchModal } from './SearchModal';
 
 const NAV = [
-  { label: 'About', href: '/about' },
-  { label: 'Content', href: '/content' },
+  { label: 'App', href: '/about' },
+  { label: 'Contact', href: '/contact' },
   { label: 'Blog', href: '/blog' },
   { label: 'Pricing', href: '/pricing' },
 ] as const;

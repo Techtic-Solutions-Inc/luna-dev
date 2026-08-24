@@ -18,7 +18,7 @@ const HOME_PAYLOAD = {
     'New agents, team leaders, and large brokerages are using Agentwise to spend less time marketing and more time closing without sacrificing quality.',
   ],
   links: [
-    { label: 'About', href: '/about' },
+    { label: 'App', href: '/about' },
     { label: 'Learn More', href: '/learn-more' },
     { label: 'Privacy Policy', href: '/privacy' },
     { label: 'Terms of Service', href: '/terms' },
@@ -40,33 +40,24 @@ const HOME_PAYLOAD = {
 };
 
 function visitorHomeMock(): Plugin {
-  const handle = (server: ViteDevServer | PreviewServer) => {
-    const middleware = (
-      req: { method?: string; url?: string },
-      res: { setHeader: (k: string, v: string) => void; end: (body: string) => void },
-      next: () => void,
-    ) => {
+  const attach = (server: ViteDevServer | PreviewServer) => {
+    server.middlewares.use((req, res, next) => {
       const url = req.url?.split('?')[0] ?? '';
       if (req.method === 'GET' && url === '/api/visitor/home') {
-        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
         res.setHeader('Cache-Control', 'no-store');
+        res.statusCode = 200;
         res.end(JSON.stringify(HOME_PAYLOAD));
         return;
       }
       next();
-    };
-    server.middlewares.use(middleware);
-    const stack = server.middlewares.stack;
-    const entry = stack.pop();
-    if (entry) {
-      stack.unshift(entry);
-    }
+    });
   };
 
   return {
     name: 'visitor-home-mock',
-    configureServer: handle,
-    configurePreviewServer: handle,
+    configureServer: attach,
+    configurePreviewServer: attach,
   };
 }
 
@@ -80,5 +71,11 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
+    strictPort: true,
+  },
+  preview: {
+    port: 4173,
+    host: true,
+    strictPort: true,
   },
 });

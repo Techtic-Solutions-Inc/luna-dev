@@ -40,10 +40,10 @@ export function MarketingContent({
   ctaLabel = 'Learn More',
 }: MarketingContentProps) {
   return (
-    <Card gradient rounded className="overflow-hidden p-section-pad md:p-12">
+    <Card gradient rounded className="p-section-pad md:p-12">
       <div className="grid items-center gap-section md:grid-cols-2">
         <div>
-          <h3 className="font-garamond text-[34px] font-medium leading-tight text-white md:text-section-heading">
+          <h3 className="font-garamond text-section-heading font-medium leading-tight text-white">
             {title}
           </h3>
           <p className="mt-gap-16 font-almarai text-body-18 text-color-134">{description}</p>

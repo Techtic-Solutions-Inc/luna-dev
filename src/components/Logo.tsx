@@ -6,7 +6,7 @@ interface LogoProps {
   className?: string;
 }
 
-export function Logo({ to = '/home', accent = false, className = '' }: LogoProps) {
+export function Logo({ to = '/', accent = false, className = '' }: LogoProps) {
   const color = accent ? 'text-accent' : 'text-white';
 
   return (
