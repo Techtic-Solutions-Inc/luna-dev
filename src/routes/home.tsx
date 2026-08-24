@@ -35,11 +35,6 @@ const GALLERY = [
     alt: 'Headphones and books lifestyle marketing still',
     caption: 'Personal brand content that feels authentic',
   },
-  {
-    src: '/assets/figma/attlgjgqkngefohwz-large-img6232-3-I2295-3482-323-1647.png',
-    alt: 'Architectural detail marketing template',
-    caption: 'Design-forward content for luxury listings',
-  },
 ];
 
 const TESTIMONIALS = [
@@ -158,9 +153,10 @@ export default function Home() {
                 <div>
                   <h1
                     id="hero-heading"
-                    className="font-garamond text-[42px] font-normal leading-[1.08] text-accent md:text-[64px] lg:text-page-title"
+                    className="font-garamond text-page-title font-normal text-white"
                   >
-                    Stunning Real Estate Marketing, Personalized To Your Market In Minutes.
+                    Stunning Real Estate Marketing, Personalized To Your Market In{' '}
+                    <span className="text-accent">Minutes.</span>
                   </h1>
                   <p className="mt-6 max-w-xl font-almarai text-body-18 text-color-134">
                     The all-in-one marketing platform for residential real estate agents.
@@ -182,8 +178,8 @@ export default function Home() {
 
               <section className="relative px-5 pb-16 text-center md:px-12 md:pb-24">
                 <p className="font-almarai text-body-18 text-white">
-                  Join <span className="text-accent">10,000+</span> other agents on the waitlist for
-                  Agentwise
+                  Join <span className="text-accent">Hundreds</span> of other agents on the
+                  waitlist for Agentwise
                 </p>
                 <Link to="/signup" className="btn-primary mt-6">
                   Get Started

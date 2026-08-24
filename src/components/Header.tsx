@@ -1,18 +1,16 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from './Logo';
-import { SearchModal } from './SearchModal';
 
 const NAV = [
-  { label: 'App', href: '/about' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'About', href: '/about' },
+  { label: 'Content', href: '/content' },
   { label: 'Blog', href: '/blog' },
   { label: 'Pricing', href: '/pricing' },
 ] as const;
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const closeRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const dialogId = useId();
@@ -51,17 +49,6 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden items-center gap-gap-12 lg:flex">
-          <button
-            type="button"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-1000 text-white hover:bg-white/10 active:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-            aria-label="Open search"
-            onClick={() => setSearchOpen(true)}
-          >
-            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-              <circle cx="11" cy="11" r="7" />
-              <path d="M20 20l-3.5-3.5" />
-            </svg>
-          </button>
           <Link to="/signup" className="btn-ghost">
             Get Started
           </Link>
@@ -115,16 +102,6 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <button
-              type="button"
-              className="text-link text-left font-garamond text-3xl"
-              onClick={() => {
-                setMenuOpen(false);
-                setSearchOpen(true);
-              }}
-            >
-              Search
-            </button>
             <Link to="/signup" className="btn-ghost w-full" onClick={() => setMenuOpen(false)}>
               Get Started
             </Link>
@@ -134,8 +111,6 @@ export function Header() {
           </nav>
         </div>
       ) : null}
-
-      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
     </header>
   );
 }

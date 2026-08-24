@@ -1,19 +1,21 @@
 import { useState, type FormEvent } from 'react';
 
-const TEAM_SIZES = [
-  'Team Size',
-  'Just me',
-  '2–5 agents',
-  '6–15 agents',
-  '16+ agents',
+const EXPERIENCE_OPTIONS = [
+  'How long have you been in Real Estate?',
+  'Less than 1 year',
+  '1–3 years',
+  '3–5 years',
+  '5–10 years',
+  '10+ years',
 ] as const;
 
-const GOALS = [
-  'Goal',
-  'Generate more leads',
-  'Improve social presence',
-  'Save time on marketing',
-  'Build my personal brand',
+const MARKETING_OPTIONS = [
+  'What do you currently do for marketing your business?',
+  'Mostly social media',
+  'Print and mailers',
+  'Paid ads',
+  'Referrals only',
+  'A mix of channels',
 ] as const;
 
 export function ContactForm() {
@@ -71,21 +73,21 @@ export function ContactForm() {
             </label>
             <input id="phone" name="phone" type="tel" className="field-input" placeholder="Phone number" />
           </div>
-          <label className="sr-only" htmlFor="teamSize">
-            Team Size
+          <label className="sr-only" htmlFor="experience">
+            How long have you been in Real Estate?
           </label>
-          <select id="teamSize" name="teamSize" required className="field-input" defaultValue="">
-            {TEAM_SIZES.map((option, index) => (
+          <select id="experience" name="experience" required className="field-input" defaultValue="">
+            {EXPERIENCE_OPTIONS.map((option, index) => (
               <option key={option} value={index === 0 ? '' : option} disabled={index === 0}>
                 {option}
               </option>
             ))}
           </select>
-          <label className="sr-only" htmlFor="goal">
-            Goal
+          <label className="sr-only" htmlFor="marketing">
+            What do you currently do for marketing your business?
           </label>
-          <select id="goal" name="goal" required className="field-input" defaultValue="">
-            {GOALS.map((option, index) => (
+          <select id="marketing" name="marketing" required className="field-input" defaultValue="">
+            {MARKETING_OPTIONS.map((option, index) => (
               <option key={option} value={index === 0 ? '' : option} disabled={index === 0}>
                 {option}
               </option>
