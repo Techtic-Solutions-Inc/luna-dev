@@ -13,7 +13,6 @@ export interface HomeStep {
   description: string;
   imageSrc: string;
   imageAlt: string;
-  reversed?: boolean;
 }
 
 interface HomeContentProps {
@@ -25,13 +24,9 @@ interface HomeContentProps {
 function StepFrame({ step }: { step: HomeStep }) {
   const padded = String(step.stepNumber).padStart(2, '0');
   return (
-    <article
-      className={`flex flex-col desktop:items-center gap-24 tablet:gap-32 desktop:gap-40 ${
-        step.reversed ? 'desktop:flex-row-reverse' : 'desktop:flex-row'
-      }`}
-    >
+    <article className="flex flex-col desktop:flex-row desktop:items-center gap-24 tablet:gap-32 desktop:gap-40">
       <div className="flex-1 flex flex-col gap-16">
-        <p className="font-almarai text-heading-lg-71 text-accent">Step {padded}</p>
+        <p className="font-almarai text-heading-lg-71 uppercase text-accent">Step {padded}</p>
         <h3 className="font-garamond text-heading-xl-37 text-secondary text-balance">{step.title}</h3>
         <p className="font-almarai text-body-3 text-color-14 max-w-xl">{step.description}</p>
       </div>
@@ -143,7 +138,7 @@ export function HomeContent({ title, steps, contentLibrary }: HomeContentProps) 
         <div className="relative mx-auto max-w-[1440px]">
           <h2
             id="steps-heading"
-            className="font-garamond text-heading-xl-37 tablet:text-heading-xl-45 text-secondary text-center mb-32 tablet:mb-50 text-balance"
+            className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-secondary text-center mb-32 tablet:mb-50 text-balance"
           >
             {title}
           </h2>

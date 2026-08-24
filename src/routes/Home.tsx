@@ -11,14 +11,14 @@ import { FALLBACK_GALLERY } from '../hooks/useContentCalendar';
 import { DEFAULT_HOME_STEPS, HOME_PAGE_TITLE } from '../lib/homeContent';
 
 const NAV_LINKS: NavLinkItem[] = [
-  { label: 'App', href: '#about' },
+  { label: 'About', href: '#about' },
   { label: 'Content', href: '#content' },
   { label: 'Blog', href: '#blog' },
   { label: 'Pricing', href: '#pricing' },
 ];
 
 const FOOTER_LINKS: NavLinkItem[] = [
-  { label: 'App', href: '#about' },
+  { label: 'About', href: '#about' },
   { label: 'Content', href: '#content' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Blog', href: '#blog' },
@@ -77,8 +77,8 @@ interface ContactForm {
   lastName: string;
   email: string;
   phone: string;
-  city: string;
-  budget: string;
+  agency: string;
+  production: string;
   message: string;
   privacyPolicy: boolean;
   termsOfService: boolean;
@@ -89,8 +89,8 @@ const EMPTY_FORM: ContactForm = {
   lastName: '',
   email: '',
   phone: '',
-  city: '',
-  budget: '',
+  agency: '',
+  production: '',
   message: '',
   privacyPolicy: false,
   termsOfService: false,
@@ -294,7 +294,7 @@ function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-padding-32 tablet:py-padding-60 px-padding-16 tablet:px-padding-24 desktop:px-padding-40"
+      className="bg-[linear-gradient(180deg,theme(colors.color-24)_0%,theme(colors.color-16)_100%)] py-padding-32 tablet:py-padding-60 px-padding-16 tablet:px-padding-24 desktop:px-padding-40"
       aria-labelledby="contact-heading"
     >
       <div className="mx-auto max-w-[1440px]">
@@ -315,7 +315,10 @@ function ContactSection() {
             </p>
           </div>
           <div className="flex-1 p-padding-24 tablet:p-padding-32 desktop:p-padding-40 bg-color-44">
-            <h2 id="contact-heading" className="font-garamond text-heading-xl-37 text-secondary mb-32">
+            <h2
+              id="contact-heading"
+              className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-secondary mb-32"
+            >
               Let&apos;s Work Together
             </h2>
             {status === 'success' ? (
@@ -373,19 +376,19 @@ function ContactSection() {
                   error={errors.phone}
                 />
                 <TextInput
-                  label="What city is your primary market?"
-                  name="city"
-                  placeholder="What city is your primary market?"
+                  label="Agency"
+                  name="agency"
+                  placeholder="Agency"
                   hideLabel
-                  value={form.city}
+                  value={form.agency}
                   onChange={onChange}
                 />
                 <TextInput
-                  label="What is your current monthly marketing budget?"
-                  name="budget"
-                  placeholder="What is your current monthly marketing budget?"
+                  label="What is your current real estate production?"
+                  name="production"
+                  placeholder="What is your current real estate production?"
                   hideLabel
-                  value={form.budget}
+                  value={form.production}
                   onChange={onChange}
                 />
                 <div className="flex flex-col gap-4">
@@ -450,9 +453,9 @@ function ContactSection() {
                   size="lg"
                   fullWidth
                   disabled={status === 'submitting'}
-                  aria-label="Join the waitlist"
+                  aria-label="Let's talk with a pro"
                 >
-                  {status === 'submitting' ? 'Submitting...' : 'Join the waitlist now'}
+                  {status === 'submitting' ? 'Submitting...' : "Let's talk with a pro"}
                 </Button>
               </form>
             )}
@@ -544,7 +547,7 @@ export default function Home() {
               <div className="flex-1 flex flex-col gap-24">
                 <h1
                   id="hero-heading"
-                  className="font-garamond text-heading-xl-37 tablet:text-heading-xl-45 text-secondary text-balance"
+                  className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-secondary text-balance"
                 >
                   Stunning Real Estate Marketing,{' '}
                   <span className="text-accent">Personalized To Your Market</span> In Minutes
@@ -583,12 +586,12 @@ export default function Home() {
               </div>
             </div>
             <div className="mt-32 tablet:mt-60 text-center flex flex-col items-center gap-16 tablet:gap-24">
-              <p className="font-almarai text-body-34 text-text-secondary">
-                Join <span className="text-accent font-bold">18,000+</span> other agents on the waitlist
-              </p>
-              <Link to="/signup" aria-label="Join the Agentwise waitlist">
-                <Button size="lg">Join Waitlist</Button>
+              <Link to="/signup" aria-label="Get started with Agentwise">
+                <Button size="lg">Get Started</Button>
               </Link>
+              <p className="font-almarai text-body-34 text-text-secondary">
+                Join <span className="text-accent font-bold">10,000+</span> other agents on the newsletter at Agentwise.
+              </p>
             </div>
           </div>
         </section>
@@ -605,8 +608,8 @@ export default function Home() {
           aria-labelledby="ultimate-mind-heading"
         >
           <div className="mx-auto max-w-[1440px]">
-            <div className="flex flex-col desktop:flex-row gap-24 tablet:gap-32 rounded-radius-20 overflow-hidden">
-              <div className="flex-1 bg-color-84 p-padding-24 tablet:p-padding-32 desktop:p-padding-40">
+            <div className="flex flex-col desktop:flex-row gap-24 tablet:gap-32 rounded-radius-20 overflow-hidden bg-color-93">
+              <div className="flex-1 p-padding-24 tablet:p-padding-32 desktop:p-padding-40">
                 <div className="flex flex-col gap-16 tablet:gap-24">
                   <h3 id="ultimate-mind-heading" className="font-garamond text-heading-lg-26 text-secondary">
                     Agentwise Ultimate Mind
@@ -622,8 +625,8 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="flex-1 bg-color-93 p-padding-24 tablet:p-padding-32 desktop:p-padding-40 flex flex-col justify-center gap-24">
-                <h2 className="font-garamond text-heading-xl-37 text-secondary text-balance">
+              <div className="flex-1 p-padding-24 tablet:p-padding-32 desktop:p-padding-40 flex flex-col justify-center gap-24">
+                <h2 className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-secondary text-balance">
                   Here&apos;s The Deal... <span className="text-accent">Great Marketing</span> Is Just The Start.
                 </h2>
                 <p className="font-almarai text-body-34 text-text-secondary">
@@ -652,7 +655,7 @@ export default function Home() {
               <div className="desktop:w-1/3 flex flex-col gap-16 tablet:gap-24">
                 <h2
                   id="testimonials-heading"
-                  className="font-garamond text-heading-xl-37 tablet:text-heading-xl-45 text-color-16 text-balance"
+                  className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-color-16 text-balance"
                 >
                   Built For <span className="text-accent">Agents Like You.</span>
                 </h2>

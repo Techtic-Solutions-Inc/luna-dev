@@ -25,7 +25,6 @@ export const DEFAULT_HOME_STEPS: HomeStep[] = [
       'Help real estate professionals create content faster with ready-made templates. Our AI adapts every template to your brand, voice, and local market.',
     imageSrc: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop',
     imageAlt: 'Personalization interface with branding options',
-    reversed: true,
   },
   {
     stepNumber: 3,
