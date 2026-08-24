@@ -1,0 +1,1107 @@
+import { writeFileSync, mkdirSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const outPath = resolve(__dirname, '../src/theme/tokens.ts');
+
+const colors = {
+  primary: '#00000000',
+  secondary: '#ffffff',
+  accent: '#c8a47e',
+  background: '#637381',
+  surface: '#b71d18',
+  'text-primary': '#000000',
+  'text-secondary': '#828282',
+  border: '#ff5630',
+  error: '#ffffff0c',
+  success: '#e0e0e0',
+  warning: '#ff563028',
+  info: '#c8a47e19',
+  'color-13': '#1877f2',
+  'color-14': '#919eab',
+  'color-15': '#959595',
+  'color-16': '#0b0b0b',
+  'color-17': '#22c55e',
+  'color-18': '#bdbdbd',
+  'color-19': '#333333',
+  'color-20': '#ffffff19',
+  'color-21': '#f2f2f2',
+  'color-22': '#14100d',
+  'color-23': '#c8a47e33',
+  'color-24': '#0e0d0d',
+  'color-25': '#090014',
+  'color-26': '#2f2f2f',
+  'color-27': '#d9d9d9',
+  'color-28': '#212b36',
+  'color-29': '#62503d00',
+  'color-30': '#f332f6',
+  'color-31': '#51ca7e',
+  'color-32': '#c8a47e7f',
+  'color-33': '#2e00ff',
+  'color-34': '#b355d8',
+  'color-35': '#b356d9',
+  'color-36': '#b355d826',
+  'color-37': '#faad4f',
+  'color-38': '#dd2a7b',
+  'color-39': '#9537b0',
+  'color-40': '#515bd4',
+  'color-41': '#f7f2ec',
+  'color-42': '#0f0f0f',
+  'color-43': '#00000001',
+  'color-44': '#1a1919',
+  'color-45': '#7200ff',
+  'color-46': '#0072ce',
+  'color-47': '#c8a47e26',
+  'color-48': '#0b0b0b00',
+  'color-49': '#ffb032',
+  'color-50': '#22c55e33',
+  'color-51': '#ff2f2f',
+  'color-52': '#a732f6',
+  'color-53': '#494949',
+  'color-54': '#020102',
+  'color-55': '#eaeaea',
+  'color-56': '#1c101d',
+  'color-57': '#666666',
+  'color-58': '#616161',
+  'color-59': '#3a3541',
+  'color-60': '#ebebeb',
+  'color-61': '#f1f1ef',
+  'color-62': '#0000003f',
+  'color-63': '#383838',
+  'color-64': '#2f271f',
+  'color-65': '#c8a47e4c',
+  'color-66': '#ffffff4c',
+  'color-67': '#32f680',
+  'color-68': '#473e33',
+  'color-69': '#6c00f0',
+  'color-70': '#030303',
+  'color-71': '#c2c2c2',
+  'color-72': '#07295d',
+  'color-73': '#8b6843',
+  'color-74': '#efe4d9',
+  'color-75': '#44413e',
+  'color-76': '#c8a47e3f',
+  'color-77': '#1c1916',
+  'color-78': '#1e1e1e',
+  'color-79': '#ffdd55',
+  'color-80': '#3771c8',
+  'color-81': '#232323',
+  'color-82': '#ffffff00',
+  'color-83': '#191919',
+  'color-84': '#3b6c4f',
+  'color-85': '#6c5082',
+  'color-86': '#376292',
+  'color-87': '#1a1a19',
+  'color-88': '#1a1a197f',
+  'color-89': '#1a1a1a',
+  'color-90': '#c5a3a3',
+  'color-91': '#fdfdfd',
+  'color-92': '#fefffc',
+  'color-93': '#182620',
+  'color-94': '#105d39',
+  'color-95': '#4e4b4b',
+  'color-96': '#858585',
+  'color-97': '#0000007f',
+  'color-98': '#ff543e',
+  'color-99': '#c837ab',
+  'color-100': '#6600ff00',
+  'color-101': '#000001',
+  'color-102': '#8b6842',
+  'color-103': '#11161c',
+  'color-104': '#4b92eb99',
+  'color-105': '#050505',
+  'color-106': '#1d1a1a',
+  'color-107': '#1d1818',
+  'color-108': '#ef7b16',
+  'color-109': '#8a43e1',
+  'color-110': '#d511fd',
+  'color-111': '#554545',
+  'color-112': '#ff004f',
+  'color-113': '#00f7ef',
+  'color-114': '#4285f4',
+  'color-115': '#34a853',
+  'color-116': '#ea4335',
+  'color-117': '#fbbc04',
+  'color-118': '#c5221f',
+  'color-119': '#00e510',
+  'color-120': '#007ebb',
+  'color-121': '#402631',
+  'color-122': '#e53a71',
+  'color-123': '#03f7b51e',
+  'color-124': '#788d871e',
+  'color-125': '#d8d8d8',
+  'color-126': '#872bff',
+  'color-127': '#00000019',
+  'color-128': '#d9d9d8',
+  'color-129': '#ffffff14',
+  'color-130': '#bebbb9',
+  'color-131': '#646261',
+  'color-132': '#272727',
+};
+
+const typography = {
+  body: {
+    fontFamily: 'Almarai',
+    fontSize: '16px',
+    fontWeight: 400,
+    lineHeight: '17.856000900268555px',
+  },
+  'body-sm-2': {
+    fontFamily: 'Almarai',
+    fontSize: '14px',
+    fontWeight: 400,
+    lineHeight: '15.624000549316406px',
+  },
+  'body-3': { fontFamily: 'Almarai', fontSize: '18px', fontWeight: 400, lineHeight: '28px' },
+  'caption-4': { fontFamily: 'Public Sans', fontSize: '12px', fontWeight: 400, lineHeight: '18px' },
+  'caption-5': { fontFamily: 'Public Sans', fontSize: '12px', fontWeight: 700, lineHeight: '20px' },
+  'body-6': {
+    fontFamily: 'Almarai',
+    fontSize: '18px',
+    fontWeight: 400,
+    lineHeight: '20.088001251220703px',
+  },
+  'caption-7': {
+    fontFamily: 'Almarai',
+    fontSize: '12px',
+    fontWeight: 400,
+    lineHeight: '13.392000198364258px',
+  },
+  'caption-8': {
+    fontFamily: 'Almarai',
+    fontSize: '13.999999046325684px',
+    fontWeight: 400,
+    lineHeight: '15.62399959564209px',
+  },
+  'caption-9': {
+    fontFamily: 'Almarai',
+    fontSize: '10.000000953674316px',
+    fontWeight: 300,
+    lineHeight: '11.160001754760742px',
+  },
+  'caption-10': {
+    fontFamily: 'Almarai',
+    fontSize: '7.777777671813965px',
+    fontWeight: 400,
+    lineHeight: '8.680000305175781px',
+  },
+  'heading-md-11': {
+    fontFamily: 'Almarai',
+    fontSize: '22px',
+    fontWeight: 400,
+    lineHeight: '24.552001953125px',
+  },
+  'caption-12': {
+    fontFamily: 'Almarai',
+    fontSize: '6.80555534362793px',
+    fontWeight: 400,
+    lineHeight: '7.595000267028809px',
+  },
+  'caption-13': {
+    fontFamily: 'Almarai',
+    fontSize: '4.861111640930176px',
+    fontWeight: 300,
+    lineHeight: '5.4250006675720215px',
+  },
+  'heading-md-14': {
+    fontFamily: 'Almarai',
+    fontSize: '20px',
+    fontWeight: 400,
+    lineHeight: '22.32000160217285px',
+  },
+  'body-15': { fontFamily: 'Almarai', fontSize: '16px', fontWeight: 400, lineHeight: '22px' },
+  'body-16': { fontFamily: 'Almarai', fontSize: '16px', fontWeight: 400, lineHeight: '26px' },
+  'body-17': {
+    fontFamily: 'Almarai',
+    fontSize: '18px',
+    fontWeight: 700,
+    lineHeight: '20.088001251220703px',
+  },
+  'body-sm-18': {
+    fontFamily: 'Almarai',
+    fontSize: '14px',
+    fontWeight: 300,
+    lineHeight: '15.624000549316406px',
+  },
+  'heading-lg-19': {
+    fontFamily: 'EB Garamond',
+    fontSize: '30px',
+    fontWeight: 500,
+    lineHeight: '39.14999771118164px',
+  },
+  'caption-20': {
+    fontFamily: 'Public Sans',
+    fontSize: '5.8333330154418945px',
+    fontWeight: 400,
+    lineHeight: '8.75px',
+  },
+  'caption-21': {
+    fontFamily: 'Public Sans',
+    fontSize: '5.8333330154418945px',
+    fontWeight: 700,
+    lineHeight: '9.722222328186035px',
+  },
+  'caption-22': {
+    fontFamily: 'Almarai',
+    fontSize: '9.146902084350586px',
+    fontWeight: 400,
+    lineHeight: '10.207942962646484px',
+  },
+  'body-sm-23': {
+    fontFamily: 'Almarai',
+    fontSize: '14px',
+    fontWeight: 700,
+    lineHeight: '15.624000549316406px',
+  },
+  'body-sm-24': { fontFamily: 'Almarai', fontSize: '14px', fontWeight: 400, lineHeight: '22px' },
+  'body-25': {
+    fontFamily: 'Public Sans',
+    fontSize: '19.69230842590332px',
+    fontWeight: 600,
+    lineHeight: '29.538463592529297px',
+  },
+  'heading-lg-26': {
+    fontFamily: 'EB Garamond',
+    fontSize: '24px',
+    fontWeight: 600,
+    lineHeight: '31.31999969482422px',
+  },
+  'body-sm-27': {
+    fontFamily: 'Public Sans',
+    fontSize: '14px',
+    fontWeight: 600,
+    lineHeight: '22px',
+  },
+  'caption-28': {
+    fontFamily: 'Almarai',
+    fontSize: '8.75px',
+    fontWeight: 400,
+    lineHeight: '13.61111068725586px',
+  },
+  'body-29': {
+    fontFamily: 'Almarai',
+    fontSize: '16px',
+    fontWeight: 300,
+    lineHeight: '17.856000900268555px',
+  },
+  'caption-30': {
+    fontFamily: 'Public Sans',
+    fontSize: '12px',
+    fontWeight: 600,
+    lineHeight: '14.09999942779541px',
+  },
+  'heading-lg-31': {
+    fontFamily: 'Almarai',
+    fontSize: '24px',
+    fontWeight: 700,
+    lineHeight: '26.784000396728516px',
+  },
+  'body-sm-32': {
+    fontFamily: 'Fellix',
+    fontSize: '15px',
+    fontWeight: 600,
+    lineHeight: '20px',
+    letterSpacing: '0.22499999999999998px',
+  },
+  'body-33': { fontFamily: 'Almarai', fontSize: '16px', fontWeight: 400, lineHeight: '16px' },
+  'body-34': { fontFamily: 'Almarai', fontSize: '18px', fontWeight: 400, lineHeight: '24px' },
+  'heading-xl-35': {
+    fontFamily: 'EB Garamond',
+    fontSize: '32px',
+    fontWeight: 500,
+    lineHeight: '41.7599983215332px',
+  },
+  'heading-xl-36': {
+    fontFamily: 'EB Garamond',
+    fontSize: '50px',
+    fontWeight: 500,
+    lineHeight: '65.25px',
+  },
+  'heading-xl-37': {
+    fontFamily: 'EB Garamond',
+    fontSize: '42px',
+    fontWeight: 500,
+    lineHeight: '54.80999755859375px',
+  },
+  'caption-38': {
+    fontFamily: 'Almarai',
+    fontSize: '8.003539085388184px',
+    fontWeight: 400,
+    lineHeight: '8.931949615478516px',
+  },
+  'heading-lg-39': {
+    fontFamily: 'EB Garamond',
+    fontSize: '30px',
+    fontWeight: 600,
+    lineHeight: '39.14999771118164px',
+  },
+  'caption-40': {
+    fontFamily: 'Almarai',
+    fontSize: '8px',
+    fontWeight: 400,
+    lineHeight: '8.928000450134277px',
+  },
+  'heading-lg-41': {
+    fontFamily: 'Almarai',
+    fontSize: '24px',
+    fontWeight: 400,
+    lineHeight: '26.784000396728516px',
+  },
+  'caption-42': {
+    fontFamily: 'Public Sans',
+    fontSize: '6.864686965942383px',
+    fontWeight: 400,
+    lineHeight: '10.297030448913574px',
+  },
+  'caption-43': {
+    fontFamily: 'Public Sans',
+    fontSize: '6.864686965942383px',
+    fontWeight: 700,
+    lineHeight: '11.441144943237305px',
+  },
+  'body-44': {
+    fontFamily: 'Public Sans',
+    fontSize: '17.6842098236084px',
+    fontWeight: 400,
+    lineHeight: '27.789472579956055px',
+  },
+  'heading-xl-45': {
+    fontFamily: 'EB Garamond',
+    fontSize: '84px',
+    fontWeight: 400,
+    lineHeight: '109.6199951171875px',
+  },
+  'body-46': { fontFamily: 'Almarai', fontSize: '16px', fontWeight: 400, lineHeight: '28px' },
+  'heading-xl-47': {
+    fontFamily: 'Almarai',
+    fontSize: '41.389190673828125px',
+    fontWeight: 800,
+    lineHeight: '46.190338134765625px',
+  },
+  'caption-48': {
+    fontFamily: 'Inter',
+    fontSize: '12px',
+    fontWeight: 400,
+    lineHeight: '14px',
+    letterSpacing: '0.4000000059604645px',
+  },
+  'caption-49': { fontFamily: 'Almarai', fontSize: '12px', fontWeight: 400, lineHeight: '18px' },
+  'caption-50': {
+    fontFamily: 'Almarai',
+    fontSize: '8.008801460266113px',
+    fontWeight: 400,
+    lineHeight: '8.937823295593262px',
+  },
+  'heading-lg-51': {
+    fontFamily: 'EB Garamond',
+    fontSize: '26px',
+    fontWeight: 500,
+    lineHeight: '33.93000030517578px',
+  },
+  'caption-52': {
+    fontFamily: 'Almarai',
+    fontSize: '6.80555534362793px',
+    fontWeight: 400,
+    lineHeight: '10.69444465637207px',
+  },
+  'caption-53': {
+    fontFamily: 'Almarai',
+    fontSize: '7px',
+    fontWeight: 400,
+    lineHeight: '7.812000274658203px',
+  },
+  'caption-54': {
+    fontFamily: 'Almarai',
+    fontSize: '6.920904159545898px',
+    fontWeight: 400,
+    lineHeight: '7.723729610443115px',
+  },
+  'body-55': {
+    fontFamily: 'Almarai',
+    fontSize: '16px',
+    fontWeight: 700,
+    lineHeight: '17.856000900268555px',
+  },
+  'caption-56': {
+    fontFamily: 'Almarai',
+    fontSize: '10px',
+    fontWeight: 400,
+    lineHeight: '11.160000801086426px',
+  },
+  'heading-md-57': {
+    fontFamily: 'EB Garamond',
+    fontSize: '22px',
+    fontWeight: 600,
+    lineHeight: '28.709999084472656px',
+  },
+  'heading-xl-58': {
+    fontFamily: 'EB Garamond',
+    fontSize: '36px',
+    fontWeight: 600,
+    lineHeight: '46.97999954223633px',
+  },
+  'heading-lg-59': {
+    fontFamily: 'EB Garamond',
+    fontSize: '26px',
+    fontWeight: 600,
+    lineHeight: '33.93000030517578px',
+  },
+  'heading-xl-60': {
+    fontFamily: 'EB Garamond',
+    fontSize: '80px',
+    fontWeight: 400,
+    lineHeight: '104.39999389648438px',
+  },
+  'caption-61': {
+    fontFamily: 'Almarai',
+    fontSize: '9.152915954589844px',
+    fontWeight: 400,
+    lineHeight: '10.214654922485352px',
+  },
+  'caption-62': {
+    fontFamily: 'Almarai',
+    fontSize: '9.448482513427734px',
+    fontWeight: 400,
+    lineHeight: '10.544507026672363px',
+  },
+  'caption-63': {
+    fontFamily: 'Almarai',
+    fontSize: '6.7489166259765625px',
+    fontWeight: 300,
+    lineHeight: '7.5317912101745605px',
+  },
+  'heading-md-64': { fontFamily: 'Almarai', fontSize: '20px', fontWeight: 400, lineHeight: '28px' },
+  'caption-65': {
+    fontFamily: 'Almarai',
+    fontSize: '7.488888740539551px',
+    fontWeight: 400,
+    lineHeight: '8.357600212097168px',
+  },
+  'heading-md-66': { fontFamily: 'Almarai', fontSize: '20px', fontWeight: 400, lineHeight: '30px' },
+  'heading-xl-67': {
+    fontFamily: 'EB Garamond',
+    fontSize: '34px',
+    fontWeight: 600,
+    lineHeight: '44.369998931884766px',
+  },
+  'heading-lg-68': {
+    fontFamily: 'EB Garamond',
+    fontSize: '24px',
+    fontWeight: 500,
+    lineHeight: '31.31999969482422px',
+  },
+  'body-69': { fontFamily: 'Almarai', fontSize: '16px', fontWeight: 400, lineHeight: '20px' },
+  'heading-xl-70': {
+    fontFamily: 'EB Garamond',
+    fontSize: '32px',
+    fontWeight: 500,
+    lineHeight: '32px',
+  },
+  'heading-lg-71': {
+    fontFamily: 'Almarai',
+    fontSize: '28px',
+    fontWeight: 400,
+    lineHeight: '31.248001098632812px',
+  },
+  'caption-72': {
+    fontFamily: 'EB Garamond',
+    fontSize: '12.638888359069824px',
+    fontWeight: 600,
+    lineHeight: '16.49374771118164px',
+  },
+  'body-73': {
+    fontFamily: 'EB Garamond',
+    fontSize: '17.150442123413086px',
+    fontWeight: 500,
+    lineHeight: '22.38132667541504px',
+  },
+  'heading-lg-74': {
+    fontFamily: 'EB Garamond',
+    fontSize: '30px',
+    fontWeight: 400,
+    lineHeight: '39.14999771118164px',
+  },
+  'heading-md-75': {
+    fontFamily: 'EB Garamond',
+    fontSize: '20px',
+    fontWeight: 500,
+    lineHeight: '26.099998474121094px',
+  },
+  'heading-xl-76': {
+    fontFamily: 'EB Garamond',
+    fontSize: '38px',
+    fontWeight: 500,
+    lineHeight: '49.589996337890625px',
+  },
+  'body-77': { fontFamily: 'Almarai', fontSize: '16px', fontWeight: 400, lineHeight: '24px' },
+  'body-sm-78': {
+    fontFamily: 'EB Garamond',
+    fontSize: '14.583333015441895px',
+    fontWeight: 500,
+    lineHeight: '19.031248092651367px',
+  },
+  'caption-79': {
+    fontFamily: 'Public Sans',
+    fontSize: '6.80555534362793px',
+    fontWeight: 600,
+    lineHeight: '10.69444465637207px',
+  },
+  'heading-xl-80': {
+    fontFamily: 'EB Garamond',
+    fontSize: '60px',
+    fontWeight: 400,
+    lineHeight: '78.29999542236328px',
+  },
+  'caption-81': {
+    fontFamily: 'Almarai',
+    fontSize: '7.6898932456970215px',
+    fontWeight: 400,
+    lineHeight: '8.581921577453613px',
+  },
+  'caption-82': {
+    fontFamily: 'Almarai',
+    fontSize: '7.4666666984558105px',
+    fontWeight: 400,
+    lineHeight: '8.33280086517334px',
+  },
+  'caption-83': {
+    fontFamily: 'Almarai',
+    fontSize: '6.728656768798828px',
+    fontWeight: 400,
+    lineHeight: '7.509181499481201px',
+  },
+  'heading-md-84': {
+    fontFamily: 'EB Garamond',
+    fontSize: '20.580530166625977px',
+    fontWeight: 600,
+    lineHeight: '26.85759162902832px',
+  },
+  'body-sm-85': { fontFamily: 'Almarai', fontSize: '14px', fontWeight: 400, lineHeight: '20px' },
+  'heading-lg-86': {
+    fontFamily: 'Almarai',
+    fontSize: '30px',
+    fontWeight: 400,
+    lineHeight: '33.480003356933594px',
+  },
+  'caption-87': {
+    fontFamily: 'Almarai',
+    fontSize: '12px',
+    fontWeight: 300,
+    lineHeight: '13.392000198364258px',
+  },
+  'body-88': { fontFamily: 'Almarai', fontSize: '18px', fontWeight: 700, lineHeight: '26px' },
+  'caption-89': {
+    fontFamily: 'Public Sans',
+    fontSize: '6px',
+    fontWeight: 600,
+    lineHeight: '7.049999713897705px',
+  },
+  'heading-xl-90': {
+    fontFamily: 'EB Garamond',
+    fontSize: '84px',
+    fontWeight: 500,
+    lineHeight: '90px',
+  },
+  'caption-91': {
+    fontFamily: 'EB Garamond',
+    fontSize: '13.999999046325684px',
+    fontWeight: 500,
+    lineHeight: '18.26999855041504px',
+  },
+  'caption-92': {
+    fontFamily: 'Almarai',
+    fontSize: '5.599999904632568px',
+    fontWeight: 400,
+    lineHeight: '6.249600410461426px',
+  },
+  'caption-93': {
+    fontFamily: 'Public Sans',
+    fontSize: '5.93220329284668px',
+    fontWeight: 600,
+    lineHeight: '6.970338821411133px',
+  },
+  'caption-94': {
+    fontFamily: 'Almarai',
+    fontSize: '7.909605026245117px',
+    fontWeight: 400,
+    lineHeight: '8.827119827270508px',
+  },
+  'caption-95': {
+    fontFamily: 'Public Sans',
+    fontSize: '5.767419815063477px',
+    fontWeight: 400,
+    lineHeight: '8.651129722595215px',
+  },
+  'caption-96': {
+    fontFamily: 'Public Sans',
+    fontSize: '5.767419815063477px',
+    fontWeight: 700,
+    lineHeight: '9.612366676330566px',
+  },
+  'caption-97': {
+    fontFamily: 'Almarai',
+    fontSize: '7.777777671813965px',
+    fontWeight: 400,
+    lineHeight: '10.69444465637207px',
+  },
+  'caption-98': {
+    fontFamily: 'EB Garamond',
+    fontSize: '10.69444465637207px',
+    fontWeight: 600,
+    lineHeight: '13.956250190734863px',
+  },
+  'body-sm-99': {
+    fontFamily: 'Almarai',
+    fontSize: '14.583333015441895px',
+    fontWeight: 400,
+    lineHeight: '16.274999618530273px',
+  },
+  'caption-100': {
+    fontFamily: 'Almarai',
+    fontSize: '5.8333330154418945px',
+    fontWeight: 300,
+    lineHeight: '6.509999752044678px',
+  },
+  'caption-101': {
+    fontFamily: 'Public Sans',
+    fontSize: '5.8333330154418945px',
+    fontWeight: 600,
+    lineHeight: '6.854166030883789px',
+  },
+  'heading-lg-102': {
+    fontFamily: 'Kalam',
+    fontSize: '28.049240112304688px',
+    fontWeight: 700,
+    lineHeight: '38.80799865722656px',
+  },
+  'heading-lg-103': {
+    fontFamily: 'EB Garamond',
+    fontSize: '24.010618209838867px',
+    fontWeight: 500,
+    lineHeight: '31.33385467529297px',
+  },
+  'caption-104': {
+    fontFamily: 'Public Sans',
+    fontSize: '6.864686965942383px',
+    fontWeight: 600,
+    lineHeight: '8.066006660461426px',
+  },
+  'caption-105': {
+    fontFamily: 'Public Sans',
+    fontSize: '8.008801460266113px',
+    fontWeight: 600,
+    lineHeight: '12.585259437561035px',
+  },
+  'body-sm-106': { fontFamily: 'Almarai', fontSize: '14px', fontWeight: 400, lineHeight: '18px' },
+  'body-sm-107': {
+    fontFamily: 'EB Garamond',
+    fontSize: '14.041666030883789px',
+    fontWeight: 500,
+    lineHeight: '18.324373245239258px',
+  },
+  'caption-108': {
+    fontFamily: 'Almarai',
+    fontSize: '5.616666793823242px',
+    fontWeight: 400,
+    lineHeight: '6.268200397491455px',
+  },
+  'caption-109': {
+    fontFamily: 'Almarai',
+    fontSize: '6.5527777671813965px',
+    fontWeight: 400,
+    lineHeight: '7.312900543212891px',
+  },
+  'heading-xl-110': {
+    fontFamily: 'EB Garamond',
+    fontSize: '120px',
+    fontWeight: 400,
+    lineHeight: '156.59999084472656px',
+  },
+  'heading-xl-111': {
+    fontFamily: 'EB Garamond',
+    fontSize: '55px',
+    fontWeight: 500,
+    lineHeight: '71.77499389648438px',
+  },
+  'heading-lg-112': {
+    fontFamily: 'EB Garamond',
+    fontSize: '28px',
+    fontWeight: 400,
+    lineHeight: '36.53999710083008px',
+  },
+  'heading-lg-113': {
+    fontFamily: 'EB Garamond',
+    fontSize: '24px',
+    fontWeight: 500,
+    lineHeight: '30px',
+  },
+  'heading-md-114': {
+    fontFamily: 'EB Garamond',
+    fontSize: '20px',
+    fontWeight: 600,
+    lineHeight: '26.099998474121094px',
+  },
+  'body-115': {
+    fontFamily: 'Public Sans',
+    fontSize: '16px',
+    fontWeight: 600,
+    lineHeight: '18.799999237060547px',
+  },
+  'body-sm-116': {
+    fontFamily: 'Space Grotesk',
+    fontSize: '14px',
+    fontWeight: 500,
+    lineHeight: '17.86400032043457px',
+  },
+  'body-117': { fontFamily: 'Almarai', fontSize: '18px', fontWeight: 400, lineHeight: '48px' },
+};
+
+const spacing = {
+  'padding-11': '11px',
+  'padding-9': '9px',
+  'padding-14': '14px',
+  'padding-30': '30px',
+  'padding-8': '8px',
+  'padding-20': '20px',
+  'padding-6': '6px',
+  'padding-16': '16px',
+  'padding-10': '10px',
+  'padding-7': '7px',
+  'padding-24': '24px',
+  'padding-12': '12px',
+  'padding-3': '3px',
+  'padding-4': '4px',
+  'padding-2': '2px',
+  'padding-15': '15px',
+  'padding-5': '5px',
+  'padding-40': '40px',
+  'padding-13': '13px',
+  'padding-50': '50px',
+  'padding-36': '36px',
+  'padding-0': '0px',
+  'padding-17': '17px',
+  'padding-60': '60px',
+  'padding-32': '32px',
+  'padding-1': '1px',
+  'padding-22': '22px',
+  'gap-10': '10px',
+  'gap-6': '6px',
+  'gap-8': '8px',
+  'gap-16': '16px',
+  'gap-4': '4px',
+  'gap-20': '20px',
+  'gap-7': '7px',
+  'gap-5': '5px',
+  'gap-12': '12px',
+  'gap-2': '2px',
+  'gap-14': '14px',
+  'gap-9': '9px',
+  'gap-3': '3px',
+  'gap-30': '30px',
+  'gap-24': '24px',
+  'gap-40': '40px',
+  'gap-11': '11px',
+  'gap-1': '1px',
+  'gap-26': '26px',
+  'gap--2': '-2px',
+  'gap-48': '48px',
+  'gap-36': '36px',
+  'gap--6': '-6px',
+  'gap-32': '32px',
+  'gap-815': '815px',
+  'gap-15': '15px',
+  'gap-52': '52px',
+  'gap-71': '71px',
+  'gap-624': '624px',
+  'gap-18': '18px',
+  'gap--1': '-1px',
+  'gap-44': '44px',
+  'gap-75': '75px',
+  'gap-50': '50px',
+  'gap-465': '465px',
+  'gap-303': '303px',
+  'gap-17': '17px',
+  'gap-42': '42px',
+  'gap-113': '113px',
+  'gap-125': '125px',
+  'gap--10': '-10px',
+  'gap-60': '60px',
+  'gap-13': '13px',
+  'gap-102': '102px',
+  'gap-43': '43px',
+  'gap-101': '101px',
+  'gap-832': '832px',
+};
+
+const radius = {
+  'radius-8': '8px',
+  'radius-6': '6px',
+  'radius-10': '10px',
+  'radius-10000': '10000px',
+  'radius-3': '3px',
+  'radius-2': '2px',
+  'radius-1000': '1000px',
+  'radius-500': '500px',
+  'radius-4': '4px',
+  'radius-60709': '60709px',
+  'radius-16': '16px',
+  'radius-20': '20px',
+  'radius-27': '27px',
+  'radius-5': '5px',
+  'radius-100': '100px',
+  'radius-100000': '100000px',
+  'radius-1': '1px',
+  'radius-29511': '29511px',
+  'radius-50': '50px',
+  'radius-30': '30px',
+  'radius-24': '24px',
+  'radius-4861': '4861px',
+  'radius-243': '243px',
+  'radius-9': '9px',
+  'radius-25': '25px',
+  'radius-64': '64px',
+  'radius-60': '60px',
+  'radius-486': '486px',
+  'radius-7': '7px',
+  'radius-300': '300px',
+  'radius-40972': '40972px',
+  'radius-8666': '8666px',
+  'radius-15000': '15000px',
+  'radius-4806': '4806px',
+  'radius-480': '480px',
+  'radius-571': '571px',
+  'radius-572': '572px',
+  'radius-286': '286px',
+  'radius-12': '12px',
+  'radius-4680': '4680px',
+  'radius-649': '649px',
+  'radius-5720': '5720px',
+  'radius-5716': '5716px',
+  'radius-69': '69px',
+  'radius-535': '535px',
+  'radius-4666': '4666px',
+  'radius-240': '240px',
+  'radius-11': '11px',
+  'radius-28': '28px',
+  'radius-7000': '7000px',
+};
+
+const shadows = {
+  glass: 'none',
+  'layer-blur-2': 'blur(394.0px)',
+  'layer-blur-3': 'blur(514.0px)',
+  'layer-blur-4': 'blur(276.1745910644531px)',
+  'drop-shadow-5': '-3.0px 0px 25.0px 0px #00000019',
+  'layer-blur-6': 'blur(211.69802856445312px)',
+  'layer-blur-7': 'blur(191.4674072265625px)',
+  'layer-blur-8': 'blur(121.02381896972656px)',
+  'layer-blur-9': 'blur(157.8838653564453px)',
+  'background-blur-10': 'blur(15.0px)',
+  'drop-shadow-11': '0px 4.0px 4.0px 0px #0000003f',
+  'layer-blur-12': 'blur(320.0px)',
+  'drop-shadow-13': '0px 2.8704702854156494px 3.588087797164917px -2.201871156692505px #16181d19',
+  'drop-shadow-14': '0px 0px 7.176175594329834px -1.651403546333313px #16181d19',
+  'drop-shadow-15': '-1.4583332538604736px 0px 12.152777671813965px 0px #00000019',
+  'layer-blur-16': 'blur(94.0px)',
+  'drop-shadow-17': '-1.4418549537658691px 0px 12.015458106994629px 0px #00000019',
+  'drop-shadow-18': '0px 44.0px 54.0px 0px #3b3b3b72',
+  'drop-shadow-19': '0px 34.0px 44.0px 0px #00000072',
+  'background-blur-20': 'blur(6.458558082580566px)',
+  'layer-blur-21': 'blur(339.35546875px)',
+  'background-blur-22': 'blur(4.0px)',
+  'layer-blur-23': 'blur(224.0px)',
+  'drop-shadow-24': '0px 1.8666666746139526px 18.66666603088379px 0px #00000019',
+  'background-blur-25': 'blur(1.9444444179534912px)',
+  'drop-shadow-26': '0px 1.9444444179534912px 1.9444444179534912px 0px #0000003f',
+  'drop-shadow-27': '-10.0px -20.0px 34.0px 0px #000000f2',
+  'drop-shadow-28': '0px 0px 2.0px 0px #ffffff14',
+  'drop-shadow-29': '10.0px 10.0px 20.0px 0px #0000007f',
+  'drop-shadow-30': '-1.7161717414855957px 0px 14.301431655883789px 0px #00000019',
+  'layer-blur-31': 'blur(28.584068298339844px)',
+  'background-blur-32': 'blur(7.176175594329834px)',
+  'drop-shadow-33': '20.0px -10.0px 34.0px 0px #000000f2',
+  'drop-shadow-34': '-1.4041666984558105px 0px 11.701388359069824px 0px #00000019',
+  'drop-shadow-35': '0px 1.8722221851348877px 18.72222137451172px 0px #00000019',
+  'layer-blur-36': 'blur(1954.410888671875px)',
+  'drop-shadow-37': '0px 4.0px 34.0px 0px #c8a47e33',
+  'layer-blur-38': 'blur(50.0px)',
+  'drop-shadow-39': '0px 4.0px 40.0px 0px #00000019',
+  'drop-shadow-40': '0px 8.0px 16.0px 0px #919eab28',
+};
+
+const gradients = {
+  gradient: 'linear-gradient(180deg, #2f2f2f 0%, #090014 100%)',
+  'gradient-2': 'linear-gradient(180deg, #c8a47e33 0%, #62503d00 100%)',
+  'gradient-3': 'linear-gradient(180deg, #faad4f 0%, #dd2a7b 35%, #9537b0 62%, #515bd4 100%)',
+  'gradient-4': 'linear-gradient(180deg, #ffffff 96%)',
+  'gradient-5': 'linear-gradient(180deg, #0b0b0b 0%, #0b0b0b00 100%)',
+  'gradient-6': 'linear-gradient(180deg, #000000 0%, #666666 100%)',
+  'gradient-7': 'linear-gradient(180deg, #c8a47e19 0%, #c8a47e 67%)',
+  'gradient-8': 'linear-gradient(180deg, #c8a47e 24%, #ffffff 49%, #8b6843 72%)',
+  'gradient-9': 'linear-gradient(180deg, #c8a47e3f 0%, #62503d00 100%)',
+  'gradient-10': 'linear-gradient(180deg, #182620 0%, #105d39 100%)',
+  'gradient-11':
+    'radial-gradient(circle at 30% 20%, #ffdd55 0%, #ffdd55 10%, #ff543e 50%, #c837ab 100%)',
+  'gradient-12': 'radial-gradient(circle at 30% 20%, #3771c8 0%, #3771c8 13%, #6600ff00 100%)',
+  'gradient-13': 'linear-gradient(180deg, #0b0b0b00 0%, #000001 100%)',
+  'gradient-14': 'linear-gradient(180deg, #c8a47e 24%, #ffffff 49%, #c8a47e 72%)',
+  'gradient-15': 'linear-gradient(180deg, #c8a47e 0%, #8b6842 100%)',
+  'gradient-16': 'linear-gradient(180deg, #11161c 0%, #4b92eb99 100%)',
+  'gradient-17': 'linear-gradient(180deg, #14100d 0%, #050505 100%)',
+  'gradient-18': 'linear-gradient(180deg, #00000000 0%, #000000 100%)',
+  'gradient-19': 'linear-gradient(180deg, #ff2f2f 0%, #ef7b16 36%, #8a43e1 70%, #d511fd 100%)',
+  'gradient-20': 'linear-gradient(180deg, #14100d 0%, #402631 100%)',
+  'gradient-21': 'linear-gradient(180deg, #ffffff00 0%, #ffffff 100%)',
+};
+
+function serialize(obj, indent = 2) {
+  return JSON.stringify(obj, null, indent)
+    .replace(/"([^"]+)":/g, (m, key) => {
+      if (/^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key)) return `${key}:`;
+      return `'${key}':`;
+    })
+    .replace(/"/g, "'");
+}
+
+function serializeTypography(obj) {
+  const lines = ['{'];
+  for (const [key, value] of Object.entries(obj)) {
+    const k = /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(key) ? key : `'${key}'`;
+    const ls = value.letterSpacing ? `, letterSpacing: '${value.letterSpacing}'` : '';
+    lines.push(
+      `  ${k}: { fontFamily: '${value.fontFamily}', fontSize: '${value.fontSize}', fontWeight: ${value.fontWeight}, lineHeight: '${value.lineHeight}'${ls} },`,
+    );
+  }
+  lines.push('}');
+  return lines.join('\n');
+}
+
+const file = `export interface TypographyToken {
+  fontFamily: string;
+  fontSize: string;
+  fontWeight: number;
+  lineHeight: string;
+  letterSpacing?: string;
+}
+
+export const colors = ${serialize(colors)} as const;
+
+export const typography: Record<string, TypographyToken> = ${serializeTypography(typography)};
+
+export const spacing = ${serialize(spacing)} as const;
+
+export const radius = ${serialize(radius)} as const;
+
+export const shadows = ${serialize(shadows)} as const;
+
+export const gradients = ${serialize(gradients)} as const;
+
+export const fontFamilies = {
+  almarai: "'Almarai', sans-serif",
+  publicSans: "'Public Sans', sans-serif",
+  ebGaramond: "'EB Garamond', serif",
+  inter: "'Inter', sans-serif",
+  kalam: "'Kalam', cursive",
+  spaceGrotesk: "'Space Grotesk', sans-serif",
+  fellix: "'Fellix', 'Almarai', sans-serif",
+} as const;
+
+export type ColorToken = keyof typeof colors;
+export type SpacingToken = keyof typeof spacing;
+export type RadiusToken = keyof typeof radius;
+export type ShadowToken = keyof typeof shadows;
+export type GradientToken = keyof typeof gradients;
+export type TypographyTokenName = keyof typeof typography;
+
+export const tokens = {
+  colors,
+  typography,
+  spacing,
+  radius,
+  shadows,
+  gradients,
+  fontFamilies,
+} as const;
+
+export type Theme = typeof tokens;
+
+export const boxShadows = Object.fromEntries(
+  Object.entries(shadows).filter(([, value]) => !value.startsWith('blur(') && value !== 'none'),
+) as Record<string, string>;
+
+export const layerBlurs = Object.fromEntries(
+  Object.entries(shadows)
+    .filter(([key, value]) => key.startsWith('layer-blur') && value.startsWith('blur('))
+    .map(([key, value]) => [key, value.slice(5, -1)]),
+) as Record<string, string>;
+
+export const backdropBlurs = Object.fromEntries(
+  Object.entries(shadows)
+    .filter(([key, value]) => key.startsWith('background-blur') && value.startsWith('blur('))
+    .map(([key, value]) => [key, value.slice(5, -1)]),
+) as Record<string, string>;
+
+export function tokensToCssVars(): string {
+  const lines: string[] = [];
+
+  for (const [key, value] of Object.entries(colors)) {
+    lines.push(\`--\${key}: \${value};\`);
+  }
+
+  for (const [key, value] of Object.entries(spacing)) {
+    lines.push(\`--\${key}: \${value};\`);
+  }
+
+  for (const [key, value] of Object.entries(radius)) {
+    lines.push(\`--\${key}: \${value};\`);
+  }
+
+  for (const [key, value] of Object.entries(shadows)) {
+    lines.push(\`--\${key}: \${value};\`);
+  }
+
+  for (const [key, value] of Object.entries(gradients)) {
+    lines.push(\`--\${key}: \${value};\`);
+  }
+
+  for (const [key, value] of Object.entries(typography)) {
+    lines.push(\`--typo-\${key}-font-family: \${value.fontFamily}, sans-serif;\`);
+    lines.push(\`--typo-\${key}-font-size: \${value.fontSize};\`);
+    lines.push(\`--typo-\${key}-font-weight: \${String(value.fontWeight)};\`);
+    lines.push(\`--typo-\${key}-line-height: \${value.lineHeight};\`);
+    if (value.letterSpacing) {
+      lines.push(\`--typo-\${key}-letter-spacing: \${value.letterSpacing};\`);
+    }
+  }
+
+  return lines.join('\\n    ');
+}
+
+export function typographyToCss(): string {
+  return Object.entries(typography)
+    .map(([key, value]) => {
+      const ls = value.letterSpacing ? \`\\n  letter-spacing: \${value.letterSpacing};\` : '';
+      const fallback =
+        value.fontFamily === 'EB Garamond'
+          ? 'serif'
+          : value.fontFamily === 'Kalam'
+            ? 'cursive'
+            : 'sans-serif';
+      return \`.typo-\${key} {
+  font-family: '\${value.fontFamily}', \${fallback};
+  font-size: \${value.fontSize};
+  font-weight: \${String(value.fontWeight)};
+  line-height: \${value.lineHeight};\${ls}
+}\`;
+    })
+    .join('\\n\\n');
+}
+`;
+
+mkdirSync(dirname(outPath), { recursive: true });
+writeFileSync(outPath, file);
+console.log(`Wrote ${outPath} (${file.length} bytes)`);
+console.log(
+  `colors=${Object.keys(colors).length} typography=${Object.keys(typography).length} spacing=${Object.keys(spacing).length} radius=${Object.keys(radius).length} shadows=${Object.keys(shadows).length} gradients=${Object.keys(gradients).length}`,
+);
