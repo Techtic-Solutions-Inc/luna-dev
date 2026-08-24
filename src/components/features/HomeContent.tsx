@@ -53,14 +53,14 @@ function ContentLibrarySection({
   return (
     <section
       id="content"
-      className="bg-secondary py-padding-32 tablet:py-padding-60 px-padding-16 tablet:px-padding-32"
+      className="bg-secondary py-padding-32 tablet:py-padding-60 px-padding-16 tablet:px-padding-24 desktop:px-padding-40"
       aria-labelledby="content-library-heading"
     >
       <div className="mx-auto max-w-[1440px]">
         <div className="text-center mb-32 tablet:mb-40">
           <h2
             id="content-library-heading"
-            className="font-garamond text-heading-xl-37 text-color-16 mb-16 text-balance"
+            className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-color-16 mb-16 text-balance"
           >
             Marketing That Stops The Scroll
           </h2>
@@ -128,7 +128,7 @@ export function HomeContent({ title, steps, contentLibrary }: HomeContentProps) 
       />
 
       <section
-        className="relative bg-color-24 py-padding-32 tablet:py-padding-60 px-padding-16 tablet:px-padding-32"
+        className="relative bg-color-24 py-padding-32 tablet:py-padding-60 px-padding-16 tablet:px-padding-24 desktop:px-padding-40"
         aria-labelledby="steps-heading"
       >
         <div

@@ -575,12 +575,12 @@ export default function Home() {
               </div>
             </div>
             <div className="mt-32 tablet:mt-60 text-center flex flex-col items-center gap-16 tablet:gap-24">
+              <p className="font-almarai text-body-34 text-text-secondary max-w-xl">
+                Join <span className="text-accent font-bold">10,000+</span> other agents on the newsletter at Agentwise.
+              </p>
               <Link to="/signup" aria-label="Get started with Agentwise">
                 <Button size="lg">Get Started</Button>
               </Link>
-              <p className="font-almarai text-body-34 text-text-secondary">
-                Join <span className="text-accent font-bold">10,000+</span> other agents on the newsletter at Agentwise.
-              </p>
             </div>
           </div>
         </section>
