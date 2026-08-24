@@ -158,7 +158,7 @@ function SiteHeader() {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-color-24/90 backdrop-blur-sm border-b border-color-20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-home-background border-b border-color-20">
       <div className="mx-auto max-w-[1440px] grid grid-cols-[1fr_auto_1fr] items-center px-padding-16 tablet:px-padding-24 desktop:px-padding-40 py-padding-16">
         <Link
           to="/"
@@ -173,14 +173,14 @@ function SiteHeader() {
           className="hidden desktop:flex items-center justify-center gap-40 justify-self-center"
         />
         <div className="hidden desktop:flex items-center justify-end gap-16 justify-self-end">
-          <Link to="/signup" aria-label="Get started with Agentwise">
-            <Button variant="outline" size="sm">
-              Get Started
+          <Link to="/signin" aria-label="Log in to Agentwise">
+            <Button variant="ghost" size="sm">
+              Log in
             </Button>
           </Link>
-          <Link to="/signin" aria-label="Log in to Agentwise">
+          <Link to="/signup" aria-label="Get started with Agentwise">
             <Button variant="primary" size="sm">
-              Log in
+              Get Started
             </Button>
           </Link>
         </div>
@@ -203,7 +203,7 @@ function SiteHeader() {
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
-          className="desktop:hidden fixed inset-0 top-[64px] bg-color-24/90 backdrop-blur-sm"
+          className="desktop:hidden fixed inset-0 top-[64px] bg-home-background"
           onKeyDown={onKeyDown}
         >
           <div className="flex flex-col gap-24 p-padding-32">
@@ -235,12 +235,14 @@ function SiteHeader() {
               ))}
               <li>
                 <Link to="/signup" onClick={close} className="block py-padding-8">
-                  Get Started
+                  <Button variant="primary" size="md" fullWidth aria-label="Get started with Agentwise">
+                    Get Started
+                  </Button>
                 </Link>
               </li>
               <li>
                 <Link to="/signin" onClick={close}>
-                  <Button variant="primary" size="md" fullWidth aria-label="Log in">
+                  <Button variant="ghost" size="md" fullWidth aria-label="Log in">
                     Log in
                   </Button>
                 </Link>
@@ -457,7 +459,7 @@ function ContactSection() {
 
 function SiteFooter() {
   return (
-    <footer className="bg-color-16 px-padding-16 tablet:px-padding-24 desktop:px-padding-40 py-padding-32">
+    <footer className="bg-color-16 px-padding-16 tablet:px-padding-24 desktop:px-padding-40 py-padding-60">
       <div className="mx-auto max-w-[1440px]">
         <div className="flex items-center justify-between">
           <Link
@@ -533,19 +535,19 @@ export default function Home() {
           />
           <div className="relative mx-auto max-w-[1440px]">
             <div className="flex flex-col desktop:flex-row desktop:items-center gap-32 desktop:gap-60">
-              <div className="flex-1 flex flex-col gap-24">
+              <div className="flex-1 flex flex-col gap-24 text-center items-center">
                 <h1
                   id="hero-heading"
-                  className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-secondary text-balance"
+                  className="font-garamond text-heading-xl-45 text-secondary text-balance"
                 >
                   Stunning Real Estate Marketing, <span className="text-accent">Personalized</span> To Your Market
                   In Minutes
                 </h1>
-                <p className="font-almarai text-body-34 text-text-secondary max-w-xl">
+                <p className="font-almarai text-body-34 text-text-secondary max-w-xl mx-auto">
                   Agentwise is the all-in-one marketing platform for residential real estate agents. A custom business
                   dashboard and a personalized AI advisor built into every plan.
                 </p>
-                <div className="flex items-center gap-12" aria-label="Social networks">
+                <div className="flex items-center justify-center gap-12" aria-label="Social networks">
                   {HERO_SOCIAL.map(({ icon: Icon, label, href, className }) => (
                     <a
                       key={label}
@@ -563,12 +565,12 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-              <div className="flex-1 relative">
+              <div className="flex-1 relative desktop:flex-[1.35]">
                 <div className="shadow-drop-shadow-18 rounded-radius-20 overflow-hidden">
                   <img
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&h=600&fit=crop"
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop"
                     alt="Agentwise dashboard showing content library and calendar"
-                    className="w-full h-auto"
+                    className="w-full h-auto min-h-[280px] tablet:min-h-[360px] desktop:min-h-[480px] object-cover"
                     loading="eager"
                   />
                 </div>

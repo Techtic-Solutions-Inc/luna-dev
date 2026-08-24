@@ -25,10 +25,10 @@ function StepFrame({ step }: { step: HomeStep }) {
   const padded = String(step.stepNumber).padStart(2, '0');
   return (
     <article className="flex flex-col desktop:flex-row desktop:items-center gap-24 tablet:gap-32 desktop:gap-40">
-      <div className="flex-1 flex flex-col gap-16">
+      <div className="flex-1 flex flex-col gap-16 text-center desktop:text-left items-center desktop:items-start">
         <p className="font-almarai text-heading-lg-71 uppercase text-accent">Step {padded}</p>
         <h3 className="font-garamond text-heading-xl-37 text-secondary text-balance">{step.title}</h3>
-        <p className="font-almarai text-body-3 text-color-14 max-w-xl">{step.description}</p>
+        <p className="font-garamond text-heading-xl-37 text-color-14 max-w-xl text-balance">{step.description}</p>
       </div>
       <div className="flex-1 rounded-radius-20 overflow-hidden shadow-drop-shadow-18">
         <img src={step.imageSrc} alt={step.imageAlt} className="w-full h-auto object-cover" loading="lazy" />
@@ -60,7 +60,7 @@ function ContentLibrarySection({
         <div className="text-center mb-32 tablet:mb-40">
           <h2
             id="content-library-heading"
-            className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-color-16 mb-16 text-balance"
+            className="font-garamond text-heading-xl-45 text-color-16 mb-16 text-balance"
           >
             Marketing That Stops The Scroll
           </h2>
@@ -138,7 +138,7 @@ export function HomeContent({ title, steps, contentLibrary }: HomeContentProps) 
         <div className="relative mx-auto max-w-[1440px]">
           <h2
             id="steps-heading"
-            className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-secondary text-center mb-32 tablet:mb-50 text-balance"
+            className="font-garamond text-heading-xl-45 text-secondary text-center mb-32 tablet:mb-50 text-balance"
           >
             {title}
           </h2>
