@@ -1,0 +1,84 @@
+import { defineConfig, type Plugin, type PreviewServer, type ViteDevServer } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const HOME_PAYLOAD = {
+  headings: [
+    'Built For Agents Like You.',
+    "Here's the deal… Great Marketing is Just the Start.",
+    'Hundreds',
+    'Marketing that stops the scroll',
+    'A custom business dashboard and a personalized AI advisor built into every plan.',
+    'Stunning marketing',
+    'in three simple steps',
+    'Hand-designed by our creative team. Personalized by AI to your market. Ready to post in minutes.',
+    'New agents, team leaders, and large brokerages are using Agentwise to spend less time marketing and more time closing without sacrificing quality.',
+  ],
+  links: [
+    { label: 'About', href: '/about' },
+    { label: 'Learn More', href: '/learn-more' },
+    { label: 'Privacy Policy', href: '/privacy' },
+    { label: 'Terms of Service', href: '/terms' },
+    { label: 'Get Started', href: '/signup' },
+    { label: 'Log in', href: '/signin' },
+    { label: 'Join', href: '/signup' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'Content', href: '/content' },
+    { label: 'Pricing', href: '/pricing' },
+    { label: 'Contact Us', href: '/contact' },
+  ],
+  marketing: [
+    {
+      title: 'Stunning marketing, in three simple steps',
+      description: 'Browse the continuously updated collection.',
+      image: '/assets/figma/frame-2147227816-2270-14191.png',
+    },
+  ],
+};
+
+function visitorHomeMock(): Plugin {
+  const handle = (server: ViteDevServer | PreviewServer) => {
+    const middleware = (
+      req: { method?: string; url?: string },
+      res: { setHeader: (k: string, v: string) => void; end: (body: string) => void },
+      next: () => void,
+    ) => {
+      const url = req.url?.split('?')[0] ?? '';
+      if (req.method === 'GET' && url === '/api/visitor/home') {
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Cache-Control', 'no-store');
+        res.end(JSON.stringify(HOME_PAYLOAD));
+        return;
+      }
+      next();
+    };
+    server.middlewares.use(middleware);
+    const stack = server.middlewares.stack;
+    const entry = stack.pop();
+    if (entry) {
+      stack.unshift(entry);
+    }
+  };
+
+  return {
+    name: 'visitor-home-mock',
+    configureServer: handle,
+    configurePreviewServer: handle,
+  };
+}
+
+export default defineConfig({
+  plugins: [react(), visitorHomeMock()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
+  server: {
+    port: 5173,
+    host: true,
+  },
+});

@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #c8a47e;
+  --background: #637381;
+  --border: #ff5630;
+  --page-bg: #0e0d0d;
+  --color-100: #6600ff00;
+  --color-101: #000001;
+  --color-102: #8b6842;
+  --color-103: #11161c;
+  --color-104: #4b92eb99;
+  --color-105: #050505;
+  --color-106: #1d1a1a;
+  --color-107: #1d1818;
+  --color-108: #ef7b16;
+  --color-109: #8a43e1;
+  --color-110: #d511fd;
+  --color-111: #554545;
+  --color-112: #ff004f;
+  --color-113: #00f7ef;
+  --color-114: #4285f4;
+  --color-115: #34a853;
+  --color-116: #ea4335;
+  --color-117: #fbbc04;
+  --color-118: #c5221f;
+  --color-119: #00e510;
+  --color-120: #007ebb;
+  --color-121: #402631;
+  --color-122: #e53a71;
+  --color-123: #03f7b51e;
+  --color-124: #788d871e;
+  --color-125: #d8d8d8;
+  --color-126: #872bff;
+  --color-127: #00000019;
+  --color-128: #d9d9d8;
+  --color-129: #ffffff14;
+  --color-130: #1877f2;
+  --color-131: #bebbb9;
+  --color-132: #646261;
+  --color-133: #272727;
+  --color-134: #919eab;
+  --color-135: #959595;
+  --color-136: #0b0b0b;
+  --text: #ffffff;
+  --space-section: 50px;
+  --space-pad: 32px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-100: 100px;
+  --shadow-drop: 0px 4px 4px 0px #0000003f;
+  --shadow-accent: 0px 4px 34px 0px #c8a47e33;
+  --shadow-soft: 0px 8px 16px 0px #919eab28;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--text);
+    font-family: Almarai, sans-serif;
+    font-size: 16px;
+    line-height: 1.116;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .interactive-hover {
+    @apply transition-colors duration-150;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-1000 bg-accent px-7 py-3 font-almarai text-almarai-16-bold text-color-105;
+    @apply hover:bg-color-102 active:brightness-90;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-1000 border border-white px-7 py-3 font-almarai text-almarai-16 text-white;
+    @apply hover:bg-white/10 active:bg-white/20;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-dark {
+    @apply inline-flex items-center justify-center rounded-1000 bg-color-121 px-8 py-3 font-almarai text-almarai-16 text-white;
+    @apply hover:bg-color-111 active:brightness-90;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .text-link {
+    @apply font-almarai text-almarai-16 text-white transition-colors duration-150;
+    @apply hover:text-accent active:text-color-102;
+    @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .field-input {
+    @apply w-full rounded-1000 border border-color-129 bg-white/5 px-5 py-3 font-almarai text-almarai-16-22 text-white placeholder:text-color-134;
+    @apply hover:border-color-131;
+    @apply focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .field-textarea {
+    @apply w-full resize-y rounded-16 border border-color-129 bg-white/5 px-5 py-3 font-almarai text-almarai-16-22 text-white placeholder:text-color-134;
+    @apply hover:border-color-131;
+    @apply focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-10 focus:bg-accent focus:px-4 focus:py-2 focus:text-color-105;
+  }
+
+  .grid-overlay {
+    background-image: linear-gradient(to right, #ffffff0d 1px, transparent 1px),
+      linear-gradient(to bottom, #ffffff0d 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+
+  .skeleton {
+    @apply animate-pulse rounded-12 bg-white/10;
+  }
+}
