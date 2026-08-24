@@ -1,6 +1,5 @@
 import { useEffect, useId, useRef, useState, type ChangeEvent, type FormEvent, type KeyboardEvent } from 'react';
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok } from 'react-icons/fa6';
-import { FaMedium } from 'react-icons/fa';
 import { SiX } from 'react-icons/si';
 import { Link } from 'react-router-dom';
 import HomeContent from '../components/features/HomeContent';
@@ -60,8 +59,8 @@ const HERO_SOCIAL = [
     href: 'https://instagram.com',
     className: 'bg-gradient-to-br from-color-30 to-color-122',
   },
+  { icon: SiX, label: 'X (Twitter)', href: 'https://x.com', className: 'bg-color-16' },
   { icon: FaTiktok, label: 'TikTok', href: 'https://tiktok.com', className: 'bg-color-16' },
-  { icon: FaMedium, label: 'Medium', href: 'https://medium.com', className: 'bg-color-16' },
   { icon: FaLinkedinIn, label: 'LinkedIn', href: 'https://linkedin.com', className: 'bg-color-13' },
 ];
 
@@ -160,10 +159,10 @@ function SiteHeader() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-color-24/90 backdrop-blur-sm border-b border-color-20">
-      <div className="mx-auto max-w-[1440px] flex items-center justify-between px-padding-16 tablet:px-padding-24 desktop:px-padding-40 py-padding-16">
+      <div className="mx-auto max-w-[1440px] grid grid-cols-[1fr_auto_1fr] items-center px-padding-16 tablet:px-padding-24 desktop:px-padding-40 py-padding-16">
         <Link
           to="/"
-          className="font-garamond text-heading-lg-26 text-secondary hover:text-accent transition-colors"
+          className="font-garamond text-heading-lg-26 text-secondary hover:text-accent transition-colors justify-self-start"
           aria-label="Agentwise home"
         >
           Agentwise
@@ -171,23 +170,13 @@ function SiteHeader() {
         <LinkList
           links={NAV_LINKS}
           ariaLabel="Main navigation"
-          className="hidden desktop:flex items-center gap-40"
+          className="hidden desktop:flex items-center justify-center gap-40 justify-self-center"
         />
-        <div className="hidden desktop:flex items-center gap-24">
-          <Link
-            to="/signup"
-            className="group inline-flex items-center gap-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-radius-8"
-            aria-label="Get started with Agentwise"
-          >
-            <span className="font-almarai text-body-77 text-secondary group-hover:text-accent transition-colors">
+        <div className="hidden desktop:flex items-center justify-end gap-16 justify-self-end">
+          <Link to="/signup" aria-label="Get started with Agentwise">
+            <Button variant="outline" size="sm">
               Get Started
-            </span>
-            <span
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-secondary text-xl leading-none group-hover:bg-[#b8936a] group-active:bg-[#a8835c] transition-colors"
-              aria-hidden="true"
-            >
-              +
-            </span>
+            </Button>
           </Link>
           <Link to="/signin" aria-label="Log in to Agentwise">
             <Button variant="primary" size="sm">
@@ -198,7 +187,7 @@ function SiteHeader() {
         <button
           ref={hamburgerRef}
           type="button"
-          className="desktop:hidden flex items-center justify-center w-10 h-10 text-secondary hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-radius-8 transition-colors"
+          className="desktop:hidden col-start-3 justify-self-end flex items-center justify-center w-10 h-10 text-secondary hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-radius-8 transition-colors"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           aria-controls="mobile-nav"
@@ -549,8 +538,8 @@ export default function Home() {
                   id="hero-heading"
                   className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-secondary text-balance"
                 >
-                  Stunning Real Estate Marketing,{' '}
-                  <span className="text-accent">Personalized To Your Market</span> In Minutes
+                  Stunning Real Estate Marketing, <span className="text-accent">Personalized</span> To Your Market
+                  In Minutes
                 </h1>
                 <p className="font-almarai text-body-34 text-text-secondary max-w-xl">
                   Agentwise is the all-in-one marketing platform for residential real estate agents. A custom business
@@ -608,8 +597,8 @@ export default function Home() {
           aria-labelledby="ultimate-mind-heading"
         >
           <div className="mx-auto max-w-[1440px]">
-            <div className="flex flex-col desktop:flex-row gap-24 tablet:gap-32 rounded-radius-20 overflow-hidden bg-color-93">
-              <div className="flex-1 p-padding-24 tablet:p-padding-32 desktop:p-padding-40">
+            <div className="flex flex-col desktop:flex-row rounded-radius-20 overflow-hidden">
+              <div className="flex-1 bg-color-93 p-padding-24 tablet:p-padding-32 desktop:p-padding-40">
                 <div className="flex flex-col gap-16 tablet:gap-24">
                   <h3 id="ultimate-mind-heading" className="font-garamond text-heading-lg-26 text-secondary">
                     Agentwise Ultimate Mind
@@ -625,11 +614,11 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="flex-1 p-padding-24 tablet:p-padding-32 desktop:p-padding-40 flex flex-col justify-center gap-24">
-                <h2 className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-secondary text-balance">
+              <div className="flex-1 bg-color-41 p-padding-24 tablet:p-padding-32 desktop:p-padding-40 flex flex-col justify-center gap-24">
+                <h2 className="font-garamond text-heading-xl-37 desktop:text-heading-xl-45 text-color-16 text-balance">
                   Here&apos;s The Deal... <span className="text-accent">Great Marketing</span> Is Just The Start.
                 </h2>
-                <p className="font-almarai text-body-34 text-text-secondary">
+                <p className="font-almarai text-body-34 text-color-14">
                   Agentwise helps you build and personalize a brand for your real estate career. Our AI learns your
                   market, your brand, and your voice.
                 </p>

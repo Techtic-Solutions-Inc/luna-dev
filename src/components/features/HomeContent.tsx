@@ -142,7 +142,7 @@ export function HomeContent({ title, steps, contentLibrary }: HomeContentProps) 
           >
             {title}
           </h2>
-          <div className="flex flex-col gap-32 tablet:gap-50">
+          <div className="flex flex-col gap-50">
             {steps.map((step) => (
               <StepFrame key={step.stepNumber} step={step} />
             ))}
