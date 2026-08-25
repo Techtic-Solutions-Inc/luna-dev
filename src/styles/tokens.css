@@ -1,0 +1,147 @@
+:root {
+  --accent: #c8a47e;
+  --background: #637381;
+  --border: #ff5630;
+  --color-100: #6600ff00;
+  --color-101: #000001;
+  --color-102: #8b6842;
+  --color-103: #11161c;
+  --color-104: #4b92eb99;
+  --color-105: #050505;
+  --color-106: #1d1a1a;
+  --color-107: #1d1818;
+  --color-108: #ef7b16;
+  --color-109: #8a43e1;
+  --color-110: #d511fd;
+  --color-111: #554545;
+  --color-112: #ff004f;
+  --color-113: #00f7ef;
+  --color-114: #4285f4;
+  --color-115: #34a853;
+  --color-116: #ea4335;
+  --color-117: #fbbc04;
+  --color-118: #c5221f;
+  --color-119: #00e510;
+  --color-120: #007ebb;
+  --color-121: #402631;
+  --color-122: #e53a71;
+  --color-123: #03f7b51e;
+  --color-124: #788d871e;
+  --color-125: #d8d8d8;
+  --color-126: #872bff;
+  --color-127: #00000019;
+  --color-128: #d9d9d8;
+  --color-129: #ffffff14;
+  --color-13: #1877f2;
+  --color-130: #1877f2;
+  --color-131: #bebbb9;
+  --color-132: #646261;
+  --color-133: #272727;
+  --color-134: #919eab;
+  --color-135: #959595;
+  --color-16: #0b0b0b;
+  --secondary: #ffffff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-16);
+  color: var(--secondary);
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  line-height: 1.116;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.hero-glow {
+  position: relative;
+  background:
+    radial-gradient(ellipse 55% 50% at 12% 8%, color-mix(in srgb, var(--color-102) 40%, transparent) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 80% at 78% 18%, var(--color-121) 0%, transparent 58%),
+    radial-gradient(ellipse 50% 70% at 88% 42%, color-mix(in srgb, var(--color-109) 15%, transparent) 0%, transparent 52%),
+    var(--color-16);
+}
+
+.hero-glow::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(#ffffff0d 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff0d 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 40%, transparent 100%);
+}
+
+.dashboard-canvas {
+  background:
+    radial-gradient(ellipse 48% 32% at 82% 4%, #40263199 0%, transparent 58%),
+    radial-gradient(ellipse 28% 22% at 70% 0%, #8a43e124 0%, transparent 50%),
+    transparent;
+}
+
+.signup-glow {
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 45%, #8b684233 0%, transparent 62%),
+    radial-gradient(ellipse 60% 50% at 20% 80%, #40263140 0%, transparent 55%),
+    #11161c;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -40px;
+  z-index: 80;
+  border-radius: 100px;
+  background: #c8a47e;
+  color: #000001;
+  padding: 8px 16px;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.home-grid-bg {
+  position: relative;
+  background-color: #0b0b0b;
+  background-image:
+    linear-gradient(#ffffff0f 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff0f 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.contact-gradient {
+  background: linear-gradient(180deg, #402631, #1d1a1a 45%, #0b0b0b);
+}
