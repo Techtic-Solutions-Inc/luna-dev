@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-accent: #c8a47e;
+  --color-page: #0e0d0d;
+  --color-background: var(--color-page);
+  --color-border: #ff5630;
+  --color-100: #6600ff00;
+  --color-101: #000001;
+  --color-102: #8b6842;
+  --color-103: #11161c;
+  --color-104: #4b92eb99;
+  --color-105: #050505;
+  --color-106: #1d1a1a;
+  --color-107: #1d1818;
+  --color-108: #ef7b16;
+  --color-109: #8a43e1;
+  --color-110: #d511fd;
+  --color-111: #554545;
+  --color-112: #ff004f;
+  --color-113: #00f7ef;
+  --color-114: #4285f4;
+  --color-115: #34a853;
+  --color-116: #ea4335;
+  --color-117: #fbbc04;
+  --color-118: #c5221f;
+  --color-119: #00e510;
+  --color-120: #007ebb;
+  --color-121: #402631;
+  --color-122: #e53a71;
+  --color-123: #03f7b51e;
+  --color-124: #788d871e;
+  --color-125: #d8d8d8;
+  --color-126: #872bff;
+  --color-127: #00000019;
+  --color-128: #d9d9d8;
+  --color-129: #ffffff14;
+  --color-130: #1877f2;
+  --color-131: #bebbb9;
+  --color-132: #646261;
+  --color-133: #272727;
+  --color-134: #919eab;
+  --color-135: #959595;
+  --color-136: #0b0b0b;
+  --color-forest: #2c4c3d;
+  --color-forest-deep: #143023;
+  --spacing-32: 32px;
+  --spacing-50: 50px;
+  --size-gallery-height: 420px;
+  --size-gallery-height-md: 553px;
+  --size-gallery-width-lg: 317px;
+  --radius-24: 24px;
+  --radius-100: 100px;
+  --shadow-gold: 0px 4px 34px 0px #c8a47e33;
+  --shadow-float: 0px 4px 40px 0px #00000019;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  max-width: 100%;
+  background: var(--color-background);
+  color: #ffffff;
+  font-family: Almarai, system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.gallery-shell {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.site-header,
+.site-header a,
+.site-header button {
+  color: #ffffff;
+}
+
+.gallery-track {
+  animation: gallery-scroll 42s linear infinite;
+}
+
+.gallery-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes gallery-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero-glows {
+  background:
+    radial-gradient(ellipse 50% 45% at 12% 18%, rgba(138, 67, 225, 0.38), transparent 62%),
+    radial-gradient(ellipse 42% 40% at 62% 22%, rgba(200, 164, 126, 0.28), transparent 58%),
+    radial-gradient(ellipse 40% 38% at 18% 78%, rgba(52, 168, 83, 0.18), transparent 60%),
+    radial-gradient(ellipse 36% 36% at 88% 72%, rgba(75, 146, 235, 0.16), transparent 58%),
+    #0e0d0d;
+}
+
+.ultimate-mind-panel {
+  background-image: linear-gradient(180deg, #182620 0%, #105d39 100%);
+}
+
+.interactive-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-color-105;
+}
+
+@layer components {
+  .btn-gold {
+    @apply inline-flex items-center justify-center rounded-100 bg-accent px-7 py-3 font-public-sans text-public-16 text-color-107 shadow-gold transition duration-150;
+    @apply hover:bg-color-102 hover:brightness-110;
+    @apply active:scale-[0.98] active:brightness-95;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-color-105;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-100 border border-white bg-transparent px-7 py-3 font-public-sans text-public-16 text-white transition duration-150;
+    @apply hover:bg-white hover:text-color-107;
+    @apply active:scale-[0.98];
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-color-105;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-ghost-dark {
+    @apply inline-flex items-center justify-center rounded-100 border border-white/20 bg-color-133 px-10 py-3.5 font-serif text-lg text-white transition duration-150;
+    @apply hover:border-accent hover:bg-color-106;
+    @apply active:scale-[0.98];
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-color-105;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .nav-link {
+    @apply font-public-sans text-[15px] font-medium text-white transition duration-150;
+    @apply hover:text-accent;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-color-105 rounded-2;
+    @apply active:opacity-80;
+  }
+
+  .btn-header {
+    @apply inline-flex !h-[50px] !min-h-[50px] !max-h-[50px] !w-[150px] !min-w-[150px] !max-w-[150px] shrink-0 items-center justify-center !px-0 !py-0 box-border;
+  }
+
+  .field-input {
+    @apply w-full rounded-12 border border-white/15 bg-transparent px-5 py-3.5 font-sans text-almarai-lg text-white placeholder:text-color-135;
+    @apply transition duration-150;
+    @apply hover:border-white/30;
+    @apply focus-visible:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .field-textarea {
+    @apply w-full resize-none rounded-12 border border-white/15 bg-transparent px-5 py-3.5 font-sans text-almarai-lg text-white placeholder:text-color-135;
+    @apply transition duration-150 min-h-[120px];
+    @apply hover:border-white/30;
+    @apply focus-visible:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-waitlist {
+    @apply inline-flex min-w-[240px] items-center justify-center rounded-100 bg-gradient-to-b from-color-106 to-color-121 px-10 py-3.5 font-public-sans text-sm font-semibold uppercase tracking-[0.14em] text-white shadow-hairline transition duration-150;
+    @apply hover:brightness-110;
+    @apply active:scale-[0.98] active:brightness-95;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-color-105;
+    @apply disabled:cursor-not-allowed disabled:opacity-50;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .gallery-track {
+    animation: none;
+  }
+}
