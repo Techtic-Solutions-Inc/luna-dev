@@ -5,6 +5,7 @@ import { AppThemeProvider } from './theme';
 import { breakpoints } from './theme/breakpoints';
 import ErrorBoundary from './components/ErrorBoundary';
 import App from './App';
+import './fonts';
 import './index.css';
 
 config.autoAddCss = false;
