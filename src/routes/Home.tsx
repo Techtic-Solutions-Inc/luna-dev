@@ -43,6 +43,18 @@ const FALLBACK_IMAGES: GalleryImage[] = [
   { src: '/images/gallery-3.png', alt: 'Aerial courtyard story for neighborhood showings' },
   { src: '/images/gallery-4.png', alt: 'City street at dusk story' },
   { src: '/images/gallery-5.png', alt: 'Workspace flat-lay story' },
+  {
+    src: '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-65-2289.png',
+    alt: 'Lifestyle listing portrait',
+  },
+  {
+    src: '/assets/figma/attlgjgqkngefohwz-large-img6232-2-I2295-3482-65-2287.png',
+    alt: 'Cafe lifestyle story',
+  },
+  {
+    src: '/assets/figma/attlgjgqkngefohwz-large-img6232-3-I2295-3482-65-2290.png',
+    alt: 'Workspace story portrait',
+  },
 ];
 
 const TESTIMONIALS = [
