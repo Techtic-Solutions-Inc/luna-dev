@@ -26,7 +26,7 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="relative z-20 mx-auto flex max-w-[1920px] items-center justify-between gap-12 px-20 py-20 lg:gap-16 lg:px-60">
+    <header className="relative z-20 mx-auto flex min-w-0 max-w-[1920px] items-center justify-between gap-8 px-20 py-20 lg:gap-16 lg:px-60">
       <BrandMark compact align="start" />
       <nav className="hidden items-center gap-32 md:flex" aria-label="Primary">
         {links.map((link) => (

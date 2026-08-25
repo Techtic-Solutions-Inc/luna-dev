@@ -75,12 +75,12 @@ const quotes = [
 export function MarketingSections() {
   return (
     <>
-      <section id="content" className="bg-secondary px-20 py-60 text-color-16 lg:px-60">
+      <section id="content" className="min-w-0 overflow-x-clip bg-secondary px-20 py-60 text-color-16 lg:px-60">
         <h2 className="text-center font-garamond text-page-title">Marketing That Stops The Scroll</h2>
         <p className="mx-auto mt-16 max-w-[720px] text-center font-public-sans text-almarai-16-24 text-color-132">
           Hand-designed by our creative team. Personalized by AI to your market. Ready to post in minutes.
         </p>
-        <div className="-mx-20 mt-40 flex gap-20 overflow-x-auto px-20 pb-8 lg:-mx-60 lg:px-60">
+        <div className="mt-40 flex w-full min-w-0 max-w-full gap-20 overflow-x-auto overscroll-x-contain px-20 pb-8 lg:-mx-60 lg:px-60">
           {gallery.map((item) => (
             <img
               key={item.src}
