@@ -62,7 +62,6 @@ export function SignInForm() {
         onChange={(e) => setEmail(e.target.value)}
         error={emailError}
         disabled={loading}
-        hideLabel
         shape="pill"
       />
       <PasswordInput
@@ -74,7 +73,6 @@ export function SignInForm() {
         onChange={(e) => setPassword(e.target.value)}
         error={passwordError}
         disabled={loading}
-        hideLabel
         shape="pill"
       />
       <div className="flex items-center justify-between gap-12">

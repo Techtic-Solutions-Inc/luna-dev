@@ -28,14 +28,14 @@ export function AuthLayout({
       </a>
       <section className="signup-glow relative flex min-h-screen flex-col px-24 py-32 sm:px-40 lg:px-48 lg:py-32">
         {brandPlacement === "panel-start" ? <BrandMark align="start" /> : null}
-        <div id="main" className="mx-auto flex w-full max-w-[461px] flex-1 flex-col justify-center py-32">
+        <main id="main" className="mx-auto flex w-full max-w-[461px] flex-1 flex-col justify-center py-32">
           {brandPlacement === "form-center" ? (
             <div className="mb-32 flex justify-center">
               <BrandMark align="center" />
             </div>
           ) : null}
           {children}
-        </div>
+        </main>
       </section>
       <aside className="relative hidden min-h-screen overflow-hidden bg-color-16 lg:block">
         <img

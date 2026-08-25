@@ -86,7 +86,6 @@ export function SignUpForm() {
           onChange={(e) => setFirstName(e.target.value)}
           error={firstNameError}
           disabled={loading}
-          hideLabel
           shape="pill"
         />
         <Input
@@ -98,7 +97,6 @@ export function SignUpForm() {
           onChange={(e) => setLastName(e.target.value)}
           error={lastNameError}
           disabled={loading}
-          hideLabel
           shape="pill"
         />
       </div>
@@ -112,7 +110,6 @@ export function SignUpForm() {
         onChange={(e) => setEmail(e.target.value)}
         error={emailError}
         disabled={loading}
-        hideLabel
         shape="pill"
       />
       <PasswordInput
@@ -124,7 +121,6 @@ export function SignUpForm() {
         onChange={(e) => setPassword(e.target.value)}
         error={passwordError}
         disabled={loading}
-        hideLabel
         shape="pill"
       />
       <Checkbox

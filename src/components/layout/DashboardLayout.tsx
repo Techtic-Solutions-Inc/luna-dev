@@ -28,15 +28,21 @@ export function DashboardLayout({ children, name, creditsUsed, creditsTotal }: D
     }
     const node = drawerRef.current;
     const previously = document.activeElement;
-    const focusable = node?.querySelectorAll<HTMLElement>("a,button,input,[tabindex]:not([tabindex='-1'])");
-    focusable?.[0]?.focus();
-
+    node?.querySelectorAll<HTMLElement>("a,button,input,[tabindex]:not([tabindex='-1'])")?.[0]?.focus();
     function onKey(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setOpen(false);
         return;
       }
-      if (event.key !== "Tab" || !focusable || focusable.length === 0) {
+      if (event.key !== "Tab") {
+        return;
+      }
+      const node = drawerRef.current;
+      if (!node) {
+        return;
+      }
+      const focusable = node.querySelectorAll<HTMLElement>("a,button,input,[tabindex]:not([tabindex='-1'])");
+      if (focusable.length === 0) {
         return;
       }
       const first = focusable[0];

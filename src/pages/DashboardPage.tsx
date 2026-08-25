@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { AnnouncementsList, type AnnouncementRow } from "@/components/dashboard/AnnouncementsList";
-import { ContentCard, WEEK_CARDS } from "@/components/dashboard/ContentCard";
+import { ContentCard } from "@/components/dashboard/ContentCard";
 import { DashboardSearch } from "@/components/dashboard/DashboardSearch";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { NewFeaturesList, type FeatureRow } from "@/components/dashboard/NewFeaturesList";
@@ -11,11 +11,6 @@ import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { useDashboard } from "@/hooks/useDashboard";
 import { useAuth } from "@/lib/auth/useAuth";
 import { asArray, asNumber, asRecord, asString, displayName, personName } from "@/lib/bind";
-import {
-  deleteDashboardNotification,
-  updateDashboardSubscription,
-} from "@/lib/api/dashboard";
-import type { SuggestionItem } from "@/lib/api/types";
 
 function greetingPrefix(): string {
   const hour = new Date().getHours();
@@ -70,56 +65,77 @@ function mapFeatures(raw: unknown[] | undefined): FeatureRow[] {
   });
 }
 
-function mapCalendar(raw: unknown[] | undefined) {
-  if (!raw) {
-    return [];
+function localAssetSrc(link: string | undefined): string | undefined {
+  if (link?.startsWith("/assets/") || link?.startsWith("/images/")) {
+    return link;
   }
-  return raw.flatMap((entry, index) => {
+  return undefined;
+}
+
+function mapCalendar(raw: unknown[]) {
+  return raw.flatMap((entry) => {
     const rec = asRecord(entry);
     if (!rec) {
       return [];
     }
-    const fallback = WEEK_CARDS[index % WEEK_CARDS.length];
-    const link = asString(rec.link);
-    const src = link && link.startsWith("/assets/") ? link : fallback.src;
+    const day = asString(rec.date);
+    const kind = asString(rec.title);
+    if (!day || !kind) {
+      return [];
+    }
     return [
       {
-        id: asString(rec.id) ?? fallback.id,
-        day: asString(rec.date) ?? fallback.day,
-        kind: asString(rec.title) ?? fallback.kind,
-        overlay: asString(rec.content) ?? asString(rec.description) ?? fallback.overlay,
-        src,
+        id: asString(rec.id) ?? `${day}-${kind}`,
+        day,
+        kind,
+        overlay: asString(rec.content) ?? asString(rec.description),
+        src: localAssetSrc(asString(rec.link)),
       },
     ];
   });
 }
 
-function suggestionText(item: SuggestionItem): string {
-  return item.prompt ?? item.message ?? item.text ?? item.title ?? "";
+interface PromptRow {
+  id?: string;
+  text: string;
+}
+
+function mapPrompts(raw: unknown[] | undefined): PromptRow[] {
+  if (!raw) {
+    return [];
+  }
+  return raw.flatMap((entry) => {
+    if (typeof entry === "string" && entry.length > 0) {
+      return [{ text: entry }];
+    }
+    const rec = asRecord(entry);
+    if (!rec) {
+      return [];
+    }
+    const text =
+      asString(rec.prompt) ?? asString(rec.message) ?? asString(rec.text) ?? asString(rec.title);
+    return text ? [{ id: asString(rec.id), text }] : [];
+  });
 }
 
 export function DashboardPage() {
   const { user } = useAuth();
-  const { data, suggestions, loading, error, reload } = useDashboard();
+  const { data, loading, error, reload } = useDashboard();
   const [query, setQuery] = useState("");
-  const [manageError, setManageError] = useState<string | null>(null);
-  const [managing, setManaging] = useState(false);
-  const [hiddenIds, setHiddenIds] = useState<string[]>([]);
 
   const overviewName =
     displayName(data) ?? personName(user?.full_name, user?.name, user?.first_name);
   const used = asNumber(data?.ai_credits_used);
   const total = asNumber(data?.ai_credits_total);
-  const status = asString(data?.subscription_status) ?? asString(asRecord(data?.subscription)?.status);
 
   const announcements = useMemo(() => {
-    const rows = mapAnnouncements(asArray(data?.announcements)).filter((row) => !hiddenIds.includes(row.id ?? ""));
+    const rows = mapAnnouncements(asArray(data?.announcements));
     const q = query.trim().toLowerCase();
     if (!q) {
       return rows;
     }
     return rows.filter((row) => row.title.toLowerCase().includes(q) || (row.detail ?? "").toLowerCase().includes(q));
-  }, [data, hiddenIds, query]);
+  }, [data, query]);
 
   const features = useMemo(() => {
     const rows = mapFeatures(asArray(data?.new_features));
@@ -130,52 +146,27 @@ export function DashboardPage() {
     return rows.filter((row) => row.title.toLowerCase().includes(q) || (row.description ?? "").toLowerCase().includes(q));
   }, [data, query]);
 
-  const rawCalendar = asArray(data?.content_calendar) ?? asArray(data?.items);
+  const calendarItems = asArray(data?.content_calendar) ?? asArray(data?.items);
   const calendar = useMemo(() => {
-    const fromApi = rawCalendar ? mapCalendar(rawCalendar) : WEEK_CARDS.map((card) => ({ ...card }));
+    const fromApi = calendarItems ? mapCalendar(calendarItems) : [];
     const q = query.trim().toLowerCase();
     if (!q) {
       return fromApi;
     }
-    return fromApi.filter((card) => `${card.day} ${card.kind} ${card.overlay}`.toLowerCase().includes(q));
-  }, [rawCalendar, query]);
+    return fromApi.filter((card) => `${card.day} ${card.kind} ${card.overlay ?? ""}`.toLowerCase().includes(q));
+  }, [calendarItems, query]);
 
   const prompts = useMemo(() => {
-    const texts = suggestions.map(suggestionText).filter((text) => text.length > 0);
+    const rows = mapPrompts(asArray(data?.suggestions));
     const q = query.trim().toLowerCase();
     if (!q) {
-      return texts;
+      return rows;
     }
-    return texts.filter((text) => text.toLowerCase().includes(q));
-  }, [suggestions, query]);
+    return rows.filter((row) => row.text.toLowerCase().includes(q));
+  }, [data, query]);
 
   const downloads = asNumber(data?.downloads);
   const generated = asNumber(data?.content_generated);
-
-  async function onDismiss(id: string) {
-    if (!id) {
-      return;
-    }
-    try {
-      await deleteDashboardNotification(id);
-      setHiddenIds((prev) => [...prev, id]);
-    } catch {
-      setHiddenIds((prev) => [...prev, id]);
-    }
-  }
-
-  async function onManage() {
-    setManaging(true);
-    setManageError(null);
-    try {
-      await updateDashboardSubscription();
-      reload();
-    } catch (err: unknown) {
-      setManageError(err instanceof Error ? err.message : "Unable to update subscription");
-    } finally {
-      setManaging(false);
-    }
-  }
 
   if (loading) {
     return <DashboardSkeleton />;
@@ -292,7 +283,7 @@ export function DashboardPage() {
               View all
             </a>
           </div>
-          <AnnouncementsList items={announcements} onDismiss={onDismiss} />
+          <AnnouncementsList items={announcements} />
         </section>
         <section className="rounded-16 border border-color-129 bg-color-106 p-24">
           <h2 className="font-garamond text-hero-serif text-secondary">Prompt Library</h2>
@@ -302,10 +293,13 @@ export function DashboardPage() {
             </div>
           ) : (
             <ul className="mt-16 flex flex-col gap-10">
-              {prompts.map((text) => (
-                <li key={text} className="rounded-12 border border-color-129 bg-color-107 px-16 py-14">
+              {prompts.map((row, index) => (
+                <li
+                  key={row.id ?? `${index}-${row.text}`}
+                  className="rounded-12 border border-color-129 bg-color-107 px-16 py-14"
+                >
                   <p className="text-almarai-14 text-accent">Post</p>
-                  <p className="mt-8 text-almarai-16-20 text-secondary">{text}</p>
+                  <p className="mt-8 text-almarai-16-20 text-secondary">{row.text}</p>
                 </li>
               ))}
             </ul>
@@ -323,14 +317,7 @@ export function DashboardPage() {
       <section id="subscription" className="mt-40">
         <h2 className="font-garamond text-hero-serif text-secondary">Subscription</h2>
         <div className="mt-16">
-          <SubscriptionPanel
-            used={used}
-            total={total}
-            status={status}
-            onManage={() => void onManage()}
-            managing={managing}
-            error={manageError}
-          />
+          <SubscriptionPanel used={used} total={total} />
         </div>
       </section>
 

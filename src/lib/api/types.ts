@@ -91,11 +91,3 @@ export interface NewFeatureItem {
   title: string;
   description?: string;
 }
-
-export interface SuggestionItem {
-  id?: string;
-  title?: string;
-  message?: string;
-  prompt?: string;
-  text?: string;
-}

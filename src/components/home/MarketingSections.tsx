@@ -229,29 +229,27 @@ function ContactBlock() {
           </div>
           <h2 className="text-center font-garamond text-section-title text-secondary">Let’s Work Together</h2>
           <div className="grid gap-16 sm:grid-cols-2">
-            <Input label="First Name" name="first_name" placeholder="First Name" hideLabel shape="pill" required />
-            <Input label="Last Name" name="last_name" placeholder="Last Name" hideLabel shape="pill" required />
+            <Input label="First Name" name="first_name" placeholder="First Name" shape="pill" required />
+            <Input label="Last Name" name="last_name" placeholder="Last Name" shape="pill" required />
           </div>
           <div className="grid gap-16 sm:grid-cols-2">
-            <Input label="Email" name="email" type="email" placeholder="Email" hideLabel shape="pill" required />
-            <Input label="Phone number" name="phone" placeholder="Phone number" hideLabel shape="pill" />
+            <Input label="Email" name="email" type="email" placeholder="Email" shape="pill" required />
+            <Input label="Phone number" name="phone" placeholder="Phone number" shape="pill" />
           </div>
           <Input
             label="How long have you been in Real Estate?"
             name="tenure"
             placeholder="How long have you been in Real Estate?"
-            hideLabel
             shape="pill"
           />
           <Input
             label="What do you currently do for marketing your business?"
             name="marketing"
             placeholder="What do you currently do for marketing your business?"
-            hideLabel
             shape="pill"
           />
           <label className="flex flex-col gap-8 text-almarai-14 text-color-131" htmlFor="message">
-            <span className="sr-only">Your Message</span>
+            <span>Your Message</span>
             <textarea
               id="message"
               name="message"

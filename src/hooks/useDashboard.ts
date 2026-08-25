@@ -1,18 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  getDashboard,
-  getUltimateMindSuggestions,
-} from "@/lib/api/dashboard";
+import { getDashboard } from "@/lib/api/dashboard";
 import { ApiClientError } from "@/lib/api/client";
 import { useAuth } from "@/lib/auth/useAuth";
-import type { DashboardOverviewData, SuggestionItem } from "@/lib/api/types";
+import type { DashboardOverviewData } from "@/lib/api/types";
 
 export function useDashboard() {
   const { token, logout } = useAuth();
   const navigate = useNavigate();
   const [data, setData] = useState<DashboardOverviewData | null>(null);
-  const [suggestions, setSuggestions] = useState<SuggestionItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,13 +18,9 @@ export function useDashboard() {
     }
     setLoading(true);
     setError(null);
-    void Promise.all([
-      getDashboard(),
-      getUltimateMindSuggestions().catch(() => [] as SuggestionItem[]),
-    ])
-      .then(([overview, list]) => {
+    void getDashboard()
+      .then((overview) => {
         setData(overview);
-        setSuggestions(list);
       })
       .catch((err: unknown) => {
         if (err instanceof ApiClientError && err.status === 401) {
@@ -48,5 +40,5 @@ export function useDashboard() {
     reload();
   }, [reload]);
 
-  return { data, suggestions, loading, error, reload };
+  return { data, loading, error, reload };
 }
