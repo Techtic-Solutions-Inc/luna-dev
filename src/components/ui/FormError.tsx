@@ -7,7 +7,7 @@ export function FormError({ message }: FormErrorProps) {
     return null;
   }
   return (
-    <p className="type-body-69 w-full font-almarai text-[#ff5630]" role="alert">
+    <p className="type-body-69 w-full font-almarai text-border" role="alert">
       {message}
     </p>
   );

@@ -47,6 +47,8 @@ export function SignInForm() {
     await submit({ email: email.trim(), password }, remember);
   }
 
+  const fieldClass = `!px-[16px]${isSubmitting ? ' skeleton-pulse' : ''}`;
+
   return (
     <form
       id="auth-form"
@@ -55,13 +57,10 @@ export function SignInForm() {
       noValidate
     >
       <AuthBrand />
-      <h1
-        className="mt-[30px] text-center font-garamond text-[32px] font-medium leading-[41.76px] text-white"
-        style={{ fontFamily: "'EB Garamond', serif" }}
-      >
+      <h1 className="mt-[30px] text-center font-garamond text-[32px] font-medium leading-[41.76px] text-ink">
         Welcome To Agentwise
       </h1>
-      <p className="type-body-15 mt-[16px] max-w-[400px] text-center font-almarai text-[#637381]">
+      <p className="type-body-15 mt-[16px] max-w-[400px] text-center text-ink">
         Everything you need to create standout real estate content.
       </p>
 
@@ -77,8 +76,7 @@ export function SignInForm() {
           onChange={(event) => setEmail(event.target.value)}
           error={mergedErrors.email}
           disabled={isSubmitting}
-          shape="soft"
-          className={isSubmitting ? 'skeleton-pulse' : ''}
+          className={fieldClass}
         />
         <PasswordInput
           id="password"
@@ -90,10 +88,9 @@ export function SignInForm() {
           onChange={(event) => setPassword(event.target.value)}
           error={mergedErrors.password}
           disabled={isSubmitting}
-          shape="soft"
-          className={isSubmitting ? 'skeleton-pulse' : ''}
+          className={fieldClass}
         />
-        <div className="flex items-center justify-between gap-[12px]">
+        <div className="flex flex-wrap items-center justify-between gap-[12px]">
           <Checkbox
             id="remember"
             name="remember"
@@ -101,34 +98,31 @@ export function SignInForm() {
             onChange={(event) => setRemember(event.target.checked)}
             disabled={isSubmitting}
             align="center"
-            labelClassName="type-body-15 font-almarai text-[#637381]"
+            labelClassName="type-body-15 font-almarai text-ink"
             label="Remember me"
           />
           <Link
             to="/forgot-password"
-            className="type-body-15 shrink-0 font-almarai text-[#637381] hover:text-[#c8a47e] hover:underline focus-visible:text-[#c8a47e] active:text-[#8b6842]"
+            className="type-body-15 shrink-0 font-almarai text-ink hover:text-accent hover:underline focus-visible:text-accent"
           >
             Forgot your password?
           </Link>
         </div>
         <FormError message={error} />
         {success ? (
-          <p className="type-body-15 font-almarai text-[#c8a47e]" role="status">
+          <p className="type-body-15 font-almarai text-accent" role="status">
             Signed in. Redirecting…
           </p>
         ) : null}
-        <Button isLoading={isSubmitting} disabled={isSubmitting} shape="pill">
+        <Button isLoading={isSubmitting} disabled={isSubmitting}>
           Sign In
         </Button>
       </div>
 
-      <hr className="mt-[24px] h-px w-full border-0 bg-[#637381]" />
-      <p className="type-body-15 mt-[16px] text-center font-almarai text-white">
+      <hr className="mt-[24px] h-px w-full border-0 bg-line" />
+      <p className="type-body-15 mt-[16px] text-center font-almarai text-ink">
         Not a member yet?{' '}
-        <Link
-          to="/signup"
-          className="text-[#c8a47e] hover:text-[#8b6842] hover:underline focus-visible:text-[#c8a47e] active:text-[#8b6842]"
-        >
+        <Link to="/signup" className="text-accent hover:underline focus-visible:text-accent">
           Sign up here.
         </Link>
       </p>

@@ -17,16 +17,16 @@ export function DashboardPlaceholder() {
   const signedIn = Boolean(readToken());
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-[#11161c] px-[20px] text-white">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-color-103 px-[20px] text-ink">
       <h1 className="font-garamond text-[32px] font-medium">Signed in</h1>
-      <p className="type-body-15 mt-[16px] text-[#637381]">
+      <p className="type-body-15 mt-[16px] text-muted">
         {signedIn ? 'Your session is active.' : 'No session token was found.'}
       </p>
       <div className="mt-[30px] flex gap-[16px]">
-        <Link to="/" className="text-[#c8a47e] underline">
+        <Link to="/" className="text-accent underline">
           Home
         </Link>
-        <button type="button" onClick={() => void onLogout()} className="text-[#c8a47e] underline">
+        <button type="button" onClick={() => void onLogout()} className="text-accent underline">
           Sign out
         </button>
       </div>

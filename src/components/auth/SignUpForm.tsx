@@ -24,7 +24,12 @@ export function SignUpForm() {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [localErrors, setLocalErrors] = useState<Record<string, string>>({});
 
-  const canSubmit = termsAccepted && !isSubmitting;
+  const fieldsValid =
+    firstName.trim().length > 0 &&
+    lastName.trim().length > 0 &&
+    EMAIL_PATTERN.test(email.trim()) &&
+    password.length > 0;
+  const canSubmit = termsAccepted && fieldsValid && !isSubmitting;
 
   const mergedErrors = useMemo(
     () => ({
@@ -71,12 +76,12 @@ export function SignUpForm() {
       noValidate
     >
       <AuthBrand />
-      <h1 className="mt-[30px] max-w-[461px] text-center font-garamond text-[32px] font-medium leading-[41.76px] text-white">
+      <h1 className="mt-[30px] max-w-[461px] text-center font-garamond text-[32px] font-medium leading-[41.76px] text-ink">
         Great Marketing Made Easier. Specifically For Agents
       </h1>
-      <p className="type-body-3 mt-[16px] text-center font-almarai text-[#637381]">
+      <h2 className="mt-[16px] text-center font-almarai text-[20px] font-normal leading-[22.32px] text-ink">
         Create your account today
-      </p>
+      </h2>
 
       <div className="mt-[30px] flex w-full flex-col gap-[16px]">
         <div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2">
@@ -129,39 +134,48 @@ export function SignUpForm() {
         <Checkbox
           id="terms"
           name="terms_accepted"
+          className="w-full"
           checked={termsAccepted}
           onChange={(event) => setTermsAccepted(event.target.checked)}
           disabled={isSubmitting}
           error={mergedErrors.terms_accepted}
-          label={
-            <>
-              I have read and agree to the{' '}
-              <Link to="/terms-of-service" className="underline text-[#c8a47e] hover:text-[#8b6842] focus-visible:text-[#c8a47e]">
+          aria-label="I have read and agree to the Terms of Use and Privacy Policy."
+          labelClassName="font-almarai text-[14px] font-normal leading-[15.624px] text-ink"
+          label="I have read and agree to the "
+          afterLabel={
+            <span className="font-almarai text-[14px] font-normal leading-[15.624px] text-ink">
+              <Link
+                to="/terms-of-service"
+                className="text-accent underline hover:brightness-90 focus-visible:text-accent"
+              >
                 Terms of Use
               </Link>{' '}
               and{' '}
-              <Link to="/privacy-policy" className="underline text-[#c8a47e] hover:text-[#8b6842] focus-visible:text-[#c8a47e]">
+              <Link
+                to="/privacy-policy"
+                className="text-accent underline hover:brightness-90 focus-visible:text-accent"
+              >
                 Privacy Policy
               </Link>
               .
-            </>
+            </span>
           }
         />
         <FormError message={error} />
         {success ? (
-          <p className="type-body-15 font-almarai text-[#c8a47e]" role="status">
+          <p className="type-body-15 font-almarai text-accent" role="status">
             Account created. Redirecting to sign in…
           </p>
         ) : null}
-        <Button isLoading={isSubmitting} disabled={!canSubmit} shape="box">
+        <Button isLoading={isSubmitting} disabled={!canSubmit}>
           Sign Up
         </Button>
       </div>
 
-      <hr className="mt-[24px] h-px w-full border-0 bg-[#637381]" />
-      <p className="type-body-15 mt-[16px] text-center font-almarai text-white">
+      <hr className="mt-[24px] h-px w-full border-0 bg-line" />
+      <p className="mt-[16px] text-center font-almarai text-[14px] font-normal leading-[15.624px] text-ink">
         Already have an account?{' '}
-        <Link to="/signin" className="text-[#c8a47e] underline hover:text-[#8b6842] focus-visible:text-[#c8a47e]">
+        <Link to="/signin" className="text-accent underline hover:brightness-90 focus-visible:text-accent">
           Sign in
         </Link>
       </p>

@@ -6,6 +6,7 @@ interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'typ
   error?: string;
   labelClassName?: string;
   align?: 'start' | 'center';
+  afterLabel?: ReactNode;
 }
 
 export function Checkbox({
@@ -14,26 +15,38 @@ export function Checkbox({
   error,
   disabled,
   className = '',
-  labelClassName = 'type-body-15 font-almarai text-white',
+  labelClassName = 'type-body-15 font-almarai text-ink',
   align = 'start',
+  afterLabel,
   ...props
 }: CheckboxProps) {
   const alignClass = align === 'center' ? 'items-center' : 'items-start';
   return (
-    <div className={`flex gap-[10px] ${alignClass} ${className}`}>
-      <input
-        id={id}
-        type="checkbox"
-        disabled={disabled}
-        aria-invalid={error ? true : undefined}
-        className={`h-[16px] w-[16px] shrink-0 cursor-pointer rounded-[2px] border border-[#637381] accent-[#c8a47e] hover:border-[#c8a47e] focus-visible:border-[#c8a47e] disabled:cursor-not-allowed disabled:opacity-50 ${
-          align === 'start' ? 'mt-[2px]' : ''
-        }`}
-        {...props}
-      />
-      <label htmlFor={id} className={labelClassName}>
-        {label}
-      </label>
+    <div className={className}>
+      <div className={`flex gap-[10px] ${alignClass}`}>
+        <input
+          id={id}
+          type="checkbox"
+          disabled={disabled}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? `${id}-error` : undefined}
+          className={`h-[16px] w-[16px] shrink-0 cursor-pointer rounded-[2px] border border-ink/40 accent-accent hover:border-accent focus-visible:border-accent disabled:cursor-not-allowed disabled:opacity-50 ${
+            align === 'start' ? 'mt-[2px]' : ''
+          }`}
+          {...props}
+        />
+        <div>
+          <label htmlFor={id} className={labelClassName}>
+            {label}
+          </label>
+          {afterLabel}
+          {error ? (
+            <p id={`${id}-error`} className="type-body-69 mt-[2px] font-almarai text-border" role="alert">
+              {error}
+            </p>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 }

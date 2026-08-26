@@ -3,7 +3,7 @@ import { SignInForm } from '@/components/auth/SignInForm';
 
 export function SignInPage() {
   return (
-    <AuthSplitLayout collageSrc="/images/sign-in.png" collageAlt="Sign In">
+    <AuthSplitLayout collageSrc="/images/sign-in.png" collageAlt="">
       <SignInForm />
     </AuthSplitLayout>
   );

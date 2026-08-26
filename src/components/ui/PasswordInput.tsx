@@ -1,57 +1,43 @@
 import { useState, type InputHTMLAttributes } from 'react';
+import { Input } from '@/components/ui/Input';
 
-interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface PasswordInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
   id: string;
   label: string;
   error?: string;
-  shape?: 'box' | 'soft';
 }
 
 export function PasswordInput({
   id,
   label,
   error,
-  shape = 'box',
   disabled,
   className = '',
   ...props
 }: PasswordInputProps) {
   const [visible, setVisible] = useState(false);
-  const radius = shape === 'soft' ? 'rounded-[24px]' : 'rounded-[12px]';
 
   return (
-    <div className="w-full">
-      <label htmlFor={id} className="sr-only type-body font-almarai">
-        {label}
-      </label>
-      <div className="relative">
-        <input
-          id={id}
-          type={visible ? 'text' : 'password'}
-          disabled={disabled}
-          aria-invalid={error ? true : undefined}
-          aria-describedby={error ? `${id}-error` : undefined}
-          className={`type-body-15 h-[52px] w-full border bg-[#1d1a1a] py-[12px] pl-[16px] pr-[48px] font-almarai text-white placeholder:text-[#637381] hover:border-[#c8a47e] focus-visible:border-[#c8a47e] disabled:cursor-not-allowed disabled:opacity-50 ${radius} ${
-            error ? 'border-[#ff5630]' : 'border-[#637381]'
-          } ${className}`}
-          {...props}
-        />
+    <Input
+      id={id}
+      label={label}
+      error={error}
+      disabled={disabled}
+      className={className}
+      suffix={
         <button
           type="button"
           onClick={() => setVisible((current) => !current)}
           aria-label={visible ? 'Hide password' : 'Show password'}
-          className="absolute right-[16px] top-1/2 -translate-y-1/2 text-[#8b6842] hover:text-[#c8a47e] focus-visible:text-[#c8a47e] disabled:cursor-not-allowed disabled:opacity-50"
+          className="absolute right-[16px] top-1/2 -translate-y-1/2 text-muted hover:text-accent focus-visible:text-accent disabled:cursor-not-allowed disabled:opacity-50"
           disabled={disabled}
         >
           <EyeIcon off={visible} />
         </button>
-      </div>
-      {error ? (
-        <p id={`${id}-error`} className="type-body-69 mt-[2px] font-almarai text-[#ff5630]" role="alert">
-          {error}
-        </p>
-      ) : null}
-    </div>
+      }
+      {...props}
+      type={visible ? 'text' : 'password'}
+    />
   );
 }
 

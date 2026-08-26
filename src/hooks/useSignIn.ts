@@ -39,6 +39,10 @@ export function useSignIn(): SignInState {
       try {
         const response = await login(body);
         const token = response.data.token || response.data.accessToken;
+        if (!token) {
+          setError('Sign in succeeded but no session token was returned.');
+          return;
+        }
         saveSession(token, remember);
         setSuccess(true);
         navigate('/dashboard', { replace: true });
