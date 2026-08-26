@@ -1,0 +1,66 @@
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
+  content: ['./index.html', './src/**/*.{ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        accent: 'var(--accent)',
+        background: 'var(--background)',
+        border: 'var(--border)',
+        canvas: 'var(--canvas)',
+        panel: 'var(--panel)',
+        ink: 'var(--ink)',
+        muted: 'var(--muted)',
+        line: 'var(--line)',
+        'color-100': 'var(--color-100)',
+        'color-101': 'var(--color-101)',
+        'color-102': 'var(--color-102)',
+        'color-103': 'var(--color-103)',
+        'color-104': 'var(--color-104)',
+        'color-105': 'var(--color-105)',
+        'color-106': 'var(--color-106)',
+        'color-107': 'var(--color-107)',
+        'color-108': 'var(--color-108)',
+        'color-109': 'var(--color-109)',
+        'color-110': 'var(--color-110)',
+        'color-111': 'var(--color-111)',
+        'color-112': 'var(--color-112)',
+        'color-113': 'var(--color-113)',
+        'color-114': 'var(--color-114)',
+        'color-115': 'var(--color-115)',
+        'color-116': 'var(--color-116)',
+        'color-117': 'var(--color-117)',
+        'color-118': 'var(--color-118)',
+        'color-119': 'var(--color-119)',
+        'color-120': 'var(--color-120)',
+      },
+      fontFamily: {
+        almarai: ['Almarai', 'sans-serif'],
+        public: ['Public Sans', 'sans-serif'],
+        garamond: ['EB Garamond', 'serif'],
+        grotesk: ['Space Grotesk', 'sans-serif'],
+        kalam: ['Kalam', 'cursive'],
+        fellix: ['Fellix', 'Almarai', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+      },
+      borderRadius: {
+        control: '10px',
+        12: '12px',
+        16: '16px',
+        20: '20px',
+        24: '24px',
+        25: '25px',
+        pill: '100px',
+      },
+      screens: {
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;

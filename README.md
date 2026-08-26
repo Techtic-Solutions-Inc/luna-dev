@@ -1,4 +1,4 @@
-# luna-dev
+# Agentwise
 
 Frontend workspace for Luna agent runs.
 
@@ -13,3 +13,5 @@ Frontend workspace for Luna agent runs.
 npm install
 npm run dev
 ```
+
+Other scripts: `npm run lint`, `npm run typecheck`, `npm run build`.
