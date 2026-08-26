@@ -5,7 +5,7 @@ interface BrandLogoProps {
 }
 
 export function BrandLogo({ gold = false }: BrandLogoProps) {
-  const color = gold ? 'text-[#c8a47e]' : 'text-ink';
+  const color = gold ? 'text-accent' : 'text-ink';
   return (
     <Link to="/" className="flex flex-col no-underline">
       <span className={`font-kalam text-[28px] font-normal leading-none ${color}`}>Agentwise</span>

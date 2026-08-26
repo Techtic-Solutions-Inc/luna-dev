@@ -1,16 +1,16 @@
-import type { ReactNode } from 'react';
+import { forwardRef, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 type Variant = 'primary' | 'secondary' | 'ghost' | 'waitlist';
 
+const goldCta =
+  'bg-accent text-color-101 border border-accent hover:brightness-90 active:brightness-75';
+
 const variants: Record<Variant, string> = {
-  primary:
-    'bg-[#c8a47e] text-[#000001] border border-[#c8a47e] hover:brightness-90 active:brightness-75',
-  secondary:
-    'bg-transparent text-ink border border-ink hover:bg-ink/10 active:bg-ink/15',
-  ghost: 'bg-transparent text-ink border border-transparent hover:text-[#c8a47e]',
-  waitlist:
-    'bg-[#c8a47e] text-[#000001] border border-[#c8a47e] hover:brightness-90 active:brightness-75',
+  primary: goldCta,
+  secondary: 'bg-transparent text-ink border border-ink hover:bg-ink/10 active:bg-ink/15',
+  ghost: 'bg-transparent text-ink border border-transparent hover:text-accent',
+  waitlist: goldCta,
 };
 
 const base =
@@ -41,7 +41,7 @@ function classes(variant: Variant, className: string): string {
   return `${base} ${variants[variant]} ${className}`.trim();
 }
 
-export function Button(props: ButtonProps) {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(props, ref) {
   const variant = props.variant ?? 'primary';
   const className = classes(variant, props.className ?? '');
 
@@ -64,8 +64,10 @@ export function Button(props: ButtonProps) {
 
   const { children, type, disabled, onClick } = props;
   return (
-    <button type={type ?? 'button'} className={className} disabled={disabled} onClick={onClick}>
+    <button ref={ref} type={type ?? 'button'} className={className} disabled={disabled} onClick={onClick}>
       {children}
     </button>
   );
-}
+});
+
+Button.displayName = 'Button';

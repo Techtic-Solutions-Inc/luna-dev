@@ -15,13 +15,13 @@ export function HeroSection({ data }: HeroSectionProps) {
   const subcopy = readString(data, 'sub_heading') ?? readString(data, 'subcopy') ?? DEFAULT_SUBCOPY;
 
   return (
-    <section className="hero-glow bg-[#11161c] px-[20px] pb-[101px] pt-[30px] md:px-[30px] lg:px-[101px]">
+    <section className="hero-glow bg-color-103 px-[20px] pb-[101px] pt-[30px] md:px-[30px] lg:px-[101px]">
       <div className="mx-auto grid max-w-[1760px] items-center gap-[30px] lg:grid-cols-2 lg:gap-[101px]">
         <div>
           <h1 className="max-w-[640px] font-garamond text-[32px] font-medium leading-[1.305] text-ink md:text-[50px] md:leading-[65.25px]">
             {headline}
           </h1>
-          <p className="type-body-3 mt-[20px] max-w-[560px] text-[#637381]">{subcopy}</p>
+          <p className="type-body-34 mt-[20px] max-w-[560px] text-ink">{subcopy}</p>
           <SocialRow />
         </div>
         <div>
@@ -34,8 +34,7 @@ export function HeroSection({ data }: HeroSectionProps) {
       </div>
       <div className="mx-auto mt-[30px] flex max-w-[1760px] flex-col items-center text-center">
         <p className="type-body-117 text-ink">
-          Join <span className="type-body-55 text-[#c8a47e]">Hundreds</span> of other agents on the waitlist for
-          Agentwise
+          Join <span className="type-body-55 text-accent">Hundreds</span> of other agents on the waitlist for Agentwise
         </p>
         <Button to="/signup" variant="primary" className="mt-[20px] min-w-[180px]">
           Get Started

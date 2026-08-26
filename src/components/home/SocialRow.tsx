@@ -10,7 +10,7 @@ export function SocialIcon({ label, href, children }: SocialIconProps) {
   return (
     <a
       href={href}
-      className="inline-flex h-[40px] w-[40px] items-center justify-center rounded-[100px] bg-ink text-[#000001] hover:brightness-90 active:brightness-75"
+      className="inline-flex h-[40px] w-[40px] items-center justify-center rounded-[100px] bg-ink text-color-101 hover:brightness-90 active:brightness-75"
       aria-label={label}
       target="_blank"
       rel="noreferrer"
@@ -22,7 +22,7 @@ export function SocialIcon({ label, href, children }: SocialIconProps) {
 
 export function SocialRow() {
   return (
-    <div className="mt-[24px] flex flex-wrap items-center gap-[12px]" aria-label="Social">
+    <nav className="mt-[24px] flex flex-wrap items-center gap-[12px]" aria-label="Social">
       <SocialIcon label="Facebook" href="https://www.facebook.com">
         <svg viewBox="0 0 24 24" className="h-[16px] w-[16px]" aria-hidden="true">
           <path
@@ -63,6 +63,6 @@ export function SocialRow() {
           />
         </svg>
       </SocialIcon>
-    </div>
+    </nav>
   );
 }

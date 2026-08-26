@@ -9,13 +9,11 @@ const NAV = [
   { label: 'Blog', to: '/blog' },
   { label: 'Pricing', to: '/pricing' },
   { label: 'Join', to: '/signup' },
-  { label: 'Contact Us', to: '#contact' },
+  { label: 'Contact Us', to: '/contact' },
 ] as const;
 
 const LINK_CLASS =
-  'type-body-115 font-medium text-ink no-underline hover:text-[#c8a47e] focus-visible:text-[#c8a47e] active:opacity-80';
-
-const FOCUSABLE = 'a[href], button:not([disabled])';
+  'type-body-115 font-medium text-ink no-underline hover:text-accent focus-visible:text-accent active:opacity-80';
 
 function NavLink({ to, label, onClick }: { to: string; label: string; onClick?: () => void }) {
   if (to.startsWith('#')) {
@@ -35,7 +33,6 @@ function NavLink({ to, label, onClick }: { to: string; label: string; onClick?: 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLElement>(null);
 
   const close = useCallback(() => {
     setOpen(false);
@@ -46,30 +43,11 @@ export function SiteHeader() {
     if (!open) {
       return;
     }
-    const panel = panelRef.current;
-    panel?.focus();
 
     function onKey(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         event.preventDefault();
         close();
-        return;
-      }
-      if (event.key !== 'Tab' || !panel) {
-        return;
-      }
-      const nodes = panel.querySelectorAll<HTMLElement>(FOCUSABLE);
-      if (nodes.length === 0) {
-        return;
-      }
-      const first = nodes[0];
-      const last = nodes[nodes.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
       }
     }
 
@@ -82,10 +60,10 @@ export function SiteHeader() {
   ));
 
   return (
-    <header className="relative z-40 bg-[#11161c] px-[20px] pt-[20px] md:px-[30px] lg:px-[101px]">
+    <header className="relative z-40 bg-color-103 px-[20px] pt-[20px] md:px-[30px] lg:px-[101px]">
       <div className="mx-auto flex max-w-[1760px] items-center justify-between gap-[16px]">
         <BrandLogo />
-        <nav className="hidden items-center gap-[30px] lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-[30px] lg:flex" aria-label="Main">
           {NAV.map((item) => (
             <NavLink key={item.label} to={item.to} label={item.label} />
           ))}
@@ -112,11 +90,9 @@ export function SiteHeader() {
       </div>
       {open ? (
         <nav
-          ref={panelRef}
           id="mobile-nav"
-          tabIndex={-1}
-          className="mt-[16px] flex flex-col gap-[12px] rounded-[16px] border border-[#637381] bg-[#11161c] p-[16px] lg:hidden"
-          aria-label="Mobile"
+          className="mt-[16px] flex flex-col gap-[12px] rounded-[16px] border border-line bg-color-103 p-[16px] lg:hidden"
+          aria-label="Main"
         >
           {links}
           <Button to="/signup" variant="secondary" onClick={close}>

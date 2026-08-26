@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ContactSection } from '@/components/home/ContactSection';
 import { EmptyLinksState } from '@/components/home/EmptyLinksState';
 import { FeaturesGallery } from '@/components/home/FeaturesGallery';
@@ -13,21 +15,27 @@ import { useVisitorHome } from '@/hooks/useVisitorHome';
 
 export function HomePage() {
   const { status, data, error, retry } = useVisitorHome();
+  const { pathname } = useLocation();
+  const showSkeleton = status === 'loading' && error === null;
+  const showContent = !showSkeleton;
 
-  if (status === 'loading') {
-    return <HomeSkeleton />;
-  }
+  useEffect(() => {
+    if (pathname !== '/contact' || !showContent) {
+      return;
+    }
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  }, [pathname, showContent]);
 
   return (
-    <div className="home-hero-bg min-h-screen bg-[#11161c]">
+    <div className="home-hero-bg min-h-screen bg-color-103">
       <a className="skip-link" href="#main-content">
         Skip to main content
       </a>
       <SiteHeader />
-      <main id="main-content" aria-busy={false}>
-        {status === 'error' && error ? (
+      <main id="main-content" aria-busy={status === 'loading'}>
+        {error ? (
           <div className="px-[20px] pb-[16px] pt-[12px] md:px-[30px] lg:px-[101px]">
-            <HomeErrorState message={error.message} onRetry={retry} />
+            <HomeErrorState message={error.message} onRetry={retry} busy={status === 'loading'} />
           </div>
         ) : null}
         {status === 'empty' ? (
@@ -35,14 +43,20 @@ export function HomePage() {
             <EmptyLinksState />
           </div>
         ) : null}
-        <HeroSection data={data} />
-        <div id="features">
-          <FeaturesGallery />
-        </div>
-        <ThreeStepsSection />
-        <UltimateMindSection />
-        <TestimonialsSection />
-        <ContactSection data={data} />
+        {showSkeleton ? (
+          <HomeSkeleton />
+        ) : (
+          <>
+            <HeroSection data={data} />
+            <div id="features">
+              <FeaturesGallery />
+            </div>
+            <ThreeStepsSection />
+            <UltimateMindSection />
+            <TestimonialsSection />
+            <ContactSection data={data} />
+          </>
+        )}
       </main>
       <SiteFooter data={data} />
     </div>

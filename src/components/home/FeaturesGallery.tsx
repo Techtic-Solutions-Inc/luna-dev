@@ -33,10 +33,10 @@ export function FeaturesGallery() {
   return (
     <section className="home-gallery-bg px-[20px] py-[125px] md:px-[30px] lg:px-[101px]">
       <div className="mx-auto flex max-w-[1760px] flex-col gap-[24px] text-center">
-        <h2 className="font-garamond text-[32px] font-medium leading-[1.2] text-[#000001] md:text-[48px]">
+        <h2 className="font-garamond text-[32px] font-medium leading-[1.2] text-color-101 md:text-[48px]">
           Marketing That Stops The Scroll
         </h2>
-        <p className="type-body-34 mx-auto max-w-[640px] text-[#637381]">
+        <p className="type-body-34 mx-auto max-w-[640px] text-background">
           Hand-designed by our creative team. Personalized by AI to your market. Ready to post in minutes.
         </p>
       </div>

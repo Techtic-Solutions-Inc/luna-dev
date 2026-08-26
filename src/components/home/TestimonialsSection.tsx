@@ -19,7 +19,7 @@ function Stars() {
   return (
     <div className="flex gap-[3px]" aria-label="5 out of 5 stars">
       {Array.from({ length: 5 }).map((_, index) => (
-        <span key={index} className="text-[14px] leading-none text-[#8b6842]" aria-hidden="true">
+        <span key={index} className="text-[14px] leading-none text-color-102" aria-hidden="true">
           ★
         </span>
       ))}
@@ -32,10 +32,10 @@ export function TestimonialsSection() {
     <section id="about" className="bg-ink px-[20px] py-[125px] md:px-[30px] lg:px-[101px]">
       <div className="mx-auto grid max-w-[1760px] items-start gap-[30px] lg:grid-cols-[1fr_2fr] lg:gap-[101px]">
         <div className="lg:sticky lg:top-[100px]">
-          <h2 className="font-garamond text-[32px] font-medium leading-[1.2] text-[#000001] md:text-[48px]">
-            Built For <span className="text-[#c8a47e]">Agents Like You.</span>
+          <h2 className="font-garamond text-[32px] font-medium leading-[1.2] text-color-101 md:text-[48px]">
+            Built For <span className="text-accent">Agents Like You.</span>
           </h2>
-          <p className="type-body-46 mt-[20px] max-w-[461px] text-[#637381]">
+          <p className="type-body-46 mt-[20px] max-w-[461px] text-background">
             New agents, team leaders, and large brokerages are using Agentwise to spend less time marketing and more
             time closing without sacrificing quality.
           </p>
@@ -44,15 +44,15 @@ export function TestimonialsSection() {
           {TESTIMONIALS.map((item) => (
             <article
               key={item.name}
-              className="rounded-[16px] border border-[#637381] bg-ink p-[24px] shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
+              className="rounded-[16px] border border-background bg-ink p-[24px] shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
             >
               <Stars />
-              <p className="type-body-44 mt-[12px] text-[#000001]">“{item.quote}”</p>
+              <p className="type-body-44 mt-[12px] text-color-101">“{item.quote}”</p>
               <div className="mt-[16px] flex items-center gap-[12px]">
                 <img src={item.avatar} alt="" className="h-[40px] w-[40px] rounded-[100px] object-cover" />
                 <div>
-                  <p className="type-body-25 text-[#000001]">{item.name}</p>
-                  <p className="type-body-69 text-[#637381]">{item.meta}</p>
+                  <p className="type-body-25 text-color-101">{item.name}</p>
+                  <p className="type-body-69 text-background">{item.meta}</p>
                 </div>
               </div>
             </article>

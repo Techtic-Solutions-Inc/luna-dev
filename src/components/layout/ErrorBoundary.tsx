@@ -22,7 +22,7 @@ export class ErrorBoundary extends Component<Props, State> {
   render(): ReactNode {
     if (this.state.hasError) {
       return (
-        <main className="flex min-h-screen items-center justify-center bg-[#11161c] px-[20px] text-ink">
+        <main className="flex min-h-screen items-center justify-center bg-color-103 px-[20px] text-ink">
           <p className="type-body-34">Something went wrong.</p>
         </main>
       );

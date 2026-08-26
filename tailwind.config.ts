@@ -9,6 +9,8 @@ const config: Config = {
         background: 'var(--background)',
         border: 'var(--border)',
         canvas: 'var(--canvas)',
+        'green-panel': 'var(--green-panel)',
+        'green-panel-aside': 'var(--green-panel-aside)',
         panel: 'var(--panel)',
         ink: 'var(--ink)',
         muted: 'var(--muted)',

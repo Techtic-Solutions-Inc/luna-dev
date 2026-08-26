@@ -7,11 +7,11 @@ const FOOTER_NAV = [
   { label: 'Content', to: '/content' },
   { label: 'Pricing', to: '/pricing' },
   { label: 'Blog', to: '/blog' },
-  { label: 'Contact Us', to: '#contact' },
+  { label: 'Contact Us', to: '/contact' },
 ] as const;
 
 const LINK_CLASS =
-  'type-body-115 text-ink no-underline hover:text-[#c8a47e] focus-visible:text-[#c8a47e] active:opacity-80';
+  'type-body-115 text-ink no-underline hover:text-accent focus-visible:text-accent active:opacity-80';
 
 const SOCIAL = [
   { label: 'Facebook', href: 'https://www.facebook.com', short: 'f' },
@@ -30,7 +30,7 @@ export function SiteFooter({ data }: SiteFooterProps) {
   const terms = readString(data, 'terms_of_service_link') ?? '/terms-of-service';
 
   return (
-    <footer className="bg-[#11161c] px-[20px] py-[30px] md:px-[30px] lg:px-[101px]" aria-label="Footer">
+    <footer className="bg-color-103 px-[20px] py-[30px] md:px-[30px] lg:px-[101px]" aria-label="Footer">
       <div className="mx-auto flex max-w-[1760px] flex-col gap-[24px]">
         <div className="flex flex-col gap-[16px] sm:flex-row sm:items-center sm:justify-between">
           <BrandLogo gold />
@@ -38,7 +38,7 @@ export function SiteFooter({ data }: SiteFooterProps) {
             {SOCIAL.map((item) => (
               <li key={item.label}>
                 <a
-                  className="font-public text-[14px] font-semibold text-ink no-underline hover:text-[#c8a47e] focus-visible:text-[#c8a47e]"
+                  className="font-public text-[14px] font-semibold text-ink no-underline hover:text-accent focus-visible:text-accent"
                   href={item.href}
                   aria-label={item.label}
                   target="_blank"
@@ -68,16 +68,14 @@ export function SiteFooter({ data }: SiteFooterProps) {
             {email}
           </a>
         </div>
-        <div className="flex flex-col gap-[12px] border-t border-[#637381] pt-[20px] sm:flex-row sm:items-center sm:justify-between">
-          <p className="type-body-29 font-fellix text-[#637381]">
-            © 2026 Agentwise. All Rights Reserved.
-          </p>
-          <p className="type-body-29 font-fellix text-[#637381]">
-            <Link to={terms} className="text-[#637381] no-underline hover:text-[#c8a47e]">
+        <div className="flex flex-col gap-[12px] border-t border-line pt-[20px] sm:flex-row sm:items-center sm:justify-between">
+          <p className="type-body-29 font-fellix text-muted">© 2026 Agentwise. All Rights Reserved.</p>
+          <p className="type-body-29 font-fellix text-muted">
+            <Link to={terms} className="text-muted no-underline hover:text-accent">
               Terms of Service
             </Link>
             {' | '}
-            <Link to={privacy} className="text-[#637381] no-underline hover:text-[#c8a47e]">
+            <Link to={privacy} className="text-muted no-underline hover:text-accent">
               Privacy Policy
             </Link>
           </p>

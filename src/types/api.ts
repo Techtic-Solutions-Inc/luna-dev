@@ -85,8 +85,6 @@ function parseErrorDetails(value: unknown): ApiErrorDetails {
 }
 
 export function payloadHasLinkFields(payload: unknown): boolean {
-  if (!isRecord(payload)) {
-    return false;
-  }
-  return Object.values(payload).some((value) => typeof value === 'string' && value.trim().length > 0);
+  const keys = ['privacy_policy_link', 'terms_of_service_link', 'contact_email', 'phone'] as const;
+  return keys.some((key) => Boolean(readString(payload, key)));
 }

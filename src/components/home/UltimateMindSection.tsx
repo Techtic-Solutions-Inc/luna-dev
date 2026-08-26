@@ -2,9 +2,9 @@ import { Button } from '@/components/ui/Button';
 
 export function UltimateMindSection() {
   return (
-    <section className="home-steps-bg bg-[#11161c] px-[20px] pb-[125px] md:px-[30px] lg:px-[101px]">
-      <div className="home-green-panel mx-auto grid max-w-[1760px] gap-[30px] rounded-[24px] px-[24px] py-[30px] md:px-[30px] lg:grid-cols-2 lg:gap-[101px]">
-        <div>
+    <section className="home-steps-bg bg-color-103 px-[20px] pb-[125px] md:px-[30px] lg:px-[101px]">
+      <div className="mx-auto grid max-w-[1760px] overflow-hidden rounded-[24px] lg:grid-cols-2">
+        <div className="home-green-panel px-[24px] py-[30px] md:px-[30px]">
           <h2 className="font-garamond text-[32px] font-medium leading-[1.2] text-ink md:text-[40px]">
             Agentwise Ultimate Mind
           </h2>
@@ -18,9 +18,9 @@ export function UltimateMindSection() {
             className="mt-[24px] h-auto w-full rounded-[16px] object-contain"
           />
         </div>
-        <div className="flex flex-col gap-[20px] lg:self-center">
+        <div className="home-green-panel-aside flex flex-col gap-[20px] px-[24px] py-[30px] md:px-[30px] lg:justify-center">
           <h2 className="font-garamond text-[32px] font-medium leading-[1.2] text-ink md:text-[48px]">
-            Here’s The Deal... <span className="text-[#c8a47e]">Great Marketing</span> Is Just The Start.
+            Here’s The Deal... <span className="text-accent">Great Marketing</span> Is Just The Start.
           </h2>
           <p className="type-body-6 text-ink">
             A custom business dashboard and a personalized AI advisor built into every plan.

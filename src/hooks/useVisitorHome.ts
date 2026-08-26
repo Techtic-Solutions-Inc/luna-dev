@@ -24,7 +24,6 @@ export function useVisitorHome(): UseVisitorHomeResult {
 
   const retry = useCallback(() => {
     setStatus('loading');
-    setError(null);
     setRequestId((current) => current + 1);
   }, []);
 

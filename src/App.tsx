@@ -6,7 +6,10 @@ import { StubPage } from '@/pages/StubPage';
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route element={<HomePage />}>
+        <Route index />
+        <Route path="contact" />
+      </Route>
       <Route path="/home" element={<Navigate to="/" replace />} />
       <Route path="/signin" element={<StubPage />} />
       <Route path="/signup" element={<StubPage />} />
