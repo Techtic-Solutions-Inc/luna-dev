@@ -1,0 +1,307 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #c8a47e;
+  --background: #637381;
+  --border: #ff5630;
+  --color-100: #6600ff00;
+  --color-101: #000001;
+  --color-102: #8b6842;
+  --color-103: #11161c;
+  --color-104: #4b92eb99;
+  --color-105: #050505;
+  --color-106: #1d1a1a;
+  --color-107: #1d1818;
+  --color-108: #ef7b16;
+  --color-109: #8a43e1;
+  --color-110: #d511fd;
+  --color-111: #554545;
+  --color-112: #ff004f;
+  --color-113: #00f7ef;
+  --color-114: #4285f4;
+  --color-115: #34a853;
+  --color-116: #ea4335;
+  --color-117: #fbbc04;
+  --color-118: #c5221f;
+  --color-119: #00e510;
+  --color-120: #007ebb;
+  --canvas: #0e0d0d;
+  --panel: #1c1916;
+  --card: #232323;
+  --ink: #ffffff;
+  --muted: #a3a3a3;
+  --line: #44413e;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 17.856px;
+  letter-spacing: 0;
+  background-color: var(--color-105);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .type-body {
+    font-family: Almarai, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 17.856px;
+    letter-spacing: 0;
+  }
+
+  .type-body-115 {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18.8px;
+    letter-spacing: 0;
+  }
+
+  .type-body-117 {
+    font-family: Almarai, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 48px;
+    letter-spacing: 0;
+  }
+
+  .type-body-15 {
+    font-family: Almarai, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0;
+  }
+
+  .type-body-16 {
+    font-family: Almarai, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0;
+  }
+
+  .type-body-17 {
+    font-family: Almarai, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20.088px;
+    letter-spacing: 0;
+  }
+
+  .type-body-25 {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 19.692px;
+    font-weight: 600;
+    line-height: 29.538px;
+    letter-spacing: 0;
+  }
+
+  .type-body-29 {
+    font-family: Almarai, sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 17.856px;
+    letter-spacing: 0;
+  }
+
+  .type-body-3 {
+    font-family: Almarai, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0;
+  }
+
+  .type-body-33 {
+    font-family: Almarai, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    letter-spacing: 0;
+  }
+
+  .type-body-34 {
+    font-family: Almarai, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+
+  .type-body-44 {
+    font-family: 'Public Sans', sans-serif;
+    font-size: 17.684px;
+    font-weight: 400;
+    line-height: 27.789px;
+    letter-spacing: 0;
+  }
+
+  .type-body-46 {
+    font-family: Almarai, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0;
+  }
+
+  .type-body-55 {
+    font-family: Almarai, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 17.856px;
+    letter-spacing: 0;
+  }
+
+  .type-body-6 {
+    font-family: Almarai, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20.088px;
+    letter-spacing: 0;
+  }
+
+  .type-body-69 {
+    font-family: Almarai, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 10000;
+  padding: 12px 20px;
+  background: var(--accent);
+  color: var(--color-101);
+  border-radius: 10px;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18.8px;
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  top: 16px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.home-hero-bg {
+  background-color: var(--color-105);
+  background-image:
+    radial-gradient(ellipse at 15% 10%, color-mix(in srgb, var(--color-108) 12%, transparent) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 15%, color-mix(in srgb, var(--color-109) 14%, transparent) 0%, transparent 45%),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+.home-grid-bg {
+  background-color: var(--ink);
+}
+
+.home-gallery-bg {
+  background: linear-gradient(180deg, #f5f0ff 0%, var(--ink) 30%, var(--ink) 100%);
+}
+
+.home-steps-bg {
+  background-color: var(--color-105);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.hero-glow {
+  position: relative;
+}
+
+.hero-glow::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: 55%;
+  height: 60%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--color-109) 18%, transparent) 0%,
+    color-mix(in srgb, var(--color-108) 10%, transparent) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-glow > * {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-gradient {
+  background: linear-gradient(180deg, #2f2f2f, #090014);
+}
+
+.home-green-panel {
+  background-color: var(--color-103);
+}
+
+.home-contact-panel {
+  background-color: var(--canvas);
+}
+
+@keyframes pulse-skeleton {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.skeleton-pulse {
+  animation: pulse-skeleton 1.5s ease-in-out infinite;
+  background-color: var(--panel);
+}
+
+.gallery-track {
+  scrollbar-width: none;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}

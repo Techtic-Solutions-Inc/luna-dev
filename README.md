@@ -1,4 +1,4 @@
-# luna-dev
+# Agentwise
 
 Frontend workspace for Luna agent runs.
 
@@ -6,6 +6,8 @@ Frontend workspace for Luna agent runs.
 
 - React + TypeScript
 - Vite
+- Tailwind CSS
+- Axios
 
 ## Getting started
 
@@ -13,3 +15,5 @@ Frontend workspace for Luna agent runs.
 npm install
 npm run dev
 ```
+
+Visitor Home lives at `/` and loads public content from `GET /api/visitor/home`.
