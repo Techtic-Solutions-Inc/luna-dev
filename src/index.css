@@ -1,0 +1,278 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #c8a47e;
+  --background: #637381;
+  --border: #ff5630;
+  --color-100: #6600ff00;
+  --color-101: #000001;
+  --color-102: #8b6842;
+  --color-103: #11161c;
+  --color-104: #4b92eb99;
+  --color-105: #050505;
+  --color-106: #1d1a1a;
+  --color-107: #1d1818;
+  --color-108: #ef7b16;
+  --color-109: #8a43e1;
+  --color-110: #d511fd;
+  --color-111: #554545;
+  --color-112: #ff004f;
+  --color-113: #00f7ef;
+  --color-114: #4285f4;
+  --color-115: #34a853;
+  --color-116: #ea4335;
+  --color-117: #fbbc04;
+  --color-118: #c5221f;
+  --color-119: #00e510;
+  --color-120: #007ebb;
+  --canvas: #11161c;
+  --panel: #1d1a1a;
+  --card: #1d1818;
+  --ink: #ffffff;
+  --muted: #637381;
+  --line: #637381;
+}
+
+@font-face {
+  font-family: Fellix;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/fellix.woff2) format('woff2');
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 17.856000900268555px;
+  letter-spacing: 0;
+  background-color: #11161c;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 10000;
+  padding: 12px 20px;
+  background: #c8a47e;
+  color: #000001;
+  border-radius: 10px;
+  font-family: 'Public Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18.799999237060547px;
+  text-decoration: none;
+}
+
+.skip-link:focus-visible {
+  top: 16px;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid #c8a47e;
+  outline-offset: 2px;
+}
+
+.type-body {
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 17.856000900268555px;
+  letter-spacing: 0;
+}
+
+.type-body-115 {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 18.799999237060547px;
+  letter-spacing: 0;
+}
+
+.type-body-117 {
+  font-family: Almarai, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 48px;
+  letter-spacing: 0;
+}
+
+.type-body-15 {
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0;
+}
+
+.type-body-16 {
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0;
+}
+
+.type-body-17 {
+  font-family: Almarai, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 20.088001251220703px;
+  letter-spacing: 0;
+}
+
+.type-body-25 {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 19.69230842590332px;
+  font-weight: 600;
+  line-height: 29.538463592529297px;
+  letter-spacing: 0;
+}
+
+.type-body-29 {
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 17.856000900268555px;
+  letter-spacing: 0;
+}
+
+.type-body-3 {
+  font-family: Almarai, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.type-body-33 {
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.type-body-34 {
+  font-family: Almarai, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.type-body-44 {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 17.6842098236084px;
+  font-weight: 400;
+  line-height: 27.789472579956055px;
+  letter-spacing: 0;
+}
+
+.type-body-46 {
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0;
+}
+
+.type-body-55 {
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 17.856000900268555px;
+  letter-spacing: 0;
+}
+
+.type-body-6 {
+  font-family: Almarai, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20.088001251220703px;
+  letter-spacing: 0;
+}
+
+.type-body-69 {
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0;
+}
+
+.font-almarai {
+  font-family: Almarai, sans-serif;
+}
+
+.font-garamond {
+  font-family: 'EB Garamond', serif;
+}
+
+.font-kalam {
+  font-family: Kalam, cursive;
+}
+
+.font-public {
+  font-family: 'Public Sans', sans-serif;
+}
+
+.font-grotesk {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-inter {
+  font-family: Inter, sans-serif;
+}
+
+.font-fellix {
+  font-family: Fellix, sans-serif;
+}
+
+.auth-glow {
+  background-color: #11161c;
+  background-image: radial-gradient(
+    ellipse at 50% 42%,
+    color-mix(in srgb, #c8a47e 18%, transparent) 0%,
+    transparent 58%
+  );
+}
+
+@keyframes pulse-skeleton {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.skeleton-pulse {
+  animation: pulse-skeleton 1.5s ease-in-out infinite;
+  background-color: var(--panel);
+}
