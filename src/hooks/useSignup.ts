@@ -32,7 +32,11 @@ export function useSignup() {
       } catch (err) {
         if (err instanceof ApiClientError) {
           setError(err.message);
-          setFieldErrors(mapFieldErrors(err.details));
+          const mapped = mapFieldErrors(err.details);
+          if (err.status === 409) {
+            mapped.email = err.details?.email?.[0] ?? err.message;
+          }
+          setFieldErrors(mapped);
         } else {
           setError('Something went wrong. Please try again.');
         }

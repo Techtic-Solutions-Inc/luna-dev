@@ -6,7 +6,6 @@ export function NewFeaturesPanel() {
       <h2
         id="new-features-heading"
         className="mb-4 text-[24px] font-medium leading-8 text-ink"
-        style={{ fontFamily: 'EB Garamond, serif' }}
       >
         New Features
       </h2>

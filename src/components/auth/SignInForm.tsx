@@ -10,9 +10,6 @@ import { useLogin } from '@/hooks/useLogin';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const signInInputClass =
-  'border-none bg-panel px-4 focus-visible:border-none hover:border-none';
-
 export function SignInForm() {
   const { submit, loading, error, fieldErrors } = useLogin();
   const [email, setEmail] = useState('');
@@ -43,16 +40,10 @@ export function SignInForm() {
         noValidate
       >
         <header className="flex flex-col items-center gap-4 text-center">
-          <h1
-            className="text-[32px] font-medium leading-[41.76px] text-ink"
-            style={{ fontFamily: 'EB Garamond, serif' }}
-          >
+          <h1 className="text-[32px] font-medium leading-[41.76px] text-ink">
             Welcome To Agentwise
           </h1>
-          <p
-            className="max-w-[461px] text-[16px] font-normal leading-[24px] text-muted"
-            style={{ fontFamily: 'Almarai, sans-serif' }}
-          >
+          <p className="max-w-[461px] text-[16px] font-normal leading-[24px] text-muted">
             Everything you need to create standout real estate content.
           </p>
         </header>
@@ -70,7 +61,6 @@ export function SignInForm() {
           error={mergedErrors.email}
           disabled={loading}
           placeholder="Email"
-          className={signInInputClass}
         />
 
         <PasswordField
@@ -83,7 +73,6 @@ export function SignInForm() {
           error={mergedErrors.password}
           disabled={loading}
           placeholder="Password"
-          className={signInInputClass}
         />
 
         <div className="flex items-center justify-between gap-4">

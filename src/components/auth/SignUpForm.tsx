@@ -56,16 +56,10 @@ export function SignUpForm() {
         noValidate
       >
         <header className="flex flex-col items-center gap-4 text-center">
-          <h1
-            className="max-w-[461px] text-[32px] font-medium leading-[41.76px] text-ink"
-            style={{ fontFamily: 'EB Garamond, serif' }}
-          >
+          <h1 className="max-w-[461px] text-[32px] font-medium leading-[41.76px] text-ink">
             Great Marketing Made Easier. Specifically for Agents
           </h1>
-          <h2
-            className="text-[20px] font-normal leading-[22.32px] text-[#c8a47e]"
-            style={{ fontFamily: 'Almarai, sans-serif' }}
-          >
+          <h2 className="text-[20px] font-normal leading-[22.32px] text-ink">
             Create your account today
           </h2>
         </header>

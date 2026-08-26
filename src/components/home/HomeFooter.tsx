@@ -29,16 +29,10 @@ export function HomeFooter() {
       <div className="mx-auto max-w-[1920px]">
         <div className="flex flex-col items-start justify-between gap-[24px] md:flex-row md:items-center">
           <div>
-            <p
-              className="text-[28px] leading-none text-accent md:text-[32px]"
-              style={{ fontFamily: 'Kalam, cursive' }}
-            >
+            <p className="text-[28px] font-medium leading-none text-accent md:text-[32px]">
               Agentwise
             </p>
-            <p
-              className="mt-[4px] text-[9px] font-medium uppercase tracking-[0.14em] text-ink/80 md:text-[10px]"
-              style={{ fontFamily: 'Public Sans, sans-serif' }}
-            >
+            <p className="mt-[4px] text-[9px] font-medium uppercase tracking-[0.14em] text-ink/80 md:text-[10px]">
               Real Estate Marketing
             </p>
           </div>

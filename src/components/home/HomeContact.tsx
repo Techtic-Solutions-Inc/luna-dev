@@ -23,11 +23,11 @@ export function HomeContact() {
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 px-6 text-center">
             <p
-              className="font-serif-display text-[32px] font-medium uppercase leading-[1.1] text-ink md:text-[48px]"
+              className="text-[32px] font-medium uppercase leading-[1.1] text-ink md:text-[48px]"
             >
               Everyone&apos;s Waiting
             </p>
-            <p className="mt-[12px] font-serif-display text-[20px] italic leading-[28px] text-ink/90 md:text-[24px]">
+            <p className="mt-[12px] text-[20px] italic leading-[28px] text-ink/90 md:text-[24px]">
               to buy until &ldquo;the market is right&rdquo;
             </p>
           </div>
@@ -39,11 +39,9 @@ export function HomeContact() {
               className="mx-auto mb-[16px] flex h-[48px] w-[48px] items-center justify-center rounded-full border border-accent text-accent"
               aria-hidden="true"
             >
-              <span style={{ fontFamily: 'Kalam, cursive' }} className="text-[20px]">
-                a
-              </span>
+              <span className="text-[20px] font-medium">a</span>
             </div>
-            <h2 className="font-serif-display text-[32px] font-medium leading-[1.2] text-ink md:text-[40px]">
+            <h2 className="text-[32px] font-medium leading-[1.2] text-ink md:text-[40px]">
               Let&apos;s Work Together
             </h2>
           </div>

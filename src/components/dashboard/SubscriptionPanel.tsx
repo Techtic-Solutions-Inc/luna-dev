@@ -3,8 +3,6 @@ interface SubscriptionPanelProps {
   totalCredits: number;
   contentGenerated?: number;
   downloads?: number;
-  syncing?: boolean;
-  onSync?: () => Promise<void>;
 }
 
 export function SubscriptionPanel({
@@ -12,8 +10,6 @@ export function SubscriptionPanel({
   totalCredits,
   contentGenerated,
   downloads,
-  syncing = false,
-  onSync,
 }: SubscriptionPanelProps) {
   const usedPercent =
     totalCredits > 0 ? Math.min(100, (currentCredits / totalCredits) * 100) : 0;
@@ -23,7 +19,6 @@ export function SubscriptionPanel({
       <h2
         id="subscription-heading"
         className="mb-4 text-[24px] font-medium leading-8 text-ink"
-        style={{ fontFamily: 'EB Garamond, serif' }}
       >
         Subscription
       </h2>
@@ -49,10 +44,7 @@ export function SubscriptionPanel({
           {downloads !== undefined && (
             <div className="rounded-control border border-line bg-card p-4">
               <p className="text-[14px] text-muted">Downloads</p>
-              <p
-                className="mt-1 text-[32px] font-medium leading-[41.76px] text-accent"
-                style={{ fontFamily: 'EB Garamond, serif' }}
-              >
+              <p className="mt-1 text-[32px] font-medium leading-[41.76px] text-accent">
                 {downloads.toLocaleString()}
               </p>
             </div>
@@ -60,10 +52,7 @@ export function SubscriptionPanel({
           {contentGenerated !== undefined && (
             <div className="rounded-control border border-line bg-card p-4">
               <p className="text-[14px] text-muted">Content Generated</p>
-              <p
-                className="mt-1 text-[32px] font-medium leading-[41.76px] text-accent"
-                style={{ fontFamily: 'EB Garamond, serif' }}
-              >
+              <p className="mt-1 text-[32px] font-medium leading-[41.76px] text-accent">
                 {contentGenerated.toLocaleString()}
               </p>
             </div>
@@ -73,17 +62,6 @@ export function SubscriptionPanel({
         <p className="mt-4 text-[14px] text-muted">
           Subscription details are read-only. Contact support to manage your plan.
         </p>
-        {onSync && (
-          <button
-            type="button"
-            disabled={syncing}
-            aria-busy={syncing || undefined}
-            onClick={() => void onSync()}
-            className="mt-4 inline-flex h-[44px] items-center rounded-control border border-line bg-panel px-4 text-[14px] font-semibold text-ink transition-colors hover:border-accent hover:bg-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            Sync subscription
-          </button>
-        )}
       </div>
     </section>
   );

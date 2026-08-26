@@ -139,7 +139,7 @@ export function HomeSections() {
       <section id="content" className="home-grid-bg px-6 py-[80px] md:px-[40px]">
         <div className="mx-auto max-w-[1920px]">
           <div className="mb-[40px] text-center">
-            <h2 className="font-serif-display text-[36px] font-medium leading-[1.2] text-[#000001] md:text-[48px]">
+            <h2 className="text-[36px] font-medium leading-[1.2] text-[#000001] md:text-[48px]">
               Marketing That Stops The Scroll
             </h2>
             <p className="mx-auto mt-[16px] max-w-[640px] text-[16px] font-normal leading-[24px] text-[#554545]">
@@ -169,7 +169,7 @@ export function HomeSections() {
       {/* Section 3 — Three steps */}
       <section id="learn-more" className="home-steps-bg px-6 py-[80px] md:px-[40px]">
         <div className="mx-auto max-w-[1920px]">
-          <h2 className="mb-[60px] text-center font-serif-display text-[36px] font-medium leading-[1.2] text-ink md:text-[48px]">
+          <h2 className="mb-[60px] text-center text-[36px] font-medium leading-[1.2] text-ink md:text-[48px]">
             Stunning Marketing, In Three Simple Steps
           </h2>
 
@@ -181,7 +181,7 @@ export function HomeSections() {
               >
                 <div className="flex flex-col gap-[20px]">
                   <StepBadge>{step.badge}</StepBadge>
-                  <h3 className="font-serif-display text-[32px] font-medium leading-[1.2] text-ink md:text-[40px]">
+                  <h3 className="text-[32px] font-medium leading-[1.2] text-ink md:text-[40px]">
                     {step.title}
                   </h3>
                   <p className="max-w-[480px] text-[16px] font-normal leading-[26px] text-ink/70">
@@ -227,7 +227,7 @@ export function HomeSections() {
             </div>
 
             <div className="flex flex-col gap-[20px] lg:pl-[20px]">
-              <h2 className="font-serif-display text-[36px] font-medium leading-[1.15] text-ink md:text-[48px]">
+              <h2 className="text-[36px] font-medium leading-[1.15] text-ink md:text-[48px]">
                 Here&apos;s The Deal...
                 <br />
                 <span className="text-accent">Great Marketing</span>
@@ -253,7 +253,7 @@ export function HomeSections() {
       <section id="pricing" className="home-grid-bg px-6 py-[80px] md:px-[40px]">
         <div className="mx-auto grid max-w-[1920px] gap-[40px] lg:grid-cols-[1fr_2fr] lg:gap-[60px]">
           <div className="flex flex-col gap-[20px] lg:sticky lg:top-[100px] lg:self-start">
-            <h2 className="font-serif-display text-[36px] font-medium leading-[1.15] text-[#000001] md:text-[48px]">
+            <h2 className="text-[36px] font-medium leading-[1.15] text-[#000001] md:text-[48px]">
               Built For{' '}
               <span className="text-accent">Agents Like You.</span>
             </h2>
@@ -303,7 +303,7 @@ export function HomeSections() {
       {/* Blog anchor section */}
       <section id="blog" className="home-steps-bg px-6 py-[60px] md:px-[40px]">
         <div className="mx-auto max-w-[800px] text-center">
-          <h2 className="font-serif-display text-[32px] font-medium leading-[1.2] text-ink md:text-[40px]">
+          <h2 className="text-[32px] font-medium leading-[1.2] text-ink md:text-[40px]">
             Blog
           </h2>
           <p className="mt-[16px] text-[16px] leading-[26px] text-ink/70">

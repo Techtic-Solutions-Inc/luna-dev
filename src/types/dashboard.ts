@@ -71,20 +71,3 @@ export interface DashboardOverviewData {
 }
 
 export type DashboardOverviewResponse = ApiSuccessResponse<DashboardOverviewData>;
-
-export interface CreateDashboardNotificationRequest {
-  announcement_title: string;
-  announcement_content: string;
-  full_name: string;
-  email: string;
-  phone: string;
-  link?: string | null;
-}
-
-export interface DashboardNotificationResponse {
-  id: string;
-  title: string;
-  message: string;
-}
-
-export type UpdateSubscriptionRequest = Record<string, never>;

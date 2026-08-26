@@ -8,10 +8,6 @@ export async function login(body: LoginRequest): Promise<LoginResponseData> {
 }
 
 export async function signup(body: SignupRequest): Promise<RegisteredUser> {
-  const response = await apiClient.post<RegisteredUser>('/api/signup', body);
+  const response = await apiClient.post<RegisteredUser>('/api/auth/signup', body);
   return response.data;
-}
-
-export async function logout(): Promise<void> {
-  await apiClient.get<void>('/api/auth/logout');
 }

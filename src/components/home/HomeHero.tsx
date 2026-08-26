@@ -27,9 +27,7 @@ export function HomeHero() {
       <div className="mx-auto max-w-[1920px]">
         <div className="grid items-center gap-[40px] lg:grid-cols-2 lg:gap-[60px]">
           <div className="flex flex-col gap-[20px]">
-            <h1
-              className="font-serif-display text-[36px] font-medium leading-[1.15] text-ink md:text-[50px] md:leading-[65.25px]"
-            >
+            <h1 className="text-[36px] font-medium leading-[1.15] text-ink md:text-[50px] md:leading-[65.25px]">
               Stunning Real Estate Marketing, Personalized To Your Market In Minutes
             </h1>
             <p className="max-w-[560px] text-[18px] font-normal leading-6 text-ink/80">
@@ -61,11 +59,11 @@ export function HomeHero() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative overflow-hidden rounded-[10px]" aria-hidden="true">
             <img
-              src="/images/dashboard.png"
-              alt="Agentwise dashboard showing content calendar and AI tools"
-              className="w-full rounded-[10px] object-contain shadow-2xl"
+              src="/assets/figma/group-33654428-2264-10401.png"
+              alt=""
+              className="w-full object-cover"
               loading="eager"
             />
           </div>

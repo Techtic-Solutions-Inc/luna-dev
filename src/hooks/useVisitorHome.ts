@@ -13,9 +13,7 @@ export function useVisitorHome() {
       await getVisitorHome();
     } catch (err) {
       if (err instanceof ApiClientError) {
-        if (err.status === 404) {
-          // Expected — render static Figma copy
-        } else if (err.status >= 500) {
+        if (err.status !== 404) {
           setError(err.message);
         }
       } else {

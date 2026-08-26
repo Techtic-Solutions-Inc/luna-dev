@@ -64,7 +64,7 @@ export function PasswordField({
           aria-invalid={error ? true : undefined}
           aria-describedby={errorId}
           className={[
-            'h-[52px] w-full rounded-control border border-ink bg-panel px-3 pr-12',
+            'h-[52px] w-full rounded-control border border-ink bg-panel px-3 pr-14',
             'text-[16px] font-normal leading-[17.856px] text-ink',
             'placeholder:text-muted',
             'transition-colors hover:border-accent/60',
@@ -81,7 +81,7 @@ export function PasswordField({
           type="button"
           onClick={() => setVisible((v) => !v)}
           aria-label={visible ? 'Hide password' : 'Show password'}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-ink/80 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:opacity-80"
+          className="absolute right-1 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center text-ink/80 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:opacity-80"
         >
           <EyeIcon open={visible} />
         </button>

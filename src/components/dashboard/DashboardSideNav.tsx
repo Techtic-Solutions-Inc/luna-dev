@@ -31,7 +31,7 @@ export function DashboardSideNav({
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    void logout((path) => navigate(path));
+    logout((path) => navigate(path));
   };
 
   const creditPercent =
@@ -46,10 +46,7 @@ export function DashboardSideNav({
     >
       {/* Logo */}
       <div className="mb-8 px-2">
-        <p
-          className="font-kalam text-[28px] leading-none text-ink"
-          style={{ fontFamily: 'Kalam, cursive' }}
-        >
+        <p className="text-[28px] font-medium leading-none text-ink">
           Agentwise
         </p>
         <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.12em] text-muted">

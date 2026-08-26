@@ -17,7 +17,7 @@ function formatDate(iso: string): string {
 
 export function ContentCard({ entry }: ContentCardProps) {
   return (
-    <article className="flex h-[300px] w-[200px] shrink-0 flex-col rounded-control border border-line bg-card p-4">
+    <article className="flex h-[300px] w-full shrink-0 flex-col rounded-control border border-line bg-card p-4 md:w-[200px]">
       <time
         dateTime={entry.date}
         className="mb-2 text-[12px] font-medium uppercase tracking-wide text-accent"

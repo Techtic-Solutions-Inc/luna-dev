@@ -14,12 +14,6 @@ export default {
       },
       fontFamily: {
         almarai: ['Almarai', 'sans-serif'],
-        'public-sans': ['Public Sans', 'sans-serif'],
-        garamond: ['EB Garamond', 'serif'],
-        'space-grotesk': ['Space Grotesk', 'sans-serif'],
-        fellix: ['Fellix', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
-        kalam: ['Kalam', 'cursive'],
       },
       borderRadius: {
         control: '8px',
