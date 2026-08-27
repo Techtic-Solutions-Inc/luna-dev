@@ -41,13 +41,12 @@ export default function Home() {
       />
 
       <section aria-labelledby="icon-heading" className="flex items-center gap-3">
-        <span
-          aria-label="Demo icon"
-          className="inline-flex items-center gap-2 text-[var(--accent)]"
-        >
+        <div className="inline-flex items-center gap-2 text-[var(--accent)]">
           <FontAwesomeIcon icon={faCoffee} aria-hidden />
-          <span className="text-sm text-muted-foreground">Font Awesome is loaded</span>
-        </span>
+          <h2 id="icon-heading" className="text-sm font-normal text-muted-foreground">
+            Font Awesome is loaded
+          </h2>
+        </div>
       </section>
 
       <section aria-labelledby="status-heading" className="grid gap-4 md:grid-cols-2">

@@ -43,7 +43,7 @@ export default {
         caption: ['Public Sans', 'sans-serif'],
       },
       boxShadow: {
-        header: '0px 4.0px 4.0px 0px #0000003f',
+        header: 'var(--drop-shadow-11)',
       },
     },
   },

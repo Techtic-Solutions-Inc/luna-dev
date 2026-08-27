@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { Button } from '@/components/ui/button';
 
 export default function Header() {
   const { isAuthenticated, clearToken } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="flex items-center justify-between border-b border-border bg-card px-4 py-3 shadow-header md:px-6">
@@ -20,7 +21,7 @@ export default function Header() {
           size="sm"
           onClick={() => {
             clearToken();
-            window.location.assign('/');
+            navigate('/', { replace: true });
           }}
         >
           Sign out
