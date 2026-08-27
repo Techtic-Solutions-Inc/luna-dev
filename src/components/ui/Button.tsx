@@ -31,7 +31,7 @@ export function Button({
   return (
     <button
       type={type}
-      className={`inline-flex items-center justify-center gap-8 rounded-1000 px-20 py-12 text-body-115 transition focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-color-16 ${variants[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-8 rounded-8 px-20 py-12 text-body-115 transition focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-color-16 ${variants[variant]} ${className}`}
       style={{ fontFamily: "'Public Sans', sans-serif" }}
       disabled={disabled || loading}
       aria-busy={loading}

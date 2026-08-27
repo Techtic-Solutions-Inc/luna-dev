@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Input } from "@/components/ui/Input";
 import { PasswordInput } from "@/components/ui/PasswordInput";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { useSignup } from "@/hooks/useSignup";
 
 const PASSWORD_RULE = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
@@ -82,12 +83,18 @@ export function SignUpForm() {
           Great Marketing Made Easier. Specifically for Agents
         </h1>
         <h2
-          className="text-signup-subtitle text-color-131"
+          className="text-signup-subtitle text-secondary"
           style={{ fontFamily: "'Almarai', sans-serif" }}
         >
           Create your account today
         </h2>
       </div>
+      {loading ? (
+        <div aria-busy="true" aria-live="polite">
+          <span className="sr-only">Signing up</span>
+          <Skeleton className="h-4 w-full rounded-8" />
+        </div>
+      ) : null}
       <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
         <Input
           label="First Name"

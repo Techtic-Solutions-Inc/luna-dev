@@ -6,6 +6,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   hideLabel?: boolean;
   shape?: "default" | "pill";
   inputSize?: "default" | "dashboard";
+  inputPadding?: "12" | "16";
   leadingIcon?: ReactNode;
 }
 
@@ -17,16 +18,17 @@ export function Input({
   hideLabel = false,
   shape = "default",
   inputSize = "default",
+  inputPadding = "12",
   leadingIcon,
   ...rest
 }: InputProps) {
   const inputId = id ?? rest.name ?? label.replace(/\s+/g, "-").toLowerCase();
   const errorId = `${inputId}-error`;
-  const radius =
-    inputSize === "dashboard" ? "rounded-8" : shape === "pill" ? "rounded-1000" : "rounded-16";
+  const radius = inputSize === "dashboard" || shape === "pill" ? "rounded-8" : "rounded-16";
   const height = inputSize === "dashboard" ? "h-44" : "h-52";
   const border = inputSize === "dashboard" ? "border-color-111" : "border-secondary";
-  const padding = leadingIcon ? "pl-44 pr-20" : inputSize === "dashboard" ? "px-20" : "px-16";
+  const defaultPad = inputPadding === "16" ? "px-16" : "px-12";
+  const padding = leadingIcon ? "pl-44 pr-20" : inputSize === "dashboard" ? "px-20" : defaultPad;
   return (
     <label
       className="flex w-full flex-col text-body text-color-131"

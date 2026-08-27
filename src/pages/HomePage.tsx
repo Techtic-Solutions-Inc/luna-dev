@@ -30,6 +30,28 @@ export function HomePage() {
           </Button>
         </Link>
       </div>
+      <section
+        id="terms-of-service"
+        className="mt-30 w-full max-w-[461px] text-center"
+        style={{ fontFamily: "'Almarai', sans-serif" }}
+      >
+        <h2 className="text-signup-subtitle text-secondary">Terms of Use</h2>
+        <p className="mt-12 text-body-16 text-color-131">
+          By creating an Agentwise account you agree to use the platform for legitimate real estate marketing and to
+          follow applicable advertising rules.
+        </p>
+      </section>
+      <section
+        id="privacy-policy"
+        className="mt-24 w-full max-w-[461px] text-center"
+        style={{ fontFamily: "'Almarai', sans-serif" }}
+      >
+        <h2 className="text-signup-subtitle text-secondary">Privacy Policy</h2>
+        <p className="mt-12 text-body-16 text-color-131">
+          Agentwise stores the account details you submit so you can sign in and manage your marketing workspace. We do
+          not sell your personal information.
+        </p>
+      </section>
     </div>
   );
 }

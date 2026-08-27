@@ -81,6 +81,8 @@ const config: Config = {
         stat: ["56px", { lineHeight: "1", fontWeight: "500" }],
         "nav-label": ["11px", { lineHeight: "14px", fontWeight: "700", letterSpacing: "0.16em" }],
         "logo-sub": ["9px", { lineHeight: "12px", fontWeight: "400", letterSpacing: "0.22em" }],
+        wordmark: ["36px", { lineHeight: "1", fontWeight: "400" }],
+        "wordmark-compact": ["28px", { lineHeight: "1", fontWeight: "400" }],
       },
       borderRadius: {
         1: "1px",

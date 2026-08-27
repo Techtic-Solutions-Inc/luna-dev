@@ -12,6 +12,8 @@ export function useLogout() {
     setLoading(true);
     try {
       await logoutRequest();
+    } catch {
+      /* session is still cleared below */
     } finally {
       logout();
       setLoading(false);

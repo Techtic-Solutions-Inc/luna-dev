@@ -5,6 +5,7 @@ interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   hideLabel?: boolean;
   shape?: "default" | "pill";
+  inputPadding?: "12" | "16";
 }
 
 export function PasswordInput({
@@ -14,13 +15,16 @@ export function PasswordInput({
   className = "",
   hideLabel = false,
   shape = "default",
+  inputPadding = "12",
   disabled,
   ...rest
 }: PasswordInputProps) {
   const [visible, setVisible] = useState(false);
   const inputId = id ?? rest.name ?? "password";
   const errorId = `${inputId}-error`;
-  const radius = shape === "pill" ? "rounded-1000" : "rounded-16";
+  const radius = shape === "pill" ? "rounded-8" : "rounded-16";
+  const xPad = inputPadding === "16" ? "px-16" : "px-12";
+  const toggleRight = inputPadding === "16" ? "right-16" : "right-12";
   return (
     <div className="flex w-full flex-col">
       <label
@@ -38,13 +42,13 @@ export function PasswordInput({
           aria-invalid={Boolean(error)}
           aria-describedby={error ? errorId : undefined}
           disabled={disabled}
-          className={`h-52 w-full ${radius} border border-secondary bg-color-106 px-16 pr-52 text-body text-secondary placeholder:text-color-135 transition hover:border-accent focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
+          className={`h-52 w-full ${radius} border border-secondary bg-color-106 ${xPad} pr-52 text-body text-secondary placeholder:text-color-135 transition hover:border-accent focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
           style={{ fontFamily: "'Almarai', sans-serif" }}
         />
         <button
           type="button"
           disabled={disabled}
-          className="absolute right-16 top-1/2 -translate-y-1/2 text-secondary transition hover:text-accent focus-visible:text-accent active:opacity-80 disabled:cursor-not-allowed disabled:opacity-50"
+          className={`absolute ${toggleRight} top-1/2 -translate-y-1/2 text-secondary transition hover:text-accent focus-visible:text-accent active:opacity-80 disabled:cursor-not-allowed disabled:opacity-50`}
           aria-label={visible ? "Hide password" : "Show password"}
           onClick={() => setVisible((v) => !v)}
         >

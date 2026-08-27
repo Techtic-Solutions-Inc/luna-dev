@@ -16,7 +16,7 @@ export function BrandMark({
       className={`inline-flex flex-col transition hover:opacity-90 focus-visible:opacity-90 active:opacity-80 ${align === "start" ? "items-start text-left" : "items-center text-center"} ${color}`}
     >
       <span
-        className={`${compact ? "text-[28px] leading-none" : "text-[36px] leading-none"}`}
+        className={`${compact ? "text-wordmark-compact" : "text-wordmark"} leading-none`}
         style={{ fontFamily: "'Kalam', cursive" }}
       >
         Agentwise

@@ -55,61 +55,68 @@ export function SignInForm() {
         >
           Welcome To Agentwise
         </h1>
-        <p className="text-body-44 text-color-131" style={{ fontFamily: "'Public Sans', sans-serif" }}>
+        <p className="text-almarai-16-24 text-color-131" style={{ fontFamily: "'Almarai', sans-serif" }}>
           Everything you need to create standout real estate content.
         </p>
       </div>
       {loading ? (
-        <div className="flex flex-col gap-20" aria-busy="true" aria-live="polite">
+        <div aria-busy="true" aria-live="polite">
           <span className="sr-only">Signing in</span>
-          <Skeleton className="h-52 w-full rounded-1000" />
-          <Skeleton className="h-52 w-full rounded-1000" />
-          <Skeleton className="h-16 w-full rounded-8" />
+          <Skeleton className="h-4 w-full rounded-8" />
         </div>
-      ) : (
-        <>
-          <Input
-            label="Email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={emailError}
-            hideLabel
-            shape="pill"
-          />
-          <PasswordInput
-            label="Password"
-            name="password"
-            autoComplete="current-password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={passwordError}
-            hideLabel
-            shape="pill"
-          />
-          <div className="flex items-center justify-between gap-12">
-            <Checkbox
-              name="remember"
-              checked={remember}
-              onChange={(e) => setRemember(e.target.checked)}
-              className="text-body-16 text-secondary"
-            >
-              Remember me
-            </Checkbox>
-            <Link
-              to="/forgot-password"
-              className="text-body-69 text-color-131 transition hover:text-accent focus-visible:text-accent active:opacity-80"
-              style={{ fontFamily: "'Almarai', sans-serif" }}
-            >
-              Forgot your password?
-            </Link>
-          </div>
-        </>
-      )}
+      ) : null}
+      <Input
+        label="Email"
+        name="email"
+        type="email"
+        autoComplete="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        error={emailError}
+        disabled={loading}
+        hideLabel
+        shape="pill"
+        inputPadding="16"
+      />
+      <PasswordInput
+        label="Password"
+        name="password"
+        autoComplete="current-password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        error={passwordError}
+        disabled={loading}
+        hideLabel
+        shape="pill"
+        inputPadding="16"
+      />
+      <div className="flex items-center justify-between gap-12">
+        <Checkbox
+          name="remember"
+          checked={remember}
+          onChange={(e) => setRemember(e.target.checked)}
+          disabled={loading}
+          className="text-body-16 text-secondary"
+        >
+          Remember me
+        </Checkbox>
+        <Link
+          to="/forgot-password"
+          aria-disabled={loading}
+          tabIndex={loading ? -1 : undefined}
+          onClick={(event) => {
+            if (loading) {
+              event.preventDefault();
+            }
+          }}
+          className={`text-body-69 text-color-131 transition hover:text-accent focus-visible:text-accent active:opacity-80 ${loading ? "pointer-events-none opacity-50" : ""}`}
+          style={{ fontFamily: "'Almarai', sans-serif" }}
+        >
+          Forgot your password?
+        </Link>
+      </div>
       {formError ? <Alert message={formError} /> : null}
       <Button type="submit" loading={loading} disabled={loading} className="h-52 w-full">
         {loading ? "Signing in…" : "Sign In"}

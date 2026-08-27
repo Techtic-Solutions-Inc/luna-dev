@@ -46,11 +46,7 @@ export async function signup(body: SignupRequest): Promise<SignupUserData> {
 export async function logout(): Promise<void> {
   try {
     await client.get("/api/auth/logout");
-  } catch (error) {
-    const parsed = toApiError(error);
-    if (parsed.status === 404 || parsed.status === 0) {
-      return;
-    }
-    throw parsed;
+  } catch {
+    return;
   }
 }

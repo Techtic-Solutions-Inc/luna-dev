@@ -17,10 +17,14 @@ export function asArray(value: unknown): unknown[] | undefined {
 }
 
 export function asRecord(value: unknown): Record<string, unknown> | undefined {
-  if (typeof value === "object" && value !== null && !Array.isArray(value)) {
-    return value as Record<string, unknown>;
+  if (isPlainRecord(value)) {
+    return value;
   }
   return undefined;
+}
+
+function isPlainRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 export function displayName(source: Record<string, unknown> | null | undefined): string | undefined {

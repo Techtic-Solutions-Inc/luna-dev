@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthLayout } from "@/components/layout/AuthLayout";
+import { Button } from "@/components/ui/Button";
 
 export function ForgotPasswordPage() {
+  const navigate = useNavigate();
   return (
     <AuthLayout
       collageSrc="/images/sign-in.png"
@@ -16,13 +18,9 @@ export function ForgotPasswordPage() {
         <p className="mt-16 text-body-16 text-color-131" style={{ fontFamily: "'Almarai', sans-serif" }}>
           Password recovery is not available on this endpoint yet. Return to Sign In to use your existing credentials.
         </p>
-        <Link
-          to="/sign-in"
-          className="mt-24 inline-flex h-52 items-center rounded-1000 bg-accent px-24 text-body-115 text-secondary transition hover:bg-color-102 focus-visible:ring-2 focus-visible:ring-accent active:brightness-90"
-          style={{ fontFamily: "'Public Sans', sans-serif" }}
-        >
+        <Button type="button" className="mt-24 h-52 w-full" onClick={() => navigate("/sign-in")}>
           Back to Sign In
-        </Link>
+        </Button>
       </div>
     </AuthLayout>
   );
