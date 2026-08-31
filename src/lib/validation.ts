@@ -18,3 +18,15 @@ export const profileSchema = z.object({
 });
 
 export type ProfileFormValues = z.infer<typeof profileSchema>;
+
+export const waitlistSchema = z.object({
+  first_name: z.string().min(1, 'First name is required'),
+  last_name: z.string().min(1, 'Last name is required'),
+  email: z.string().min(1, 'Email is required').email('Enter a valid email address'),
+  phone: z.string().min(1, 'Phone number is required'),
+  tenure: z.string().min(1, 'Please tell us how long you have been in real estate'),
+  marketing: z.string().min(1, 'Please tell us what you currently do for marketing'),
+  message: z.string().min(1, 'Message is required'),
+});
+
+export type WaitlistFormValues = z.infer<typeof waitlistSchema>;

@@ -4,6 +4,7 @@ export const AUTH_USER_KEY = 'auth_user';
 export const endpoints = {
   login: '/auth/login',
   currentUser: '/api/v1/users/me',
+  visitorHome: '/api/visitor/home',
 } as const;
 
 export interface LoginRequestBody {
@@ -41,4 +42,42 @@ export interface CurrentUserEnvelope {
   success?: boolean;
   message?: string;
   data?: AuthUser;
+}
+
+export interface VisitorHomeItem {
+  id: string;
+  name: string;
+  title: string;
+  description: string;
+  link: string;
+  image: string;
+  image_url: string;
+  category: string;
+  tags: string[];
+  full_name: string | null;
+  first_name: string | null;
+  last_name: string | null;
+  email: string | null;
+  phone: string | null;
+  phone_number: string | null;
+  error: string | null;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface VisitorHomePagination {
+  page: number;
+  limit: number;
+}
+
+export interface VisitorHomeData {
+  items: VisitorHomeItem[];
+  pagination: VisitorHomePagination;
+}
+
+export interface VisitorHomeResponse {
+  success: boolean;
+  message: string;
+  data: VisitorHomeData;
 }
