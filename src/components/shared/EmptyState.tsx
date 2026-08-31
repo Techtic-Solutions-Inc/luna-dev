@@ -7,9 +7,17 @@ interface EmptyStateProps {
   description?: string;
   action?: ReactNode;
   className?: string;
+  titleAs?: 'p' | 'h1';
 }
 
-export function EmptyState({ title, description, action, className }: EmptyStateProps) {
+export function EmptyState({
+  title,
+  description,
+  action,
+  className,
+  titleAs = 'p',
+}: EmptyStateProps) {
+  const TitleTag = titleAs;
   return (
     <div
       className={cn(
@@ -20,7 +28,7 @@ export function EmptyState({ title, description, action, className }: EmptyState
     >
       <Inbox className="h-padding-40 w-padding-40 text-muted-foreground" aria-hidden="true" />
       <div className="flex flex-col gap-gap-6">
-        <p className="text-body-17 text-foreground">{title}</p>
+        <TitleTag className="text-body-17 text-foreground">{title}</TitleTag>
         {description ? (
           <p className="max-w-[var(--spacing-gap-465)] text-body-sm-2 text-muted-foreground">
             {description}

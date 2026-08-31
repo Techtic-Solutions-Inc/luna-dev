@@ -7,6 +7,7 @@ interface ErrorStateProps {
   message: string;
   onRetry?: () => void;
   className?: string;
+  titleAs?: 'p' | 'h1';
 }
 
 export function ErrorState({
@@ -14,7 +15,9 @@ export function ErrorState({
   message,
   onRetry,
   className,
+  titleAs = 'p',
 }: ErrorStateProps) {
+  const TitleTag = titleAs;
   return (
     <div
       className={cn(
@@ -28,7 +31,7 @@ export function ErrorState({
         aria-hidden="true"
       />
       <div className="flex flex-col gap-gap-6">
-        <p className="text-body-17 text-foreground">{title}</p>
+        <TitleTag className="text-body-17 text-foreground">{title}</TitleTag>
         <p className="max-w-[var(--spacing-gap-465)] text-body-sm-2 text-muted-foreground">
           {message}
         </p>

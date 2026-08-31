@@ -16,6 +16,7 @@ describe('API client', () => {
   it('keeps locked contract paths', () => {
     expect(endpoints.login).toBe('/auth/login');
     expect(endpoints.currentUser).toBe('/api/v1/users/me');
+    expect(endpoints.visitorHome).toBe('/api/visitor/home');
   });
 
   it('unwraps ErrorResponse.message from Axios errors', () => {

@@ -11,3 +11,98 @@
     @apply bg-background text-foreground antialiased;
   }
 }
+
+@layer utilities {
+  .visitor-home {
+    --visitor-accent: #c8a47e;
+    --visitor-muted: #637381;
+    --visitor-error: #ff5630;
+    --visitor-bronze: #8b6842;
+    --visitor-surface: #11161c;
+    font-family: 'Almarai', sans-serif;
+    color: #ffffff;
+    background: #11161c;
+  }
+
+  .typo-almarai {
+    font-family: 'Almarai', sans-serif;
+  }
+
+  .typo-public {
+    font-family: 'Public Sans', sans-serif;
+  }
+
+  .typo-garamond {
+    font-family: 'EB Garamond', serif;
+  }
+
+  .typo-grotesk {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* Figma uses Fellix; it is not on Google Fonts, so Inter is the licensed fallback. */
+  .typo-fellix {
+    font-family: 'Fellix', 'Inter', sans-serif;
+  }
+
+  .typo-inter {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .typo-kalam {
+    font-family: 'Kalam', cursive;
+  }
+
+  .visitor-grid-bg {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .visitor-grid-bg-green {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  .visitor-marquee {
+    animation: visitor-marquee 48s linear infinite;
+  }
+
+  .visitor-testimonial-col {
+    animation: visitor-column 36s linear infinite;
+  }
+
+  .visitor-testimonial-col-delayed {
+    animation: visitor-column 42s linear infinite;
+    animation-delay: -12s;
+  }
+}
+
+@keyframes visitor-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes visitor-column {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visitor-marquee,
+  .visitor-testimonial-col,
+  .visitor-testimonial-col-delayed {
+    animation: none;
+  }
+}
