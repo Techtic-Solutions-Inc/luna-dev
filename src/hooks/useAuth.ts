@@ -8,6 +8,9 @@ import {
   type ReactNode,
 } from 'react';
 import { AUTH_TOKEN_KEY, AUTH_USER_KEY, type AuthUser } from '@/types/api';
+import { isRecord } from '@/lib/guards';
+import { queryClient } from '@/lib/queryClient';
+import { currentUserQueryKey } from '@/lib/queryKeys';
 
 function readUser(): AuthUser | null {
   if (typeof window === 'undefined') {
@@ -19,19 +22,19 @@ function readUser(): AuthUser | null {
   }
   try {
     const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== 'object' || parsed === null) {
+    if (!isRecord(parsed)) {
       return null;
     }
-    const record = parsed as Record<string, unknown>;
-    if (typeof record.email !== 'string') {
+    const email = parsed.email;
+    if (typeof email !== 'string') {
       return null;
     }
     return {
-      id: typeof record.id === 'string' ? record.id : '',
-      name: typeof record.name === 'string' ? record.name : '',
-      first_name: typeof record.first_name === 'string' ? record.first_name : '',
-      last_name: typeof record.last_name === 'string' ? record.last_name : '',
-      email: record.email,
+      id: typeof parsed.id === 'string' ? parsed.id : '',
+      name: typeof parsed.name === 'string' ? parsed.name : '',
+      first_name: typeof parsed.first_name === 'string' ? parsed.first_name : '',
+      last_name: typeof parsed.last_name === 'string' ? parsed.last_name : '',
+      email,
     };
   } catch {
     return null;
@@ -83,6 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     clearSession();
     setToken(null);
     setUser(null);
+    queryClient.removeQueries({ queryKey: currentUserQueryKey });
   }, []);
 
   const value = useMemo(

@@ -1,4 +1,5 @@
 import { fetchData } from '@/lib/api/client';
+import { isRecord } from '@/lib/guards';
 import { endpoints, type AuthUser } from '@/types/api';
 
 function toUser(record: Record<string, unknown>): AuthUser {
@@ -16,16 +17,15 @@ function toUser(record: Record<string, unknown>): AuthUser {
 }
 
 export async function getCurrentUser(): Promise<AuthUser> {
-  const payload = await fetchData<unknown>(endpoints.currentUser);
-  if (typeof payload !== 'object' || payload === null) {
+  const payload: unknown = await fetchData<unknown>(endpoints.currentUser);
+  if (!isRecord(payload)) {
     throw new Error('The current user response did not include an account profile.');
   }
-  const record = payload as Record<string, unknown>;
-  if (typeof record.email === 'string') {
-    return toUser(record);
+  if (typeof payload.email === 'string') {
+    return toUser(payload);
   }
-  if (typeof record.data === 'object' && record.data !== null) {
-    return toUser(record.data as Record<string, unknown>);
+  if (isRecord(payload.data)) {
+    return toUser(payload.data);
   }
   throw new Error('The current user response did not include an account profile.');
 }

@@ -18,11 +18,13 @@ export function EmptyState({ title, description, action, className }: EmptyState
       )}
       role="status"
     >
-      <Inbox className="h-10 w-10 text-muted-foreground" aria-hidden="true" />
+      <Inbox className="h-padding-40 w-padding-40 text-muted-foreground" aria-hidden="true" />
       <div className="flex flex-col gap-gap-6">
         <p className="text-body-17 text-foreground">{title}</p>
         {description ? (
-          <p className="max-w-md text-sm text-muted-foreground">{description}</p>
+          <p className="max-w-[var(--spacing-gap-465)] text-body-sm-2 text-muted-foreground">
+            {description}
+          </p>
         ) : null}
       </div>
       {action}

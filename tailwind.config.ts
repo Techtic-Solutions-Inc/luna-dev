@@ -38,7 +38,7 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: '16px',
+      padding: 'var(--spacing-padding-16)',
       screens: {
         mobile: '480px',
         tablet: '768px',
@@ -70,8 +70,8 @@ const config: Config = {
           foreground: 'var(--muted-foreground)',
         },
         accent: {
-          DEFAULT: 'var(--primary)',
-          foreground: 'var(--primary-foreground)',
+          DEFAULT: 'var(--accent)',
+          foreground: 'var(--accent-foreground)',
         },
         popover: {
           DEFAULT: 'var(--popover)',
@@ -86,8 +86,14 @@ const config: Config = {
       borderRadius: {
         ...sofiaRadius,
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        md: 'calc(var(--radius) - var(--spacing-padding-2))',
+        sm: 'calc(var(--radius) - var(--spacing-padding-4))',
+      },
+      ringWidth: {
+        'padding-2': 'var(--spacing-padding-2)',
+      },
+      ringOffsetWidth: {
+        'padding-2': 'var(--spacing-padding-2)',
       },
       boxShadow: sofiaShadows,
       fontFamily: {

@@ -28,7 +28,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   html {
-    font-size: 16px;
+    font-size: var(--font-body-size);
   }
 
   body {
@@ -56,8 +56,8 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
+    outline: var(--spacing-padding-2) solid var(--ring);
+    outline-offset: var(--spacing-padding-2);
   }
 
   ${typographyClasses}

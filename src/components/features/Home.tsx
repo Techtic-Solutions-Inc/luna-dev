@@ -39,7 +39,7 @@ export default function Home() {
   const user = query.data ?? sessionUser;
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col gap-gap-24">
+    <div className="mx-auto flex w-full max-w-[var(--radius-1000)] flex-col gap-gap-24">
       <PageHeader
         title="Overview"
         description="Session status and the account loaded from the API."
@@ -55,7 +55,11 @@ export default function Home() {
           <CardHeader>
             <CardDescription>Session</CardDescription>
             <CardTitle className="text-heading-md-14">
-              {query.isLoading && !user ? <Skeleton className="h-7 w-28" /> : 'Authenticated'}
+              {query.isLoading && !user ? (
+                <Skeleton className="h-padding-30 w-[var(--spacing-gap-113)]" />
+              ) : (
+                'Authenticated'
+              )}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -67,7 +71,7 @@ export default function Home() {
             <CardDescription>Signed in as</CardDescription>
             <CardTitle className="text-heading-md-14">
               {query.isLoading && !user ? (
-                <Skeleton className="h-7 w-40" />
+                <Skeleton className="h-padding-30 w-[var(--spacing-gap-125)]" />
               ) : user ? (
                 getDisplayName(user)
               ) : (
@@ -75,7 +79,9 @@ export default function Home() {
               )}
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-sm text-muted-foreground">{user?.email ?? '—'}</CardContent>
+          <CardContent className="text-body-sm-2 text-muted-foreground">
+            {user?.email ?? '—'}
+          </CardContent>
         </Card>
         <Card>
           <CardHeader>
@@ -106,11 +112,11 @@ export default function Home() {
         <section className="flex flex-col gap-gap-12">
           <h2 className="font-garamond text-heading-lg-26">Account record</h2>
           {query.isError ? (
-            <p className="text-sm text-destructive" role="alert">
+            <p className="text-body-sm-2 text-destructive-foreground" role="alert">
               {errorMessage} Showing cached session data.{' '}
               <button
                 type="button"
-                className="underline hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="underline hover:text-foreground focus-visible:outline-none focus-visible:ring-padding-2 focus-visible:ring-ring"
                 onClick={() => {
                   void query.refetch();
                 }}

@@ -29,11 +29,11 @@ export default class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBo
     if (this.state.hasError) {
       return (
         <div className="flex min-h-screen items-center justify-center bg-background px-padding-24">
-          <div className="flex max-w-md flex-col items-center gap-gap-16 text-center">
+          <div className="flex max-w-[var(--spacing-gap-465)] flex-col items-center gap-gap-16 text-center">
             <h1 className="font-garamond text-heading-lg-19 text-foreground">
               Something went wrong
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-body-sm-2 text-muted-foreground">
               {this.state.error?.message ??
                 'An unexpected error stopped this screen from rendering.'}
             </p>

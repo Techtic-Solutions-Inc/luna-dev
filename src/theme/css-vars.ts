@@ -1,12 +1,7 @@
 import { colors, effects, radius, semantic, spacing, typography } from './tokens';
 
 function fontStack(family: string): string {
-  const fallback =
-    family === 'EB Garamond' || family === 'Kalam'
-      ? 'serif'
-      : family === 'Fellix'
-        ? "'Inter', sans-serif"
-        : 'sans-serif';
+  const fallback = family === 'EB Garamond' || family === 'Kalam' ? 'serif' : 'sans-serif';
   return `'${family}', ${fallback}`;
 }
 
@@ -53,13 +48,15 @@ export function buildCssVariables(): string {
   lines.push(`--popover-foreground: ${semantic.appCardForeground};`);
   lines.push(`--primary: ${semantic.appPrimary};`);
   lines.push(`--primary-foreground: ${semantic.appPrimaryForeground};`);
-  lines.push(`--secondary: ${semantic.appMuted};`);
-  lines.push(`--secondary-foreground: ${semantic.appForeground};`);
+  lines.push(`--secondary: ${semantic.appSecondary};`);
+  lines.push(`--secondary-foreground: ${semantic.appSecondaryForeground};`);
   lines.push(`--muted: ${semantic.appMuted};`);
   lines.push(`--muted-foreground: ${semantic.appMutedForeground};`);
-  lines.push(`--accent-fg: ${semantic.appAccent};`);
+  lines.push(`--accent: ${semantic.appAccent};`);
+  lines.push(`--accent-foreground: ${semantic.appForeground};`);
   lines.push(`--destructive: ${semantic.appDestructive};`);
-  lines.push(`--destructive-foreground: ${colors.secondary};`);
+  lines.push(`--destructive-foreground: ${semantic.appBorder};`);
+  lines.push(`--error-text: ${semantic.appBorder};`);
   lines.push(`--border: ${semantic.appBorder};`);
   lines.push(`--input: ${semantic.appInput};`);
   lines.push(`--ring: ${semantic.appRing};`);

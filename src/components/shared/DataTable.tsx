@@ -121,7 +121,7 @@ export function DataTable<T>({
           >
             Previous
           </Button>
-          <span className="text-sm text-muted-foreground">
+          <span className="text-body-sm-2 text-muted-foreground">
             Page {page} of {pageCount}
           </span>
           <Button

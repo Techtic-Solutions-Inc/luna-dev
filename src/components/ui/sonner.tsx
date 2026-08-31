@@ -10,7 +10,7 @@ export function Toaster(props: ToasterProps) {
           toast:
             'group toast group-[.toaster]:bg-card group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-drop-shadow-40',
           description: 'group-[.toast]:text-muted-foreground',
-          actionButton: 'group-[.toast]:bg-primary group-[.toast]:text-primary-foreground',
+          actionButton: 'group-[.toast]:bg-accent group-[.toast]:text-accent-foreground',
           cancelButton: 'group-[.toast]:bg-muted group-[.toast]:text-muted-foreground',
         },
       }}

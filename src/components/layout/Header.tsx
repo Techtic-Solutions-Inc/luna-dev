@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { LogOut } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import { getDisplayName, getInitials } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -22,10 +20,10 @@ export default function Header() {
   const displayName = user ? getDisplayName(user) : 'Account';
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-border bg-sofia-color-16 px-padding-16 tablet:px-padding-24">
+    <header className="flex h-[var(--radius-64)] items-center justify-between border-b border-border bg-sofia-color-16 px-padding-16 tablet:px-padding-24">
       <Link
         to="/"
-        className="font-garamond text-heading-md-14 text-primary hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+        className="font-garamond text-heading-md-14 text-foreground hover:brightness-110 focus-visible:outline-none focus-visible:ring-padding-2 focus-visible:ring-ring rounded-sm"
       >
         Sofia Admin
       </Link>
@@ -37,10 +35,12 @@ export default function Header() {
               className="flex items-center gap-gap-8 px-padding-8"
               aria-label="Open account menu"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-10000 bg-primary text-xs font-bold text-primary-foreground">
+              <span className="flex h-padding-32 w-padding-32 items-center justify-center rounded-10000 bg-accent text-caption-7 font-bold text-accent-foreground">
                 {getInitials(displayName)}
               </span>
-              <span className="hidden text-sm tablet:inline">{displayName}</span>
+              <span className="hidden max-w-[var(--spacing-gap-125)] truncate text-body-sm-2 tablet:inline">
+                {displayName}
+              </span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -48,15 +48,15 @@ export default function Header() {
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
               <Link to="/profile">
-                <FontAwesomeIcon icon={faUser} className="mr-2 h-3.5 w-3.5" />
+                <User className="mr-padding-8 h-padding-16 w-padding-16" />
                 Profile
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem
               onSelect={() => setConfirmOpen(true)}
-              className="text-destructive focus:text-destructive"
+              className="text-destructive-foreground focus:text-destructive-foreground"
             >
-              <LogOut className="mr-2 h-4 w-4" />
+              <LogOut className="mr-padding-8 h-padding-16 w-padding-16" />
               Sign out
             </DropdownMenuItem>
           </DropdownMenuContent>

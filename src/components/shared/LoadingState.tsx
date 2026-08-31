@@ -16,7 +16,7 @@ export function LoadingState({ rows = 4, className, label = 'Loading' }: Loading
       aria-label={label}
     >
       {Array.from({ length: rows }, (_, index) => (
-        <Skeleton key={index} className="h-12 w-full" />
+        <Skeleton key={index} className="h-gap-48 w-full" />
       ))}
     </div>
   );

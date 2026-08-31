@@ -22,8 +22,8 @@ export default function AppShell() {
           end
           className={({ isActive }) =>
             cn(
-              'rounded-md px-padding-12 py-padding-8 text-sm hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-              isActive ? 'text-primary' : 'text-muted-foreground',
+              'rounded-md px-padding-12 py-padding-8 text-body-sm-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-padding-2 focus-visible:ring-ring',
+              isActive ? 'text-foreground' : 'text-muted-foreground',
             )
           }
         >
@@ -33,8 +33,8 @@ export default function AppShell() {
           to="/profile"
           className={({ isActive }) =>
             cn(
-              'rounded-md px-padding-12 py-padding-8 text-sm hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-              isActive ? 'text-primary' : 'text-muted-foreground',
+              'rounded-md px-padding-12 py-padding-8 text-body-sm-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-padding-2 focus-visible:ring-ring',
+              isActive ? 'text-foreground' : 'text-muted-foreground',
             )
           }
         >

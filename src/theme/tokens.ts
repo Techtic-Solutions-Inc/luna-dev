@@ -177,7 +177,8 @@ export const typography: Record<string, TypographyToken> = {
   'body-29': { fontFamily: 'Almarai', fontSize: '16.0px', fontWeight: 300, lineHeight: '17.856000900268555px' },
   'caption-30': { fontFamily: 'Public Sans', fontSize: '12.0px', fontWeight: 600, lineHeight: '14.09999942779541px' },
   'heading-lg-31': { fontFamily: 'Almarai', fontSize: '24.0px', fontWeight: 700, lineHeight: '26.784000396728516px' },
-  'body-sm-32': { fontFamily: 'Fellix', fontSize: '15.0px', fontWeight: 600, lineHeight: '20.0px', letterSpacing: '0.22499999999999998px' },
+  // Fellix is not available via Google Fonts; Inter (already loaded) substitutes for body-sm-32.
+  'body-sm-32': { fontFamily: 'Inter', fontSize: '15.0px', fontWeight: 600, lineHeight: '20.0px', letterSpacing: '0.22499999999999998px' },
   'body-33': { fontFamily: 'Almarai', fontSize: '16.0px', fontWeight: 400, lineHeight: '16.0px' },
   'body-34': { fontFamily: 'Almarai', fontSize: '18.0px', fontWeight: 400, lineHeight: '24.0px' },
   'heading-xl-35': { fontFamily: 'EB Garamond', fontSize: '32.0px', fontWeight: 500, lineHeight: '41.7599983215332px' },
@@ -473,23 +474,27 @@ for (const [name, token] of Object.entries(effects)) {
   }
 }
 
-/** Semantic aliases used by shadcn primitives (still sourced from Figma tokens). */
+/**
+ * shadcn semantic CSS variables map 1:1 to named Figma tokens so re-theming
+ * those names updates the running UI. Remaining aliases still come from the
+ * same tokens file.
+ */
 export const semantic = {
-  appBackground: colors['color-22'],
-  appForeground: colors['color-41'],
-  appCard: colors['color-77'],
-  appCardForeground: colors['color-41'],
-  appMuted: colors['color-64'],
+  appBackground: colors.background,
+  appForeground: colors['text-primary'],
+  appCard: colors.surface,
+  appCardForeground: colors['text-primary'],
+  appMuted: colors['color-21'],
   appMutedForeground: colors['text-secondary'],
-  appPrimary: colors.accent,
-  appPrimaryForeground: colors['color-16'],
+  appPrimary: colors.primary,
+  appPrimaryForeground: colors['text-primary'],
   appSecondary: colors.secondary,
-  appSecondaryForeground: colors['color-16'],
+  appSecondaryForeground: colors['text-primary'],
   appAccent: colors.accent,
-  appDestructive: colors['color-51'],
-  appBorder: colors['color-68'],
-  appRing: colors.accent,
-  appInput: colors['color-68'],
+  appDestructive: colors.error,
+  appBorder: colors.border,
+  appRing: colors.border,
+  appInput: colors.border,
 } as const;
 
 export const tokens = {

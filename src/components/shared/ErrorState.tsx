@@ -23,10 +23,15 @@ export function ErrorState({
       )}
       role="alert"
     >
-      <AlertCircle className="h-8 w-8 text-destructive" aria-hidden="true" />
+      <AlertCircle
+        className="h-padding-32 w-padding-32 text-destructive-foreground"
+        aria-hidden="true"
+      />
       <div className="flex flex-col gap-gap-6">
         <p className="text-body-17 text-foreground">{title}</p>
-        <p className="max-w-md text-sm text-muted-foreground">{message}</p>
+        <p className="max-w-[var(--spacing-gap-465)] text-body-sm-2 text-muted-foreground">
+          {message}
+        </p>
       </div>
       {onRetry ? (
         <Button type="button" variant="outline" onClick={onRetry}>

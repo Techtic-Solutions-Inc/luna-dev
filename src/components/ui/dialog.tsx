@@ -32,7 +32,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-gap-16 border border-border bg-card p-padding-24 shadow-drop-shadow-39 duration-200',
+        'fixed left-1/2 top-1/2 z-50 grid w-full max-w-[var(--radius-500)] -translate-x-1/2 -translate-y-1/2 gap-gap-16 border border-border bg-card p-padding-24 shadow-drop-shadow-39 duration-200',
         'rounded-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
         className,
       )}
@@ -40,10 +40,10 @@ const DialogContent = React.forwardRef<
     >
       {children}
       <DialogPrimitive.Close
-        className="absolute right-4 top-4 rounded-sm text-muted-foreground opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none"
+        className="absolute right-padding-16 top-padding-16 rounded-sm text-muted-foreground opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-padding-2 focus-visible:ring-ring disabled:pointer-events-none"
         aria-label="Close"
       >
-        <X className="h-4 w-4" />
+        <X className="h-padding-16 w-padding-16" />
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </DialogPortal>
@@ -83,7 +83,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn('text-sm text-muted-foreground', className)}
+    className={cn('text-body-sm-2 text-muted-foreground', className)}
     {...props}
   />
 ));

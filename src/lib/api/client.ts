@@ -1,5 +1,9 @@
-import axios, { AxiosError, type AxiosInstance } from 'axios';
-import { AUTH_TOKEN_KEY, type ErrorResponse } from '@/types/api';
+import axios, { type AxiosInstance } from 'axios';
+import { AUTH_TOKEN_KEY, endpoints, type ErrorResponse } from '@/types/api';
+import { isRecord, isStringArrayRecord } from '@/lib/guards';
+import { queryClient } from '@/lib/queryClient';
+import { currentUserQueryKey } from '@/lib/queryKeys';
+import { clearSession } from '@/hooks/useAuth';
 
 function resolveBaseUrl(): string {
   const fromEnv = import.meta.env.VITE_API_BASE_URL ?? import.meta.env.VITE_API_URL;
@@ -35,37 +39,71 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
-export function isErrorResponse(value: unknown): value is ErrorResponse {
-  if (typeof value !== 'object' || value === null) {
+function isLoginRequest(url: string | undefined): boolean {
+  if (!url) {
     return false;
   }
-  return 'message' in value && typeof (value as { message: unknown }).message === 'string';
+  return url.includes(endpoints.login);
+}
+
+function clearAuthenticatedSession(): void {
+  clearSession();
+  void queryClient.removeQueries({ queryKey: currentUserQueryKey });
+  if (typeof window !== 'undefined' && window.location.pathname !== '/login') {
+    window.location.assign('/login');
+  }
+}
+
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error: unknown) => {
+    if (axios.isAxiosError(error)) {
+      const status = error.response?.status;
+      if (
+        (status === 401 || status === 403) &&
+        !isLoginRequest(error.config?.url) &&
+        getStoredToken()
+      ) {
+        clearAuthenticatedSession();
+      }
+    }
+    return Promise.reject(error);
+  },
+);
+
+export function isErrorResponse(value: unknown): value is ErrorResponse {
+  if (!isRecord(value)) {
+    return false;
+  }
+  return typeof value.message === 'string';
 }
 
 export function getApiError(error: unknown): ErrorResponse {
   if (axios.isAxiosError(error)) {
-    const axiosError = error as AxiosError<unknown>;
-    const data = axiosError.response?.data;
+    const data: unknown = error.response?.data;
     if (isErrorResponse(data)) {
       return {
         message: data.message,
-        errors: data.errors ?? {},
+        errors: isStringArrayRecord(data.errors) ? data.errors : {},
       };
     }
-    if (axiosError.response?.status === 401) {
-      return { message: 'Invalid credentials. Please try again.', errors: {} };
+    if (error.response?.status === 401) {
+      if (isLoginRequest(error.config?.url)) {
+        return { message: 'Invalid credentials. Please try again.', errors: {} };
+      }
+      return { message: 'Your session has expired. Please sign in again.', errors: {} };
     }
-    if (axiosError.response?.status === 403) {
+    if (error.response?.status === 403) {
       return { message: 'You do not have permission to perform this action.', errors: {} };
     }
-    if (axiosError.code === 'ERR_NETWORK') {
+    if (error.code === 'ERR_NETWORK') {
       return {
         message: 'Unable to reach the API. Confirm the backend is running.',
         errors: {},
       };
     }
     return {
-      message: axiosError.message || 'Request failed. Please try again.',
+      message: error.message || 'Request failed. Please try again.',
       errors: {},
     };
   }
