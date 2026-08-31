@@ -5,12 +5,14 @@ import ProfilePage from '@/components/features/ProfilePage';
 import AppShell from '@/components/layout/AppShell';
 import ProtectedRoute from '@/components/layout/ProtectedRoute';
 import NotFound from '@/components/404';
+import VisitorHomePage from '@/routes/visitor/home';
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/visitor/home" element={<VisitorHomePage />} />
         <Route
           element={
             <ProtectedRoute>
