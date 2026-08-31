@@ -9,7 +9,7 @@ import { loginSchema, type LoginFormValues } from '@/lib/validation';
 import { useAuth } from '@/hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { FormField } from '@/components/shared/FormField';
 import type { AuthUser } from '@/types/api';
 
@@ -85,7 +85,7 @@ export default function LoginPage() {
           <p className="text-body-sm-2 font-semibold uppercase tracking-widest text-foreground">
             Sofia Admin
           </p>
-          <CardTitle>Sign in</CardTitle>
+          <h1 className="font-garamond text-heading-lg-26 text-foreground">Sign in</h1>
           <CardDescription>
             Authenticate with your work email to open the workspace.
           </CardDescription>

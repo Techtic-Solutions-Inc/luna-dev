@@ -45,7 +45,7 @@ export default function Home() {
         description="Session status and the account loaded from the API."
         action={
           <Button asChild>
-            <Link to="/profile">Open profile</Link>
+            <Link to="/settings/profile">Open profile</Link>
           </Button>
         }
       />

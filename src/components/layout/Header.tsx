@@ -47,7 +47,7 @@ export default function Header() {
             <DropdownMenuLabel>Signed in</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link to="/profile">
+              <Link to="/settings/profile">
                 <User className="mr-padding-8 h-padding-16 w-padding-16" />
                 Profile
               </Link>

@@ -30,7 +30,7 @@ export default function AppShell() {
           Overview
         </NavLink>
         <NavLink
-          to="/profile"
+          to="/settings/profile"
           className={({ isActive }) =>
             cn(
               'rounded-md px-padding-12 py-padding-8 text-body-sm-2 hover:text-foreground focus-visible:outline-none focus-visible:ring-padding-2 focus-visible:ring-ring',

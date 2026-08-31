@@ -19,7 +19,8 @@ export default function AppRouter() {
           }
         >
           <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/settings/profile" element={<ProfilePage />} />
+          <Route path="/profile" element={<Navigate to="/settings/profile" replace />} />
         </Route>
         <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="*" element={<NotFound />} />

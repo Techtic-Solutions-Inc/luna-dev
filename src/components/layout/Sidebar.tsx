@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 const navItems = [
   { to: '/', label: 'Overview', icon: Home, end: true },
-  { to: '/profile', label: 'Profile', icon: IdCard, end: false },
+  { to: '/settings/profile', label: 'Profile', icon: IdCard, end: false },
 ] as const;
 
 export default function Sidebar() {
