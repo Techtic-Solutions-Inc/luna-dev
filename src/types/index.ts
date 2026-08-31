@@ -1,1 +1,9 @@
-export type { AuthUser, ErrorResponse, LoginRequestBody, LoginResponse } from './api';
+export type {
+  AuthUser,
+  ErrorResponse,
+  LoginRequestBody,
+  LoginResponse,
+  VisitorHomeData,
+  VisitorHomeItem,
+  VisitorHomeSearchResponse,
+} from './api';
