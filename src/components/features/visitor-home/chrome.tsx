@@ -8,14 +8,22 @@ import {
   FolderOpen,
   LayoutGrid,
   LogOut,
+  Menu,
   Sparkles,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 export const visitorFontAlmarai = "'Almarai', sans-serif";
 export const visitorFontPublicSans = "'Public Sans', sans-serif";
 export const visitorFontEbGaramond = "'EB Garamond', serif";
 export const visitorFontSpaceGrotesk = "'Space Grotesk', sans-serif";
+/** Figma uses Fellix; it is not on Google Fonts, so Inter is the licensed fallback. */
 export const visitorFontFellix = "'Fellix', 'Inter', sans-serif";
 export const visitorFontKalam = "'Kalam', cursive";
 
@@ -36,21 +44,16 @@ export function BrandLogo({
   wordmarkClassName,
   taglineClassName,
   tagline = true,
+  linked = true,
 }: {
   className?: string;
   wordmarkClassName?: string;
   taglineClassName?: string;
   tagline?: boolean;
+  linked?: boolean;
 }) {
-  return (
-    <Link
-      to="/home"
-      className={cn(
-        'inline-flex flex-col leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]',
-        className,
-      )}
-      aria-label="Agentwise home"
-    >
+  const content = (
+    <>
       <span
         className={cn(
           'typo-kalam text-[28px] font-bold leading-[38.8px] text-white',
@@ -71,6 +74,23 @@ export function BrandLogo({
           Real Estate Marketing
         </span>
       ) : null}
+    </>
+  );
+
+  if (!linked) {
+    return <div className={cn('inline-flex flex-col leading-none', className)}>{content}</div>;
+  }
+
+  return (
+    <Link
+      to="/home"
+      className={cn(
+        'inline-flex flex-col leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]',
+        className,
+      )}
+      aria-label="Agentwise home"
+    >
+      {content}
     </Link>
   );
 }
@@ -142,11 +162,17 @@ export function GmailIcon({ className }: { className?: string }) {
 }
 
 const NAV_LINKS = [
-  { label: 'About', to: '/about' },
-  { label: 'Content', to: '/content' },
-  { label: 'Blog', to: '/blog' },
-  { label: 'Pricing', to: '/pricing' },
+  { label: 'About', href: '#waitlist' },
+  { label: 'Content', href: '#waitlist' },
+  { label: 'Blog', href: '#waitlist' },
+  { label: 'Pricing', href: '#waitlist' },
 ] as const;
+
+const navLinkClass =
+  'typo-public text-[16px] font-semibold leading-[18.8px] text-white transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:opacity-50';
+
+const menuItemClass =
+  'cursor-pointer text-white focus:bg-white/10 focus:text-white data-[highlighted]:bg-white/10 data-[highlighted]:text-white';
 
 export function SiteNav() {
   return (
@@ -154,27 +180,73 @@ export function SiteNav() {
       <BrandLogo />
       <nav aria-label="Primary" className="hidden items-center gap-[30px] desktop:flex">
         {NAV_LINKS.map((item) => (
-          <Link
-            key={item.to}
-            to={item.to}
-            className="typo-public text-[16px] font-semibold leading-[18.8px] text-white transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:opacity-50"
+          <a
+            key={item.label}
+            href={item.href}
+            className={navLinkClass}
             style={{ fontFamily: visitorFontPublicSans }}
           >
             {item.label}
-          </Link>
+          </a>
         ))}
       </nav>
       <div className="flex items-center gap-[12px]">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              className="inline-flex h-[44px] w-[44px] items-center justify-center rounded-full border border-white text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] desktop:hidden"
+              aria-label="Open menu"
+              style={{ fontFamily: visitorFontPublicSans }}
+            >
+              <Menu className="h-[20px] w-[20px]" aria-hidden="true" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className="min-w-[180px] border-white/15 bg-[#11161c] text-white"
+          >
+            {NAV_LINKS.map((item) => (
+              <DropdownMenuItem key={item.label} asChild className={menuItemClass}>
+                <a
+                  href={item.href}
+                  className="typo-public text-[16px] font-semibold text-white"
+                  style={{ fontFamily: visitorFontPublicSans }}
+                >
+                  {item.label}
+                </a>
+              </DropdownMenuItem>
+            ))}
+            <DropdownMenuItem asChild className={menuItemClass}>
+              <a
+                href="#waitlist"
+                className="typo-public text-[16px] font-semibold text-white"
+                style={{ fontFamily: visitorFontPublicSans }}
+              >
+                Get Started
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild className={menuItemClass}>
+              <Link
+                to="/login"
+                className="typo-public text-[16px] font-semibold text-white"
+                style={{ fontFamily: visitorFontPublicSans }}
+              >
+                Log in
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
         <a
           href="#waitlist"
-          className="typo-public inline-flex h-[44px] items-center justify-center rounded-[100px] border border-white px-[20px] text-[16px] font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:scale-[0.98]"
+          className="typo-public hidden h-[44px] items-center justify-center rounded-[100px] border border-white px-[20px] text-[16px] font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:scale-[0.98] desktop:inline-flex"
           style={{ fontFamily: visitorFontPublicSans }}
         >
           Get Started
         </a>
         <Link
           to="/login"
-          className="typo-public inline-flex h-[44px] items-center justify-center rounded-[100px] bg-[#c8a47e] px-[20px] text-[16px] font-semibold text-[#11161c] transition hover:bg-[#8b6842] hover:text-[#11161c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:brightness-75"
+          className="typo-public hidden h-[44px] items-center justify-center rounded-[100px] bg-[#c8a47e] px-[20px] text-[16px] font-semibold text-[#11161c] transition hover:bg-[#8b6842] hover:text-[#11161c] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:brightness-75 desktop:inline-flex"
           style={{
             fontFamily: visitorFontPublicSans,
             color: '#11161c',
@@ -251,12 +323,13 @@ export function AppSidebar({
   return (
     <aside
       className={cn(
-        'flex h-full w-[210px] shrink-0 flex-col justify-between px-[14px] py-[16px]',
+        'hidden h-full w-[210px] shrink-0 flex-col justify-between px-[14px] py-[16px] tablet:flex',
         isLight ? 'bg-[#f7f2ec] text-[#11161c]' : 'bg-[#11161c] text-white',
       )}
     >
       <div>
         <BrandLogo
+          linked={false}
           className="mb-[20px] px-[4px]"
           wordmarkClassName={cn(
             'text-[22px] leading-[28px]',
@@ -280,25 +353,23 @@ export function AppSidebar({
                 const Icon = sidebarIcon(item);
                 const isActive = item === active;
                 return (
-                  <button
+                  <div
                     key={item}
-                    type="button"
                     className={cn(
-                      'typo-fellix flex items-center gap-[8px] rounded-[10px] px-[8px] py-[7px] text-left text-[12px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]',
+                      'typo-fellix flex items-center gap-[8px] rounded-[10px] px-[8px] py-[7px] text-left text-[12px]',
                       isActive
                         ? isLight
                           ? 'bg-[#efe4d9] text-[#11161c]'
                           : 'bg-[#1d1a1a] text-white'
                         : isLight
-                          ? 'text-[#637381] hover:bg-[#efe4d9]/70'
-                          : 'text-white/70 hover:bg-white/5',
+                          ? 'text-[#637381]'
+                          : 'text-white/70',
                     )}
                     style={{ fontFamily: visitorFontFellix }}
-                    aria-current={isActive ? 'page' : undefined}
                   >
                     <Icon className="h-[14px] w-[14px] shrink-0" aria-hidden="true" />
                     {item}
-                  </button>
+                  </div>
                 );
               })}
             </div>
@@ -332,16 +403,15 @@ export function AppSidebar({
           <span className="flex-1 truncate typo-almarai text-[12px]">Joseph Stanley</span>
           <ChevronRight className="h-[14px] w-[14px] opacity-60" aria-hidden="true" />
         </div>
-        <button
-          type="button"
+        <div
           className={cn(
-            'flex items-center gap-[8px] px-[4px] typo-almarai text-[12px] transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]',
+            'flex items-center gap-[8px] px-[4px] typo-almarai text-[12px]',
             isLight ? 'text-[#666666]' : 'text-white/70',
           )}
         >
           <LogOut className="h-[14px] w-[14px]" aria-hidden="true" />
           Logout
-        </button>
+        </div>
       </div>
     </aside>
   );
@@ -361,6 +431,8 @@ export function StepBadge({ label }: { label: string }) {
 export function MockWindow({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <div
+      aria-hidden="true"
+      inert
       className={cn(
         'overflow-hidden rounded-[24px] border border-white/10 bg-[#11161c] shadow-[0_34px_44px_#00000072]',
         className,

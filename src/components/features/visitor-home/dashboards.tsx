@@ -8,7 +8,6 @@ import {
   visitorFontPublicSans,
   visitorFontSpaceGrotesk,
 } from '@/components/features/visitor-home/chrome';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const WEEK_CARDS = [
@@ -50,7 +49,8 @@ export function HeroDashboard({ className }: { className?: string }) {
           <div className="grid gap-[12px] desktop:grid-cols-[minmax(0,1fr)_180px]">
             <div className="rounded-[16px] bg-[#1c1916] p-[18px]">
               <p className="typo-garamond text-[18px] font-medium leading-[24px] text-[#c8a47e]">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                Your week&apos;s listing content, Reels, and email blasts — planned in your brand
+                voice.
               </p>
               <p
                 className="mt-[8px] typo-almarai text-[12px] leading-[18px] text-white/60"
@@ -59,16 +59,16 @@ export function HeroDashboard({ className }: { className?: string }) {
                 Generate on-brand listing copy, Reels scripts, and email blasts without leaving your
                 dashboard.
               </p>
-              <label className="mt-[14px] flex h-[40px] items-center gap-[8px] rounded-[12px] border border-white/10 bg-[#1d1a1a] px-[14px]">
+              <div className="mt-[14px] flex h-[40px] items-center gap-[8px] rounded-[12px] border border-white/10 bg-[#1d1a1a] px-[14px]">
                 <Search className="h-[14px] w-[14px] text-white/50" aria-hidden="true" />
                 <span className="truncate typo-almarai text-[12px] text-white/50">
                   Generate captions, listing descriptions, email blasts, and Reels scripts in your
                   brand voice.
                 </span>
-              </label>
+              </div>
               <div className="mt-[14px] flex flex-wrap gap-[10px]">
-                <Button
-                  className="typo-public h-[36px] rounded-[100px] bg-[#c8a47e] px-[16px] text-[13px] font-semibold text-[#11161c] hover:bg-[#8b6842] hover:text-[#11161c]"
+                <div
+                  className="typo-public inline-flex h-[36px] items-center gap-[8px] rounded-[100px] bg-[#c8a47e] px-[16px] text-[13px] font-semibold text-[#11161c]"
                   style={{
                     backgroundColor: '#c8a47e',
                     color: '#11161c',
@@ -77,14 +77,11 @@ export function HeroDashboard({ className }: { className?: string }) {
                 >
                   <Sparkles className="h-[14px] w-[14px]" aria-hidden="true" />
                   Plan My Week
-                </Button>
-                <Button
-                  variant="outline"
-                  className="h-[36px] rounded-[100px] border-white/40 bg-transparent px-[16px] typo-almarai text-[13px] text-white hover:bg-white/10 hover:text-white"
-                >
+                </div>
+                <div className="inline-flex h-[36px] items-center gap-[8px] rounded-[100px] border border-white/40 bg-transparent px-[16px] typo-almarai text-[13px] text-white">
                   <CalendarDays className="h-[14px] w-[14px]" aria-hidden="true" />
                   My Content Calendar
-                </Button>
+                </div>
               </div>
             </div>
             <div className="hidden flex-col gap-[8px] desktop:flex">
@@ -167,10 +164,10 @@ export function LibraryDashboard({ className }: { className?: string }) {
                 Explore hundreds of hand-designed templates for social, email, and more.
               </p>
             </div>
-            <label className="flex h-[36px] w-[160px] items-center gap-[8px] rounded-[12px] border border-white/15 bg-[#1d1a1a] px-[12px]">
+            <div className="flex h-[36px] w-[160px] items-center gap-[8px] rounded-[12px] border border-white/15 bg-[#1d1a1a] px-[12px]">
               <Search className="h-[14px] w-[14px] text-white/50" aria-hidden="true" />
               <span className="typo-almarai text-[12px] text-white/50">Search</span>
-            </label>
+            </div>
           </div>
           <div className="mb-[12px] flex items-center justify-between">
             <p className="typo-almarai text-[12px] text-white/50">452 Results</p>
@@ -221,7 +218,7 @@ export function UltimateMindDashboard({
             Your strategic advisor — trained on your business, your market, and your voice. Ask
             anything.
           </p>
-          <label className="mt-[18px] flex h-[48px] w-full max-w-[520px] items-center gap-[10px] rounded-[100px] border border-[#eaeaea] bg-white px-[16px] shadow-[0_4px_40px_#00000019]">
+          <div className="mt-[18px] flex h-[48px] w-full max-w-[520px] items-center gap-[10px] rounded-[100px] border border-[#eaeaea] bg-white px-[16px] shadow-[0_4px_40px_#00000019]">
             <Plus className="h-[16px] w-[16px] text-[#828282]" aria-hidden="true" />
             <span className="flex-1 text-left typo-almarai text-[13px] text-[#828282]">
               Ask the Mind anything about your business...
@@ -229,20 +226,19 @@ export function UltimateMindDashboard({
             <span className="flex h-[32px] w-[32px] items-center justify-center rounded-full bg-[#c8a47e] text-white">
               <Sparkles className="h-[14px] w-[14px]" aria-hidden="true" />
             </span>
-          </label>
+          </div>
           <div className="mt-[16px] grid w-full max-w-[520px] grid-cols-1 gap-[10px] tablet:grid-cols-2">
             {MIND_PROMPTS.map((prompt) => (
-              <button
+              <div
                 key={prompt}
-                type="button"
-                className="rounded-[12px] bg-[#efe4d9] p-[12px] text-left typo-almarai text-[12px] leading-[18px] text-[#1a1a1a] transition hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
+                className="rounded-[12px] bg-[#efe4d9] p-[12px] text-left typo-almarai text-[12px] leading-[18px] text-[#1a1a1a]"
               >
                 <Sparkles
                   className="mb-[6px] h-[12px] w-[12px] text-[#c8a47e]"
                   aria-hidden="true"
                 />
                 {prompt}
-              </button>
+              </div>
             ))}
           </div>
           <p className="mt-auto pt-[16px] typo-almarai text-[11px] text-[#828282]">
@@ -299,25 +295,17 @@ export function ContentDetailDashboard({ className }: { className?: string }) {
           </span>
         </div>
         <div className="relative mt-[12px]">
-          <button
-            type="button"
-            className="absolute left-[-6px] top-1/2 z-10 flex h-[22px] w-[22px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#1a1a1a] shadow-sm"
-            aria-label="Previous template"
-          >
-            <ArrowLeft className="h-[12px] w-[12px]" />
-          </button>
+          <div className="absolute left-[-6px] top-1/2 z-10 flex h-[22px] w-[22px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#1a1a1a] shadow-sm">
+            <ArrowLeft className="h-[12px] w-[12px]" aria-hidden="true" />
+          </div>
           <img
             src={PHOTOS.city}
             alt="Market update template preview"
             className="mx-auto h-[160px] w-[110px] rounded-[12px] object-cover"
           />
-          <button
-            type="button"
-            className="absolute right-[-6px] top-1/2 z-10 flex h-[22px] w-[22px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#1a1a1a] shadow-sm"
-            aria-label="Next template"
-          >
-            <ArrowRight className="h-[12px] w-[12px]" />
-          </button>
+          <div className="absolute right-[-6px] top-1/2 z-10 flex h-[22px] w-[22px] -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#1a1a1a] shadow-sm">
+            <ArrowRight className="h-[12px] w-[12px]" aria-hidden="true" />
+          </div>
         </div>
         <p className="mt-[12px] typo-garamond text-[14px] font-medium text-[#1a1a1a]">
           About This Template

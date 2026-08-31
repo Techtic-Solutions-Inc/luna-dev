@@ -1,6 +1,3 @@
-import { useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
-import { toast } from 'sonner';
 import {
   BrandLogo,
   FacebookIcon,
@@ -26,86 +23,12 @@ import {
 } from '@/components/features/visitor-home/dashboards';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
+import { EmptyState } from '@/components/shared/EmptyState';
 import type { VisitorHomeItem } from '@/types/api';
 
-const GALLERY = [
-  {
-    src: PHOTOS.cityAlt,
-    alt: 'White cottage listing card',
-    caption: '[address + times]',
-    italic: false,
-  },
-  {
-    src: PHOTOS.coffee,
-    alt: 'Iced drinks and sunglasses',
-    caption: "Phone's busy, I'm doing the best I ever have",
-    italic: true,
-  },
-  {
-    src: PHOTOS.deskAlt,
-    alt: 'Patio aerial template',
-    caption: 'Doing showings in [insert neighborhood and city]!',
-    italic: false,
-  },
-  {
-    src: PHOTOS.city,
-    alt: 'City street at dusk',
-    caption: "If I was moving to [City Name], here's where I'd visit first (as a local)",
-    italic: true,
-  },
-  {
-    src: PHOTOS.desk,
-    alt: 'Workspace flat lay',
-    caption: "here's what I'm working on today",
-    italic: false,
-  },
-  {
-    src: PHOTOS.coffeeAlt,
-    alt: 'Lifestyle coffee still',
-    caption: 'What You Need To Know This Week',
-    italic: false,
-  },
-] as const;
-
-const TESTIMONIALS = [
-  {
-    quote:
-      'The Ultimate Mind has become my second brain for pricing strategy. It pulls comps and pushes back on my assumptions like a seasoned mentor would.',
-    name: 'Marcus Donovan',
-    agency: 'Keller Williams · Denver, CO',
-    avatar: PHOTOS.avatar,
-  },
-  {
-    quote:
-      'My listings actually look like they belong to a top-1% agent now. Three of my last four clients said the marketing is what sold them on hiring me.',
-    name: 'Jordan Hayes',
-    agency: 'eXp Realty · Nashville, TN',
-    avatar: PHOTOS.avatarAlt,
-  },
-  {
-    quote:
-      'Agentwise replaced my entire marketing workflow. What used to take a full Sunday now takes a coffee break — and the content is better than anything I was making in Canva.',
-    name: 'Jordan Hayes',
-    agency: 'eXp Realty · Nashville, TN',
-    avatar: PHOTOS.avatarAlt,
-  },
-  {
-    quote:
-      'New agents, team leaders, and large brokerages can finally ship consistent content without a full-time designer on payroll.',
-    name: 'Marcus Donovan',
-    agency: 'Keller Williams · Denver, CO',
-    avatar: PHOTOS.avatar,
-  },
-] as const;
-
-const FOOTER_LINKS = [
-  { label: 'About', to: '/about' },
-  { label: 'Content', to: '/content' },
-  { label: 'Pricing', to: '/pricing' },
-  { label: 'Blog', to: '/blog' },
-  { label: 'Contact Us', to: '#waitlist' },
-] as const;
+const FOOTER_SECTIONS = ['About', 'Content', 'Pricing', 'Blog'] as const;
 
 const inputClass =
   'h-[48px] rounded-[12px] border border-white/15 bg-[#1d1a1a] px-[18px] typo-almarai text-[16px] text-white placeholder:text-[#637381] hover:border-[#c8a47e]/60 focus-visible:ring-[#c8a47e] focus-visible:ring-offset-[#11161c] aria-[invalid=true]:border-[#ff5630]';
@@ -128,54 +51,110 @@ interface VisitorHomeViewProps {
   items: VisitorHomeItem[];
 }
 
+function isQuoteItem(item: VisitorHomeItem): boolean {
+  const category = item.category.toLowerCase();
+  const tags = item.tags.map((tag) => tag.toLowerCase());
+  const labeledQuote =
+    category.includes('testimonial') ||
+    category.includes('review') ||
+    tags.some(
+      (tag) => tag.includes('testimonial') || tag.includes('review') || tag.includes('quote'),
+    );
+  return Boolean(item.description && labeledQuote);
+}
+
+function quoteDisplayName(item: VisitorHomeItem): string {
+  if (item.full_name) {
+    return item.full_name;
+  }
+  const parts = [item.first_name, item.last_name].filter((part): part is string => Boolean(part));
+  if (parts.length > 0) {
+    return parts.join(' ');
+  }
+  return 'Agent';
+}
+
+function quoteInitials(name: string): string {
+  const parts = name
+    .split(/\s+/)
+    .map((part) => part[0])
+    .filter(Boolean)
+    .slice(0, 2);
+  return parts.join('').toUpperCase() || 'A';
+}
+
 function galleryCards(items: VisitorHomeItem[]) {
-  const fromApi = items
-    .filter((item) => item.image_url || item.image)
+  return items
+    .filter((item) => (item.image_url || item.image) && !isQuoteItem(item))
     .map((item) => ({
       src: item.image_url || item.image,
       alt: item.title || item.name || 'Marketing content',
       caption: item.title || item.description || '',
-      italic: false,
-    }));
-  if (fromApi.length >= 3) {
-    return fromApi.slice(0, 8);
-  }
-  return [...GALLERY];
+    }))
+    .slice(0, 8);
 }
 
 function testimonialCards(items: VisitorHomeItem[]) {
-  const fromApi = items
-    .filter((item) => item.description && (item.full_name || item.name || item.title))
-    .map((item) => ({
-      quote: item.description,
-      name: item.full_name || item.name || item.title,
-      agency: item.category || 'Agentwise',
-      avatar: item.image_url || item.image || PHOTOS.avatar,
-    }));
-  if (fromApi.length >= 2) {
-    return fromApi.slice(0, 6);
-  }
-  return [...TESTIMONIALS];
+  return items
+    .filter(isQuoteItem)
+    .map((item) => {
+      const name = quoteDisplayName(item);
+      const agency =
+        item.category && !/testimonial|review|quote/i.test(item.category)
+          ? item.category
+          : 'Agentwise';
+      return {
+        quote: item.description,
+        name,
+        agency,
+        initials: quoteInitials(name),
+      };
+    })
+    .slice(0, 6);
+}
+
+const fieldLabelClass = 'typo-almarai mb-[8px] block text-[14px] font-semibold text-white';
+
+function WaitlistField({
+  id,
+  name,
+  label,
+  type = 'text',
+  autoComplete,
+}: {
+  id: string;
+  name: string;
+  label: string;
+  type?: string;
+  autoComplete?: string;
+}) {
+  return (
+    <div className="flex flex-col">
+      <Label htmlFor={id} className={fieldLabelClass} style={labelFont}>
+        {label}
+      </Label>
+      <Input
+        id={id}
+        name={name}
+        type={type}
+        autoComplete={autoComplete}
+        className={inputClass}
+        style={darkFieldStyle}
+      />
+    </div>
+  );
 }
 
 export function VisitorHomeView({ items }: VisitorHomeViewProps) {
-  const [waitlistSubmitting, setWaitlistSubmitting] = useState(false);
   const gallery = galleryCards(items);
   const testimonials = testimonialCards(items);
-  const marquee = [...gallery, ...gallery];
-  const columnA = [...testimonials, ...testimonials];
-  const columnB = [...testimonials.slice(1), testimonials[0], ...testimonials.slice(1)];
-
-  const onWaitlistSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    setWaitlistSubmitting(true);
-    window.setTimeout(() => {
-      setWaitlistSubmitting(false);
-      toast.success('You are on the Agentwise waitlist.');
-      form.reset();
-    }, 400);
-  };
+  const galleryScrolls = gallery.length > 1;
+  const testimonialScrolls = testimonials.length > 1;
+  const marquee = galleryScrolls ? [...gallery, ...gallery] : gallery;
+  const columnA = testimonialScrolls ? [...testimonials, ...testimonials] : testimonials;
+  const columnB = testimonialScrolls
+    ? [...testimonials.slice(1), testimonials[0], ...testimonials.slice(1)]
+    : [];
 
   return (
     <div
@@ -278,24 +257,32 @@ export function VisitorHomeView({ items }: VisitorHomeViewProps) {
           </p>
         </div>
         <div className="mt-[30px] overflow-hidden">
-          <div className="visitor-marquee flex w-max gap-[24px] pr-[24px]">
-            {marquee.map((card, index) => (
-              <article
-                key={`${card.src}-${index}`}
-                className="relative h-[552px] w-[316px] shrink-0 overflow-hidden rounded-[24px]"
-              >
-                <img src={card.src} alt={card.alt} className="h-full w-full object-cover" />
-                <div className="absolute inset-0 bg-[#00000033]" />
-                <p
-                  className={`absolute inset-x-[18px] top-1/2 -translate-y-1/2 text-center typo-garamond text-[20px] leading-[26px] text-white ${
-                    card.italic ? 'italic' : ''
-                  }`}
+          {gallery.length === 0 ? (
+            <div className="px-[40px]">
+              <EmptyState
+                title="No Content Available"
+                description="Marketing templates have not been published yet."
+                className="border-[#637381] bg-white text-[#11161c]"
+              />
+            </div>
+          ) : (
+            <div
+              className={`flex w-max gap-[24px] pr-[24px]${galleryScrolls ? ' visitor-marquee' : ''}`}
+            >
+              {marquee.map((card, index) => (
+                <article
+                  key={`${card.src}-${index}`}
+                  className="relative h-[552px] w-[316px] shrink-0 overflow-hidden rounded-[24px]"
                 >
-                  {card.caption}
-                </p>
-              </article>
-            ))}
-          </div>
+                  <img src={card.src} alt={card.alt} className="h-full w-full object-cover" />
+                  <div className="absolute inset-0 bg-[#00000033]" />
+                  <p className="absolute inset-x-[18px] top-1/2 -translate-y-1/2 text-center typo-garamond text-[20px] leading-[26px] text-white">
+                    {card.caption}
+                  </p>
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -412,9 +399,9 @@ export function VisitorHomeView({ items }: VisitorHomeViewProps) {
               asChild
               className="typo-public h-[48px] w-fit rounded-[100px] bg-[#c8a47e] px-[28px] text-[16px] font-semibold text-[#11161c] hover:bg-[#8b6842] hover:text-[#11161c]"
             >
-              <Link to="/about" style={tanCtaStyle}>
+              <a href="#waitlist" style={tanCtaStyle}>
                 Learn More
-              </Link>
+              </a>
             </Button>
           </div>
         </div>
@@ -439,21 +426,37 @@ export function VisitorHomeView({ items }: VisitorHomeViewProps) {
               marketing and more time closing without sacrificing quality.
             </p>
           </div>
-          <div className="relative h-[560px] overflow-hidden">
-            <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[72px] bg-gradient-to-b from-white to-transparent" />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[72px] bg-gradient-to-t from-white to-transparent" />
-            <div className="grid h-full grid-cols-1 gap-[16px] tablet:grid-cols-2">
-              <div className="visitor-testimonial-col flex flex-col gap-[16px]">
-                {columnA.map((card, index) => (
-                  <TestimonialCard key={`a-${card.name}-${index}`} {...card} />
-                ))}
-              </div>
-              <div className="visitor-testimonial-col-delayed hidden flex-col gap-[16px] tablet:flex">
-                {columnB.map((card, index) => (
-                  <TestimonialCard key={`b-${card.name}-${index}`} {...card} />
-                ))}
-              </div>
-            </div>
+          <div className="relative min-h-[200px] overflow-hidden">
+            {testimonials.length === 0 ? (
+              <EmptyState
+                title="No Content Available"
+                description="Agent stories have not been published yet."
+                className="h-full border-[#637381] bg-white text-[#11161c]"
+              />
+            ) : (
+              <>
+                <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[72px] bg-gradient-to-b from-white to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[72px] bg-gradient-to-t from-white to-transparent" />
+                <div className="grid h-[560px] grid-cols-1 gap-[16px] overflow-hidden tablet:grid-cols-2">
+                  <div
+                    className={`flex flex-col gap-[16px]${testimonialScrolls ? ' visitor-testimonial-col' : ''}`}
+                  >
+                    {columnA.map((card, index) => (
+                      <TestimonialCard key={`a-${card.name}-${index}`} {...card} />
+                    ))}
+                  </div>
+                  {columnB.length > 0 ? (
+                    <div
+                      className={`hidden flex-col gap-[16px] tablet:flex${testimonialScrolls ? ' visitor-testimonial-col-delayed' : ''}`}
+                    >
+                      {columnB.map((card, index) => (
+                        <TestimonialCard key={`b-${card.name}-${index}`} {...card} />
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -498,78 +501,77 @@ export function VisitorHomeView({ items }: VisitorHomeViewProps) {
               </h2>
               <form
                 className="mt-[28px] flex w-full flex-col gap-[14px]"
-                onSubmit={onWaitlistSubmit}
+                onSubmit={(event) => {
+                  event.preventDefault();
+                }}
               >
                 <div className="grid gap-[14px] tablet:grid-cols-2">
-                  <Input
+                  <WaitlistField
+                    id="waitlist-first-name"
                     name="firstName"
-                    required
-                    placeholder="First Name"
+                    label="First Name"
                     autoComplete="given-name"
-                    aria-label="First Name"
-                    className={inputClass}
-                    style={darkFieldStyle}
                   />
-                  <Input
+                  <WaitlistField
+                    id="waitlist-last-name"
                     name="lastName"
-                    required
-                    placeholder="Last Name"
+                    label="Last Name"
                     autoComplete="family-name"
-                    aria-label="Last Name"
-                    className={inputClass}
-                    style={darkFieldStyle}
                   />
                 </div>
                 <div className="grid gap-[14px] tablet:grid-cols-2">
-                  <Input
+                  <WaitlistField
+                    id="waitlist-email"
                     name="email"
+                    label="Email"
                     type="email"
-                    required
-                    placeholder="Email"
                     autoComplete="email"
-                    aria-label="Email"
-                    className={inputClass}
-                    style={darkFieldStyle}
                   />
-                  <Input
+                  <WaitlistField
+                    id="waitlist-phone"
                     name="phone"
+                    label="Phone number"
                     type="tel"
-                    placeholder="Phone number"
                     autoComplete="tel"
-                    aria-label="Phone number"
-                    className={inputClass}
+                  />
+                </div>
+                <WaitlistField
+                  id="waitlist-experience"
+                  name="experience"
+                  label="How long have you been in Real Estate?"
+                />
+                <WaitlistField
+                  id="waitlist-marketing"
+                  name="marketing"
+                  label="What do you currently do for marketing your business?"
+                />
+                <div className="flex flex-col">
+                  <Label htmlFor="waitlist-message" className={fieldLabelClass} style={labelFont}>
+                    Your Message
+                  </Label>
+                  <textarea
+                    id="waitlist-message"
+                    name="message"
+                    rows={4}
+                    className="min-h-[120px] rounded-[12px] border border-white/15 bg-[#1d1a1a] px-[18px] py-[14px] typo-almarai text-[16px] text-white placeholder:text-[#637381] hover:border-[#c8a47e]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] aria-[invalid=true]:border-[#ff5630]"
                     style={darkFieldStyle}
                   />
                 </div>
-                <Input
-                  name="experience"
-                  placeholder="How long have you been in Real Estate?"
-                  aria-label="How long have you been in Real Estate?"
-                  className={inputClass}
-                  style={darkFieldStyle}
-                />
-                <Input
-                  name="marketing"
-                  placeholder="What do you currently do for marketing your business?"
-                  aria-label="What do you currently do for marketing your business?"
-                  className={inputClass}
-                  style={darkFieldStyle}
-                />
-                <textarea
-                  name="message"
-                  placeholder="Your Message"
-                  aria-label="Your Message"
-                  rows={4}
-                  className="min-h-[120px] rounded-[12px] border border-white/15 bg-[#1d1a1a] px-[18px] py-[14px] typo-almarai text-[16px] text-white placeholder:text-[#637381] hover:border-[#c8a47e]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] aria-[invalid=true]:border-[#ff5630]"
-                  style={darkFieldStyle}
-                />
+                <p
+                  id="waitlist-unavailable"
+                  className="typo-almarai text-center text-[14px] leading-[20px] text-[#637381]"
+                  role="status"
+                >
+                  Waitlist signup is not available yet. No request will be sent.
+                </p>
                 <Button
-                  type="submit"
-                  disabled={waitlistSubmitting}
+                  type="button"
+                  disabled
+                  aria-describedby="waitlist-unavailable"
                   className="typo-public mx-auto mt-[8px] h-[48px] w-full max-w-[280px] rounded-[100px] bg-[#c8a47e] text-[16px] font-semibold text-[#11161c] hover:bg-[#8b6842] hover:text-[#11161c]"
                   style={tanCtaStyle}
                 >
-                  {waitlistSubmitting ? 'Joining…' : 'Join the waitlist now'}
+                  Join the waitlist now
                 </Button>
               </form>
             </div>
@@ -617,25 +619,17 @@ export function VisitorHomeView({ items }: VisitorHomeViewProps) {
           </div>
           <div className="flex flex-col gap-[16px] tablet:flex-row tablet:items-center tablet:justify-between">
             <nav aria-label="Footer" className="flex flex-wrap gap-[24px]">
-              {FOOTER_LINKS.map((item) =>
-                item.to.startsWith('#') ? (
-                  <a
-                    key={item.label}
-                    href={item.to}
-                    className="typo-almarai text-[16px] text-white transition hover:text-[#c8a47e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.label}
-                    to={item.to}
-                    className="typo-almarai text-[16px] text-white transition hover:text-[#c8a47e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
-                  >
-                    {item.label}
-                  </Link>
-                ),
-              )}
+              {FOOTER_SECTIONS.map((label) => (
+                <span key={label} className="typo-almarai text-[16px] text-white">
+                  {label}
+                </span>
+              ))}
+              <a
+                href="#waitlist"
+                className="typo-almarai text-[16px] text-white transition hover:text-[#c8a47e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
+              >
+                Contact Us
+              </a>
             </nav>
             <a
               href="mailto:hello@agentwisemarketing.com"
@@ -651,19 +645,9 @@ export function VisitorHomeView({ items }: VisitorHomeViewProps) {
           >
             <p>© 2026 Agentwise. All Rights Reserved.</p>
             <p>
-              <Link
-                to="/terms"
-                className="transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
-              >
-                Terms of Service
-              </Link>
+              <span>Terms of Service</span>
               {' | '}
-              <Link
-                to="/privacy"
-                className="transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
-              >
-                Privacy Policy
-              </Link>
+              <span>Privacy Policy</span>
             </p>
           </div>
         </div>
@@ -676,12 +660,12 @@ function TestimonialCard({
   quote,
   name,
   agency,
-  avatar,
+  initials,
 }: {
   quote: string;
   name: string;
   agency: string;
-  avatar: string;
+  initials: string;
 }) {
   return (
     <article className="rounded-[16px] border border-[#eaeaea] bg-white p-[24px] shadow-[0_8px_16px_#919eab28]">
@@ -690,11 +674,12 @@ function TestimonialCard({
       </p>
       <p className="typo-almarai mt-[12px] text-[16px] leading-[24px] text-[#11161c]">{quote}</p>
       <div className="mt-[16px] flex items-center gap-[12px]">
-        <img
-          src={avatar}
-          alt=""
-          className="h-[40px] w-[40px] rounded-full object-cover object-[20%_85%]"
-        />
+        <span
+          className="flex h-[40px] w-[40px] items-center justify-center rounded-full bg-[#c8a47e] typo-public text-[14px] font-semibold text-[#11161c]"
+          aria-hidden="true"
+        >
+          {initials}
+        </span>
         <div>
           <p
             className="typo-public text-[14px] font-semibold text-[#11161c]"

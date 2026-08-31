@@ -14,8 +14,7 @@ export function LoadingSkeleton({
     <div
       className={cn('visitor-home min-h-screen bg-[#11161c] text-white', className)}
       style={{
-        fontFamily:
-          "'Almarai', 'Public Sans', 'EB Garamond', 'Space Grotesk', 'Fellix', sans-serif",
+        fontFamily: "'Almarai', 'Public Sans', 'EB Garamond', 'Space Grotesk', 'Inter', sans-serif",
       }}
       role="status"
       aria-live="polite"
