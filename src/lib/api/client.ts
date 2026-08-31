@@ -107,12 +107,6 @@ export function getApiError(error: unknown): ErrorResponse {
       errors: {},
     };
   }
-  if (isErrorResponse(error)) {
-    return {
-      message: error.message,
-      errors: isStringArrayRecord(error.errors) ? error.errors : {},
-    };
-  }
   if (error instanceof Error) {
     return { message: error.message, errors: {} };
   }
