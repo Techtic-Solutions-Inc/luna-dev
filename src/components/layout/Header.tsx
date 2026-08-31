@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { LogOut, User } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { useLogout } from '@/hooks/useLogout';
 import { getDisplayName, getInitials } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,6 +17,7 @@ import { ConfirmDialog } from '@/components/shared/ConfirmDialog';
 
 export default function Header() {
   const { user, logout } = useAuth();
+  const logoutMutation = useLogout();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const displayName = user ? getDisplayName(user) : 'Account';
 
@@ -69,7 +71,13 @@ export default function Header() {
         description="You will need to authenticate again to access the admin workspace."
         confirmLabel="Sign out"
         destructive
-        onConfirm={logout}
+        onConfirm={() => {
+          logoutMutation.mutate(undefined, {
+            onSettled: () => {
+              logout();
+            },
+          });
+        }}
       />
     </header>
   );

@@ -14,7 +14,10 @@ describe('API client', () => {
   });
 
   it('keeps locked contract paths', () => {
-    expect(endpoints.login).toBe('/auth/login');
+    expect(endpoints.login).toBe('/api/auth/login');
+    expect(endpoints.forgotPassword).toBe('/api/auth/forgot-password');
+    expect(endpoints.signup).toBe('/api/signup');
+    expect(endpoints.logout).toBe('/api/auth/logout');
     expect(endpoints.currentUser).toBe('/api/v1/users/me');
     expect(endpoints.visitorHome).toBe('/api/visitor/home');
   });
