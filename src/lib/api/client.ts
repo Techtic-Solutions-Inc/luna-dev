@@ -39,11 +39,13 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
-function isLoginRequest(url: string | undefined): boolean {
+const PUBLIC_AUTH_PATHS = [endpoints.login, endpoints.forgotPassword, endpoints.signup] as const;
+
+function isPublicAuthRequest(url: string | undefined): boolean {
   if (!url) {
     return false;
   }
-  return url.includes(endpoints.login);
+  return PUBLIC_AUTH_PATHS.some((path) => url.includes(path));
 }
 
 function clearAuthenticatedSession(): void {
@@ -61,7 +63,7 @@ apiClient.interceptors.response.use(
       const status = error.response?.status;
       if (
         (status === 401 || status === 403) &&
-        !isLoginRequest(error.config?.url) &&
+        !isPublicAuthRequest(error.config?.url) &&
         getStoredToken()
       ) {
         clearAuthenticatedSession();
@@ -88,8 +90,11 @@ export function getApiError(error: unknown): ErrorResponse {
       };
     }
     if (error.response?.status === 401) {
-      if (isLoginRequest(error.config?.url)) {
+      if (error.config?.url?.includes(endpoints.login)) {
         return { message: 'Invalid credentials. Please try again.', errors: {} };
+      }
+      if (isPublicAuthRequest(error.config?.url)) {
+        return { message: error.message || 'Request failed. Please try again.', errors: {} };
       }
       return { message: 'Your session has expired. Please sign in again.', errors: {} };
     }
