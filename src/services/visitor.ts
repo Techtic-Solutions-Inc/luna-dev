@@ -1,6 +1,11 @@
 import { fetchData } from '@/lib/api/client';
-import { isRecord } from '@/lib/guards';
-import { endpoints, type VisitorHomeData, type VisitorHomeItem } from '@/types/api';
+import { isRecord, isStringArrayRecord } from '@/lib/guards';
+import {
+  endpoints,
+  type ErrorResponse,
+  type VisitorHomeData,
+  type VisitorHomeItem,
+} from '@/types/api';
 
 function asString(value: unknown): string {
   return typeof value === 'string' ? value : '';
@@ -64,21 +69,44 @@ function toData(record: Record<string, unknown>): VisitorHomeData {
   };
 }
 
+function hasItemCollection(payload: Record<string, unknown>): boolean {
+  if (isRecord(payload.data) && Array.isArray(payload.data.items)) {
+    return true;
+  }
+  return Array.isArray(payload.items);
+}
+
 export function unwrapVisitorHome(payload: unknown): VisitorHomeData {
   if (!isRecord(payload)) {
     throw new Error('The home response was not a valid object.');
   }
-  if (isRecord(payload.data)) {
-    return toData(payload.data);
-  }
-  if (Array.isArray(payload.items) || isRecord(payload.pagination)) {
-    return toData(payload);
-  }
+
   if (Array.isArray(payload)) {
     return {
       items: toItems(payload),
       pagination: { page: 1, limit: toItems(payload).length },
     };
+  }
+
+  const itemsPresent = hasItemCollection(payload);
+  const message = typeof payload.message === 'string' ? payload.message : '';
+  const hasErrors = payload.errors != null;
+  const isErrorEnvelope =
+    payload.success === false || ((Boolean(message) || hasErrors) && !itemsPresent);
+
+  if (isErrorEnvelope) {
+    const envelope: ErrorResponse = {
+      message: message || 'Unable to load home.',
+      errors: isStringArrayRecord(payload.errors) ? payload.errors : {},
+    };
+    throw envelope;
+  }
+
+  if (isRecord(payload.data)) {
+    return toData(payload.data);
+  }
+  if (Array.isArray(payload.items) || isRecord(payload.pagination)) {
+    return toData(payload);
   }
   return { items: [], pagination: { page: 1, limit: 0 } };
 }

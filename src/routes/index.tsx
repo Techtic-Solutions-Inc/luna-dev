@@ -6,6 +6,8 @@ import AppShell from '@/components/layout/AppShell';
 import ProtectedRoute from '@/components/layout/ProtectedRoute';
 import NotFound from '@/components/404';
 import VisitorHomePage from '@/routes/visitor/home';
+import VisitorPrivacyPage from '@/routes/visitor/privacy';
+import VisitorTermsPage from '@/routes/visitor/terms';
 
 export default function AppRouter() {
   return (
@@ -13,6 +15,8 @@ export default function AppRouter() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/visitor/home" element={<VisitorHomePage />} />
+        <Route path="/visitor/terms" element={<VisitorTermsPage />} />
+        <Route path="/visitor/privacy" element={<VisitorPrivacyPage />} />
         <Route
           element={
             <ProtectedRoute>
