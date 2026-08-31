@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,66 +10,35 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
 
-const FONT_ALMARAI = "'Almarai', sans-serif";
-const FONT_PUBLIC_SANS = "'Public Sans', sans-serif";
-const FONT_EB_GARAMOND = "'EB Garamond', serif";
-const FONT_SPACE_GROTESK = "'Space Grotesk', sans-serif";
-const FONT_FELLIX = "'Fellix', 'Inter', sans-serif";
-
-const COLOR_ACCENT = '#c8a47e';
-const COLOR_MUTED = '#637381';
-const COLOR_ERROR = '#ff5630';
-const COLOR_INK = '#000001';
-const COLOR_BRONZE = '#8b6842';
-const COLOR_SURFACE = '#11161c';
-
-const headingStyle: CSSProperties = {
-  fontFamily: FONT_EB_GARAMOND,
-  color: '#ffffff',
-};
-
-const subheadStyle: CSSProperties = {
-  fontFamily: FONT_ALMARAI,
-  color: COLOR_BRONZE,
-};
-
-const fieldStyle: CSSProperties = {
-  fontFamily: FONT_ALMARAI,
-  color: '#ffffff',
-  backgroundColor: COLOR_SURFACE,
-};
-
-const ctaStyle: CSSProperties = {
-  fontFamily: FONT_PUBLIC_SANS,
-  color: COLOR_INK,
-  backgroundColor: COLOR_BRONZE,
-};
+const HEADLINE = 'Great Marketing Made Easier. Specifically for Agents';
 
 const inputClassName =
-  'h-[52px] w-full rounded-[12px] border border-[#ffffff4c] bg-[#11161c] p-[12px] text-[16px] font-[400] leading-[17.856px] text-[#ffffff] shadow-none placeholder:text-[#8b6842] hover:border-[#c8a47e] focus-visible:border-[#c8a47e] focus-visible:ring-2 focus-visible:ring-[#c8a47e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000001] disabled:cursor-not-allowed disabled:opacity-50 aria-[invalid=true]:border-[#ff5630]';
+  'h-[52px] w-full rounded-8 border border-sofia-secondary bg-sofia-color-89 p-[12px] font-almarai text-[16px] font-[400] leading-[17.856px] text-sofia-secondary shadow-none placeholder:text-sofia-color-102 hover:border-sofia-accent focus-visible:border-sofia-accent focus-visible:ring-2 focus-visible:ring-sofia-accent focus-visible:ring-offset-2 focus-visible:ring-offset-sofia-color-25 disabled:cursor-not-allowed disabled:opacity-50 aria-[invalid=true]:border-sofia-border';
 
 const buttonClassName =
-  'h-[52px] w-full max-w-[461px] rounded-[100px] border border-[#8b6842] bg-[#8b6842] p-[12px] text-[16px] font-[600] leading-[24px] text-[#000001] hover:bg-[#c8a47e] hover:text-[#000001] focus-visible:ring-2 focus-visible:ring-[#c8a47e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000001] active:bg-[#554545] active:text-[#000001] disabled:cursor-not-allowed disabled:opacity-50';
+  'h-[52px] w-full max-w-[461px] rounded-8 border border-sofia-accent bg-sofia-accent p-[12px] font-public-sans text-[16px] font-[600] leading-[24px] text-sofia-secondary hover:bg-sofia-color-102 hover:text-sofia-secondary focus-visible:ring-2 focus-visible:ring-sofia-accent focus-visible:ring-offset-2 focus-visible:ring-offset-sofia-color-25 active:bg-sofia-color-111 disabled:cursor-not-allowed disabled:opacity-50';
+
+const legalLinkClassName =
+  'font-almarai text-sofia-accent underline underline-offset-[3px] hover:text-sofia-color-102 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sofia-accent';
 
 function SignUpSkeleton() {
   return (
     <div
-      className="flex w-full max-w-[461px] flex-col items-center gap-[16px]"
+      className="flex w-full max-w-[461px] flex-col items-center gap-[16px] font-almarai"
       role="status"
       aria-live="polite"
       aria-label="Creating your account"
-      style={{ fontFamily: FONT_ALMARAI }}
     >
-      <Skeleton className="h-[100px] w-full bg-[#11161c]" />
-      <Skeleton className="h-[20px] w-[204px] bg-[#11161c]" />
-      <div className="flex w-full gap-[20px]">
-        <Skeleton className="h-[52px] w-[220px] rounded-[12px] bg-[#11161c]" />
-        <Skeleton className="h-[52px] w-[220px] rounded-[12px] bg-[#11161c]" />
+      <Skeleton className="h-[100px] w-full bg-sofia-color-89" />
+      <Skeleton className="h-[20px] w-[204px] bg-sofia-color-89" />
+      <div className="flex w-full flex-col gap-[20px] tablet:flex-row">
+        <Skeleton className="h-[52px] w-full rounded-8 bg-sofia-color-89 tablet:w-[220px]" />
+        <Skeleton className="h-[52px] w-full rounded-8 bg-sofia-color-89 tablet:w-[220px]" />
       </div>
-      <Skeleton className="h-[52px] w-full rounded-[12px] bg-[#11161c]" />
-      <Skeleton className="h-[52px] w-full rounded-[12px] bg-[#11161c]" />
-      <Skeleton className="h-[16px] w-full bg-[#11161c]" />
-      <Skeleton className="h-[52px] w-full rounded-[100px] bg-[#8b6842]/40" />
+      <Skeleton className="h-[52px] w-full rounded-8 bg-sofia-color-89" />
+      <Skeleton className="h-[52px] w-full rounded-8 bg-sofia-color-89" />
+      <Skeleton className="h-[16px] w-full bg-sofia-color-89" />
+      <Skeleton className="h-[52px] w-full rounded-8 bg-sofia-accent/40" />
     </div>
   );
 }
@@ -116,24 +85,17 @@ export default function SignUpForm() {
   if (mutation.isSuccess) {
     return (
       <div
-        className="flex w-full max-w-[461px] flex-col items-center gap-[16px] text-center"
+        className="flex w-full max-w-[461px] flex-col items-center gap-[16px] text-center font-almarai"
         role="status"
         aria-live="polite"
-        style={{ fontFamily: FONT_ALMARAI }}
       >
-        <h1
-          className="w-full text-[32px] font-[500] leading-[41.76px] text-[#ffffff]"
-          style={headingStyle}
-        >
-          Great Marketing Made Easier. Specifically For Agents
-        </h1>
-        <p className="text-[20px] font-[400] leading-[22.32px]" style={subheadStyle}>
+        <h1 className="w-full font-garamond text-heading-xl-35 text-sofia-secondary">{HEADLINE}</h1>
+        <p className="text-heading-md-14 text-sofia-secondary">
           {mutation.data.message || 'Your account was created. Sign in to continue.'}
         </p>
         <Link
           to="/sign-in"
-          className="text-[14px] font-[400] leading-[15.624px] text-[#c8a47e] underline underline-offset-[3px] hover:text-[#8b6842] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
-          style={{ fontFamily: FONT_PUBLIC_SANS }}
+          className="font-public-sans text-body-sm-2 text-sofia-accent underline underline-offset-[3px] hover:text-sofia-color-102 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sofia-accent"
         >
           Sign in
         </Link>
@@ -146,41 +108,28 @@ export default function SignUpForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex w-full max-w-[461px] flex-col items-center gap-[16px]"
+      className="flex w-full max-w-[461px] flex-col items-center gap-[16px] font-almarai"
       noValidate
-      style={{ fontFamily: FONT_ALMARAI }}
     >
       <div className="flex w-full flex-col items-center gap-[16px]">
-        <h1
-          className="w-full text-center text-[32px] font-[500] leading-[41.76px] text-[#ffffff]"
-          style={headingStyle}
-        >
-          Great Marketing Made Easier. Specifically For Agents
+        <h1 className="w-full text-center font-garamond text-heading-xl-35 text-sofia-secondary">
+          {HEADLINE}
         </h1>
-        <h2
-          className="w-[204px] text-center text-[20px] font-[400] leading-[22.32px]"
-          style={subheadStyle}
-        >
+        <h2 className="w-[204px] text-center font-almarai text-heading-md-14 text-sofia-secondary">
           Create your account today
         </h2>
       </div>
 
       {mutation.isError ? (
         <div
-          className="flex w-full flex-col items-center gap-[12px] rounded-[12px] border border-[#ff5630] bg-[#ff563028] px-[16px] py-[14px] text-center"
+          className="flex w-full flex-col items-center gap-[12px] rounded-8 border border-sofia-border bg-sofia-warning px-[16px] py-[14px] text-center"
           role="alert"
         >
-          <p
-            className="text-[16px] font-[400] leading-[20px]"
-            style={{ fontFamily: FONT_ALMARAI, color: COLOR_ERROR }}
-          >
-            {errorMessage}
-          </p>
+          <p className="text-[16px] font-[400] leading-[20px] text-sofia-border">{errorMessage}</p>
           <Button
             type="button"
             onClick={handleRetry}
             className={`${buttonClassName} h-[36px] w-auto min-w-[120px] px-[20px]`}
-            style={ctaStyle}
           >
             Try again
           </Button>
@@ -189,11 +138,7 @@ export default function SignUpForm() {
 
       <div className="flex w-full flex-col gap-[20px] tablet:flex-row">
         <div className="flex w-full flex-col gap-[10px] tablet:w-[220px]">
-          <Label
-            htmlFor="signup-first-name"
-            className="sr-only"
-            style={{ fontFamily: FONT_FELLIX }}
-          >
+          <Label htmlFor="signup-first-name" className="sr-only font-fellix">
             First Name
           </Label>
           <Input
@@ -202,22 +147,22 @@ export default function SignUpForm() {
             autoComplete="given-name"
             placeholder="First Name"
             aria-invalid={Boolean(errors.first_name)}
+            aria-describedby={errors.first_name ? 'signup-first-name-error' : undefined}
             className={inputClassName}
-            style={fieldStyle}
             {...form.register('first_name')}
           />
           {errors.first_name?.message ? (
             <p
-              className="text-[14px] leading-[15.624px]"
+              id="signup-first-name-error"
+              className="text-body-sm-2 text-sofia-border"
               role="alert"
-              style={{ color: COLOR_ERROR }}
             >
               {errors.first_name.message}
             </p>
           ) : null}
         </div>
         <div className="flex w-full flex-col gap-[10px] tablet:w-[220px]">
-          <Label htmlFor="signup-last-name" className="sr-only" style={{ fontFamily: FONT_FELLIX }}>
+          <Label htmlFor="signup-last-name" className="sr-only font-fellix">
             Last Name
           </Label>
           <Input
@@ -226,15 +171,15 @@ export default function SignUpForm() {
             autoComplete="family-name"
             placeholder="Last Name"
             aria-invalid={Boolean(errors.last_name)}
+            aria-describedby={errors.last_name ? 'signup-last-name-error' : undefined}
             className={inputClassName}
-            style={fieldStyle}
             {...form.register('last_name')}
           />
           {errors.last_name?.message ? (
             <p
-              className="text-[14px] leading-[15.624px]"
+              id="signup-last-name-error"
+              className="text-body-sm-2 text-sofia-border"
               role="alert"
-              style={{ color: COLOR_ERROR }}
             >
               {errors.last_name.message}
             </p>
@@ -253,12 +198,12 @@ export default function SignUpForm() {
           inputMode="email"
           placeholder="Email"
           aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? 'signup-email-error' : undefined}
           className={inputClassName}
-          style={fieldStyle}
           {...form.register('email')}
         />
         {errors.email?.message ? (
-          <p className="text-[14px] leading-[15.624px]" role="alert" style={{ color: COLOR_ERROR }}>
+          <p id="signup-email-error" className="text-body-sm-2 text-sofia-border" role="alert">
             {errors.email.message}
           </p>
         ) : null}
@@ -275,13 +220,13 @@ export default function SignUpForm() {
             autoComplete="new-password"
             placeholder="Create a Password"
             aria-invalid={Boolean(errors.password)}
+            aria-describedby={errors.password ? 'signup-password-error' : undefined}
             className={`${inputClassName} pr-[48px]`}
-            style={fieldStyle}
             {...form.register('password')}
           />
           <button
             type="button"
-            className="absolute right-[12px] top-[14px] inline-flex h-[24px] w-[24px] items-center justify-center text-[#637381] hover:text-[#c8a47e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:text-[#8b6842]"
+            className="absolute right-[12px] top-[14px] inline-flex h-[24px] w-[24px] items-center justify-center text-sofia-background hover:text-sofia-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sofia-accent active:text-sofia-color-102"
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             onClick={() => setShowPassword((open) => !open)}
           >
@@ -293,7 +238,7 @@ export default function SignUpForm() {
           </button>
         </div>
         {errors.password?.message ? (
-          <p className="text-[14px] leading-[15.624px]" role="alert" style={{ color: COLOR_ERROR }}>
+          <p id="signup-password-error" className="text-body-sm-2 text-sofia-border" role="alert">
             {errors.password.message}
           </p>
         ) : null}
@@ -303,41 +248,31 @@ export default function SignUpForm() {
         <input
           id="signup-terms"
           type="checkbox"
-          className="mt-[2px] h-[20px] w-[20px] shrink-0 cursor-pointer rounded-[2px] border border-[#ffffff] bg-[#000001] accent-[#c8a47e] hover:border-[#c8a47e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] disabled:cursor-not-allowed disabled:opacity-50"
-          style={{ accentColor: COLOR_ACCENT }}
+          className="mt-[2px] h-[20px] w-[20px] shrink-0 cursor-pointer rounded-[2px] border border-sofia-secondary bg-sofia-color-101 accent-sofia-accent hover:border-sofia-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sofia-accent disabled:cursor-not-allowed disabled:opacity-50"
           aria-invalid={Boolean(errors.terms)}
+          aria-labelledby="signup-terms-copy"
+          aria-describedby={errors.terms ? 'signup-terms-error' : undefined}
           {...form.register('terms')}
         />
-        <Label
-          htmlFor="signup-terms"
-          className="cursor-pointer text-[14px] font-[400] leading-[15.624px] text-[#ffffff]"
-          style={{ fontFamily: FONT_ALMARAI, color: '#ffffff' }}
-        >
-          I have read and agree to the{' '}
-          <a
-            href="#terms"
-            className="underline underline-offset-[3px] hover:text-[#c8a47e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
-            onClick={(event) => event.stopPropagation()}
+        <p id="signup-terms-copy" className="font-almarai text-body-sm-2 text-sofia-secondary">
+          <Label
+            htmlFor="signup-terms"
+            className="cursor-pointer font-almarai text-sofia-secondary"
           >
+            I have read and agree to the
+          </Label>{' '}
+          <Link to="/terms" className={legalLinkClassName}>
             Terms of Use
-          </a>{' '}
+          </Link>{' '}
           and{' '}
-          <a
-            href="#privacy"
-            className="underline underline-offset-[3px] hover:text-[#c8a47e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
-            onClick={(event) => event.stopPropagation()}
-          >
+          <Link to="/privacy" className={legalLinkClassName}>
             Privacy Policy
-          </a>
+          </Link>
           .
-        </Label>
+        </p>
       </div>
       {errors.terms?.message ? (
-        <p
-          className="w-full text-[14px] leading-[15.624px]"
-          role="alert"
-          style={{ color: COLOR_ERROR }}
-        >
+        <p id="signup-terms-error" className="w-full text-body-sm-2 text-sofia-border" role="alert">
           {errors.terms.message}
         </p>
       ) : null}
@@ -346,27 +281,19 @@ export default function SignUpForm() {
         type="submit"
         disabled={!termsAccepted || mutation.isPending}
         className={buttonClassName}
-        style={ctaStyle}
       >
         Sign Up
       </Button>
 
-      <p
-        className="w-full text-center text-[14px] font-[400] leading-[15.624px] text-[#637381]"
-        style={{ fontFamily: FONT_ALMARAI, color: COLOR_MUTED }}
-      >
+      <p className="w-full text-center font-almarai text-body-sm-2 text-sofia-accent">
         Already have an account?{' '}
         <Link
           to="/sign-in"
-          className="text-[#c8a47e] underline underline-offset-[3px] hover:text-[#8b6842] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:text-[#8b6842]"
-          style={{ fontFamily: FONT_PUBLIC_SANS, color: COLOR_ACCENT }}
+          className="font-public-sans text-sofia-accent underline underline-offset-[3px] hover:text-sofia-color-102 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sofia-accent active:text-sofia-color-102"
         >
           Sign in
         </Link>
       </p>
-      <span className="sr-only" style={{ fontFamily: FONT_SPACE_GROTESK }}>
-        Create your Agentwise account
-      </span>
     </form>
   );
 }

@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from 'react';
+import { useState } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,52 +14,14 @@ import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { AuthUser, LoginResponseData } from '@/types/api';
 
-const FONT_ALMARAI = "'Almarai', sans-serif";
-const FONT_PUBLIC_SANS = "'Public Sans', sans-serif";
-const FONT_EB_GARAMOND = "'EB Garamond', serif";
-const FONT_SPACE_GROTESK = "'Space Grotesk', sans-serif";
-const FONT_FELLIX = "'Fellix', 'Inter', sans-serif";
-const FONT_INTER = "'Inter', sans-serif";
-
-const COLOR_ACCENT = '#c8a47e';
-const COLOR_MUTED = '#637381';
-const COLOR_ERROR = '#ff5630';
-const COLOR_INK = '#000001';
-const COLOR_BRONZE = '#8b6842';
-const COLOR_SURFACE = '#11161c';
-const COLOR_FIELD = '#1d1a1a';
-const COLOR_FIELD_ALT = '#1c1916';
-
 const REMEMBER_ME_KEY = 'remember_me';
 const REMEMBERED_EMAIL_KEY = 'remembered_email';
 
-const headingStyle: CSSProperties = {
-  fontFamily: FONT_EB_GARAMOND,
-  color: '#ffffff',
-};
-
-const subheadStyle: CSSProperties = {
-  fontFamily: FONT_ALMARAI,
-  color: COLOR_MUTED,
-};
-
-const fieldStyle: CSSProperties = {
-  fontFamily: FONT_ALMARAI,
-  color: '#ffffff',
-  backgroundColor: COLOR_FIELD,
-};
-
-const ctaStyle: CSSProperties = {
-  fontFamily: FONT_PUBLIC_SANS,
-  color: COLOR_INK,
-  backgroundColor: COLOR_BRONZE,
-};
-
 const inputClassName =
-  'h-[52px] w-full rounded-[100px] border border-[#ffffff4c] bg-[#1d1a1a] p-[16px] text-[16px] font-[400] leading-[24px] text-[#ffffff] shadow-none placeholder:text-[#637381] hover:border-[#c8a47e] hover:bg-[#1d1818] focus-visible:border-[#c8a47e] focus-visible:ring-2 focus-visible:ring-[#c8a47e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000001] disabled:cursor-not-allowed disabled:opacity-50 aria-[invalid=true]:border-[#ff5630]';
+  'h-[52px] w-full rounded-8 border-none bg-sofia-color-77 p-[16px] font-almarai text-[16px] font-[400] leading-[24px] text-sofia-secondary shadow-none placeholder:text-sofia-background hover:border-sofia-accent focus-visible:border-sofia-accent focus-visible:ring-2 focus-visible:ring-sofia-accent focus-visible:ring-offset-2 focus-visible:ring-offset-sofia-color-25 disabled:cursor-not-allowed disabled:opacity-50 aria-[invalid=true]:border-sofia-border';
 
 const buttonClassName =
-  'h-[52px] w-full max-w-[461px] rounded-[100px] border border-[#8b6842] bg-[#8b6842] p-[16px] text-[16px] font-[600] leading-[24px] text-[#000001] hover:bg-[#c8a47e] hover:text-[#000001] focus-visible:ring-2 focus-visible:ring-[#c8a47e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#000001] active:bg-[#554545] active:text-[#000001] disabled:cursor-not-allowed disabled:opacity-50';
+  'h-[52px] w-full max-w-[461px] rounded-8 bg-sofia-accent p-[16px] font-public-sans text-[16px] font-[600] leading-[24px] text-sofia-secondary hover:bg-sofia-color-102 hover:text-sofia-secondary focus-visible:ring-2 focus-visible:ring-sofia-accent focus-visible:ring-offset-2 focus-visible:ring-offset-sofia-color-25 active:bg-sofia-color-111 disabled:cursor-not-allowed disabled:opacity-50';
 
 function readRememberedEmail(): string {
   if (typeof window === 'undefined') {
@@ -101,18 +63,17 @@ function toAuthUser(data: LoginResponseData): AuthUser {
 function SignInSkeleton() {
   return (
     <div
-      className="flex w-full max-w-[461px] flex-col items-center gap-[20px]"
+      className="flex w-full max-w-[461px] flex-col items-center gap-[20px] font-almarai"
       role="status"
       aria-live="polite"
       aria-label="Signing in"
-      style={{ fontFamily: FONT_ALMARAI }}
     >
-      <Skeleton className="h-[50px] w-[351px] bg-[#1d1a1a]" />
-      <Skeleton className="h-[28px] w-full bg-[#1d1a1a]" />
-      <Skeleton className="h-[52px] w-full rounded-[100px] bg-[#1d1a1a]" />
-      <Skeleton className="h-[52px] w-full rounded-[100px] bg-[#1d1a1a]" />
-      <Skeleton className="h-[20px] w-full bg-[#1d1a1a]" />
-      <Skeleton className="h-[52px] w-full rounded-[100px] bg-[#8b6842]/40" />
+      <Skeleton className="h-[50px] w-full bg-sofia-color-77" />
+      <Skeleton className="h-[28px] w-full bg-sofia-color-77" />
+      <Skeleton className="h-[52px] w-full rounded-8 bg-sofia-color-77" />
+      <Skeleton className="h-[52px] w-full rounded-8 bg-sofia-color-77" />
+      <Skeleton className="h-[20px] w-full bg-sofia-color-77" />
+      <Skeleton className="h-[52px] w-full rounded-8 bg-sofia-accent/40" />
     </div>
   );
 }
@@ -124,6 +85,7 @@ export default function SignInForm() {
   const errorMessage = useSignInErrorMessage(mutation.error);
   const [showPassword, setShowPassword] = useState(false);
   const [tokenError, setTokenError] = useState<string | null>(null);
+  const [unmappedErrors, setUnmappedErrors] = useState<string[]>([]);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -136,6 +98,7 @@ export default function SignInForm() {
 
   const onSubmit = form.handleSubmit(async (values) => {
     setTokenError(null);
+    setUnmappedErrors([]);
     persistRememberMe(values.rememberMe, values.email);
     try {
       const response = await mutation.mutateAsync({
@@ -143,8 +106,8 @@ export default function SignInForm() {
         password: values.password,
       });
       const payload = response.data;
-      const token = payload.token || payload.accessToken;
-      if (!token) {
+      const token = payload?.token || payload?.accessToken;
+      if (!payload || !token) {
         setTokenError('Login succeeded but no access token was returned.');
         return;
       }
@@ -152,11 +115,15 @@ export default function SignInForm() {
       navigate('/', { replace: true });
     } catch (error) {
       const apiError = getApiError(error);
+      const leftover: string[] = [];
       Object.entries(apiError.errors).forEach(([field, messages]) => {
         if (field === 'email' || field === 'password') {
           form.setError(field, { type: 'server', message: messages[0] });
+        } else {
+          leftover.push(...messages.map((message) => `${field}: ${message}`));
         }
       });
+      setUnmappedErrors(leftover);
     }
   });
 
@@ -175,18 +142,14 @@ export default function SignInForm() {
   if (mutation.isSuccess && !tokenError) {
     return (
       <div
-        className="flex w-full max-w-[461px] flex-col items-center gap-[20px] text-center"
+        className="flex w-full max-w-[461px] flex-col items-center gap-[20px] text-center font-almarai"
         role="status"
         aria-live="polite"
-        style={{ fontFamily: FONT_ALMARAI }}
       >
-        <h1
-          className="text-[32px] font-[500] leading-[41.76px] text-[#ffffff]"
-          style={headingStyle}
-        >
+        <h1 className="font-garamond text-heading-xl-35 text-sofia-secondary">
           Welcome To Agentwise
         </h1>
-        <p className="w-full text-[18px] font-[400] leading-[28px]" style={subheadStyle}>
+        <p className="w-full text-body-3 text-sofia-background">
           {mutation.data.message || 'Signed in successfully.'}
         </p>
       </div>
@@ -199,41 +162,39 @@ export default function SignInForm() {
   return (
     <form
       onSubmit={onSubmit}
-      className="flex w-full max-w-[461px] flex-col items-center gap-[20px]"
+      className="flex w-full max-w-[461px] flex-col items-center gap-[20px] font-almarai"
       noValidate
-      style={{ fontFamily: FONT_ALMARAI }}
     >
       <div className="flex w-full flex-col items-center gap-[30px]">
-        <h1
-          className="text-center text-[32px] font-[500] leading-[41.76px] text-[#ffffff]"
-          style={headingStyle}
-        >
+        <h1 className="text-center font-garamond text-heading-xl-35 text-sofia-secondary">
           Welcome To Agentwise
         </h1>
-        <p
-          className="w-full text-center text-[18px] font-[400] leading-[28px] text-[#637381]"
-          style={subheadStyle}
-        >
+        <p className="w-full text-center text-body-3 text-sofia-background">
           Everything you need to create standout real estate content.
         </p>
       </div>
 
-      {alertMessage ? (
+      {alertMessage || unmappedErrors.length > 0 ? (
         <div
-          className="flex w-full flex-col items-center gap-[12px] rounded-[12px] border border-[#ff5630] bg-[#ff563028] px-[16px] py-[14px] text-center"
+          className="flex w-full flex-col items-center gap-[12px] rounded-8 border border-sofia-border bg-sofia-warning px-[16px] py-[14px] text-center"
           role="alert"
         >
-          <p
-            className="text-[16px] font-[400] leading-[20px]"
-            style={{ fontFamily: FONT_ALMARAI, color: COLOR_ERROR }}
-          >
-            {alertMessage}
-          </p>
+          {alertMessage ? (
+            <p className="text-[16px] font-[400] leading-[20px] text-sofia-border">
+              {alertMessage}
+            </p>
+          ) : null}
+          {unmappedErrors.length > 0 ? (
+            <ul className="list-disc pl-[16px] text-left text-[16px] text-sofia-border">
+              {unmappedErrors.map((message) => (
+                <li key={message}>{message}</li>
+              ))}
+            </ul>
+          ) : null}
           <Button
             type="button"
             onClick={handleRetry}
             className={`${buttonClassName} h-[36px] w-auto min-w-[120px] px-[20px]`}
-            style={ctaStyle}
           >
             Try again
           </Button>
@@ -241,7 +202,7 @@ export default function SignInForm() {
       ) : null}
 
       <div className="flex w-full flex-col gap-[10px]">
-        <Label htmlFor="sign-in-email" className="sr-only" style={{ fontFamily: FONT_FELLIX }}>
+        <Label htmlFor="sign-in-email" className="sr-only font-fellix">
           Email
         </Label>
         <Input
@@ -251,19 +212,19 @@ export default function SignInForm() {
           inputMode="email"
           placeholder="Email"
           aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? 'sign-in-email-error' : undefined}
           className={inputClassName}
-          style={{ ...fieldStyle, backgroundColor: COLOR_FIELD_ALT }}
           {...form.register('email')}
         />
         {errors.email?.message ? (
-          <p className="text-[14px] leading-[15.624px]" role="alert" style={{ color: COLOR_ERROR }}>
+          <p id="sign-in-email-error" className="text-body-sm-2 text-sofia-border" role="alert">
             {errors.email.message}
           </p>
         ) : null}
       </div>
 
       <div className="flex w-full flex-col gap-[10px]">
-        <Label htmlFor="sign-in-password" className="sr-only" style={{ fontFamily: FONT_INTER }}>
+        <Label htmlFor="sign-in-password" className="sr-only font-inter">
           Password
         </Label>
         <div className="relative w-full">
@@ -273,13 +234,13 @@ export default function SignInForm() {
             autoComplete="current-password"
             placeholder="Password"
             aria-invalid={Boolean(errors.password)}
+            aria-describedby={errors.password ? 'sign-in-password-error' : undefined}
             className={`${inputClassName} pr-[48px]`}
-            style={fieldStyle}
             {...form.register('password')}
           />
           <button
             type="button"
-            className="absolute right-[12px] top-[14px] inline-flex h-[24px] w-[24px] items-center justify-center text-[#637381] hover:text-[#c8a47e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:text-[#8b6842]"
+            className="absolute right-[12px] top-[14px] inline-flex h-[24px] w-[24px] items-center justify-center text-sofia-background hover:text-sofia-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sofia-accent active:text-sofia-color-102"
             aria-label={showPassword ? 'Hide password' : 'Show password'}
             onClick={() => setShowPassword((open) => !open)}
           >
@@ -291,68 +252,50 @@ export default function SignInForm() {
           </button>
         </div>
         {errors.password?.message ? (
-          <p className="text-[14px] leading-[15.624px]" role="alert" style={{ color: COLOR_ERROR }}>
+          <p id="sign-in-password-error" className="text-body-sm-2 text-sofia-border" role="alert">
             {errors.password.message}
           </p>
         ) : null}
       </div>
 
-      <div className="flex w-full items-center justify-between gap-[12px]">
+      <div className="flex w-full flex-wrap items-center justify-between gap-[12px]">
         <div className="flex items-center gap-[8px]">
           <input
             id="sign-in-remember"
             type="checkbox"
-            className="h-[20px] w-[20px] shrink-0 cursor-pointer rounded-[2px] border border-[#ffffff] bg-[#000001] accent-[#c8a47e] hover:border-[#c8a47e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] disabled:cursor-not-allowed disabled:opacity-50"
-            style={{ accentColor: COLOR_ACCENT }}
+            className="h-[20px] w-[20px] shrink-0 cursor-pointer rounded-[2px] border border-sofia-secondary bg-sofia-color-101 accent-sofia-accent hover:border-sofia-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sofia-accent disabled:cursor-not-allowed disabled:opacity-50"
             {...form.register('rememberMe')}
           />
           <Label
             htmlFor="sign-in-remember"
-            className="cursor-pointer text-[16px] font-[400] leading-[24px] text-[#637381]"
-            style={{ fontFamily: FONT_ALMARAI, color: COLOR_MUTED }}
+            className="cursor-pointer font-almarai text-[16px] font-[400] leading-[24px] text-sofia-secondary"
           >
             Remember me
           </Label>
         </div>
         <Link
           to="/forgot-password"
-          className="text-[16px] font-[400] leading-[16px] text-[#637381] hover:text-[#c8a47e] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:text-[#8b6842]"
-          style={{ fontFamily: FONT_ALMARAI, color: COLOR_MUTED }}
+          className="font-almarai text-[16px] font-[400] leading-[16px] text-sofia-background hover:text-sofia-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sofia-accent active:text-sofia-color-102"
         >
           Forgot your password?
         </Link>
       </div>
 
-      <Button
-        type="submit"
-        disabled={mutation.isPending}
-        className={buttonClassName}
-        style={ctaStyle}
-      >
+      <Button type="submit" disabled={mutation.isPending} className={buttonClassName}>
         Sign In
       </Button>
 
-      <Separator className="h-px w-full bg-[#637381]/40" />
+      <Separator className="h-px w-full bg-sofia-background/40" />
 
-      <p
-        className="w-full text-center text-[14px] font-[400] leading-[15.624px] text-[#637381]"
-        style={{ fontFamily: FONT_ALMARAI, color: COLOR_MUTED }}
-      >
+      <p className="w-full text-center font-almarai text-body-sm-2 text-sofia-background">
         Not a member yet?{' '}
         <Link
           to="/sign-up"
-          className="text-[#c8a47e] underline underline-offset-[3px] hover:text-[#8b6842] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e] active:text-[#8b6842]"
-          style={{ fontFamily: FONT_PUBLIC_SANS, color: COLOR_ACCENT }}
+          className="font-public-sans text-sofia-accent underline underline-offset-[3px] hover:text-sofia-color-102 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sofia-accent active:text-sofia-color-102"
         >
           Sign up here.
         </Link>
       </p>
-      <span className="sr-only" style={{ fontFamily: FONT_SPACE_GROTESK }}>
-        Sign in to Agentwise
-      </span>
-      <span className="sr-only" style={{ fontFamily: FONT_FELLIX, color: COLOR_SURFACE }}>
-        Real estate professional sign in
-      </span>
     </form>
   );
 }

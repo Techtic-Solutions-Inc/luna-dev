@@ -55,7 +55,7 @@ describe('sign up', () => {
     renderWithProviders(<SignUp />);
     expect(
       screen.getByRole('heading', {
-        name: 'Great Marketing Made Easier. Specifically For Agents',
+        name: 'Great Marketing Made Easier. Specifically for Agents',
       }),
     ).toBeInTheDocument();
     expect(screen.getByText('Create your account today')).toBeInTheDocument();

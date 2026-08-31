@@ -33,7 +33,7 @@ export interface LoginResponseData extends AuthUser {
 export interface LoginResponse {
   success: boolean;
   message: string;
-  data: LoginResponseData;
+  data?: LoginResponseData;
 }
 
 export interface ForgotPasswordRequestBody {
