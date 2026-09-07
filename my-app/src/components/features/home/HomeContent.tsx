@@ -1,5 +1,6 @@
 import { EmptyState } from '@/components/EmptyState'
 import { ErrorMessage } from '@/components/ErrorMessage'
+import { cn } from '@/lib/utils'
 import { useVisitorHome } from '@/hooks/useVisitorHome'
 import type { NavLink } from './constants'
 import { NAV_LINKS } from './constants'
@@ -15,7 +16,6 @@ import {
   WaitlistCta,
 } from './HomeSections'
 import { ImageGallery } from './ImageGallery'
-import { LinkList } from './LinkList'
 
 function mapApiLinks(items: ReturnType<typeof useVisitorHome>['items']): NavLink[] {
   const linkItems = items.filter((item) => item.category === 'link' && item.link)
@@ -37,14 +37,47 @@ function getSubheadline(items: ReturnType<typeof useVisitorHome>['items']): stri
   return hero?.description || undefined
 }
 
+function FallbackNotice({
+  error,
+  isEmpty,
+  onRetry,
+}: {
+  error: string | null
+  isEmpty: boolean
+  onRetry: () => void
+}) {
+  if (error) {
+    return (
+      <div className="mx-auto max-w-[720px] pb-[20px]">
+        <ErrorMessage
+          message="Live content could not be loaded. You are viewing our default marketing page."
+          onRetry={onRetry}
+        />
+      </div>
+    )
+  }
+
+  if (isEmpty) {
+    return (
+      <div className="mx-auto max-w-[720px] pb-[20px] [&_h3]:text-[#ffffff] [&_p]:text-[#ffffff]/70">
+        <EmptyState
+          title="No Content Available"
+          description="Home content is not available at the moment. You are viewing our default marketing page."
+          actionLabel="Retry"
+          onAction={onRetry}
+        />
+      </div>
+    )
+  }
+
+  return null
+}
+
 function MarketingPage({
   items,
   pagination,
   page,
   limit,
-  sortColumn,
-  sortDirection,
-  toggleSort,
   goToPage,
   error,
   isEmpty,
@@ -54,9 +87,6 @@ function MarketingPage({
   pagination: ReturnType<typeof useVisitorHome>['pagination']
   page: number
   limit: number
-  sortColumn: ReturnType<typeof useVisitorHome>['sortColumn']
-  sortDirection: ReturnType<typeof useVisitorHome>['sortDirection']
-  toggleSort: ReturnType<typeof useVisitorHome>['toggleSort']
   goToPage: ReturnType<typeof useVisitorHome>['goToPage']
   error: string | null
   isEmpty: boolean
@@ -68,57 +98,44 @@ function MarketingPage({
   const galleryItems = items.filter(
     (item) => item.category === 'image' || item.category === 'gallery' || item.image_url || item.image,
   )
-  const displayGalleryItems = galleryItems.length > 0 ? galleryItems : items.length > 0 ? items : undefined
-  const hasMore = (displayGalleryItems?.length ?? 0) >= limit
+  const hasApiGalleryItems = galleryItems.length > 0
+  const hasMore = hasApiGalleryItems && galleryItems.length >= limit
+  const isFallbackMode = Boolean(error) || isEmpty
 
   return (
     <>
-      <div className="vh-hero-shell">
-        <HomeHeader />
-        <div className="hidden lg:block">
-          <LinkList links={navLinks} className="justify-center pb-[10px]" />
-        </div>
+      <div className="vh-hero-shell px-[40px] py-[60px]">
+        <HomeHeader navLinks={navLinks} />
 
-        {(error || isEmpty) && (
-          <div className="mx-auto max-w-[720px] px-[40px] pb-[20px]">
-            {error ? (
-              <ErrorMessage message={error} onRetry={() => void refetch()} />
-            ) : (
-              <EmptyState
-                title="No Content Available"
-                description="Home content is not available at the moment. Showing default marketing content."
-                actionLabel="Retry"
-                onAction={() => void refetch()}
-              />
-            )}
+        <FallbackNotice error={error} isEmpty={isEmpty} onRetry={() => void refetch()} />
+
+        <div className={cn(isFallbackMode && 'opacity-40 saturate-[0.85]')}>
+          <HeroSection headline={headline} subheadline={subheadline} />
+          <WaitlistCta />
+        </div>
+      </div>
+
+      <div className={cn(isFallbackMode && 'opacity-40 saturate-[0.85]')}>
+        <MarketingGallerySection />
+        <div className="bg-[#ffffff] px-[40px] pb-[80px]">
+          <div className="mx-auto max-w-[1920px]">
+            <ImageGallery
+              items={hasApiGalleryItems ? galleryItems : undefined}
+              page={pagination.page || page}
+              limit={pagination.limit || limit}
+              onPageChange={hasApiGalleryItems ? goToPage : undefined}
+              hasMore={hasMore}
+              showPagination={hasApiGalleryItems}
+            />
           </div>
-        )}
-
-        <HeroSection headline={headline} subheadline={subheadline} />
-        <WaitlistCta />
-      </div>
-
-      <MarketingGallerySection />
-      <div className="bg-[#ffffff] px-[40px] pb-[80px]">
-        <div className="mx-auto max-w-[1920px]">
-          <ImageGallery
-            items={displayGalleryItems}
-            page={pagination.page || page}
-            limit={pagination.limit || limit}
-            sortColumn={sortColumn}
-            sortDirection={sortDirection}
-            onToggleSort={toggleSort}
-            onPageChange={goToPage}
-            hasMore={hasMore}
-          />
         </div>
-      </div>
 
-      <StepsSection />
-      <UltimateMindFeatureSection />
-      <TestimonialsSection />
-      <ContactSection />
-      <HomeFooter />
+        <StepsSection />
+        <UltimateMindFeatureSection />
+        <TestimonialsSection />
+        <ContactSection />
+        <HomeFooter />
+      </div>
     </>
   )
 }
@@ -132,9 +149,6 @@ export function HomeContent() {
     isLoading,
     error,
     isEmpty,
-    sortColumn,
-    sortDirection,
-    toggleSort,
     goToPage,
     refetch,
   } = useVisitorHome()
@@ -149,9 +163,6 @@ export function HomeContent() {
       pagination={pagination}
       page={page}
       limit={limit}
-      sortColumn={sortColumn}
-      sortDirection={sortDirection}
-      toggleSort={toggleSort}
       goToPage={goToPage}
       error={error}
       isEmpty={isEmpty}

@@ -11,6 +11,8 @@
   --vh-color-106: #1d1a1a;
   --vh-color-107: #1d1818;
   --vh-color-109: #8a43e1;
+  --vh-cta-primary: #ffdd55;
+  --vh-cta-primary-foreground: #000000;
 
   font-family: 'Almarai', sans-serif;
   font-size: 16px;
@@ -115,13 +117,14 @@
   letter-spacing: 0;
 }
 
-/* Hero shell with radial glows */
+/* Hero shell — design-spec gradient with Figma atmospheric glows */
 .vh-hero-shell {
-  background-color: var(--vh-color-103);
+  background-color: #090014;
   background-image:
     radial-gradient(ellipse 620px 520px at 12% 42%, rgba(120, 141, 135, 0.28) 0%, transparent 72%),
     radial-gradient(ellipse 720px 580px at 88% 28%, rgba(138, 67, 225, 0.2) 0%, transparent 72%),
-    radial-gradient(ellipse 480px 380px at 58% 62%, rgba(200, 164, 126, 0.14) 0%, transparent 70%);
+    radial-gradient(ellipse 480px 380px at 58% 62%, rgba(200, 164, 126, 0.14) 0%, transparent 70%),
+    linear-gradient(180deg, #2f2f2f 0%, #090014 100%);
 }
 
 .vh-hero-grid {
@@ -189,7 +192,7 @@
   border: 1px solid rgba(255, 255, 255, 0.12) !important;
   background-color: var(--vh-color-103) !important;
   color: #ffffff !important;
-  font-family: 'Almarai', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   font-size: 16px !important;
   font-weight: 400 !important;
   line-height: 17.856px !important;
@@ -198,7 +201,7 @@
 
 .visitor-home .vh-input::placeholder {
   color: rgba(139, 104, 66, 0.75) !important;
-  font-family: 'Almarai', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 .visitor-home .vh-input:focus-visible {
@@ -212,11 +215,42 @@
   resize: none;
 }
 
-/* Page-scoped Button overrides — dark label on tan CTA */
+/* Page-scoped Button overrides — design-spec primary CTA */
 .visitor-home .vh-btn-accent {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--vh-cta-primary) !important;
+  background-color: var(--vh-cta-primary) !important;
+  color: var(--vh-cta-primary-foreground) !important;
+  font-family: 'Public Sans', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 18.8px !important;
+  transition: background-color 0.15s ease;
+}
+
+.visitor-home .vh-btn-accent:hover {
+  background-color: color-mix(in srgb, var(--vh-cta-primary) 88%, #000000) !important;
+}
+
+.visitor-home .vh-btn-accent:active {
+  background-color: color-mix(in srgb, var(--vh-cta-primary) 78%, #000000) !important;
+}
+
+.visitor-home .vh-btn-accent:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Tan pill CTA — header Log in per Figma */
+.visitor-home .vh-btn-accent-tan {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
   border-radius: 100px;
   border: 1px solid var(--vh-accent) !important;
   background-color: var(--vh-accent) !important;
@@ -228,17 +262,12 @@
   transition: background-color 0.15s ease;
 }
 
-.visitor-home .vh-btn-accent:hover {
+.visitor-home .vh-btn-accent-tan:hover {
   background-color: color-mix(in srgb, var(--vh-accent) 88%, #000000) !important;
 }
 
-.visitor-home .vh-btn-accent:active {
+.visitor-home .vh-btn-accent-tan:active {
   background-color: color-mix(in srgb, var(--vh-accent) 78%, #000000) !important;
-}
-
-.visitor-home .vh-btn-accent:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .visitor-home .vh-btn-outline {

@@ -6,6 +6,7 @@ import {
   Search,
   Sparkles,
 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { TESTIMONIALS } from './constants'
 
 function SidebarItem({ label, active = false }: { label: string; active?: boolean }) {
@@ -51,7 +52,7 @@ export function DashboardPreview() {
         <div className="flex">
           <aside className="hidden w-[180px] shrink-0 border-r border-[#ffffff]/10 bg-[var(--vh-color-105)] p-[16px] sm:block">
             <p className="mb-[20px] vh-font-kalam text-[18px] text-[#ffffff]">Agentwise</p>
-            <p className="mb-[8px] vh-font-public-sans text-[10px] font-[600] uppercase tracking-wider text-[#ffffff]/40">
+            <p className="mb-[8px] vh-font-fellix text-[10px] font-[600] uppercase tracking-wider text-[#ffffff]/40">
               Studio
             </p>
             <div className="mb-[16px] space-y-[2px]">
@@ -59,7 +60,7 @@ export function DashboardPreview() {
               <SidebarItem label="Content Library" />
               <SidebarItem label="Content Calendar" />
             </div>
-            <p className="mb-[8px] vh-font-public-sans text-[10px] font-[600] uppercase tracking-wider text-[#ffffff]/40">
+            <p className="mb-[8px] vh-font-fellix text-[10px] font-[600] uppercase tracking-wider text-[#ffffff]/40">
               Tools
             </p>
             <SidebarItem label="Ultimate Mind" />
@@ -96,8 +97,8 @@ export function DashboardPreview() {
               Good Morning, Ava.
             </p>
             <p className="mt-[8px] vh-font-almarai text-[13px] leading-[20px] text-[#ffffff]/50">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              We&apos;ve created a new collection of homes and marketing materials specifically for
+              your market. Check them out below.
             </p>
 
             <div className="mt-[16px] flex items-center gap-[8px] rounded-[100px] border border-[#ffffff]/10 bg-[#ffffff]/5 px-[16px] py-[10px]">
@@ -128,12 +129,24 @@ export function DashboardPreview() {
             </p>
             <div className="mt-[10px] flex gap-[10px] overflow-x-auto">
               {[
-                { src: '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-323-1646.png', tag: 'Reels' },
-                { src: '/assets/figma/attlgjgqkngefohwz-large-img6232-2-I2295-3482-323-1644.png', tag: 'Story' },
-                { src: '/assets/figma/attlgjgqkngefohwz-large-img6232-3-I2295-3482-323-1647.png', tag: 'Reels' },
+                {
+                  src: '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-323-1646.png',
+                  tag: 'Reels',
+                  alt: 'Reels content preview',
+                },
+                {
+                  src: '/assets/figma/attlgjgqkngefohwz-large-img6232-2-I2295-3482-323-1644.png',
+                  tag: 'Story',
+                  alt: 'Story content preview',
+                },
+                {
+                  src: '/assets/figma/attlgjgqkngefohwz-large-img6232-3-I2295-3482-323-1647.png',
+                  tag: 'Reels',
+                  alt: 'Reels listing content preview',
+                },
               ].map((card) => (
                 <div key={card.src} className="relative h-[100px] w-[72px] shrink-0 overflow-hidden rounded-[8px]">
-                  <img src={card.src} alt="" className="h-full w-full object-cover" />
+                  <img src={card.src} alt={card.alt} className="h-full w-full object-cover" />
                   <span className="absolute bottom-[4px] left-[4px] rounded-[4px] bg-[#000000]/60 px-[4px] py-[1px] vh-font-almarai text-[9px] text-[#ffffff]">
                     {card.tag}
                   </span>
@@ -154,7 +167,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ headline, subheadline }: HeroSectionProps) {
   return (
-    <section className="relative overflow-hidden px-[40px] pb-[60px] pt-[20px]">
+    <section className="relative overflow-hidden pb-[60px] pt-[20px]">
       <div className="vh-grid-overlay" aria-hidden="true" />
 
       <div className="vh-hero-grid relative mx-auto max-w-[1920px]">
@@ -163,7 +176,7 @@ export function HeroSection({ headline, subheadline }: HeroSectionProps) {
             {headline ??
               'Stunning Real Estate Marketing, Personalized To Your Market In Minutes'}
           </h1>
-          <p className="vh-font-almarai vh-body-34 mt-[20px] max-w-[520px] text-[#ffffff]/70">
+          <p className="vh-font-almarai vh-body-34 mt-[20px] max-w-[520px] text-[18px] font-[400] leading-[24px] text-[#ffffff]">
             {subheadline ??
               'The all-in-one marketing platform for residential real estate agents. AI-personalized content, a custom business dashboard, and a strategic AI advisor that knows your market.'}
           </p>
@@ -200,14 +213,16 @@ export function HeroSection({ headline, subheadline }: HeroSectionProps) {
 
 export function WaitlistCta() {
   return (
-    <div className="flex flex-col items-center gap-[20px] px-[40px] pb-[80px]">
-      <p className="vh-font-almarai vh-body text-[#ffffff]">
-        Join <span className="vh-body-25 text-[var(--vh-accent)]">Hundreds</span> of other agents on
-        the waitlist for Agentwise
+    <div className="flex flex-col items-center gap-[20px] pb-[80px]">
+      <p className="vh-font-almarai vh-body text-center text-[#ffffff]">
+        Join <span className="vh-body-25 text-[var(--vh-accent)]">10,000+</span> other agents on the
+        waitlist. It&apos;s free to join.
       </p>
-      <a href="#get-started" id="get-started" className="vh-btn-accent h-[44px] px-[32px]">
-        Get Started
-      </a>
+      <Button asChild className="vh-btn-accent h-[44px] px-[32px]">
+        <a href="#get-started" id="get-started">
+          Get Started
+        </a>
+      </Button>
     </div>
   )
 }
@@ -230,7 +245,7 @@ export function MarketingGallerySection() {
 
 function StepBadge({ step }: { step: string }) {
   return (
-    <span className="inline-flex items-center rounded-[100px] border border-[var(--vh-accent)]/50 px-[16px] py-[6px] vh-font-public-sans text-[13px] font-[500] text-[var(--vh-accent)]">
+    <span className="inline-flex items-center rounded-[100px] border border-[var(--vh-accent)]/50 px-[16px] py-[6px] vh-font-space-grotesk text-[13px] font-[500] text-[var(--vh-accent)]">
       {step}
     </span>
   )
@@ -258,13 +273,25 @@ function ContentLibraryMockup() {
           </div>
           <div className="mt-[12px] grid grid-cols-4 gap-[8px]">
             {[
-              '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-323-1646.png',
-              '/assets/figma/attlgjgqkngefohwz-large-img6232-2-I2295-3482-323-1644.png',
-              '/assets/figma/attlgjgqkngefohwz-large-img6232-3-I2295-3482-323-1647.png',
-              '/assets/figma/frame-2147227817-2270-14193.png',
-            ].map((src) => (
-              <div key={src} className="aspect-[3/4] overflow-hidden rounded-[8px]">
-                <img src={src} alt="" className="h-full w-full object-cover" />
+              {
+                src: '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-323-1646.png',
+                alt: 'Suburban home listing template',
+              },
+              {
+                src: '/assets/figma/attlgjgqkngefohwz-large-img6232-2-I2295-3482-323-1644.png',
+                alt: 'Lifestyle marketing template',
+              },
+              {
+                src: '/assets/figma/attlgjgqkngefohwz-large-img6232-3-I2295-3482-323-1647.png',
+                alt: 'Patio courtyard listing template',
+              },
+              {
+                src: '/assets/figma/frame-2147227817-2270-14193.png',
+                alt: 'Historic building listing template',
+              },
+            ].map((item) => (
+              <div key={item.src} className="aspect-[3/4] overflow-hidden rounded-[8px]">
+                <img src={item.src} alt={item.alt} className="h-full w-full object-cover" />
               </div>
             ))}
           </div>
@@ -474,9 +501,9 @@ export function UltimateMindFeatureSection() {
           <p className="mt-[20px] vh-font-almarai text-[16px] font-[400] leading-[26px] text-[#ffffff]/70">
             A custom business dashboard and a personalized AI advisor built into every plan.
           </p>
-          <a href="#contact" className="vh-btn-accent mt-[30px] h-[44px] px-[24px]">
-            Learn More
-          </a>
+          <Button asChild className="vh-btn-accent mt-[30px] h-[44px] px-[24px]">
+            <a href="#contact">Learn More</a>
+          </Button>
         </div>
       </div>
     </section>

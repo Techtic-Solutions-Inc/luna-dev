@@ -1,58 +1,12 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { toast } from 'sonner'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from '@/components/ui/form'
 
-const waitlistSchema = z.object({
-  firstName: z.string().min(1, 'First name is required.'),
-  lastName: z.string().min(1, 'Last name is required.'),
-  email: z.string().min(1, 'Email is required.').email('Please enter a valid email address.'),
-  phone: z.string().min(1, 'Phone number is required.'),
-  experience: z.string().optional(),
-  marketing: z.string().optional(),
-  message: z.string().optional(),
-})
+const WAITLIST_UNAVAILABLE_ID = 'waitlist-unavailable-notice'
 
-type WaitlistFormValues = z.infer<typeof waitlistSchema>
+const WAITLIST_UNAVAILABLE_MESSAGE =
+  'Waitlist signup is not available yet. Please email hello@agentwisemarketing.com to join.'
 
 export function ContactSection() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const form = useForm<WaitlistFormValues>({
-    resolver: zodResolver(waitlistSchema),
-    defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      experience: '',
-      marketing: '',
-      message: '',
-    },
-  })
-
-  const onSubmit = async (values: WaitlistFormValues) => {
-    setIsSubmitting(true)
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 800))
-      toast.success(`Thank you, ${values.firstName}! You have been added to the waitlist.`)
-      form.reset()
-    } catch {
-      toast.error('Unable to join the waitlist. Please try again.')
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
   return (
     <section id="contact" className="bg-[var(--vh-color-105)] px-[40px] py-[80px]">
       <div className="vh-contact-grid mx-auto max-w-[1920px]">
@@ -81,153 +35,83 @@ export function ContactSection() {
               Let&apos;s Work Together
             </h2>
 
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="mt-[30px] space-y-[16px]" noValidate>
-                <div className="grid gap-[16px] sm:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="firstName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="First Name"
-                            className="vh-input"
-                            aria-label="First Name"
-                          />
-                        </FormControl>
-                        <FormMessage role="alert" className="vh-font-almarai text-[14px] text-[var(--vh-border)]" />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="lastName"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            placeholder="Last Name"
-                            className="vh-input"
-                            aria-label="Last Name"
-                          />
-                        </FormControl>
-                        <FormMessage role="alert" className="vh-font-almarai text-[14px] text-[var(--vh-border)]" />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <div className="grid gap-[16px] sm:grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            type="email"
-                            placeholder="Email"
-                            className="vh-input"
-                            aria-label="Email"
-                            autoComplete="email"
-                          />
-                        </FormControl>
-                        <FormMessage role="alert" className="vh-font-almarai text-[14px] text-[var(--vh-border)]" />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            {...field}
-                            type="tel"
-                            placeholder="Phone number"
-                            className="vh-input"
-                            aria-label="Phone number"
-                            autoComplete="tel"
-                          />
-                        </FormControl>
-                        <FormMessage role="alert" className="vh-font-almarai text-[14px] text-[var(--vh-border)]" />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <FormField
-                  control={form.control}
-                  name="experience"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="How long have you been in Real Estate?"
-                          className="vh-input"
-                          aria-label="How long have you been in Real Estate?"
-                        />
-                      </FormControl>
-                      <FormMessage role="alert" className="vh-font-almarai text-[14px] text-[var(--vh-border)]" />
-                    </FormItem>
-                  )}
+            <form className="mt-[30px] space-y-[16px]" noValidate>
+              <div className="grid gap-[16px] sm:grid-cols-2">
+                <Input
+                  placeholder="First Name"
+                  className="vh-input"
+                  aria-label="First Name"
+                  disabled
                 />
-
-                <FormField
-                  control={form.control}
-                  name="marketing"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          placeholder="What do you currently do for marketing your business?"
-                          className="vh-input"
-                          aria-label="What do you currently do for marketing your business?"
-                        />
-                      </FormControl>
-                      <FormMessage role="alert" className="vh-font-almarai text-[14px] text-[var(--vh-border)]" />
-                    </FormItem>
-                  )}
+                <Input
+                  placeholder="Last Name"
+                  className="vh-input"
+                  aria-label="Last Name"
+                  disabled
                 />
+              </div>
 
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <textarea
-                          {...field}
-                          placeholder="Your Message"
-                          rows={4}
-                          aria-label="Your Message"
-                          className="vh-input vh-textarea w-full"
-                        />
-                      </FormControl>
-                      <FormMessage role="alert" className="vh-font-almarai text-[14px] text-[var(--vh-border)]" />
-                    </FormItem>
-                  )}
+              <div className="grid gap-[16px] sm:grid-cols-2">
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  className="vh-input"
+                  aria-label="Email"
+                  autoComplete="email"
+                  disabled
                 />
+                <Input
+                  type="tel"
+                  placeholder="Phone number"
+                  className="vh-input"
+                  aria-label="Phone number"
+                  autoComplete="tel"
+                  disabled
+                />
+              </div>
 
-                <div className="flex justify-center pt-[8px]">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    aria-busy={isSubmitting}
-                    className="vh-btn-waitlist"
-                  >
-                    {isSubmitting ? 'Submitting…' : 'Join the waitlist now.'}
-                  </button>
-                </div>
-              </form>
-            </Form>
+              <Input
+                placeholder="How long have you been in Real Estate?"
+                className="vh-input"
+                aria-label="How long have you been in Real Estate?"
+                disabled
+              />
+
+              <Input
+                placeholder="What do you currently do for marketing your business?"
+                className="vh-input"
+                aria-label="What do you currently do for marketing your business?"
+                disabled
+              />
+
+              <textarea
+                placeholder="Your Message"
+                rows={4}
+                aria-label="Your Message"
+                className="vh-input vh-textarea w-full"
+                disabled
+              />
+
+              <div
+                id={WAITLIST_UNAVAILABLE_ID}
+                role="status"
+                className="rounded-[12px] border border-[#ffffff]/20 bg-[#ffffff]/5 px-[16px] py-[12px] text-center vh-font-almarai text-[14px] leading-[22px] text-[#ffffff]/80"
+              >
+                {WAITLIST_UNAVAILABLE_MESSAGE}
+              </div>
+
+              <div className="flex justify-center pt-[8px]">
+                <Button
+                  type="button"
+                  disabled
+                  className="vh-btn-waitlist"
+                  aria-disabled="true"
+                  aria-describedby={WAITLIST_UNAVAILABLE_ID}
+                >
+                  Join the waitlist now.
+                </Button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

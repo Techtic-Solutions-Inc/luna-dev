@@ -1,4 +1,3 @@
-import { ArrowDown, ArrowUp, ArrowUpDown } from 'lucide-react'
 import {
   Pagination,
   PaginationContent,
@@ -9,7 +8,7 @@ import {
 } from '@/components/ui/pagination'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
-import type { SortDirection, VisitorHomeItem, VisitorHomeSortColumn } from '@/types/visitor'
+import type { VisitorHomeItem } from '@/types/visitor'
 import { DEFAULT_GALLERY_IMAGES, type GalleryImage } from './constants'
 
 interface ImageGalleryProps {
@@ -17,11 +16,9 @@ interface ImageGalleryProps {
   isLoading?: boolean
   page?: number
   limit?: number
-  sortColumn?: VisitorHomeSortColumn | null
-  sortDirection?: SortDirection
-  onToggleSort?: (column: VisitorHomeSortColumn) => void
   onPageChange?: (page: number) => void
   hasMore?: boolean
+  showPagination?: boolean
 }
 
 function itemToGalleryImage(item: VisitorHomeItem): GalleryImage {
@@ -32,51 +29,14 @@ function itemToGalleryImage(item: VisitorHomeItem): GalleryImage {
   }
 }
 
-function SortButton({
-  label,
-  column,
-  sortColumn,
-  sortDirection,
-  onToggleSort,
-}: {
-  label: string
-  column: VisitorHomeSortColumn
-  sortColumn: VisitorHomeSortColumn | null
-  sortDirection: SortDirection
-  onToggleSort?: (column: VisitorHomeSortColumn) => void
-}) {
-  const isActive = sortColumn === column
-  const ariaSort = !isActive || !sortDirection ? 'none' : sortDirection === 'asc' ? 'ascending' : 'descending'
-
-  return (
-    <button
-      type="button"
-      onClick={() => onToggleSort?.(column)}
-      aria-sort={ariaSort}
-      className="inline-flex items-center gap-[6px] vh-font-public-sans text-[14px] font-[500] text-[#ffffff]/70 transition-colors hover:text-[#ffffff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--vh-accent)]"
-    >
-      {label}
-      {!isActive || !sortDirection ? (
-        <ArrowUpDown className="h-3.5 w-3.5 opacity-60" aria-hidden="true" />
-      ) : sortDirection === 'asc' ? (
-        <ArrowUp className="h-3.5 w-3.5 text-[var(--vh-accent)]" aria-hidden="true" />
-      ) : (
-        <ArrowDown className="h-3.5 w-3.5 text-[var(--vh-accent)]" aria-hidden="true" />
-      )}
-    </button>
-  )
-}
-
 export function ImageGallery({
   items,
   isLoading = false,
   page = 1,
   limit = 10,
-  sortColumn = null,
-  sortDirection = null,
-  onToggleSort,
   onPageChange,
   hasMore = false,
+  showPagination = false,
 }: ImageGalleryProps) {
   const galleryImages: GalleryImage[] =
     items && items.length > 0
@@ -87,31 +47,12 @@ export function ImageGallery({
 
   return (
     <div className="w-full">
-      {onToggleSort && (
-        <div className="mb-[16px] flex items-center justify-end gap-[16px]">
-          <SortButton
-            label="Items"
-            column="items"
-            sortColumn={sortColumn}
-            sortDirection={sortDirection}
-            onToggleSort={onToggleSort}
-          />
-          <SortButton
-            label="Pagination"
-            column="pagination"
-            sortColumn={sortColumn}
-            sortDirection={sortDirection}
-            onToggleSort={onToggleSort}
-          />
-        </div>
-      )}
-
       {isLoading ? (
         <div className="flex gap-[20px] overflow-x-auto pb-[10px]">
           {Array.from({ length: 6 }).map((_, i) => (
             <Skeleton
               key={i}
-              className="h-[552px] w-[316px] shrink-0 rounded-[24px] bg-[#ffffff]/10"
+              className="h-[552px] w-[316px] shrink-0 rounded-[24px] bg-[var(--vh-background-muted)]/20"
             />
           ))}
         </div>
@@ -145,7 +86,7 @@ export function ImageGallery({
         </div>
       )}
 
-      {onPageChange && (page > 1 || hasMore) && (
+      {showPagination && onPageChange && (page > 1 || hasMore) && (
         <Pagination className="mt-[24px]">
           <PaginationContent>
             <PaginationItem>
@@ -154,7 +95,7 @@ export function ImageGallery({
                 disabled={page <= 1 || isLoading}
                 aria-disabled={page <= 1 || isLoading}
                 className={cn(
-                  'border-[#ffffff]/20 bg-transparent text-[#ffffff] hover:bg-[#ffffff]/10',
+                  'border-[var(--vh-background-muted)]/30 bg-transparent text-[var(--vh-color-103)] hover:bg-[var(--vh-background-muted)]/10',
                   (page <= 1 || isLoading) && 'pointer-events-none opacity-50',
                 )}
               />
@@ -162,7 +103,7 @@ export function ImageGallery({
             <PaginationItem>
               <PaginationLink
                 isActive
-                className="border-[var(--vh-accent)] bg-[var(--vh-accent)] text-[var(--vh-color-103)]"
+                className="border-[var(--vh-cta-primary)] bg-[var(--vh-cta-primary)] text-[var(--vh-cta-primary-foreground)]"
                 aria-label={`Page ${page}`}
               >
                 {page}
@@ -174,7 +115,7 @@ export function ImageGallery({
                 disabled={!hasMore || isLoading}
                 aria-disabled={!hasMore || isLoading}
                 className={cn(
-                  'border-[#ffffff]/20 bg-transparent text-[#ffffff] hover:bg-[#ffffff]/10',
+                  'border-[var(--vh-background-muted)]/30 bg-transparent text-[var(--vh-color-103)] hover:bg-[var(--vh-background-muted)]/10',
                   (!hasMore || isLoading) && 'pointer-events-none opacity-50',
                 )}
               />
@@ -184,14 +125,16 @@ export function ImageGallery({
       )}
 
       {!isLoading && displayImages.length === 0 && (
-        <p className="py-[40px] text-center vh-font-almarai text-[16px] text-[#ffffff]/60">
+        <p className="py-[40px] text-center vh-font-almarai text-[16px] text-[var(--vh-background-muted)]">
           No images available.
         </p>
       )}
 
-      <span className="sr-only">
-        Showing page {page} with up to {limit} items per page.
-      </span>
+      {showPagination && (
+        <span className="sr-only">
+          Showing page {page} with up to {limit} items per page.
+        </span>
+      )}
     </div>
   )
 }

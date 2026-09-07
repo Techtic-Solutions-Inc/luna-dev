@@ -69,44 +69,23 @@ export const DEFAULT_GALLERY_IMAGES: GalleryImage[] = [
 export const TESTIMONIALS = [
   {
     quote:
-      'The Ultimate Mind has become my second brain. I ask it what to post, how to position myself, and it knows my market inside out.',
+      'The Ultimate Mind has become my second brain for pricing strategy. It pulls comps and pushes back on my assumptions like a seasoned mentor would.',
     name: 'Marcus Donovan',
     company: 'Keller Williams · Denver, CO',
     avatar: '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-65-2289.png',
   },
   {
     quote:
-      'I went from posting once a week to daily content that actually looks like me. My engagement tripled in the first month.',
+      'My listings actually look like they belong to a top-1% agent now. Three of my last four clients said the marketing is what sold them on hiring me.',
     name: 'Jordan Hayes',
     company: 'eXp Realty · Nashville, TN',
     avatar: '/assets/figma/attlgjgqkngefohwz-large-img6232-2-I2295-3482-65-2287.png',
   },
   {
     quote:
-      'Our team of 12 agents all use Agentwise now. The content library alone saved us thousands in design costs.',
-    name: 'Sarah Chen',
-    company: 'Compass · Austin, TX',
+      'Agentwise replaced my entire marketing workflow. What used to take a full Sunday now takes a coffee break — and the content is better than anything I was making in Canva.',
+    name: 'Jordan Hayes',
+    company: 'eXp Realty · Nashville, TN',
     avatar: '/assets/figma/attlgjgqkngefohwz-large-img6232-3-I2295-3482-65-2290.png',
-  },
-  {
-    quote:
-      "Finally, marketing that doesn't feel generic. Every template feels like it was made for my neighborhood.",
-    name: 'David Okonkwo',
-    company: 'RE/MAX · Charlotte, NC',
-    avatar: '/assets/figma/group-33654450-3654-11562.png',
-  },
-  {
-    quote:
-      'The content calendar keeps me consistent without the stress. I open the app Monday morning and my week is planned.',
-    name: 'Emily Rodriguez',
-    company: 'Coldwell Banker · Miami, FL',
-    avatar: '/assets/figma/ld0pdcexwugrmn6c7l8cvcjcsjk-1-2289-17245.png',
-  },
-  {
-    quote:
-      "As a new agent, Agentwise gave me the marketing presence of someone who's been in the business for years.",
-    name: 'Tyler Brooks',
-    company: 'Century 21 · Portland, OR',
-    avatar: '/assets/figma/frame-2147227816-2270-14191.png',
   },
 ]
