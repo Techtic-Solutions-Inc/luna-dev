@@ -4,10 +4,12 @@ import Dashboard from '@/components/features/Dashboard'
 import Home from '@/components/features/Home'
 import AppShell from '@/components/layout/AppShell'
 import ProtectedRoute from '@/components/layout/ProtectedRoute'
+import VisitorHome from '@/routes/visitor/home'
 
 const AppRouter = () => (
   <Router>
     <Routes>
+      <Route path="/visitor/home" element={<VisitorHome />} />
       <Route element={<AppShell />}>
         <Route path="/" element={<Home />} />
         <Route
