@@ -19,5 +19,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts", "tailwind.theme.ts", "src/theme/breakpoints.ts", "src/theme/tokens.ts"]
 }

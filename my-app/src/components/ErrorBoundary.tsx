@@ -29,10 +29,10 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     if (this.state.hasError) {
       return (
         <div className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 text-center">
-          <h1 className="font-['EB_Garamond'] text-[32px] font-[500] text-[#ffffff]">
+          <h1 className="font-heading text-[32px] font-[500] text-foreground">
             Something went wrong.
           </h1>
-          <p className="max-w-md text-[16px] text-[#828282]">
+          <p className="max-w-md text-[16px] text-muted-foreground">
             An unexpected error occurred. Please try again or return to the home page.
           </p>
           <Button onClick={this.handleReset} type="button">

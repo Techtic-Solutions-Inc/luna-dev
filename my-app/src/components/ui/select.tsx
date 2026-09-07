@@ -14,7 +14,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex h-10 w-full items-center justify-between gap-2 rounded-[8px] border border-[#3a3541] bg-[#1c1916] px-3 py-2 text-[16px] text-[#ffffff] focus:outline-none focus:ring-2 focus:ring-[#c8a47e] disabled:cursor-not-allowed disabled:opacity-50',
+      'flex h-10 w-full items-center justify-between gap-2 rounded-md border border-shell-border bg-card px-3 py-2 text-[16px] text-foreground focus:outline-none focus:ring-2 focus:ring-accent disabled:cursor-not-allowed disabled:opacity-50',
       className,
     )}
     {...props}
@@ -63,7 +63,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-[8px] border border-[#3a3541] bg-[#1c1916] text-[#ffffff] shadow-md',
+        'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-md border border-shell-border bg-card text-foreground shadow-md',
         position === 'popper' &&
           'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
         className,
@@ -106,7 +106,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-[14px] outline-none focus:bg-[#3a3541] data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-[14px] outline-none focus:bg-shell-border data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className,
     )}
     {...props}
@@ -127,7 +127,7 @@ const SelectSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Separator
     ref={ref}
-    className={cn('-mx-1 my-1 h-px bg-[#3a3541]', className)}
+    className={cn('-mx-1 my-1 h-px bg-shell-border', className)}
     {...props}
   />
 ))

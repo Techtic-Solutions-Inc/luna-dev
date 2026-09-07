@@ -1,0 +1,10 @@
+{
+  "name": "workspace",
+  "private": true,
+  "scripts": {
+    "build": "npm run build --prefix my-app",
+    "build:prod": "npm run build --prefix my-app",
+    "lint": "npm run lint --prefix my-app",
+    "typecheck": "npm run typecheck --prefix my-app"
+  }
+}

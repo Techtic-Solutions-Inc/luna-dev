@@ -1,32 +1,22 @@
-# React + TypeScript + Vite
+# my-app
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React + TypeScript + Vite frontend with design tokens, API client, and authentication.
 
-Currently, two official plugins are available:
+## Scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Script | Description |
+| --- | --- |
+| `npm run dev` | Start Vite dev server |
+| `npm run build` | Typecheck and production build |
+| `npm run typecheck` | TypeScript check only |
+| `npm run lint` | ESLint + Oxlint on `src/` (see below) |
+| `npm run format` | Prettier on `src/**/*.{ts,tsx}` |
+| `npm run test` | Vitest unit tests |
 
-## React Compiler
+## Linting
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+`npm run lint` runs **ESLint 10** (`eslint.config.js`) and **Oxlint** (`.oxlintrc.json`) on `src/`. ESLint 9+ no longer reads legacy `.eslintrc.js` / `.eslintrc.cjs` files. ESLint covers TypeScript and React Hooks rules; Oxlint covers additional React rules. Formatting is handled separately by Prettier (`npm run format`).
 
-## Expanding the Oxlint configuration
+## Environment
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Copy `.env.example` to `.env` and set `VITE_API_URL` (default `http://localhost:4040`).

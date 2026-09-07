@@ -450,8 +450,35 @@ export const gradients = {
   'gradient-21': 'linear-gradient(180deg, #ffffff00 0%, #ffffff 100%)',
 } as const
 
+/** Layout dimensions from Figma shell spec */
+export const layout = {
+  sidebarWidth: '240px',
+} as const
+
+/** Semantic aliases for Tailwind/CSS — @theme block generated from this via tailwind.theme.ts */
+export const semanticColors = {
+  primary: colors.primary,
+  secondary: colors.secondary,
+  accent: colors.accent,
+  accentForeground: colors['color-16'],
+  background: colors['color-26'],
+  foreground: colors.secondary,
+  mutedForeground: colors['text-secondary'],
+  border: colors.border,
+  shellBorder: colors['color-59'],
+  shell: colors['color-24'],
+  destructive: colors['color-51'],
+  success: colors['color-17'],
+  successMuted: colors['color-50'],
+  card: colors['color-77'],
+  cardForeground: colors.secondary,
+  overlay: colors['color-97'],
+} as const
+
 export const theme = {
   colors,
+  semanticColors,
+  layout,
   typography,
   spacing,
   radius,
