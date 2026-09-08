@@ -1,5 +1,6 @@
 import { colors, gradients, radius, spacing, theme } from './tokens';
 import { breakpoints } from './breakpoints';
+import { HOME_FRAME_WIDTH, homeScreen } from './screens/home';
 
 /** Maps Figma tokens to CSS custom properties consumed by Tailwind and components. */
 export function buildCssVariableBlock(): string {
@@ -42,12 +43,17 @@ export function buildCssVariableBlock(): string {
     `--radius-fractional-4861: ${radius['radius-4861']};`,
     `--spacing-padding-12: ${spacing['padding-12']};`,
     `--spacing-padding-20: ${spacing['padding-20']};`,
+    `--spacing-padding-24: ${spacing['padding-24']};`,
+    `--spacing-padding-30: ${spacing['padding-30']};`,
+    `--spacing-padding-32: ${spacing['padding-32']};`,
     `--spacing-padding-40: ${spacing['padding-40']};`,
     `--spacing-padding-60: ${spacing['padding-60']};`,
     `--token-breakpoint-mobile: ${breakpoints.mobile};`,
     `--token-breakpoint-tablet: ${breakpoints.tablet};`,
     `--token-breakpoint-desktop: ${breakpoints.desktop};`,
     `--token-breakpoint-wide: ${breakpoints.wide};`,
+    `--home-background: ${homeScreen.background};`,
+    `--home-frame-width: ${HOME_FRAME_WIDTH};`,
   ];
 
   return lines.join('\n    ');

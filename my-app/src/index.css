@@ -39,6 +39,9 @@
   --breakpoint-tablet: var(--token-breakpoint-tablet);
   --breakpoint-desktop: var(--token-breakpoint-desktop);
   --breakpoint-wide: var(--token-breakpoint-wide);
+
+  --color-home-background: var(--home-background);
+  --spacing-home-frame-width: var(--home-frame-width);
 }
 
 @layer base {
