@@ -1,3 +1,7 @@
+import { typography } from './typography';
+
+export { typography };
+
 export const colors = {
   primary: '#00000000',
   secondary: '#ffffff',
@@ -135,163 +139,6 @@ export const colors = {
 
 export type ColorToken = keyof typeof colors;
 
-export const typography = {
-  body: {
-    fontFamily: 'Almarai',
-    fontSize: '16px',
-    fontWeight: 400,
-    lineHeight: '17.856000900268555px',
-    letterSpacing: '0px',
-  },
-  'body-sm-2': {
-    fontFamily: 'Almarai',
-    fontSize: '14px',
-    fontWeight: 400,
-    lineHeight: '15.624000549316406px',
-    letterSpacing: '0px',
-  },
-  'body-3': {
-    fontFamily: 'Almarai',
-    fontSize: '18px',
-    fontWeight: 400,
-    lineHeight: '28px',
-    letterSpacing: '0px',
-  },
-  'caption-4': {
-    fontFamily: 'Public Sans',
-    fontSize: '12px',
-    fontWeight: 400,
-    lineHeight: '18px',
-    letterSpacing: '0px',
-  },
-  'caption-5': {
-    fontFamily: 'Public Sans',
-    fontSize: '12px',
-    fontWeight: 700,
-    lineHeight: '20px',
-    letterSpacing: '0px',
-  },
-  'body-6': {
-    fontFamily: 'Almarai',
-    fontSize: '18px',
-    fontWeight: 400,
-    lineHeight: '20.088001251220703px',
-    letterSpacing: '0px',
-  },
-  'heading-md-11': {
-    fontFamily: 'Almarai',
-    fontSize: '22px',
-    fontWeight: 400,
-    lineHeight: '24.552001953125px',
-    letterSpacing: '0px',
-  },
-  'heading-md-14': {
-    fontFamily: 'Almarai',
-    fontSize: '20px',
-    fontWeight: 400,
-    lineHeight: '22.32000160217285px',
-    letterSpacing: '0px',
-  },
-  'body-15': {
-    fontFamily: 'Almarai',
-    fontSize: '16px',
-    fontWeight: 400,
-    lineHeight: '22px',
-    letterSpacing: '0px',
-  },
-  'body-16': {
-    fontFamily: 'Almarai',
-    fontSize: '16px',
-    fontWeight: 400,
-    lineHeight: '26px',
-    letterSpacing: '0px',
-  },
-  'body-17': {
-    fontFamily: 'Almarai',
-    fontSize: '18px',
-    fontWeight: 700,
-    lineHeight: '20.088001251220703px',
-    letterSpacing: '0px',
-  },
-  'heading-lg-19': {
-    fontFamily: 'EB Garamond',
-    fontSize: '30px',
-    fontWeight: 500,
-    lineHeight: '39.14999771118164px',
-    letterSpacing: '0px',
-  },
-  'body-25': {
-    fontFamily: 'Public Sans',
-    fontSize: '19.69230842590332px',
-    fontWeight: 600,
-    lineHeight: '29.538463592529297px',
-    letterSpacing: '0px',
-  },
-  'heading-lg-26': {
-    fontFamily: 'EB Garamond',
-    fontSize: '24px',
-    fontWeight: 600,
-    lineHeight: '31.31999969482422px',
-    letterSpacing: '0px',
-  },
-  'heading-lg-31': {
-    fontFamily: 'Almarai',
-    fontSize: '24px',
-    fontWeight: 700,
-    lineHeight: '26.784000396728516px',
-    letterSpacing: '0px',
-  },
-  'body-sm-32': {
-    fontFamily: 'Fellix',
-    fontSize: '15px',
-    fontWeight: 600,
-    lineHeight: '20px',
-    letterSpacing: '0.22499999999999998px',
-  },
-  'heading-xl-35': {
-    fontFamily: 'EB Garamond',
-    fontSize: '32px',
-    fontWeight: 500,
-    lineHeight: '41.7599983215332px',
-    letterSpacing: '0px',
-  },
-  'body-44': {
-    fontFamily: 'Public Sans',
-    fontSize: '17.6842098236084px',
-    fontWeight: 400,
-    lineHeight: '27.789472579956055px',
-    letterSpacing: '0px',
-  },
-  'body-55': {
-    fontFamily: 'Almarai',
-    fontSize: '16px',
-    fontWeight: 700,
-    lineHeight: '17.856000900268555px',
-    letterSpacing: '0px',
-  },
-  'body-115': {
-    fontFamily: 'Public Sans',
-    fontSize: '16px',
-    fontWeight: 600,
-    lineHeight: '18.799999237060547px',
-    letterSpacing: '0px',
-  },
-  'body-sm-116': {
-    fontFamily: 'Space Grotesk',
-    fontSize: '14px',
-    fontWeight: 500,
-    lineHeight: '17.86400032043457px',
-    letterSpacing: '0px',
-  },
-  'body-117': {
-    fontFamily: 'Almarai',
-    fontSize: '18px',
-    fontWeight: 400,
-    lineHeight: '48px',
-    letterSpacing: '0px',
-  },
-} as const;
-
 export const spacing = {
   'padding-0': '0px',
   'padding-1': '1px',
@@ -358,6 +205,11 @@ export const spacing = {
   'gap-102': '102px',
   'gap-113': '113px',
   'gap-125': '125px',
+  'gap-303': '303px',
+  'gap-465': '465px',
+  'gap-624': '624px',
+  'gap-815': '815px',
+  'gap-832': '832px',
   'gap--1': '-1px',
   'gap--2': '-2px',
   'gap--6': '-6px',
@@ -399,6 +251,11 @@ export const radius = {
   'radius-571': '571px',
   'radius-572': '572px',
   'radius-649': '649px',
+  'radius-500': '500px',
+  'radius-4861': '4861px',
+  'radius-60709': '60709px',
+  'radius-29511': '29511px',
+  'radius-40972': '40972px',
   'radius-1000': '1000px',
   'radius-4666': '4666px',
   'radius-4680': '4680px',
@@ -437,6 +294,29 @@ export const shadows = {
   'drop-shadow-40': '0px 8px 16px 0px #919eab28',
 } as const;
 
+export const effects = {
+  glass: 'none',
+  'layer-blur-2': 'filter: blur(394px)',
+  'layer-blur-3': 'filter: blur(514px)',
+  'layer-blur-4': 'filter: blur(276.1745910644531px)',
+  'layer-blur-6': 'filter: blur(211.69802856445312px)',
+  'layer-blur-7': 'filter: blur(191.4674072265625px)',
+  'layer-blur-8': 'filter: blur(121.02381896972656px)',
+  'layer-blur-9': 'filter: blur(157.8838653564453px)',
+  'layer-blur-12': 'filter: blur(320px)',
+  'layer-blur-16': 'filter: blur(94px)',
+  'layer-blur-21': 'filter: blur(339.35546875px)',
+  'layer-blur-23': 'filter: blur(224px)',
+  'layer-blur-31': 'filter: blur(28.584068298339844px)',
+  'layer-blur-36': 'filter: blur(1954.410888671875px)',
+  'layer-blur-38': 'filter: blur(50px)',
+  'background-blur-10': 'backdrop-filter: blur(15px)',
+  'background-blur-20': 'backdrop-filter: blur(6.458558082580566px)',
+  'background-blur-22': 'backdrop-filter: blur(4px)',
+  'background-blur-25': 'backdrop-filter: blur(1.9444444179534912px)',
+  'background-blur-32': 'backdrop-filter: blur(7.176175594329834px)',
+} as const;
+
 export const gradients = {
   gradient: 'linear-gradient(180deg, #2f2f2f 0%, #090014 100%)',
   'gradient-2': 'linear-gradient(180deg, #c8a47e33 0%, #62503d00 100%)',
@@ -449,8 +329,20 @@ export const gradients = {
   'gradient-8': 'linear-gradient(180deg, #c8a47e 24%, #ffffff 49%, #8b6843 72%)',
   'gradient-9': 'linear-gradient(180deg, #c8a47e3f 0%, #62503d00 100%)',
   'gradient-10': 'linear-gradient(180deg, #182620 0%, #105d39 100%)',
+  'gradient-11':
+    'radial-gradient(circle at 30% 20%, #ffdd55 0%, #ffdd55 10%, #ff543e 50%, #c837ab 100%)',
+  'gradient-12':
+    'radial-gradient(circle at 30% 20%, #3771c8 0%, #3771c8 13%, #6600ff00 100%)',
+  'gradient-13': 'linear-gradient(180deg, #0b0b0b00 0%, #000001 100%)',
+  'gradient-14': 'linear-gradient(180deg, #c8a47e 24%, #ffffff 49%, #c8a47e 72%)',
   'gradient-15': 'linear-gradient(180deg, #c8a47e 0%, #8b6842 100%)',
+  'gradient-16': 'linear-gradient(180deg, #11161c 0%, #4b92eb99 100%)',
   'gradient-17': 'linear-gradient(180deg, #14100d 0%, #050505 100%)',
+  'gradient-18': 'linear-gradient(180deg, #00000000 0%, #000000 100%)',
+  'gradient-19':
+    'linear-gradient(180deg, #ff2f2f 0%, #ef7b16 36%, #8a43e1 70%, #d511fd 100%)',
+  'gradient-20': 'linear-gradient(180deg, #14100d 0%, #402631 100%)',
+  'gradient-21': 'linear-gradient(180deg, #ffffff00 0%, #ffffff 100%)',
 } as const;
 
 export const theme = {
@@ -459,6 +351,7 @@ export const theme = {
   spacing,
   radius,
   shadows,
+  effects,
   gradients,
 } as const;
 

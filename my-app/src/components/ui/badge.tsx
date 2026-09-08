@@ -11,8 +11,10 @@ const badgeVariants = cva(
         secondary: 'border-transparent bg-secondary text-secondary-foreground',
         destructive: 'border-transparent bg-destructive text-destructive-foreground',
         outline: 'text-foreground border-border',
-        success: 'border-transparent bg-[#22c55e33] text-[#22c55e]',
-        warning: 'border-transparent bg-[#ffb03233] text-[#ffb032]',
+        success:
+          'border-transparent bg-[color-mix(in_srgb,var(--success-token)_20%,transparent)] text-[var(--success-token)]',
+        warning:
+          'border-transparent bg-[color-mix(in_srgb,var(--warning-token)_20%,transparent)] text-[var(--warning-token)]',
       },
     },
     defaultVariants: {

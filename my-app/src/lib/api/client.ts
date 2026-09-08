@@ -1,6 +1,9 @@
 import axios, { type AxiosError } from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:4040';
+const API_URL =
+  import.meta.env.VITE_API_BASE_URL ??
+  import.meta.env.VITE_API_URL ??
+  'http://localhost:4040';
 
 export const apiClient = axios.create({
   baseURL: API_URL,
@@ -21,6 +24,15 @@ interface ApiErrorBody {
   message?: string;
   detail?: string;
   errors?: Record<string, string[]>;
+}
+
+function firstFieldError(errors: Record<string, string[]>): string | undefined {
+  for (const messages of Object.values(errors)) {
+    if (messages.length > 0 && messages[0]) {
+      return messages[0];
+    }
+  }
+  return undefined;
 }
 
 export function getApiErrorMessage(
@@ -51,6 +63,13 @@ export function getApiErrorMessage(
 
   if (data?.message && typeof data.message === 'string') {
     return data.message;
+  }
+
+  if (data?.errors && typeof data.errors === 'object') {
+    const fieldError = firstFieldError(data.errors);
+    if (fieldError) {
+      return fieldError;
+    }
   }
 
   if (data?.detail && typeof data.detail === 'string') {

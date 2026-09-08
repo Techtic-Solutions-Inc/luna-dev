@@ -51,6 +51,19 @@ function Home() {
     setApiError(null);
     try {
       const response = await login(values);
+      if (!response.success) {
+        const message = response.message || 'Unable to sign in. Please try again.';
+        setApiError(message);
+        toast.error(message);
+        return;
+      }
+      const token = response.data.token || response.data.accessToken;
+      if (!token) {
+        const message = 'Sign-in succeeded but no session token was returned. Please try again.';
+        setApiError(message);
+        toast.error(message);
+        return;
+      }
       toast.success(response.message || 'Signed in successfully.');
     } catch (err) {
       const message = getApiErrorMessage(err, 'Unable to sign in. Please try again.');
@@ -59,9 +72,9 @@ function Home() {
     }
   };
 
-  if (isAuthenticated()) {
+  if (isAuthenticated) {
     return (
-      <div className="flex flex-col px-[60px] py-[40px]">
+      <div className="flex flex-col px-[var(--spacing-padding-60)] py-[var(--spacing-padding-40)]">
         <div className="mb-8">
           <Badge variant="success" className="mb-4">
             Authenticated
@@ -98,7 +111,7 @@ function Home() {
   }
 
   return (
-    <div className="flex flex-col items-center px-[60px] py-[40px]">
+    <div className="flex flex-col items-center px-[var(--spacing-padding-60)] py-[var(--spacing-padding-40)]">
       <div className="mb-8 w-full max-w-lg text-center">
         <h1 className="font-['EB_Garamond'] text-[32px] font-medium leading-[41.76px] text-foreground">
           Welcome

@@ -29,7 +29,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex min-h-screen flex-col items-center justify-center px-[40px] py-[20px]">
+        <div className="flex min-h-screen flex-col items-center justify-center px-[var(--spacing-padding-40)] py-[var(--spacing-padding-20)]">
           <div className="w-full max-w-md space-y-6">
             <h1 className="font-['EB_Garamond'] text-2xl font-semibold text-foreground">
               Something went wrong

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 function Dashboard() {
   return (
-    <div className="flex flex-col px-[60px] py-[40px]">
+    <div className="flex flex-col px-[var(--spacing-padding-60)] py-[var(--spacing-padding-40)]">
       <div className="mb-8">
         <Badge className="mb-4">Protected Route</Badge>
         <h1 className="font-['EB_Garamond'] text-[32px] font-medium leading-[41.76px] text-foreground">

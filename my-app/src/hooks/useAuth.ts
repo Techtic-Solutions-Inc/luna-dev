@@ -1,4 +1,14 @@
-import { useCallback, useState } from 'react';
+import {
+  createContext,
+  createElement,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   clearAuth,
   getStoredToken,
@@ -9,12 +19,37 @@ import {
 } from '@/services/auth';
 import type { LoginRequestBody, LoginResponse } from '@/types/auth';
 
-export function useAuth() {
+interface AuthContextValue {
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  getToken: () => string | null;
+  getUser: () => LoginResponse['data'] | null;
+  login: (credentials: LoginRequestBody) => Promise<LoginResponse>;
+  logout: () => void;
+}
+
+const AuthContext = createContext<AuthContextValue | null>(null);
+
+function readAuthState(): boolean {
+  return !!getStoredToken();
+}
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(readAuthState);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getToken = useCallback(() => getStoredToken(), []);
+  useEffect(() => {
+    const syncAuth = () => {
+      setIsAuthenticated(readAuthState());
+    };
 
-  const isAuthenticated = useCallback(() => !!getStoredToken(), []);
+    window.addEventListener('storage', syncAuth);
+    return () => {
+      window.removeEventListener('storage', syncAuth);
+    };
+  }, []);
+
+  const getToken = useCallback(() => getStoredToken(), []);
 
   const getUser = useCallback(() => getStoredUser(), []);
 
@@ -22,10 +57,13 @@ export function useAuth() {
     setIsLoading(true);
     try {
       const response = await loginRequest(credentials);
-      const token = response.data.token || response.data.accessToken;
-      if (token) {
-        storeAuthToken(token);
-        storeAuthUser(response.data);
+      if (response.success) {
+        const token = response.data.token || response.data.accessToken;
+        if (token) {
+          storeAuthToken(token);
+          storeAuthUser(response.data);
+          setIsAuthenticated(true);
+        }
       }
       return response;
     } finally {
@@ -35,14 +73,38 @@ export function useAuth() {
 
   const logout = useCallback(() => {
     clearAuth();
+    setIsAuthenticated(false);
   }, []);
 
-  return {
-    getToken,
-    isAuthenticated,
-    getUser,
-    login,
-    logout,
-    isLoading,
-  };
+  const value = useMemo(
+    () => ({
+      isAuthenticated,
+      isLoading,
+      getToken,
+      getUser,
+      login,
+      logout,
+    }),
+    [isAuthenticated, isLoading, getToken, getUser, login, logout],
+  );
+
+  return createElement(AuthContext.Provider, { value }, children);
+}
+
+export function useAuth(): AuthContextValue {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}
+
+export function useAuthLogout() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  return useCallback(() => {
+    logout();
+    navigate('/', { replace: true });
+  }, [logout, navigate]);
 }
