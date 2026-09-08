@@ -25,18 +25,19 @@
 
 /* Section 3: Frame 2147227816 (2270:14191) */
 .home-frame-2147227812__badge {
-  font-family: 'Public Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
+  font-family: 'Almarai', sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 31.248001098632812px;
   letter-spacing: 0;
   color: #c8a47e;
 }
 
 .home-frame-2147227812__heading {
   font-family: 'EB Garamond', serif;
-  font-size: 40px;
+  font-size: 42px;
   font-weight: 500;
-  line-height: 42px;
+  line-height: 54.80999755859375px;
   letter-spacing: 0;
   color: #ffffff;
   margin: 0;
@@ -44,11 +45,11 @@
 
 .home-frame-2147227812__body {
   font-family: 'Almarai', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  line-height: 26px;
+  line-height: 28px;
   letter-spacing: 0;
-  color: #637381;
+  color: #ffffff;
   margin: 0;
 }
 
@@ -60,15 +61,14 @@
 }
 
 @media (max-width: 1023px) {
+  .home-frame-2147227812__badge {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
   .home-frame-2147227812__heading {
     font-size: 32px;
     line-height: 42px;
-  }
-
-  .home-content-library__preview {
-    width: 100%;
-    left: 0;
-    object-position: center top;
   }
 }
 

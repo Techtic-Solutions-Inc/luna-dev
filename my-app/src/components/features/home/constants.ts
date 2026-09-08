@@ -17,9 +17,9 @@ export const HOME_FRAME_2147227817_IMAGE =
 export const HOME_FRAME_2147227818_IMAGE =
   '/assets/figma/frame-2147227818-2270-14699.png';
 
-/** Figma export for Frame 1618873431 (node 2729:13112) — contact / waitlist section */
-export const HOME_FRAME_1618873431_IMAGE =
-  '/assets/figma/frame-1618873431-2729-13112.png';
+/** Agent portrait for contact / waitlist left panel */
+export const HOME_CONTACT_AGENT_IMAGE =
+  '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-65-2289.png';
 
 /** Figma export for Group 33654450 (node 3654:11562) — Ultimate Mind mockup */
 export const HOME_GROUP_33654450_IMAGE =
@@ -30,6 +30,18 @@ export const ULTIMATE_MIND_INTRO_COPY = {
   body:
     'A bold, strategic AI advisor trained on your market, your business, and the realities of residential real estate. Brainstorm campaigns, pressure-test pricing, develop your growth plan, and get a second opinion 24/7 from a partner who actually knows your business.',
 } as const;
+
+export const ULTIMATE_MIND_SECTION_12_COPY = {
+  heading: 'See Ultimate Mind In Action',
+  body:
+    'Explore starter prompts, chat with your market-trained advisor, and preview the strategic guidance available inside every Agentwise plan.',
+} as const;
+
+export const TESTIMONIAL_PORTRAIT_AVATARS = [
+  '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-65-2289.png',
+  '/assets/figma/attlgjgqkngefohwz-large-img6232-2-I2295-3482-65-2287.png',
+  '/assets/figma/attlgjgqkngefohwz-large-img6232-3-I2295-3482-65-2290.png',
+] as const;
 
 export interface NavLink {
   label: string;
@@ -105,41 +117,41 @@ export const TESTIMONIALS: Testimonial[] = [
       'The Ultimate Mind has become my second brain. I ask it what to post, how to position myself, and it knows my market inside out.',
     name: 'Marcus Donovan',
     company: 'Keller Williams · Denver, CO',
-    avatar: '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-65-2289.png',
+    avatar: TESTIMONIAL_PORTRAIT_AVATARS[0],
   },
   {
     quote:
       'I went from posting once a week to daily content that actually looks like me. My engagement tripled in the first month.',
     name: 'Jordan Hayes',
     company: 'eXp Realty · Nashville, TN',
-    avatar: '/assets/figma/attlgjgqkngefohwz-large-img6232-2-I2295-3482-65-2287.png',
+    avatar: TESTIMONIAL_PORTRAIT_AVATARS[1],
   },
   {
     quote:
       'Our team of 12 agents all use Agentwise now. The content library alone saved us thousands in design costs.',
     name: 'Sarah Chen',
     company: 'Compass · Austin, TX',
-    avatar: '/assets/figma/attlgjgqkngefohwz-large-img6232-3-I2295-3482-65-2290.png',
+    avatar: TESTIMONIAL_PORTRAIT_AVATARS[2],
   },
   {
     quote:
       "Finally, marketing that doesn't feel generic. Every template feels like it was made for my neighborhood.",
     name: 'David Okonkwo',
     company: 'RE/MAX · Charlotte, NC',
-    avatar: '/assets/figma/group-33654450-3654-11562.png',
+    avatar: TESTIMONIAL_PORTRAIT_AVATARS[0],
   },
   {
     quote:
       'The content calendar keeps me consistent without the stress. I open the app Monday morning and my week is planned.',
     name: 'Emily Rodriguez',
     company: 'Coldwell Banker · Miami, FL',
-    avatar: '/assets/figma/ld0pdcexwugrmn6c7l8cvcjcsjk-1-2289-17245.png',
+    avatar: TESTIMONIAL_PORTRAIT_AVATARS[1],
   },
   {
     quote:
       "As a new agent, Agentwise gave me the marketing presence of someone who's been in the business for years.",
     name: 'Tyler Brooks',
     company: 'Century 21 · Portland, OR',
-    avatar: '/assets/figma/frame-2147227816-2270-14191.png',
+    avatar: TESTIMONIAL_PORTRAIT_AVATARS[2],
   },
 ];

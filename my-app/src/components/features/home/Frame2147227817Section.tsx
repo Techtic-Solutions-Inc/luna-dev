@@ -1,10 +1,9 @@
 import { frameRelativeLength } from '@/theme/screens/home';
-import { HOME_FRAME_2147227817_IMAGE } from './constants';
+import { UltimateMindDashboard } from './mockups/UltimateMindDashboard';
 import { StepSectionLayout } from './StepSectionLayout';
 
 /**
  * Frame 2147227817 — Home screen section 7/12 (Figma node 2270:14193).
- * Children: Frame 2147227812 (copy), Content Library (Ultimate Mind preview).
  */
 export function Frame2147227817Section({ className }: { className?: string }) {
   return (
@@ -20,8 +19,7 @@ export function Frame2147227817Section({ className }: { className?: string }) {
         </>
       }
       body="Our AI customizes every template with your brand, your market, and your neighborhood — automatically. What used to take hours now takes seconds."
-      imageSrc={HOME_FRAME_2147227817_IMAGE}
-      imageAlt="Agentwise Ultimate Mind dashboard preview"
+      preview={<UltimateMindDashboard sidebar="dark" className="w-full" />}
     />
   );
 }

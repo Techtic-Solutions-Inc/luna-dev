@@ -1,23 +1,36 @@
 import { cn } from '@/lib/utils';
-import { FOOTER_LEGAL_LINKS, FOOTER_NAV_LINKS } from './constants';
+import { FOOTER_LEGAL_LINKS, type NavLink } from './constants';
+import { HomeSectionEmptyState } from './HomeSectionEmptyState';
 
 function SocialIcon({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <a
-      href="#"
-      aria-label={label}
-      className="flex h-[20px] w-[20px] items-center justify-center text-[#ffffff] transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
+    <button
+      type="button"
+      disabled
+      aria-disabled="true"
+      aria-label={`${label} (coming soon)`}
+      title={`${label} link coming soon`}
+      className="flex h-[20px] w-[20px] cursor-not-allowed items-center justify-center text-[#ffffff]/50"
     >
       {children}
-    </a>
+    </button>
   );
+}
+
+export interface Group33654370SectionProps {
+  className?: string;
+  navLinks: NavLink[];
+  showEmptyState?: boolean;
 }
 
 /**
  * Group 33654370 — Home screen section 4/12 (Figma node 2270:16773).
- * Footer: branding, social links, navigation, contact email, legal links, copyright.
  */
-export function Group33654370Section({ className }: { className?: string }) {
+export function Group33654370Section({
+  className,
+  navLinks,
+  showEmptyState = false,
+}: Group33654370SectionProps) {
   return (
     <section
       className={cn('home-group-33654370 relative z-10 w-full', className)}
@@ -53,17 +66,24 @@ export function Group33654370Section({ className }: { className?: string }) {
           </div>
 
           <div className="relative w-full min-h-[26.784px]">
-            <nav aria-label="Footer navigation" data-figma-node="List">
-              <ul className="home-group-33654370__nav-list flex flex-wrap items-center gap-[30px]">
-                {FOOTER_NAV_LINKS.map((link) => (
-                  <li key={link.label}>
-                    <a href={link.href} className="home-group-33654370__nav-link">
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            {showEmptyState ? (
+              <HomeSectionEmptyState
+                title="Navigation links unavailable"
+                description="No footer navigation links were returned for this page."
+              />
+            ) : (
+              <nav aria-label="Footer navigation" data-figma-node="List">
+                <ul className="home-group-33654370__nav-list flex flex-wrap items-center gap-[30px]">
+                  {navLinks.map((link) => (
+                    <li key={link.label}>
+                      <a href={link.href} className="home-group-33654370__nav-link">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
 
             <a
               href="mailto:hello@agentwisemarketing.com"

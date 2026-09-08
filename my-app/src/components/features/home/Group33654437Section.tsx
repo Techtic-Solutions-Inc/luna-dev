@@ -1,15 +1,25 @@
 import { cn } from '@/lib/utils';
-import { TESTIMONIALS } from './constants';
+import { type Testimonial } from './constants';
+import { HomeSectionEmptyState } from './HomeSectionEmptyState';
 import { TestimonialCard } from './TestimonialCard';
+
+export interface Group33654437SectionProps {
+  className?: string;
+  testimonials: Testimonial[];
+  showEmptyState?: boolean;
+}
 
 /**
  * Group 33654437 — Home screen section 6/12 (Figma node 2295:3500).
- * Children: Rectangle 28 (white background), Frame 1618873464 (testimonials layout).
  */
-export function Group33654437Section({ className }: { className?: string }) {
-  const midpoint = Math.ceil(TESTIMONIALS.length / 2);
-  const columnA = TESTIMONIALS.slice(0, midpoint);
-  const columnB = TESTIMONIALS.slice(midpoint);
+export function Group33654437Section({
+  className,
+  testimonials,
+  showEmptyState = false,
+}: Group33654437SectionProps) {
+  const midpoint = Math.ceil(testimonials.length / 2);
+  const columnA = testimonials.slice(0, midpoint);
+  const columnB = testimonials.slice(midpoint);
 
   return (
     <section
@@ -36,22 +46,31 @@ export function Group33654437Section({ className }: { className?: string }) {
             </div>
 
             <div className="relative min-h-[200px] overflow-hidden">
-              <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[72px] bg-gradient-to-b from-[#ffffff] to-transparent" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[72px] bg-gradient-to-t from-[#ffffff] to-transparent" />
-              <div className="grid max-h-[560px] grid-cols-1 gap-[16px] overflow-y-auto md:grid-cols-2 md:overflow-hidden">
-                <div className="flex flex-col gap-[16px]">
-                  {columnA.map((testimonial) => (
-                    <TestimonialCard key={testimonial.name} {...testimonial} />
-                  ))}
-                </div>
-                {columnB.length > 0 && (
-                  <div className="flex flex-col gap-[16px]">
-                    {columnB.map((testimonial) => (
-                      <TestimonialCard key={`${testimonial.name}-b`} {...testimonial} />
-                    ))}
+              {showEmptyState ? (
+                <HomeSectionEmptyState
+                  title="Testimonials unavailable"
+                  description="No testimonial entries were returned for this page."
+                />
+              ) : (
+                <>
+                  <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-[72px] bg-gradient-to-b from-[#ffffff] to-transparent" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[72px] bg-gradient-to-t from-[#ffffff] to-transparent" />
+                  <div className="grid max-h-[560px] grid-cols-1 gap-[16px] overflow-y-auto md:grid-cols-2 md:overflow-hidden">
+                    <div className="flex flex-col gap-[16px]">
+                      {columnA.map((testimonial) => (
+                        <TestimonialCard key={testimonial.name} {...testimonial} />
+                      ))}
+                    </div>
+                    {columnB.length > 0 && (
+                      <div className="flex flex-col gap-[16px]">
+                        {columnB.map((testimonial) => (
+                          <TestimonialCard key={`${testimonial.name}-b`} {...testimonial} />
+                        ))}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                </>
+              )}
             </div>
           </div>
         </div>

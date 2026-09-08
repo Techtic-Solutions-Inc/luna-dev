@@ -9,8 +9,7 @@ export interface StepSectionLayoutProps {
   step: string;
   heading: ReactNode;
   body: string;
-  imageSrc: string;
-  imageAlt: string;
+  preview: ReactNode;
   previewFillClassName?: string;
 }
 
@@ -25,8 +24,7 @@ export function StepSectionLayout({
   step,
   heading,
   body,
-  imageSrc,
-  imageAlt,
+  preview,
   previewFillClassName = 'bg-home-background',
 }: StepSectionLayoutProps) {
   return (
@@ -51,14 +49,7 @@ export function StepSectionLayout({
         className={cn('relative min-w-0 flex-[0.62]', previewFillClassName)}
         data-figma-node="Content Library"
       >
-        <div className="relative aspect-[786/519] w-full overflow-hidden">
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            className="home-content-library__preview absolute top-0 h-full max-w-none object-cover"
-            decoding="async"
-          />
-        </div>
+        {preview}
       </div>
     </section>
   );

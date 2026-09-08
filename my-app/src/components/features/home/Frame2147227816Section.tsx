@@ -1,10 +1,9 @@
 import { frameRelativeLength } from '@/theme/screens/home';
-import { HOME_FRAME_2147227816_IMAGE } from './constants';
+import { LibraryDashboard } from './mockups/LibraryDashboard';
 import { StepSectionLayout } from './StepSectionLayout';
 
 /**
  * Frame 2147227816 — Home screen section 3/12 (Figma node 2270:14191).
- * Children: Frame 2147227812 (copy), Content Library (mockup preview).
  */
 export function Frame2147227816Section({ className }: { className?: string }) {
   return (
@@ -20,8 +19,7 @@ export function Frame2147227816Section({ className }: { className?: string }) {
         </>
       }
       body="Explore hundreds of hand-designed templates for social, email, and more. Save the ones that fit your style."
-      imageSrc={HOME_FRAME_2147227816_IMAGE}
-      imageAlt="Agentwise Content Library dashboard preview"
+      preview={<LibraryDashboard className="w-full" />}
     />
   );
 }

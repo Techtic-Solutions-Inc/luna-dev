@@ -10,7 +10,7 @@ export function TestimonialCard({ quote, name, company, avatar }: Testimonial) {
       <div className="mt-[16px] flex items-center gap-[12px]">
         <img
           src={avatar}
-          alt=""
+          alt={`${name} headshot`}
           className="h-[40px] w-[40px] rounded-full object-cover"
           loading="lazy"
           decoding="async"

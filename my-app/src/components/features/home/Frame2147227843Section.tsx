@@ -1,11 +1,10 @@
 import { cn } from '@/lib/utils';
-import { HOME_FRAME_2147227817_IMAGE } from './constants';
+import { UltimateMindDashboard } from './mockups/UltimateMindDashboard';
 import { UltimateMindGreenCard, UltimateMindSectionShell } from './UltimateMindGreenCard';
 import { UltimateMindIntroCopy } from './UltimateMindIntroCopy';
 
 /**
  * Frame 2147227843 — Home screen section 11/12 (Figma node 3330:1780).
- * Ultimate Mind feature: green gradient card with copy, mockup, and CTA.
  */
 export function Frame2147227843Section({ className }: { className?: string }) {
   return (
@@ -26,14 +25,7 @@ export function Frame2147227843Section({ className }: { className?: string }) {
 
             <div data-figma-node="Frame 2147227830">
               <div className="relative mt-[10px] overflow-hidden rounded-[16px]" data-figma-node="Group 33654428">
-                <div className="relative aspect-[786/519] w-full">
-                  <img
-                    src={HOME_FRAME_2147227817_IMAGE}
-                    alt="Agentwise Ultimate Mind interface preview"
-                    className="home-ultimate-mind__preview absolute top-0 h-full max-w-none object-cover"
-                    decoding="async"
-                  />
-                </div>
+                <UltimateMindDashboard sidebar="light" className="w-full border-0 shadow-none" />
               </div>
             </div>
           </div>

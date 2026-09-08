@@ -48,3 +48,4 @@ export type HomeSortDirection = 'asc' | 'desc' | null;
 
 export const HOME_API_PATH = '/api/visitor/home' as const;
 export const HOME_QUERY_KEY = ['home'] as const;
+export const VISITOR_HOME_QUERY_KEY = ['visitor', 'home'] as const;
