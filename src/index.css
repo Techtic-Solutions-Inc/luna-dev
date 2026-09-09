@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* GLOBAL DESIGN TOKENS — exact Figma hex values */
+    --page-background: #00000000;
+    --surface: #00000000;
+    --token-primary: #ffffff;
+    --token-text: #272727;
+    --token-border: #c8a47e;
+    --token-background: #637381;
+    --token-border-alt: #ff5630;
+    --token-surface-dark: #000001;
+    --token-accent-dark: #8b6842;
+    --token-input-fill: #11161c;
+    /* Aliases matching Figma token names */
+    --figma-page-background: #00000000;
+    --figma-surface: #00000000;
+    --figma-primary: #ffffff;
+    --figma-text: #272727;
+    --figma-border: #c8a47e;
+    --figma-background: #637381;
+    --figma-border-alt: #ff5630;
+    --figma-surface-dark: #000001;
+    --figma-accent-dark: #8b6842;
+    --figma-input-fill: #11161c;
+  }
+
+  * {
+    @apply border-border;
+  }
+}

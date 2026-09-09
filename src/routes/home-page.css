@@ -1,0 +1,64 @@
+/* Home page only — GLOBAL DESIGN TOKENS (exact Figma hex) */
+.home-page {
+  --token-primary: #ffffff;
+  --token-text: #272727;
+  --token-border: #c8a47e;
+  --token-background: #637381;
+  --token-border-alt: #ff5630;
+  --token-surface-dark: #000001;
+  --token-accent-dark: #8b6842;
+  --token-input-fill: #11161c;
+  --page-background: #00000000;
+  --surface: #00000000;
+
+  background: linear-gradient(180deg, #2f2f2f 0%, #090014 100%);
+}
+
+.home-page__glow-purple {
+  background: radial-gradient(circle, #872bff 0%, transparent 70%);
+  filter: blur(100px);
+}
+
+.home-page__glow-tan {
+  background: radial-gradient(circle, #c8a47e 0%, transparent 70%);
+  filter: blur(90px);
+}
+
+.home-page__glow-coral {
+  background: radial-gradient(circle, #ff5630 0%, transparent 70%);
+  filter: blur(80px);
+}
+
+.home-page__cta-gradient {
+  background: radial-gradient(
+    ellipse at center bottom,
+    rgba(135, 43, 255, 0.35) 0%,
+    color-mix(in srgb, #c8a47e 25%, transparent) 45%,
+    transparent 75%
+  );
+}
+
+.home-page__glass-card {
+  border-color: color-mix(in srgb, #c8a47e 35%, transparent);
+  background-color: color-mix(in srgb, #000001 70%, transparent);
+}
+
+.home-page__light-section {
+  background-color: #f7f2ec;
+  color: #272727;
+}
+
+.home-page__mind-preview {
+  border-color: color-mix(in srgb, #c8a47e 50%, transparent);
+  background: linear-gradient(145deg, #11161c 0%, #000001 100%);
+}
+
+.home-page__mind-cell {
+  border-color: color-mix(in srgb, #637381 40%, transparent);
+  background-color: #11161c;
+}
+
+.home-page__shell-footer {
+  border-color: color-mix(in srgb, #637381 30%, transparent);
+  background-color: #000001;
+}

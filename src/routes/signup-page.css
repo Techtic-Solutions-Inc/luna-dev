@@ -1,0 +1,111 @@
+/* Signup page only — GLOBAL DESIGN TOKENS (exact Figma hex) */
+.signup-page {
+  --token-primary: #ffffff;
+  --token-text: #272727;
+  --token-border: #c8a47e;
+  --token-background: #637381;
+  --token-border-alt: #ff5630;
+  --token-surface-dark: #000001;
+  --token-accent-dark: #8b6842;
+  --token-input-fill: #11161c;
+  --page-background: #00000000;
+  --surface: #00000000;
+
+  background: linear-gradient(180deg, #2f2f2f 0%, #090014 100%);
+}
+
+.signup-page__glow-purple {
+  background: radial-gradient(circle, #872bff 0%, transparent 70%);
+  filter: blur(80px);
+}
+
+.signup-page__glow-tan {
+  background: radial-gradient(circle, #c8a47e 0%, transparent 70%);
+  filter: blur(90px);
+}
+
+.signup-page__glow-coral {
+  background: radial-gradient(circle, #ff5630 0%, transparent 70%);
+  filter: blur(70px);
+}
+
+.signup-page__card {
+  border-color: color-mix(in srgb, #c8a47e 40%, transparent);
+  background-color: color-mix(in srgb, #000001 60%, transparent);
+}
+
+.signup-page__form-shell {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Page-local Input override — dark fill #11161c, border #c8a47e, placeholder #637381 */
+.signup-page .signup-page__input {
+  height: 44px;
+  border-radius: 6px;
+  padding: 10px 15px;
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 17.856px;
+  background-color: #11161c;
+  border-color: #c8a47e;
+  color: #ffffff;
+}
+
+.signup-page .signup-page__input::placeholder {
+  color: #637381;
+}
+
+.signup-page .signup-page__input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #c8a47e;
+}
+
+.signup-page .signup-page__input-eye {
+  height: 44px;
+  width: 44px;
+  color: #637381;
+}
+
+.signup-page .signup-page__input-eye:hover {
+  color: #ffffff;
+}
+
+/* Page-local Button override — tan #c8a47e CTA, dark label #272727 (not white) */
+.signup-page .signup-page__submit {
+  width: 100%;
+  height: 44px;
+  border-radius: 9999px;
+  border: 0;
+  box-shadow: none;
+  font-family: Almarai, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 17.856px;
+  background-color: #c8a47e !important;
+  color: #272727 !important;
+}
+
+.signup-page .signup-page__submit:hover:not(:disabled) {
+  background-color: #8b6842 !important;
+  color: #272727 !important;
+}
+
+.signup-page .signup-page__submit:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #c8a47e;
+}
+
+.signup-page .signup-page__checkbox {
+  border-color: #c8a47e;
+}
+
+.signup-page .signup-page__checkbox[data-state='checked'] {
+  background-color: #c8a47e;
+  color: #272727;
+}
+
+.signup-page .signup-page__error {
+  color: #ff5630;
+}
