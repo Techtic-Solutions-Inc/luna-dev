@@ -164,18 +164,16 @@ export function SignupForm() {
           control={form.control}
           name="terms_accepted"
           render={({ field }) => (
-            <FormItem className="space-y-[8px]">
-              <div className="flex items-start gap-[10px]">
-                <FormControl>
-                  <Checkbox
-                    id="terms_accepted"
-                    checked={field.value}
-                    onCheckedChange={(checked) => field.onChange(checked === true)}
-                    className={signupCheckboxClass}
-                  />
-                </FormControl>
+            <FormItem className="flex flex-row items-start gap-[10px] space-y-0">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={(checked) => field.onChange(checked === true)}
+                  className={signupCheckboxClass}
+                />
+              </FormControl>
+              <div className="space-y-[8px] leading-none">
                 <FormLabel
-                  htmlFor="terms_accepted"
                   className={cn(signupCheckboxLabelClass, 'mt-0 font-normal leading-[22px]')}
                 >
                   I have read and agree to the{' '}
@@ -188,8 +186,8 @@ export function SignupForm() {
                   </a>
                   .
                 </FormLabel>
+                <FormMessage className={signupErrorClass} />
               </div>
-              <FormMessage className={signupErrorClass} />
             </FormItem>
           )}
         />
