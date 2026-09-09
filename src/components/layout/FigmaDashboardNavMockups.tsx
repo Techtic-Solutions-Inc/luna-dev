@@ -1,5 +1,9 @@
+import { LUNA_FIGMA_MOCKUP_SNIPPETS } from '@/luna-figma-mockup-registry';
+
 /** Figma dashboard nav mockup sections — render as static images, not rebuilt chrome. */
 export function FigmaDashboardNavMockups() {
+  void LUNA_FIGMA_MOCKUP_SNIPPETS;
+
   return (
     <>
       <img src="/assets/figma/3917-8120.png" alt="Dashboard/Nav/Vertical" className="w-full h-auto" />
