@@ -2,6 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { useVisitorHomeData } from '@/hooks/useVisitorHomeData';
+import {
+  useVisitorCategories,
+  VISITOR_CATEGORY_DISCOVERY_LIMIT,
+} from '@/hooks/useVisitorCategories';
 import { VisitorItemCard } from '@/components/features/VisitorItemCard';
 import { EmptyState } from '@/components/EmptyState';
 import { ErrorMessage } from '@/components/ErrorMessage';
@@ -58,15 +62,17 @@ const VisitorHome = () => {
     category: category === 'all' ? undefined : category,
   });
 
+  const { data: categories = [], isLoading: categoriesLoading } = useVisitorCategories();
+
   const items = data?.data?.items ?? [];
   const pagination = data?.data?.pagination;
-  const total = pagination?.total ?? items.length;
-  const totalPages = pagination?.total_pages ?? Math.max(1, Math.ceil(total / limit));
-
-  const categories = useMemo(() => {
-    const cats = new Set(items.map((item) => item.category).filter(Boolean));
-    return Array.from(cats);
-  }, [items]);
+  const hasTotal = typeof pagination?.total === 'number';
+  const hasTotalPages = typeof pagination?.total_pages === 'number';
+  const total = hasTotal ? pagination.total : undefined;
+  const totalPages = hasTotalPages ? pagination.total_pages : undefined;
+  const canGoPrev = page > 1;
+  const canGoNext =
+    hasTotalPages && totalPages !== undefined ? page < totalPages : items.length >= limit;
 
   const updateParams = useCallback(
     (updates: Record<string, string | null>) => {
@@ -95,10 +101,13 @@ const VisitorHome = () => {
     return () => clearTimeout(timer);
   }, [searchInput, searchParams, updateParams]);
 
-  const rangeStart = total === 0 ? 0 : (page - 1) * limit + 1;
-  const rangeEnd = Math.min(page * limit, total);
+  const rangeStart = items.length === 0 ? 0 : (page - 1) * limit + 1;
+  const rangeEnd = (page - 1) * limit + items.length;
 
   const pageNumbers = useMemo(() => {
+    if (!hasTotalPages || !totalPages) {
+      return [];
+    }
     const pages: number[] = [];
     const maxVisible = 5;
     let start = Math.max(1, page - Math.floor(maxVisible / 2));
@@ -108,7 +117,7 @@ const VisitorHome = () => {
       pages.push(i);
     }
     return pages;
-  }, [page, totalPages]);
+  }, [page, totalPages, hasTotalPages]);
 
   return (
     <div className="flex w-full flex-col px-8 py-8">
@@ -141,18 +150,25 @@ const VisitorHome = () => {
         </div>
         <Select
           value={category ?? 'all'}
+          disabled={categoriesLoading}
           onValueChange={(value) => updateParams({ category: value === 'all' ? null : value, page: '1' })}
         >
           <SelectTrigger className="w-full sm:w-[180px]" aria-label="Filter by category">
-            <SelectValue placeholder="All categories" />
+            <SelectValue placeholder={categoriesLoading ? 'Loading categories…' : 'All categories'} />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All categories</SelectItem>
-            {categories.map((cat) => (
-              <SelectItem key={cat} value={cat}>
-                {cat}
+            {categoriesLoading ? (
+              <SelectItem value="loading" disabled>
+                Loading categories…
               </SelectItem>
-            ))}
+            ) : (
+              categories.map((cat) => (
+                <SelectItem key={cat} value={cat}>
+                  {cat}
+                </SelectItem>
+              ))
+            )}
           </SelectContent>
         </Select>
         <Select
@@ -170,7 +186,27 @@ const VisitorHome = () => {
             ))}
           </SelectContent>
         </Select>
+        <Select disabled value="default">
+          <SelectTrigger
+            className="w-full sm:w-[160px]"
+            aria-label="Sort by"
+            aria-describedby="sort-backend-gap"
+          >
+            <SelectValue placeholder="Sort by" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="default">Default order</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
+      <p id="sort-backend-gap" className="mb-2 font-almarai text-xs text-muted-foreground">
+        Sorting is unavailable — the GET /api/visitor/home contract does not define sort query
+        parameters. Backend support is required before sort controls can be enabled.
+      </p>
+      <p id="category-discovery-limit" className="mb-6 font-almarai text-xs text-muted-foreground">
+        Category options are derived from the first {VISITOR_CATEGORY_DISCOVERY_LIMIT} items — the
+        API contract provides no dedicated categories field or endpoint.
+      </p>
 
       {isLoading && <VisitorHomeSkeleton />}
 
@@ -215,28 +251,31 @@ const VisitorHome = () => {
 
           <Pagination className="mt-6">
             <p className="font-almarai text-sm text-muted-foreground">
-              {rangeStart}–{rangeEnd} of {total}
+              {hasTotal
+                ? `${rangeStart}–${rangeEnd} of ${total}`
+                : `Page ${page} · showing ${rangeStart}–${rangeEnd}`}
             </p>
             <PaginationContent>
               <PaginationItem>
                 <PaginationPrevious
-                  disabled={page <= 1}
+                  disabled={!canGoPrev}
                   onClick={() => updateParams({ page: String(page - 1) })}
                 />
               </PaginationItem>
-              {pageNumbers.map((pageNum) => (
-                <PaginationItem key={pageNum}>
-                  <PaginationLink
-                    isActive={pageNum === page}
-                    onClick={() => updateParams({ page: String(pageNum) })}
-                  >
-                    {pageNum}
-                  </PaginationLink>
-                </PaginationItem>
-              ))}
+              {hasTotalPages &&
+                pageNumbers.map((pageNum) => (
+                  <PaginationItem key={pageNum}>
+                    <PaginationLink
+                      isActive={pageNum === page}
+                      onClick={() => updateParams({ page: String(pageNum) })}
+                    >
+                      {pageNum}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
               <PaginationItem>
                 <PaginationNext
-                  disabled={page >= totalPages}
+                  disabled={!canGoNext}
                   onClick={() => updateParams({ page: String(page + 1) })}
                 />
               </PaginationItem>

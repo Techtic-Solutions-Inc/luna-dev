@@ -11,27 +11,27 @@
   --page-background: #00000000;
   --surface: #00000000;
 
-  background: linear-gradient(180deg, #2f2f2f 0%, #090014 100%);
+  background: var(--token-page-gradient);
 }
 
 .signup-page__glow-purple {
-  background: radial-gradient(circle, #872bff 0%, transparent 70%);
+  background: radial-gradient(circle, var(--token-glow-purple) 0%, transparent 70%);
   filter: blur(80px);
 }
 
 .signup-page__glow-tan {
-  background: radial-gradient(circle, #c8a47e 0%, transparent 70%);
+  background: radial-gradient(circle, var(--token-border) 0%, transparent 70%);
   filter: blur(90px);
 }
 
 .signup-page__glow-coral {
-  background: radial-gradient(circle, #ff5630 0%, transparent 70%);
+  background: radial-gradient(circle, var(--token-border-alt) 0%, transparent 70%);
   filter: blur(70px);
 }
 
 .signup-page__card {
-  border-color: color-mix(in srgb, #c8a47e 40%, transparent);
-  background-color: color-mix(in srgb, #000001 60%, transparent);
+  border-color: color-mix(in srgb, var(--token-border) 40%, transparent);
+  background-color: color-mix(in srgb, var(--token-surface-dark) 60%, transparent);
 }
 
 .signup-page__form-shell {
@@ -39,7 +39,7 @@
   max-width: 400px;
 }
 
-/* Page-local Input override — dark fill #11161c, border #c8a47e, placeholder #637381 */
+/* Page-local Input override */
 .signup-page .signup-page__input {
   height: 44px;
   border-radius: 6px;
@@ -48,31 +48,36 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 17.856px;
-  background-color: #11161c;
-  border-color: #c8a47e;
-  color: #ffffff;
+  background-color: var(--token-input-fill);
+  border-color: var(--token-border);
+  color: var(--token-primary);
 }
 
 .signup-page .signup-page__input::placeholder {
-  color: #637381;
+  color: var(--token-background);
 }
 
 .signup-page .signup-page__input:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #c8a47e;
+  box-shadow: 0 0 0 2px var(--token-border);
 }
 
 .signup-page .signup-page__input-eye {
   height: 44px;
   width: 44px;
-  color: #637381;
+  color: var(--token-background);
 }
 
 .signup-page .signup-page__input-eye:hover {
-  color: #ffffff;
+  color: var(--token-primary);
 }
 
-/* Page-local Button override — tan #c8a47e CTA, dark label #272727 (not white) */
+.signup-page .signup-page__input-eye:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--token-border);
+}
+
+/* Page-local Button override — tan CTA, dark label */
 .signup-page .signup-page__submit {
   width: 100%;
   height: 44px;
@@ -83,29 +88,29 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 17.856px;
-  background-color: #c8a47e !important;
-  color: #272727 !important;
+  background-color: var(--token-border) !important;
+  color: var(--token-text) !important;
 }
 
 .signup-page .signup-page__submit:hover:not(:disabled) {
-  background-color: #8b6842 !important;
-  color: #272727 !important;
+  background-color: var(--token-accent-dark) !important;
+  color: var(--token-text) !important;
 }
 
 .signup-page .signup-page__submit:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px #c8a47e;
+  box-shadow: 0 0 0 2px var(--token-border);
 }
 
 .signup-page .signup-page__checkbox {
-  border-color: #c8a47e;
+  border-color: var(--token-border);
 }
 
 .signup-page .signup-page__checkbox[data-state='checked'] {
-  background-color: #c8a47e;
-  color: #272727;
+  background-color: var(--token-border);
+  color: var(--token-text);
 }
 
 .signup-page .signup-page__error {
-  color: #ff5630;
+  color: var(--token-border-alt);
 }

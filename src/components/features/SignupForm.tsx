@@ -70,7 +70,7 @@ export function SignupForm() {
         password: values.password,
       });
       toast.success(response.message || 'Account created successfully.');
-      navigate('/home');
+      navigate('/visitor-home');
     } catch (err) {
       toast.error(getApiErrorMessage(err, 'Unable to create account. Please try again.'));
     } finally {
@@ -168,13 +168,16 @@ export function SignupForm() {
               <div className="flex items-start gap-[10px]">
                 <FormControl>
                   <Checkbox
+                    id="terms_accepted"
                     checked={field.value}
                     onCheckedChange={(checked) => field.onChange(checked === true)}
                     className={signupCheckboxClass}
-                    aria-label="Agree to Terms of Use and Privacy Policy"
                   />
                 </FormControl>
-                <FormLabel className={cn(signupCheckboxLabelClass, 'mt-0 font-normal leading-[22px]')}>
+                <FormLabel
+                  htmlFor="terms_accepted"
+                  className={cn(signupCheckboxLabelClass, 'mt-0 font-normal leading-[22px]')}
+                >
                   I have read and agree to the{' '}
                   <a href="/terms" className={signupLinkClass}>
                     Terms of Use

@@ -10,6 +10,13 @@ export default defineConfig({
     },
   },
   server: {
+    proxy: {
+      '/api': {
+        target: process.env.LUNA_VALIDATION_API_PROXY_TARGET || 'http://localhost:4040',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
     port: 3033,
   },
 });

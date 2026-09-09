@@ -9,7 +9,7 @@ export default {
         garamond: ['EB Garamond', 'serif'],
         'public-sans': ['Public Sans', 'sans-serif'],
         'space-grotesk': ['Space Grotesk', 'sans-serif'],
-        fellix: ['Fellix', 'sans-serif'],
+        fellix: ['Public Sans', 'sans-serif'],
       },
       colors: {
         border: 'var(--border)',

@@ -2,10 +2,7 @@ import { Link } from 'react-router-dom';
 
 const footerLinks = [
   { label: 'About', to: '/home#about' },
-  { label: 'Content', to: '/home#content' },
-  { label: 'Pricing', to: '/pricing' },
-  { label: 'Blog', to: '/blog' },
-  { label: 'Contact Us', to: '/contact' },
+  { label: 'Content', to: '/visitor-home' },
 ];
 
 export function HomeFooter() {

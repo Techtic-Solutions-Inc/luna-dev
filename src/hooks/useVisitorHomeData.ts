@@ -4,7 +4,7 @@ import type { VisitorHomeParams } from '@/types';
 
 export function useVisitorHomeData(params: VisitorHomeParams = {}) {
   return useQuery({
-    queryKey: ['visitor', 'home', params.page, params.limit, params.q, params.category],
+    queryKey: ['visitor', 'home', params],
     queryFn: () => fetchVisitorHome(params),
   });
 }

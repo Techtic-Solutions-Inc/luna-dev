@@ -26,6 +26,10 @@
     --figma-surface-dark: #000001;
     --figma-accent-dark: #8b6842;
     --figma-input-fill: #11161c;
+    --token-page-gradient: linear-gradient(180deg, #2f2f2f 0%, #090014 100%);
+    --token-page-gradient-start: #2f2f2f;
+    --token-page-gradient-end: #090014;
+    --token-glow-purple: #872bff;
   }
 
   * {

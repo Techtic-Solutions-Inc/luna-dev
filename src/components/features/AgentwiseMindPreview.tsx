@@ -1,3 +1,9 @@
+const METRICS = [
+  { label: 'Leads', value: '128' },
+  { label: 'Content', value: '340' },
+  { label: 'Insights', value: '12' },
+] as const;
+
 /** Coded UI preview for "Agentwise Ultimate Mind" — not a screenshot */
 export function AgentwiseMindPreview() {
   return (
@@ -17,13 +23,13 @@ export function AgentwiseMindPreview() {
         </div>
       </div>
       <div className="grid grid-cols-3 gap-[8px]">
-        {['Leads', 'Content', 'Insights'].map((label) => (
+        {METRICS.map(({ label, value }) => (
           <div key={label} className="home-page__mind-cell rounded-[8px] border p-[10px]">
             <p className="font-almarai text-[10px] leading-[11px] [color:var(--token-background)]">
               {label}
             </p>
             <p className="mt-[4px] font-almarai text-[14px] font-bold leading-[15.624px] [color:var(--token-primary)]">
-              —
+              {value}
             </p>
           </div>
         ))}

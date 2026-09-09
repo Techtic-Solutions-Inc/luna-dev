@@ -11,11 +11,11 @@
   --page-background: #00000000;
   --surface: #00000000;
 
-  background: linear-gradient(180deg, #2f2f2f 0%, #090014 100%);
+  background: var(--token-page-gradient);
 }
 
 .home-page__glow-purple {
-  background: radial-gradient(circle, #872bff 0%, transparent 70%);
+  background: radial-gradient(circle, var(--token-glow-purple) 0%, transparent 70%);
   filter: blur(100px);
 }
 

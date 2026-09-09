@@ -8,14 +8,12 @@ import {
 
 const navLinks = [
   { to: '/home', label: 'Home' },
-  { to: '/home#content', label: 'Content' },
-  { to: '/blog', label: 'Blog' },
-  { to: '/pricing', label: 'Pricing' },
+  { to: '/visitor-home', label: 'Content' },
 ];
 
 const Header = () => {
   const location = useLocation();
-  const isHome = location.pathname === '/home' || location.pathname === '/';
+  const isHome = location.pathname === '/home';
 
   return (
     <header className="flex items-center justify-between border-b border-[color:var(--token-background)]/30 bg-[color:var(--token-surface-dark)] px-[32px] py-[16px]">
@@ -33,7 +31,7 @@ const Header = () => {
             to={link.to}
             className={cn(
               'font-almarai text-[16px] font-normal leading-[17.856px] [color:var(--token-primary)] transition-colors hover:[color:var(--token-border)] focus-visible:outline-none focus-visible:ring-2 focus-visible:[ring-color:var(--token-border)]',
-              isHome && link.to.startsWith('/home') && '[color:var(--token-border)]',
+              isHome && link.to === '/home' && '[color:var(--token-border)]',
             )}
           >
             {link.label}

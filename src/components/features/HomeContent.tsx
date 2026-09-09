@@ -1,13 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useVisitorHomeData } from '@/hooks/useVisitorHomeData';
 import { AgentwiseMindPreview } from '@/components/features/AgentwiseMindPreview';
 import { HomeFooter } from '@/components/features/HomeFooter';
-import { VisitorItemCard } from '@/components/features/VisitorItemCard';
-import { EmptyState } from '@/components/EmptyState';
-import { ErrorMessage } from '@/components/ErrorMessage';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
-import { getApiErrorMessage } from '@/lib/api/errors';
 import {
   homeButtonPrimaryClass,
   homeButtonOutlineClass,
@@ -44,28 +38,7 @@ const STEPS = [
   },
 ];
 
-function MarketingGridSkeleton() {
-  return (
-    <div className="grid grid-cols-1 gap-[24px] sm:grid-cols-2 lg:grid-cols-3">
-      {Array.from({ length: 3 }).map((_, i) => (
-        <div key={i} className="space-y-[12px]">
-          <Skeleton className="aspect-video w-full rounded-[10px]" />
-          <Skeleton className="h-[20px] w-3/4" />
-          <Skeleton className="h-[16px] w-full" />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export function HomeContent() {
-  const { data, isLoading, isError, error, refetch, isSuccess } = useVisitorHomeData({
-    page: 1,
-    limit: 6,
-  });
-
-  const items = data?.data?.items ?? [];
-
   return (
     <div className="home-page relative w-full overflow-hidden">
       {/* Radial glow / gradient atmosphere */}
@@ -169,43 +142,17 @@ export function HomeContent() {
         </div>
       </section>
 
-      {/* API-driven marketing content */}
+      {/* Browse content — full list lives on Visitor Home */}
       <section id="content" className="relative px-[32px] py-[64px]">
-        <div className="mx-auto max-w-[1200px]">
-          <h2 className={cn('mb-[32px]', homeHeadingLgClass)}>Featured Marketing Content</h2>
-
-          {isLoading && <MarketingGridSkeleton />}
-
-          {isError && (
-            <ErrorMessage
-              message={getApiErrorMessage(error, 'Unable to load content. Please try again.')}
-              onRetry={() => refetch()}
-            />
-          )}
-
-          {isSuccess && items.length === 0 && (
-            <EmptyState
-              title="No marketing content available"
-              description="Check back soon for new content and resources."
-              action={
-                <Button
-                  variant="ghost"
-                  className={homeButtonOutlineClass}
-                  onClick={() => refetch()}
-                >
-                  Refresh
-                </Button>
-              }
-            />
-          )}
-
-          {isSuccess && items.length > 0 && (
-            <div className="grid grid-cols-1 gap-[24px] sm:grid-cols-2 lg:grid-cols-3">
-              {items.map((item) => (
-                <VisitorItemCard key={item.id} item={item} />
-              ))}
-            </div>
-          )}
+        <div className="mx-auto max-w-[1200px] text-center">
+          <h2 className={homeHeadingLgClass}>Featured Marketing Content</h2>
+          <p className={cn('mx-auto mt-[16px] max-w-[640px]', homeBodyClass)}>
+            Browse studio-produced real estate marketing assets with search, filters, and
+            pagination on the Visitor Home screen.
+          </p>
+          <Button asChild variant="ghost" className={cn('mt-[32px]', homeButtonPrimaryClass)}>
+            <Link to="/visitor-home">Browse Content</Link>
+          </Button>
         </div>
       </section>
 

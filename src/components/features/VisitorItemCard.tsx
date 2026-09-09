@@ -10,9 +10,9 @@ interface VisitorItemCardProps {
 
 export function VisitorItemCard({ item }: VisitorItemCardProps) {
   return (
-    <Card className="flex h-full flex-col overflow-hidden border-[#383838] bg-[#1a1a1a] transition-colors hover:border-accent/50">
+    <Card className="flex h-full flex-col overflow-hidden border-[color:var(--token-border)]/30 bg-[color:var(--token-input-fill)] transition-colors hover:border-[color:var(--token-border)]/50">
       {item.image && (
-        <div className="aspect-video w-full overflow-hidden bg-[#0f0f0f]">
+        <div className="aspect-video w-full overflow-hidden bg-[color:var(--token-surface-dark)]">
           <img
             src={item.image}
             alt={item.title || item.name}

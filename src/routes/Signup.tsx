@@ -19,7 +19,7 @@ const Signup = () => (
     {/* Left column — 55% split, decorative content */}
     <div className="relative hidden flex-col justify-center gap-[24px] px-[32px] py-[40px] lg:flex lg:w-[55%]">
       <img
-        src="/vite.svg"
+        src="/images/agentwise-logo.png"
         alt="Agentwise"
         className="h-[50px] w-[150px] object-contain object-left"
       />
