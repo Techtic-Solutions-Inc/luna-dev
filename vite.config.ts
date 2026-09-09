@@ -21,6 +21,15 @@ const LUNA_FIGMA_MOCKUP_SNIPPETS = [
   '<img src="/assets/figma/I3795-11283;1589-4789.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
   '<img src="/assets/figma/I3795-11283;1237-2170.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
   '<img src="/assets/figma/I3795-11283;1237-2201.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/3795-12211.png" alt="Dashboard/Nav/Vertical" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-12211;1237-2083.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-12211;1237-2102.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-12211;1589-4732.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-12211;1237-2121.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-12211;1237-2144.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-12211;1589-4789.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-12211;1237-2170.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-12211;1237-2201.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
 ] as const;
 
 void LUNA_FIGMA_MOCKUP_SNIPPETS;
