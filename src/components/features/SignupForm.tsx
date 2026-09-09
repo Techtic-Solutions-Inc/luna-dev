@@ -17,7 +17,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  useFormField,
 } from '@/components/ui/form';
+import type { ControllerRenderProps } from 'react-hook-form';
 import {
   signupInputClass,
   signupButtonClass,
@@ -42,6 +44,46 @@ const signupSchema = z.object({
 });
 
 type SignupFormValues = z.infer<typeof signupSchema>;
+
+function TermsAcceptedField({
+  field,
+}: {
+  field: ControllerRenderProps<SignupFormValues, 'terms_accepted'>;
+}) {
+  const { formItemId } = useFormField();
+  const labelId = `${formItemId}-label`;
+
+  return (
+    <FormItem className="flex flex-row items-start gap-[10px] space-y-0">
+      <FormControl>
+        <Checkbox
+          checked={field.value}
+          onCheckedChange={(checked) => field.onChange(checked === true)}
+          className={signupCheckboxClass}
+          aria-labelledby={labelId}
+        />
+      </FormControl>
+      <div className="space-y-[8px] leading-none">
+        <FormLabel
+          id={labelId}
+          htmlFor={undefined}
+          className={cn(signupCheckboxLabelClass, 'mt-0 font-normal leading-[22px]')}
+        >
+          I have read and agree to the{' '}
+          <a href="/terms" className={signupLinkClass}>
+            Terms of Use
+          </a>{' '}
+          and{' '}
+          <a href="/privacy" className={signupLinkClass}>
+            Privacy Policy
+          </a>
+          .
+        </FormLabel>
+        <FormMessage className={signupErrorClass} />
+      </div>
+    </FormItem>
+  );
+}
 
 export function SignupForm() {
   const navigate = useNavigate();
@@ -163,33 +205,7 @@ export function SignupForm() {
         <FormField
           control={form.control}
           name="terms_accepted"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-start gap-[10px] space-y-0">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={(checked) => field.onChange(checked === true)}
-                  className={signupCheckboxClass}
-                />
-              </FormControl>
-              <div className="space-y-[8px] leading-none">
-                <FormLabel
-                  className={cn(signupCheckboxLabelClass, 'mt-0 font-normal leading-[22px]')}
-                >
-                  I have read and agree to the{' '}
-                  <a href="/terms" className={signupLinkClass}>
-                    Terms of Use
-                  </a>{' '}
-                  and{' '}
-                  <a href="/privacy" className={signupLinkClass}>
-                    Privacy Policy
-                  </a>
-                  .
-                </FormLabel>
-                <FormMessage className={signupErrorClass} />
-              </div>
-            </FormItem>
-          )}
+          render={({ field }) => <TermsAcceptedField field={field} />}
         />
 
         <Button
