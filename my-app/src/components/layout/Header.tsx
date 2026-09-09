@@ -51,7 +51,7 @@ function Header() {
             size="sm"
             className="bg-primary px-[var(--spacing-padding-20)] py-[var(--spacing-padding-12)] text-primary-foreground"
           >
-            <Link to="/">Sign in</Link>
+            <Link to="/login">Sign in</Link>
           </Button>
         )}
       </div>

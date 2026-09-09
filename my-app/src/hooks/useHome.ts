@@ -43,7 +43,7 @@ function sortItems(
   const sorted = [...items];
   sorted.sort((a, b) => {
     const cmp =
-      column === 'items'
+      column === 'title'
         ? compareValues(a.title || a.name, b.title || b.name)
         : compareValues(a.created_at, b.created_at);
     return direction === 'asc' ? cmp : -cmp;
@@ -58,7 +58,7 @@ export function useHome(initialPage = 1, initialLimit = DEFAULT_LIMIT) {
     limit: initialLimit,
   });
   const [page, setPage] = useState(initialPage);
-  const [limit] = useState(initialLimit);
+  const [limit, setLimit] = useState(initialLimit);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sortColumn, setSortColumn] = useState<HomeSortColumn | null>(null);
@@ -113,6 +113,13 @@ export function useHome(initialPage = 1, initialLimit = DEFAULT_LIMIT) {
     setPage(Math.max(1, nextPage));
   }, []);
 
+  const setPageSize = useCallback((nextLimit: number) => {
+    setLimit(nextLimit);
+    setPage(1);
+    setSortColumn(null);
+    setSortDirection(null);
+  }, []);
+
   const isEmpty = !isLoading && !error && sortedItems.length === 0;
 
   return {
@@ -128,6 +135,7 @@ export function useHome(initialPage = 1, initialLimit = DEFAULT_LIMIT) {
     sortDirection,
     toggleSort,
     goToPage,
+    setPageSize,
     refetch: load,
   };
 }

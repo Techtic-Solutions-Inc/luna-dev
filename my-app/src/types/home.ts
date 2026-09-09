@@ -43,7 +43,7 @@ export interface HomeQueryParams {
   limit?: number;
 }
 
-export type HomeSortColumn = 'items' | 'pagination';
+export type HomeSortColumn = 'title' | 'created_at';
 export type HomeSortDirection = 'asc' | 'desc' | null;
 
 export const HOME_API_PATH = '/api/visitor/home' as const;

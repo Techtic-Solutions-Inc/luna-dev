@@ -26,3 +26,17 @@ export function frameRelativeLength(figmaPx: number): string {
 export function frameRelativeLengthCapped(figmaPx: number): string {
   return `min(${figmaPx}px, ${frameRelativeLength(figmaPx)})`;
 }
+
+/** Figma export frame for Ld0PDcExWUGrmN6c7l8cvcjcsJk 1 (node 2289:17245). */
+export const HOME_MASK_FRAME_EXPORT = {
+  width: 1955,
+  height: 2875,
+} as const;
+
+/** Rectangle 34624219 (node 2295:3507) layout within the mask export frame. */
+export const HOME_MASK_OVERLAY_LAYOUT = {
+  top: 32,
+  left: 95,
+  width: 1765,
+  height: 960,
+} as const;

@@ -1,5 +1,12 @@
 @import 'tailwindcss';
 
+/*
+ * Theme: Figma Sofia tokens (src/theme/tokens.ts) are injected at runtime via
+ * AppThemeProvider → buildCssVariableBlock() (src/theme/cssVariables.ts).
+ * shadcn baseColor in components.json is a generator default only; all semantic
+ * colors below map to --*-token variables sourced from Figma, not stock stone.
+ */
+
 @theme inline {
   --font-almarai: 'Almarai', sans-serif;
   --font-public-sans: 'Public Sans', sans-serif;

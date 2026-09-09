@@ -42,6 +42,7 @@ export function buildCssVariableBlock(): string {
     `--radius-fractional-40972: ${radius['radius-40972']};`,
     `--radius-fractional-4861: ${radius['radius-4861']};`,
     `--spacing-padding-12: ${spacing['padding-12']};`,
+    `--spacing-padding-16: ${spacing['padding-16']};`,
     `--spacing-padding-20: ${spacing['padding-20']};`,
     `--spacing-padding-24: ${spacing['padding-24']};`,
     `--spacing-padding-30: ${spacing['padding-30']};`,
@@ -54,6 +55,9 @@ export function buildCssVariableBlock(): string {
     `--token-breakpoint-wide: ${breakpoints.wide};`,
     `--home-background: ${homeScreen.background};`,
     `--home-frame-width: ${HOME_FRAME_WIDTH};`,
+    `--home-mask-base: ${colors['text-primary']};`,
+    `--home-mask-overlay: rgba(0, 0, 0, 0.7);`,
+    `--radius-535-value: ${radius['radius-535']};`,
   ];
 
   return lines.join('\n    ');

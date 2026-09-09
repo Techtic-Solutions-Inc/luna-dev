@@ -6,9 +6,15 @@
   "tailwind": {
     "config": "",
     "css": "src/index.css",
-    "baseColor": "neutral",
+    "baseColor": "stone",
     "cssVariables": true,
     "prefix": ""
+  },
+  "projectTheme": {
+    "source": "src/theme/tokens.ts",
+    "cssVariables": "src/theme/cssVariables.ts",
+    "stylesheet": "src/index.css",
+    "note": "Figma Sofia tokens in cssVariables.ts override shadcn baseColor defaults. Never use stock stone/zinc palette values in components."
   },
   "aliases": {
     "components": "@/components",

@@ -1,3 +1,1 @@
-import Home from '@/components/features/Home';
-
-export default Home;
+export { default } from '@/routes/Home';

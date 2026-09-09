@@ -1,6 +1,9 @@
 import type { HomeItem } from '@/types/home';
 import {
+  FOOTER_NAV_LINKS,
+  MARKETING_GALLERY_IMAGES,
   TESTIMONIAL_PORTRAIT_AVATARS,
+  TESTIMONIALS,
   type GalleryImage,
   type NavLink,
   type Testimonial,
@@ -86,9 +89,14 @@ export function mapApiTestimonials(items: HomeItem[]): Testimonial[] {
 export function buildHomeContentProps(items: HomeItem[]): HomeContentProps {
   const headline = mapApiHeadline(items);
   const subheadline = mapApiSubheadline(items);
-  const galleryImages = mapApiGalleryImages(items);
-  const testimonials = mapApiTestimonials(items);
-  const navLinks = mapApiNavLinks(items);
+  const apiGalleryImages = mapApiGalleryImages(items);
+  const apiTestimonials = mapApiTestimonials(items);
+  const apiNavLinks = mapApiNavLinks(items);
+
+  const galleryImages =
+    apiGalleryImages.length > 0 ? apiGalleryImages : MARKETING_GALLERY_IMAGES;
+  const testimonials = apiTestimonials.length > 0 ? apiTestimonials : TESTIMONIALS;
+  const navLinks = apiNavLinks.length > 0 ? apiNavLinks : FOOTER_NAV_LINKS;
 
   return {
     headline,
@@ -98,9 +106,9 @@ export function buildHomeContentProps(items: HomeItem[]): HomeContentProps {
     navLinks,
     sections: {
       hero: Boolean(headline || subheadline),
-      gallery: galleryImages.length > 0,
-      testimonials: testimonials.length > 0,
-      navLinks: navLinks.length > 0,
+      gallery: apiGalleryImages.length > 0,
+      testimonials: apiTestimonials.length > 0,
+      navLinks: apiNavLinks.length > 0,
     },
   };
 }

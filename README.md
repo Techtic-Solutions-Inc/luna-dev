@@ -10,9 +10,11 @@ Frontend workspace for Luna agent runs.
 ## Getting started
 
 ```bash
-npm install
+cd my-app && npm install
 npm run dev
 ```
+
+From the workspace root, scripts delegate to `my-app/` (e.g. `npm run build`).
 
 ## Scripts
 

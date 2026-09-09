@@ -15,7 +15,9 @@ export function Frame2147227816Section({ className }: { className?: string }) {
       step="Step 01"
       heading={
         <>
-          Browse The <span className="text-[#c8a47e]">Continuously Updated</span> Collection.
+          Browse the continuously
+          <br />
+          updated collection.
         </>
       }
       body="Explore hundreds of hand-designed templates for social, email, and more. Save the ones that fit your style."

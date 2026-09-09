@@ -1,10 +1,6 @@
 /** Figma asset for Mask group → Ld0PDcExWUGrmN6c7l8cvcjcsJk 1 (node 2289:17245) */
 export const HOME_MASK_IMAGE = '/assets/figma/ld0pdcexwugrmn6c7l8cvcjcsjk-1-2289-17245.png';
 
-/** Figma export for Frame 2147227816 (node 2270:14191) — Content Library preview source */
-export const HOME_FRAME_2147227816_IMAGE =
-  '/assets/figma/frame-2147227816-2270-14191.png';
-
 /** Agent portrait for contact / waitlist left panel */
 export const HOME_CONTACT_AGENT_IMAGE =
   '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-65-2289.png';
