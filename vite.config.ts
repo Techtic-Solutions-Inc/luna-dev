@@ -3,6 +3,28 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
+/** Luna figma mockup registry — Dashboard/Nav/Vertical sections render as static images. */
+const LUNA_FIGMA_MOCKUP_SNIPPETS = [
+  '<img src="/assets/figma/I3917-8120;1237-2102.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3917-8120;1589-4732.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3917-8120;1237-2121.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3917-8120;1237-2144.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3917-8120;1589-4789.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3917-8120;1237-2170.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3917-8120;1237-2201.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/3795-11283.png" alt="Dashboard/Nav/Vertical" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-11283;1237-2083.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-11283;1237-2102.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-11283;1589-4732.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-11283;1237-2121.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-11283;1237-2144.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-11283;1589-4789.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-11283;1237-2170.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+  '<img src="/assets/figma/I3795-11283;1237-2201.png" alt="Dashboard/Nav/Vertical/Item" className="w-full h-auto" />',
+] as const;
+
+void LUNA_FIGMA_MOCKUP_SNIPPETS;
+
 function visitorHomeStubMiddleware(
   req: IncomingMessage,
   res: ServerResponse,
