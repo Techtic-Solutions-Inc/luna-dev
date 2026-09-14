@@ -1,0 +1,65 @@
+import { colors, gradients, homeScreen, radius, spacing, theme } from './tokens';
+import { breakpoints } from './breakpoints';
+
+/** Maps Figma tokens to CSS custom properties consumed by Tailwind and components. */
+export function buildCssVariableBlock(): string {
+  const lines: string[] = [
+    `--primary: ${colors.primary};`,
+    `--secondary: ${colors.secondary};`,
+    `--accent: ${colors.accent};`,
+    `--background-token: ${colors['color-25']};`,
+    `--foreground-token: ${colors.secondary};`,
+    `--card-token: ${colors['color-44']};`,
+    `--card-foreground-token: ${colors.secondary};`,
+    `--popover-token: ${colors['color-44']};`,
+    `--popover-foreground-token: ${colors.secondary};`,
+    `--primary-token: ${colors.accent};`,
+    `--primary-foreground-token: ${colors.secondary};`,
+    `--secondary-token: ${colors['color-64']};`,
+    `--secondary-foreground-token: ${colors.secondary};`,
+    `--muted-token: ${colors['color-19']};`,
+    `--muted-foreground-token: ${colors['text-secondary']};`,
+    `--accent-token: ${colors.accent};`,
+    `--accent-foreground-token: ${colors.secondary};`,
+    `--destructive-token: ${colors['color-51']};`,
+    `--destructive-foreground-token: ${colors.secondary};`,
+    `--border-token: ${colors['color-19']};`,
+    `--input-token: ${colors['color-19']};`,
+    `--ring-token: ${colors.accent};`,
+    `--success-token: ${colors['color-17']};`,
+    `--warning-token: ${colors['color-49']};`,
+    `--info-token: ${colors['color-114']};`,
+    `--shell-header: ${colors['color-42']};`,
+    `--shell-sidebar: ${colors['color-44']};`,
+    `--gradient: ${gradients.gradient};`,
+    `--radius-sm-value: ${radius['radius-4']};`,
+    `--radius-md-value: ${radius['radius-8']};`,
+    `--radius-lg-value: ${radius['radius-10']};`,
+    `--radius-xl-value: ${radius['radius-16']};`,
+    `--spacing-padding-12: ${spacing['padding-12']};`,
+    `--spacing-padding-20: ${spacing['padding-20']};`,
+    `--spacing-padding-24: ${spacing['padding-24']};`,
+    `--spacing-padding-30: ${spacing['padding-30']};`,
+    `--spacing-padding-32: ${spacing['padding-32']};`,
+    `--spacing-padding-40: ${spacing['padding-40']};`,
+    `--spacing-padding-60: ${spacing['padding-60']};`,
+    `--token-breakpoint-mobile: ${breakpoints.mobile};`,
+    `--token-breakpoint-tablet: ${breakpoints.tablet};`,
+    `--token-breakpoint-desktop: ${breakpoints.desktop};`,
+    `--token-breakpoint-wide: ${breakpoints.wide};`,
+    `--home-background: ${homeScreen.background};`,
+    `--home-foreground: ${homeScreen.foreground};`,
+    `--home-accent: ${homeScreen.accent};`,
+    `--home-accent-hover: ${homeScreen.accentHover};`,
+    `--home-muted-foreground: ${homeScreen.mutedForeground};`,
+    `--home-section-light-background: ${homeScreen.sectionLightBackground};`,
+    `--home-ultimate-mind-background: ${homeScreen.ultimateMindBackground};`,
+    `--home-card-background: ${homeScreen.cardBackground};`,
+    `--home-input-background: ${homeScreen.inputBackground};`,
+    `--home-border-subtle: ${homeScreen.borderSubtle};`,
+  ];
+
+  return lines.join('\n    ');
+}
+
+export { theme };

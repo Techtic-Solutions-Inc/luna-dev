@@ -1,0 +1,206 @@
+/* Home screen — section 1: Mask group */
+
+.home-mask-group img {
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Section 2: Stunning marketing, in three simple steps (2264:10451) */
+.home-stunning-marketing-steps__heading {
+  font-family: 'EB Garamond', serif;
+  font-size: 84px;
+  font-weight: 400;
+  line-height: 109.6199951171875px;
+  letter-spacing: 0;
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Section 3: Frame 2147227816 (2270:14191) */
+.home-frame-2147227812__badge {
+  font-family: 'Almarai', sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 31.248001098632812px;
+  letter-spacing: 0;
+  color: #c8a47e;
+}
+
+.home-frame-2147227812__heading {
+  font-family: 'EB Garamond', serif;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 54.80999755859375px;
+  letter-spacing: 0;
+  color: #ffffff;
+  margin: 0;
+}
+
+.home-frame-2147227812__body {
+  font-family: 'Almarai', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0;
+  color: #ffffff;
+  margin: 0;
+}
+
+@media (max-width: 1023px) {
+  .home-frame-2147227812__badge {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .home-frame-2147227812__heading {
+    font-size: 32px;
+    line-height: 42px;
+  }
+}
+
+/* Section 4: Group 33654370 (2270:16773) */
+.home-group-33654370__email {
+  font-family: 'Almarai', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 26.784000396728516px;
+  letter-spacing: 0;
+  color: #ffffff;
+}
+
+.home-group-33654370__copyright {
+  font-family: 'Almarai', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 17.856000900268555px;
+  letter-spacing: 0;
+  color: #ffffff;
+  margin: 0;
+}
+
+.home-group-33654370__nav-link {
+  font-family: 'Almarai', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 17.856000900268555px;
+  letter-spacing: 0;
+  color: #ffffff;
+  transition: color 0.15s ease;
+}
+
+.home-group-33654370__nav-link:hover {
+  color: #c8a47e;
+}
+
+.home-group-33654370__legal-link {
+  font-family: 'Almarai', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17.856000900268555px;
+  color: #ffffff80;
+}
+
+/* Section 5: Group 33654438 (2295:3505) */
+.home-group-33654438__heading {
+  font-family: 'EB Garamond', serif;
+  font-size: 50px;
+  font-weight: 500;
+  line-height: 65.25px;
+  letter-spacing: 0;
+  color: #11161c;
+  margin: 0;
+}
+
+.home-group-33654438__body {
+  font-family: 'Almarai', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0;
+  color: #637381;
+  margin: 0;
+}
+
+.home-group-33654438__card-caption {
+  font-family: 'EB Garamond', serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: 0;
+  color: #ffffff;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .home-group-33654438__heading {
+    font-size: 40px;
+    line-height: 52px;
+  }
+}
+
+/* Section 6: Group 33654437 (2295:3500) */
+.home-group-33654437__heading {
+  font-family: 'EB Garamond', serif;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 72px;
+  letter-spacing: 0;
+  color: #11161c;
+  margin: 0;
+}
+
+.home-group-33654437__body {
+  font-family: 'Almarai', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0;
+  color: #637381;
+  margin: 0;
+}
+
+.home-group-33654437__stars {
+  font-family: 'Almarai', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: #11161c;
+  margin: 0;
+}
+
+.home-group-33654437__quote {
+  font-family: 'Almarai', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #11161c;
+  margin: 0;
+}
+
+.home-group-33654437__name {
+  font-family: 'Public Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16.45px;
+  letter-spacing: 0;
+  color: #11161c;
+  margin: 0;
+}
+
+.home-group-33654437__company {
+  font-family: 'Almarai', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 13.392px;
+  letter-spacing: 0;
+  color: #637381;
+  margin: 0;
+}
+
+@media (max-width: 1023px) {
+  .home-group-33654437__heading {
+    font-size: 48px;
+    line-height: 58px;
+  }
+}
