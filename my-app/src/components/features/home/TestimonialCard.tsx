@@ -2,7 +2,7 @@ import type { HomeTestimonial } from '@/types/home';
 
 export function TestimonialCard({ quote, name, company, avatar }: HomeTestimonial) {
   return (
-    <article className="home-group-33654437__card break-inside-avoid rounded-[16px] border border-[#eaeaea] bg-[#ffffff] p-[24px] shadow-[0_8px_16px_#919eab28]">
+    <article className="home-group-33654437__card break-inside-avoid rounded-[16px] border border-home-panel-border bg-home-foreground p-[24px] shadow-[0_8px_16px_#919eab28]">
       <p className="home-group-33654437__stars" aria-label="5 star rating">
         ★★★★★
       </p>

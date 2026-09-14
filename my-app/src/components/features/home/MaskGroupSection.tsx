@@ -8,11 +8,11 @@ import { HOME_MASK_IMAGE } from './constants';
 export function MaskGroupSection() {
   return (
     <section
-      className="pointer-events-none absolute inset-0 z-0 w-full"
+      className="home-mask-group pointer-events-none absolute inset-0 z-0 w-full"
       aria-hidden="true"
       data-figma-node="2289:17290"
     >
-      <div className="home-mask-group relative grid h-full w-full grid-cols-1 grid-rows-1">
+      <div className="relative grid h-full w-full grid-cols-1 grid-rows-1">
         <div
           className="relative col-start-1 row-start-1 h-full w-full bg-home-background"
           data-figma-node="Rectangle 2"

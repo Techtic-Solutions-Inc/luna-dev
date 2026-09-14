@@ -3,18 +3,14 @@ import type { NavLink } from '@/types/home';
 import { FOOTER_LEGAL_LINKS, FOOTER_NAV_LINKS } from './constants';
 import { HOME_PAGE_INSET_CLASS, HOME_SECTION_STACK_CLASS } from './homeSectionLayout';
 
-function SocialIcon({ label, children }: { label: string; children: ReactNode }) {
+function SocialIcon({ children }: { children: ReactNode }) {
   return (
-    <button
-      type="button"
-      disabled
-      aria-disabled="true"
-      aria-label={`${label} (coming soon)`}
-      title={`${label} link coming soon`}
-      className="flex h-5 w-5 cursor-not-allowed items-center justify-center text-[#ffffff]/50"
+    <span
+      aria-hidden="true"
+      className="flex h-5 w-5 items-center justify-center text-home-foreground/50"
     >
       {children}
-    </button>
+    </span>
   );
 }
 
@@ -32,29 +28,33 @@ export function Group33654370Section({ navLinks = FOOTER_NAV_LINKS }: Group33654
       data-figma-node="2270:16773"
       aria-label="Site footer"
     >
-      <div className="w-full bg-[#000000]" data-figma-node="Rectangle 22">
+      <div className="w-full bg-home-footer-background" data-figma-node="Rectangle 22">
         <div className={`flex w-full flex-col gap-8 py-10 lg:py-[var(--spacing-padding-40)] ${HOME_PAGE_INSET_CLASS}`}>
           <div className="flex w-full flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex flex-col gap-9" data-figma-node="Frame 1618873375">
-              <p className="font-['Kalam'] text-[32px] font-normal leading-none text-[#c8a47e]">
+              <p className="font-['Kalam'] text-[32px] font-normal leading-none text-home-accent">
                 Agentwise
               </p>
-              <p className="font-['Public_Sans'] text-[10px] font-semibold uppercase tracking-[0.12em] text-[#c8a47e]">
+              <p className="font-['Public_Sans'] text-[10px] font-semibold uppercase tracking-[0.12em] text-home-accent">
                 Real Estate Marketing
               </p>
             </div>
 
-            <div className="flex items-center gap-4" data-figma-node="Group 33654336">
-              <SocialIcon label="Facebook">
+            <div
+              className="flex items-center gap-4"
+              data-figma-node="Group 33654336"
+              aria-hidden="true"
+            >
+              <SocialIcon>
                 <span className="font-['Public_Sans'] text-[14px] font-semibold">f</span>
               </SocialIcon>
-              <SocialIcon label="X">
+              <SocialIcon>
                 <span className="font-['Public_Sans'] text-[14px] font-semibold">𝕏</span>
               </SocialIcon>
-              <SocialIcon label="LinkedIn">
+              <SocialIcon>
                 <span className="font-['Public_Sans'] text-[12px] font-semibold">in</span>
               </SocialIcon>
-              <SocialIcon label="Instagram">
+              <SocialIcon>
                 <span className="text-[14px]">◎</span>
               </SocialIcon>
             </div>
@@ -78,7 +78,7 @@ export function Group33654370Section({ navLinks = FOOTER_NAV_LINKS }: Group33654
 
             <a
               href="mailto:hello@agentwisemarketing.com"
-              className="home-group-33654370__email shrink-0 transition-colors hover:text-[#c8a47e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
+              className="home-group-33654370__email shrink-0 transition-colors hover:text-home-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-home-accent"
               data-figma-node="Mobile App Development"
             >
               hello@agentwisemarketing.com
@@ -86,15 +86,15 @@ export function Group33654370Section({ navLinks = FOOTER_NAV_LINKS }: Group33654
           </div>
 
           <div className="flex w-full flex-col gap-4" data-figma-node="Frame 1618873388">
-            <div className="h-px w-full bg-[#ffffff]/30" aria-hidden="true" />
+            <div className="h-px w-full bg-home-foreground/30" aria-hidden="true" />
 
             <div className="flex flex-wrap items-center gap-4 md:justify-end">
               {FOOTER_LEGAL_LINKS.map((link, index) => (
                 <span key={link.label} className="flex items-center gap-4">
-                  {index > 0 && <span className="text-[#ffffff]/30">|</span>}
+                  {index > 0 && <span className="text-home-foreground/30">|</span>}
                   <a
                     href={link.href}
-                    className="home-group-33654370__legal-link transition-colors hover:text-[#ffffff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a47e]"
+                    className="home-group-33654370__legal-link transition-colors hover:text-home-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-home-accent"
                   >
                     {link.label}
                   </a>

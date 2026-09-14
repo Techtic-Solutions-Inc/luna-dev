@@ -3,17 +3,12 @@ import type { GalleryImage, HomeTestimonial, NavLink } from '@/types/home';
 /** Figma asset for Mask group → Ld0PDcExWUGrmN6c7l8cvcjcsJk 1 (node 2289:17245) */
 export const HOME_MASK_IMAGE = '/assets/figma/ld0pdcexwugrmn6c7l8cvcjcsjk-1-2289-17245.png';
 
-/** Figma export for Frame 2147227816 (node 2270:14191) — Content Library preview source */
-export const HOME_FRAME_2147227816_IMAGE =
-  '/assets/figma/frame-2147227816-2270-14191.png';
-
-/** Figma export for Frame 2147227817 (node 2270:14193) — Ultimate Mind preview source */
-export const HOME_FRAME_2147227817_IMAGE =
-  '/assets/figma/frame-2147227817-2270-14193.png';
-
-/** Figma export for Frame 2147227818 (node 2270:14699) — Content detail preview source */
-export const HOME_FRAME_2147227818_IMAGE =
-  '/assets/figma/frame-2147227818-2270-14699.png';
+/** Figma step mockup exports — use as <img>, do not rebuild as React UI. */
+export const HOME_STEP_MOCKUP_IMAGES = {
+  contentLibrary: '/assets/figma/3795-12211.png',
+  ultimateMind: '/assets/figma/3917-8120.png',
+  contentDetail: '/assets/figma/3795-11283.png',
+} as const;
 
 /** Agent portrait for contact / waitlist left panel */
 export const HOME_CONTACT_AGENT_IMAGE =
@@ -53,10 +48,11 @@ export const FOOTER_LEGAL_LINKS: NavLink[] = [
   { label: 'Privacy Policy', href: '#privacy' },
 ];
 
-export const MARKETING_GALLERY_IMAGES: GalleryImage[] = [
+/** Photographic Figma assets only — excludes dashboard frame exports. */
+export const PHOTOGRAPHIC_GALLERY_IMAGES: GalleryImage[] = [
   {
-    src: '/assets/figma/frame-2147227818-2270-14699.png',
-    alt: 'Modern interior',
+    src: '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-65-2289.png',
+    alt: 'Real estate agent portrait',
   },
   {
     src: '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-323-1646.png',
@@ -74,8 +70,8 @@ export const MARKETING_GALLERY_IMAGES: GalleryImage[] = [
     overlay: 'Doing showings in [insert neighborhood and city]!',
   },
   {
-    src: '/assets/figma/frame-2147227817-2270-14193.png',
-    alt: 'Historic brick building at dusk',
+    src: '/assets/figma/frame-2147227827-2270-16929.png',
+    alt: 'Glass skyscraper at sunset',
     overlay: "If I was moving to [City Name], here's where I'd visit first (as a local)",
   },
   {
@@ -84,11 +80,16 @@ export const MARKETING_GALLERY_IMAGES: GalleryImage[] = [
     overlay: "here's what I'm working on today",
   },
   {
-    src: '/assets/figma/frame-2147227827-2270-16929.png',
-    alt: 'Glass skyscraper at sunset',
-    overlay: 'What You...',
+    src: '/assets/figma/attlgjgqkngefohwz-large-img6232-2-I2295-3482-65-2287.png',
+    alt: 'Agent marketing portrait',
+    overlay: 'What You Buy vs What You Get [CITY] EDITION',
   },
 ];
+
+/** Group 8 hero row — full photographic strip beside testimonials copy. */
+export const TESTIMONIAL_HERO_GALLERY_IMAGES: GalleryImage[] = [...PHOTOGRAPHIC_GALLERY_IMAGES];
+
+export const MARKETING_GALLERY_IMAGES: GalleryImage[] = [...PHOTOGRAPHIC_GALLERY_IMAGES];
 
 export const TESTIMONIAL_PORTRAIT_AVATARS = [
   '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-65-2289.png',

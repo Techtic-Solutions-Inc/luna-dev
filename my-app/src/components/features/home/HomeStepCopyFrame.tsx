@@ -13,7 +13,7 @@ export function HomeStepCopyFrame({ step, heading, body }: HomeStepCopyFrameProp
       className="flex min-w-0 flex-[0.38] flex-col gap-5"
       data-figma-node="Frame 2147227812"
     >
-      <span className="home-frame-2147227812__badge inline-flex w-fit items-center rounded-[100px] border border-[#c8a47e]/50 px-[16px] py-[6px]">
+      <span className="home-frame-2147227812__badge inline-flex w-fit items-center rounded-[100px] border border-home-accent/50 px-[16px] py-[6px]">
         {step}
       </span>
       <h3 className="home-frame-2147227812__heading">{heading}</h3>

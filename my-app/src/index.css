@@ -35,10 +35,10 @@
   --radius-lg: var(--radius-lg-value);
   --radius-xl: var(--radius-xl-value);
 
-  --breakpoint-mobile: var(--token-breakpoint-mobile);
-  --breakpoint-tablet: var(--token-breakpoint-tablet);
-  --breakpoint-desktop: var(--token-breakpoint-desktop);
-  --breakpoint-wide: var(--token-breakpoint-wide);
+  --breakpoint-mobile: 480px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1280px;
 
   --color-home-background: var(--home-background);
   --color-home-foreground: var(--home-foreground);
@@ -50,6 +50,10 @@
   --color-home-card-background: var(--home-card-background);
   --color-home-input-background: var(--home-input-background);
   --color-home-border-subtle: var(--home-border-subtle);
+  --color-home-sidebar-surface: var(--home-sidebar-surface);
+  --color-home-light-panel-surface: var(--home-light-panel-surface);
+  --color-home-panel-border: var(--home-panel-border);
+  --color-home-footer-background: var(--home-footer-background);
 }
 
 @layer base {

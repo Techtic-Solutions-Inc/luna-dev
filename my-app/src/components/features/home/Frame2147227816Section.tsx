@@ -1,3 +1,4 @@
+import { HOME_STEP_MOCKUP_IMAGES } from './constants';
 import { HomeMockupPreview } from './HomeMockupPreview';
 import { HomeStepCopyFrame } from './HomeStepCopyFrame';
 import { HomeStepSectionLayout } from './HomeStepSectionLayout';
@@ -12,12 +13,15 @@ export function Frame2147227816Section() {
         step="Step 01"
         heading={
           <>
-            Browse The <span className="text-[#c8a47e]">Continuously Updated</span> Collection.
+            Browse The Continuously <span className="text-home-accent">Updated</span> Collection.
           </>
         }
         body="Explore hundreds of hand-designed templates for social, email, and more. Save the ones that fit your style."
       />
-      <HomeMockupPreview src="/assets/figma/3795-12211.png" alt="Dashboard/Nav/Vertical" />
+      <HomeMockupPreview
+        src={HOME_STEP_MOCKUP_IMAGES.contentLibrary}
+        alt="Agentwise Content Library dashboard preview"
+      />
     </HomeStepSectionLayout>
   );
 }

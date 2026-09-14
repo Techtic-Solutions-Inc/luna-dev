@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { EmptyState } from '@/components/EmptyState';
 import { ErrorMessage } from '@/components/ErrorMessage';
 import { buildHomeContentProps, type HomeContentProps } from '@/components/features/home/homeContentMappers';
 import { Frame2147227816Section } from '@/components/features/home/Frame2147227816Section';
@@ -37,6 +38,8 @@ interface HomeMarketingSectionsProps {
   isEmpty: boolean;
   itemCount: number;
   pagination: HomePagination;
+  error?: string | null;
+  onRetry?: () => void;
 }
 
 function HomeMarketingSections({
@@ -44,18 +47,37 @@ function HomeMarketingSections({
   isEmpty,
   itemCount,
   pagination,
+  error,
+  onRetry,
 }: HomeMarketingSectionsProps) {
   return (
     <>
-      <p className="sr-only">
-        {isEmpty
-          ? 'No visitor home API items were returned; showing default marketing content.'
-          : `Loaded ${itemCount} visitor home content ${itemCount === 1 ? 'item' : 'items'} from page ${pagination.page} (limit ${pagination.limit}). Sections ready: ${Object.entries(content.sections)
-              .filter(([, enabled]) => enabled)
-              .map(([name]) => name)
-              .join(', ') || 'none'}.`}
-      </p>
-      <StunningMarketingStepsSection />
+      {error && (
+        <div className={`w-full py-8 ${HOME_PAGE_INSET_CLASS}`}>
+          <ErrorMessage message={error} onRetry={onRetry ? () => void onRetry() : undefined} />
+        </div>
+      )}
+      {!isEmpty && !error && (
+        <p className="sr-only">
+          {`Loaded ${itemCount} visitor home content ${itemCount === 1 ? 'item' : 'items'} from page ${pagination.page} (limit ${pagination.limit}). Sections ready: ${Object.entries(content.sections)
+            .filter(([, enabled]) => enabled)
+            .map(([name]) => name)
+            .join(', ') || 'none'}.`}
+        </p>
+      )}
+      {isEmpty && !error && (
+        <div className={`w-full py-8 ${HOME_PAGE_INSET_CLASS}`}>
+          <EmptyState
+            tone="home"
+            title="No content is available"
+            description="We could not load visitor home content from the server. Default marketing sections are shown below."
+          />
+        </div>
+      )}
+      <StunningMarketingStepsSection
+        headline={content.headline}
+        subheadline={content.subheadline}
+      />
       <Frame2147227816Section />
       <Frame2147227817Section />
       <Frame2147227818Section />
@@ -72,14 +94,6 @@ function HomeMarketingSections({
   );
 }
 
-function HomeStatusPanel({ children }: { children: ReactNode }) {
-  return (
-    <div className={`w-full py-16 ${HOME_PAGE_INSET_CLASS}`}>
-      <div className="mx-auto w-full max-w-[720px]">{children}</div>
-    </div>
-  );
-}
-
 function Home() {
   const { items, pagination, isLoading, error, isEmpty, refetch } = useVisitorHome();
   const content = buildHomeContentProps(items);
@@ -92,16 +106,6 @@ function Home() {
     );
   }
 
-  if (error) {
-    return (
-      <HomePageShell>
-        <HomeStatusPanel>
-          <ErrorMessage message={error} onRetry={() => void refetch()} />
-        </HomeStatusPanel>
-      </HomePageShell>
-    );
-  }
-
   return (
     <HomePageShell>
       <HomeMarketingSections
@@ -109,6 +113,8 @@ function Home() {
         isEmpty={isEmpty}
         itemCount={items.length}
         pagination={pagination}
+        error={error}
+        onRetry={refetch}
       />
     </HomePageShell>
   );

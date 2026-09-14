@@ -1,3 +1,4 @@
+import { HOME_STEP_MOCKUP_IMAGES } from './constants';
 import { HomeMockupPreview } from './HomeMockupPreview';
 import { HomeStepCopyFrame } from './HomeStepCopyFrame';
 import { HomeStepSectionLayout } from './HomeStepSectionLayout';
@@ -12,12 +13,15 @@ export function Frame2147227818Section() {
         step="Step 03"
         heading={
           <>
-            Post, Attract, Engage, And <span className="text-[#c8a47e]">Stand Out.</span>
+            Post, Attract, Engage, And <span className="text-home-accent">Stand Out.</span>
           </>
         }
         body="Download your finished content and share it anywhere. Looks like you have a full-scale marketing team (and with Agentwise, you do.)"
       />
-      <HomeMockupPreview src="/assets/figma/3795-11283.png" alt="Dashboard/Nav/Vertical" />
+      <HomeMockupPreview
+        src={HOME_STEP_MOCKUP_IMAGES.contentDetail}
+        alt="Agentwise content detail dashboard preview"
+      />
     </HomeStepSectionLayout>
   );
 }

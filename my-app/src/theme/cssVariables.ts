@@ -57,6 +57,11 @@ export function buildCssVariableBlock(): string {
     `--home-card-background: ${homeScreen.cardBackground};`,
     `--home-input-background: ${homeScreen.inputBackground};`,
     `--home-border-subtle: ${homeScreen.borderSubtle};`,
+    `--home-image-scrim: rgba(0, 0, 0, 0.2);`,
+    `--home-sidebar-surface: ${colors['color-22']};`,
+    `--home-light-panel-surface: ${colors['color-41']};`,
+    `--home-panel-border: ${colors['color-55']};`,
+    `--home-footer-background: ${colors['text-primary']};`,
   ];
 
   return lines.join('\n    ');

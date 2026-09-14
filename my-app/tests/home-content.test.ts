@@ -33,7 +33,7 @@ describe('buildHomeContentProps', () => {
         id: '2',
         name: 'gallery-1',
         category: 'gallery',
-        image_url: '/assets/figma/frame-2147227818-2270-14699.png',
+        image_url: '/assets/figma/attlgjgqkngefohwz-large-img6232-1-I2295-3482-323-1646.png',
       }),
     ]);
 
