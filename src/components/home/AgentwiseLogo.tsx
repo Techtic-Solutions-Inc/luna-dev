@@ -20,7 +20,7 @@ export function AgentwiseLogo({
       <span
         className={cn(
           "font-serif text-[26px] italic leading-none tracking-[-0.02em]",
-          isFooter ? "text-border" : "text-primary",
+          isFooter ? "text-accent" : "text-primary",
         )}
       >
         Agentwise
@@ -28,7 +28,7 @@ export function AgentwiseLogo({
       <span
         className={cn(
           "mt-1.5 font-almarai text-[9px] font-bold uppercase tracking-[0.22em]",
-          isFooter ? "text-border/90" : "text-muted-alt",
+          isFooter ? "text-accent/90" : "text-muted-alt",
         )}
       >
         Real Estate Marketing

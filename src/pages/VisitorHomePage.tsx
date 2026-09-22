@@ -9,11 +9,31 @@ import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { UltimateMindSection } from "@/components/home/UltimateMindSection";
 import { WaitlistSection } from "@/components/home/WaitlistSection";
 import { useVisitorHome } from "@/hooks/useVisitorHome";
+import type { HomeApiData } from "@/lib/api-string";
 import { homePillButtonClass } from "@/lib/home-page-ui";
 import { cn } from "@/lib/utils";
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function unwrapHomeData(payload: unknown): HomeApiData | undefined {
+  if (!isPlainObject(payload)) {
+    return undefined;
+  }
+  if (!("success" in payload) || payload.success !== true) {
+    return undefined;
+  }
+  if (!("data" in payload) || !isPlainObject(payload.data)) {
+    return undefined;
+  }
+  return payload.data;
+}
+
 export function VisitorHomePage() {
-  const { isLoading, isError, error, refetch, isFetching } = useVisitorHome();
+  const { data, isLoading, isError, error, refetch, isFetching } =
+    useVisitorHome();
+  const apiData = unwrapHomeData(data);
 
   if (isLoading) {
     return <HomePageSkeleton />;
@@ -41,7 +61,7 @@ export function VisitorHomePage() {
       ) : null}
       <SiteHeader />
       <main id="main">
-        <HeroSection />
+        <HeroSection apiData={apiData} />
         <MarketingCollageSection />
         <HowItWorksSection />
         <UltimateMindSection />

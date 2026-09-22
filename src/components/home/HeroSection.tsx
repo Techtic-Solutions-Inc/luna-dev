@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { SocialIcons } from "@/components/home/SocialIcons";
+import { apiString, type HomeApiData } from "@/lib/api-string";
 import {
   homeContainerClass,
   homePillButtonClass,
@@ -8,7 +9,18 @@ import {
 } from "@/lib/home-page-ui";
 import { cn } from "@/lib/utils";
 
-export function HeroSection() {
+const FALLBACK_BODY =
+  "The all-in-one marketing platform for residential real estate agents — AI-personalized content, a custom business dashboard, and a strategic AI advisor that knows your market.";
+
+interface HeroSectionProps {
+  apiData?: HomeApiData;
+}
+
+export function HeroSection({ apiData }: HeroSectionProps) {
+  const apiHeading =
+    apiString(apiData, "heading") ?? apiString(apiData, "title");
+  const body = apiString(apiData, "description") ?? FALLBACK_BODY;
+
   return (
     <section
       className={cn(
@@ -48,13 +60,15 @@ export function HeroSection() {
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-[48px]">
           <div className="flex flex-col gap-[24px]">
             <Heading id="hero-heading" as="h1" variant="hero">
-              Stunning Real Estate Marketing, Personalized To Your Market In{" "}
-              <span className="text-border">Minutes</span>
+              {apiHeading ?? (
+                <>
+                  Stunning Real Estate Marketing, Personalized To Your Market In{" "}
+                  <span className="text-accent">Minutes</span>
+                </>
+              )}
             </Heading>
             <p className="max-w-[520px] font-sans text-[16px] font-normal leading-[26px] text-muted-alt">
-              The all-in-one marketing platform for residential real estate
-              agents — AI-personalized content, a custom business dashboard, and
-              a strategic AI advisor that knows your market.
+              {body}
             </p>
             <SocialIcons />
           </div>
@@ -62,7 +76,7 @@ export function HeroSection() {
             <img
               src="/assets/figma/group-33654428-2264-10401.png"
               alt="Agentwise dashboard preview"
-              className="h-[582px] w-auto max-w-full object-cover object-left-top drop-shadow-2xl"
+              className="h-auto w-full max-w-full object-contain object-left-top drop-shadow-2xl lg:max-h-[582px]"
               width={1584}
               height={582}
             />
@@ -71,7 +85,7 @@ export function HeroSection() {
         <div className="mt-[56px] flex flex-col items-center gap-[16px] text-center">
           <p className="font-ui text-[16px] leading-[24px] text-primary/90">
             Join{" "}
-            <span className="font-semibold text-border">Hundreds</span> of other
+            <span className="font-semibold text-accent">Hundreds</span> of other
             agents on the waitlist for Agentwise
           </p>
           <Button

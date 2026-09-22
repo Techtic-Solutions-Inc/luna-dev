@@ -37,11 +37,11 @@ export function UltimateMindSection() {
               get a second opinion 24/7 from a partner who actually knows your
               business.
             </p>
-            <div className="mt-4 overflow-hidden rounded-xl shadow-lg">
+            <div className="relative mt-4 aspect-[16/10] overflow-hidden rounded-xl shadow-lg">
               <img
                 src="/assets/figma/group-33654450-3654-11562.png"
                 alt="Agentwise Ultimate Mind dashboard interface"
-                className="h-[320px] w-full object-cover object-top sm:h-[380px]"
+                className="absolute inset-0 h-[170%] w-full object-cover object-[center_88%]"
                 width={800}
                 height={380}
               />
@@ -50,7 +50,7 @@ export function UltimateMindSection() {
           <div className="flex flex-col justify-center gap-6 bg-panel-dark p-8 sm:p-12 lg:p-14">
             <Heading as="h3" variant="sectionDark" className="text-[32px] sm:text-[40px]">
               Here&apos;s The Deal…{" "}
-              <span className="text-border">Great Marketing</span> Is Just The
+              <span className="text-accent">Great Marketing</span> Is Just The
               Start.
             </Heading>
             <p className="font-sans text-[16px] leading-[26px] text-muted-alt">

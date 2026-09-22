@@ -1,7 +1,7 @@
+import { Star } from "lucide-react";
 import { Heading } from "@/components/ui/heading";
 import { homeContainerClass, homeSectionXClass } from "@/lib/home-page-ui";
 import { cn } from "@/lib/utils";
-import { Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -17,6 +17,13 @@ const testimonials = [
     name: "Jordan Hayes",
     detail: "eXp Realty · Nashville, TN",
     initials: "JH",
+  },
+  {
+    quote:
+      "Agentwise replaced my entire marketing workflow. What used to take a full Sunday now takes a coffee break — and the content is better than anything I was making in Canva.",
+    name: "Priya Shah",
+    detail: "Compass · Austin, TX",
+    initials: "PS",
   },
 ] as const;
 
@@ -54,7 +61,7 @@ export function TestimonialsSection() {
             className="text-left"
           >
             Built For{" "}
-            <span className="text-border">Agents Like You.</span>
+            <span className="text-accent">Agents Like You.</span>
           </Heading>
           <p className="mt-6 font-sans text-[16px] leading-[26px] text-muted">
             New agents, team leaders, and large brokerages are using Agentwise to
@@ -66,7 +73,7 @@ export function TestimonialsSection() {
           {testimonials.map((item) => (
             <article
               key={item.name}
-              className="mb-4 break-inside-avoid rounded-2xl border border-border/40 bg-surface p-6 shadow-sm"
+              className="mb-4 break-inside-avoid rounded-2xl border border-border bg-marketing-surface p-6 shadow-sm"
             >
               <Stars />
               <blockquote className="mt-4 text-sm leading-relaxed text-text-on-light">
@@ -74,7 +81,7 @@ export function TestimonialsSection() {
               </blockquote>
               <footer className="mt-6 flex items-center gap-3">
                 <div
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-border/20 text-sm font-semibold text-border"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/20 text-sm font-semibold text-accent"
                   aria-hidden
                 >
                   {item.initials}

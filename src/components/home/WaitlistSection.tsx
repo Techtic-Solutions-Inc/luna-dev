@@ -97,9 +97,9 @@ export function WaitlistSection() {
       >
         <div className="relative min-h-[480px] min-w-0 overflow-hidden rounded-[24px]">
           <img
-            src="/assets/figma/ld0pdcexwugrmn6c7l8cvcjcsjk-1-2289-17245.png"
+            src="/assets/figma/frame-1618873431-2729-13112.png"
             alt=""
-            className="absolute inset-0 h-full w-full object-cover object-center"
+            className="absolute inset-0 h-full w-[210%] max-w-none object-cover object-left"
           />
           <div className="absolute inset-0 bg-black/35" aria-hidden />
           <div className="relative flex h-full min-h-[480px] flex-col items-center justify-center px-8 text-center">
@@ -111,7 +111,7 @@ export function WaitlistSection() {
             </p>
           </div>
         </div>
-        <div className="min-w-0 rounded-[24px] bg-gradient-to-b from-panel-dark to-[#1a1520] p-8 sm:p-9">
+        <div className="min-w-0 rounded-[24px] bg-gradient-to-b from-panel-dark to-waitlist-panel p-8 sm:p-9">
           <div className="mb-8 text-center">
             <div
               className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/5 text-xl font-serif italic text-text-primary"

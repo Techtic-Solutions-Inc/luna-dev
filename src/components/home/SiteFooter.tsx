@@ -13,6 +13,8 @@ const footerNav = [
   { label: "Contact Us", to: "/contact" },
 ] as const;
 
+const CONTACT_EMAIL = "hello@agentwisemarketing.com";
+
 export function SiteFooter() {
   return (
     <footer className={cn("bg-background pb-8 pt-12", homeSectionXClass)}>
@@ -34,10 +36,10 @@ export function SiteFooter() {
             ))}
           </nav>
           <a
-            href="mailto:hello@agentwisemarketing.com"
+            href={`mailto:${CONTACT_EMAIL}`}
             className="font-ui text-sm text-primary transition-opacity hover:opacity-70"
           >
-            hello@agentwisemarketing.com
+            {CONTACT_EMAIL}
           </a>
         </div>
         <Separator className="my-8 bg-white/10" />

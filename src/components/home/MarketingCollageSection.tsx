@@ -37,10 +37,10 @@ export function MarketingCollageSection() {
       </div>
       <div className="mt-12 overflow-x-auto pb-4">
         <div className="mx-auto flex w-max gap-4 px-4 sm:px-6 lg:px-8">
-          {collageImages.map((src, index) => (
+          {collageImages.map((src) => (
             <div
               key={src}
-              className="h-[552px] w-[316px] shrink-0 overflow-hidden rounded-3xl"
+              className="h-[360px] w-[220px] shrink-0 overflow-hidden rounded-3xl sm:h-[480px] sm:w-[280px] lg:h-[552px] lg:w-[316px]"
             >
               <img
                 src={src}
@@ -49,7 +49,6 @@ export function MarketingCollageSection() {
                 loading="lazy"
                 width={316}
                 height={552}
-                {...(index === 0 ? {} : {})}
               />
             </div>
           ))}

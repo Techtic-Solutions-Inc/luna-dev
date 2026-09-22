@@ -10,7 +10,7 @@ const headingVariants = cva("font-serif tracking-[-0.01em]", {
         "text-[36px] font-medium leading-[44px] text-text-on-light sm:text-[48px] sm:leading-[58px]",
       sectionDark:
         "text-[36px] font-medium leading-[44px] text-primary sm:text-[48px] sm:leading-[58px]",
-      champagne: "text-border",
+      champagne: "text-accent",
       subsection:
         "text-[28px] font-medium leading-[36px] text-primary sm:text-[32px] sm:leading-[40px]",
     },
