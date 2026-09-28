@@ -105,6 +105,8 @@ export function FigmaSection_n_2270_14191() {
                   <div data-figma-node="3795:12106" className="box-border w-[10px] h-[10px] absolute left-[0px] top-[0px]"></div>
                 </div>
                 <input data-figma-node="3795:12113" type="text" placeholder="Instagram Reel" aria-label="Instagram Reel" className="box-border w-[45px] h-[11px] absolute left-[22px] top-[4px] shadow-none ring-0 focus-visible:ring-0 focus-visible:outline-none border-0 bg-transparent px-0 text-[#ffffff] placeholder:text-[#ffffff] font-almarai text-[7px] font-[400] leading-[11px] text-left whitespace-nowrap" />
+                <p data-figma-node="3795:12115" className="box-border w-[60px] h-[11px] absolute left-[22px] top-[18px] font-almarai text-[7px] font-[400] leading-[11px] text-left whitespace-nowrap text-[#ffffff]">Instagram Stories</p>
+                <p data-figma-node="3795:12116" className="box-border w-[50px] h-[11px] absolute left-[22px] top-[32px] font-almarai text-[7px] font-[400] leading-[11px] text-left whitespace-nowrap text-[#ffffff]">Instagram Feed</p>
                 <div data-figma-node="3795:12114" className="box-border w-[10px] h-[10px] absolute left-[72px] top-[4px]"></div>
               </div>
             </div>

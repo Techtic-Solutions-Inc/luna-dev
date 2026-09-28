@@ -1,19 +1,58 @@
 import { Link } from "react-router-dom";
-import { HomeErrorState } from "@/components/home/HomeErrorState";
+import { AlertCircle } from "lucide-react";
 import { SiteFooter } from "@/components/home/SiteFooter";
 import { SiteHeader } from "@/components/home/SiteHeader";
-import {
-  FigmaAboutFrame,
-} from "@/components/luna-figma/FigmaAboutScreenPage";
+import { FigmaAboutFrame } from "@/components/luna-figma/FigmaAboutScreenPage";
 import { LunaFigmaApiBridge } from "@/components/luna-figma/LunaFigmaApiBridge";
 import "@/components/luna-figma/figma-fonts.css";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { useAboutUs } from "@/hooks/useAboutUs";
+import { getApiErrorMessage } from "@/lib/api-client";
 import { unwrapEnvelopeData } from "@/lib/envelope";
 import { homePillButtonClass } from "@/lib/home-page-ui";
 import type { AboutUsData } from "@/types/about-us";
 import { cn } from "@/lib/utils";
+
+function AboutMarketingErrorAlert({
+  error,
+  onRetry,
+  isRetrying,
+}: {
+  error: unknown;
+  onRetry: () => void;
+  isRetrying: boolean;
+}) {
+  const message = getApiErrorMessage(error);
+
+  return (
+    <div
+      className="fixed bottom-4 left-4 right-4 z-[100] mx-auto max-w-lg sm:left-auto sm:right-6"
+      role="status"
+      aria-live="polite"
+    >
+      <Alert variant="destructive" className="shadow-lg">
+        <AlertCircle className="h-4 w-4" aria-hidden />
+        <AlertTitle>Unable to load About Us content</AlertTitle>
+        <AlertDescription className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <span>{message}</span>
+          <Button
+            type="button"
+            variant="pillOutline"
+            size="sm"
+            onClick={onRetry}
+            disabled={isRetrying}
+            aria-busy={isRetrying}
+            className="shrink-0 border-white/40"
+          >
+            {isRetrying ? "Retrying…" : "Retry"}
+          </Button>
+        </AlertDescription>
+      </Alert>
+    </div>
+  );
+}
 
 export function AboutUsPage() {
   const { data, isLoading, isError, error, refetch, isFetching } =
@@ -21,6 +60,7 @@ export function AboutUsPage() {
   const apiData = unwrapEnvelopeData<AboutUsData>(data);
   const isEmpty =
     !isLoading && !isError && data !== undefined && apiData === undefined;
+  const showAboutFrame = Boolean(apiData) && !isError && !isEmpty;
 
   if (isLoading) {
     return (
@@ -40,7 +80,7 @@ export function AboutUsPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-panel-dark">
-      <LunaFigmaApiBridge screen="about" />
+      {showAboutFrame ? <LunaFigmaApiBridge screen="about" /> : null}
       <a
         href="#main"
         className={cn(
@@ -51,7 +91,7 @@ export function AboutUsPage() {
         Skip to main content
       </a>
       {isError ? (
-        <HomeErrorState
+        <AboutMarketingErrorAlert
           error={error}
           onRetry={() => {
             void refetch();
@@ -94,9 +134,12 @@ export function AboutUsPage() {
             </div>
           </div>
         ) : null}
-        <FigmaAboutFrame />
+        {showAboutFrame ? <FigmaAboutFrame /> : null}
       </main>
-      <SiteFooter />
+      <SiteFooter
+        contactEmail={apiData?.contact_email}
+        footerText={apiData?.footer}
+      />
     </div>
   );
 }
