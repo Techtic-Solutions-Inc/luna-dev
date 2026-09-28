@@ -1,5 +1,6 @@
-import { FigmaScreenPage } from "./components/luna-figma/FigmaScreenPage";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { FigmaContentLibraryPage } from "@/components/luna-figma/FigmaContentLibraryPage";
+import { FigmaScreenPage } from "@/components/luna-figma/FigmaScreenPage";
 import { PlaceholderPage } from "@/pages/PlaceholderPage";
 
 export function App() {
@@ -10,7 +11,7 @@ export function App() {
       <Route path="/forgot-password" element={<FigmaScreenPage />} />
       <Route path="/login" element={<PlaceholderPage />} />
       <Route path="/about" element={<PlaceholderPage />} />
-      <Route path="/content" element={<PlaceholderPage />} />
+      <Route path="/content" element={<FigmaContentLibraryPage />} />
       <Route path="/blog" element={<PlaceholderPage />} />
       <Route path="/pricing" element={<PlaceholderPage />} />
       <Route path="/contact" element={<PlaceholderPage />} />

@@ -15,15 +15,15 @@
   --color-primary: #ffffff;
   --color-text-primary: #ffffff;
   --color-text-on-light: #0b0b0b;
-  --color-muted: #959595;
-  --color-muted-alt: #919eab;
-  --color-cta-pill: #efe4d9;
+  --color-muted: #c8a47e;
+  --color-muted-alt: #c8a47e;
+  --color-cta-pill: #f7f2ec;
   --color-hero-grid: #14100d;
-  --color-green-panel: #1a2b23;
-  --color-panel-dark: #0e0d0d;
-  --color-waitlist-btn: #3d3544;
-  --color-waitlist-panel: #1a1520;
-  --color-field-fill: #0f0f0f;
+  --color-green-panel: #14100d;
+  --color-panel-dark: #0b0b0b;
+  --color-waitlist-btn: #14100d;
+  --color-waitlist-panel: #0b0b0b;
+  --color-field-fill: #000000;
 
   --radius-sm: 0.375rem;
   --radius-md: 0.625rem;

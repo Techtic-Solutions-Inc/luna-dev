@@ -7,3 +7,21 @@ export function FigmaSection_n_3047_21248() {
     </section>
   );
 }
+
+export function FigmaSection_n_3047_21447() {
+  return (
+    <section
+      data-figma-node="3047:21447"
+      className="absolute box-border left-[0px] top-[0px] z-[10] w-[240px] h-[840px]"
+    >
+      <div className="w-full overflow-hidden h-[840px]">
+        <img
+          data-figma-node="3047:21447"
+          src="/assets/figma/3047-21447.png"
+          alt="Dashboard/Nav/Vertical"
+          className="w-full h-[840px] w-full object-cover object-top"
+        />
+      </div>
+    </section>
+  );
+}
