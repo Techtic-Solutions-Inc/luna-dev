@@ -66,9 +66,7 @@ export function FigmaContentLibraryPage() {
             setVisibleCardCount(INITIAL_VISIBLE_CARDS);
           }}
         />
-        <button type="button" onClick={handleLoadMore}>
-          Load more
-        </button>
+        <button type="button" onClick={handleLoadMore} aria-label="Load more content" />
       </div>
       <main className="relative z-10 flex w-full flex-col">
         <FigmaFrameShell frameWidth={1440} frameHeight={2541} nodeId="3047:21237">
@@ -89,7 +87,7 @@ export function FigmaContentLibraryPage() {
           >
             <FigmaSection_n_3047_21253 />
           </div>
-          <FigmaSection_n_3047_21443 />
+          <FigmaSection_n_3047_21443 onLoadMore={handleLoadMore} />
           <FigmaSection_n_3047_21857 />
           <FigmaSection_n_3361_5525 />
         </FigmaFrameShell>

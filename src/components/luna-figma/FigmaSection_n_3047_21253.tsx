@@ -4,7 +4,7 @@ export function FigmaSection_n_3047_21253() {
     <section data-figma-node="3047:21253" className="absolute box-border left-[272px] top-[233px] w-[1130px] h-[2226px] pr-[2px] flex flex-row items-start gap-5 z-[4]">
       <div data-figma-node="3047:21254" className="box-border w-[267px] h-[429px] rounded-[10px] relative gap-4 pt-[24px] pr-[16px] pb-[24px] pl-[16px] border-[rgba(200,164,126,0.05)] border-[1px]" style={{backgroundColor: "rgba(255, 255, 255, 0.05)"}}>
         <div data-figma-node="3047:21255" className="box-border w-[219px] h-[381px] absolute left-[24px] top-[24px]">
-          <div data-figma-node="3047:21257" className="box-border w-[219px] h-[381px] absolute left-[0px] top-[0px] overflow-hidden rounded-[10px]">
+          <div data-figma-node="3047:21257" className="box-border w-[219px] h-[381px] absolute left-[0px] top-[0px] overflow-hidden rounded-[6.07px]">
             <img data-figma-node="3047:21256" src="/assets/figma/3047-21256.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 5" className="box-border w-[218px] h-[381px] absolute left-[0px] top-[0px] rounded-[10px] max-w-none object-cover object-top" />
             <div data-figma-node="I3047:21257;741:2398" className="box-border w-[211px] h-[83px] absolute left-[4px] top-[392px] rounded-[3.64px] gap-[8.5px] pt-[8px] pr-[7px] pb-[8px] pl-[7px] bg-[#ffffff]">
               <p data-figma-node="I3047:21257;741:2399" className="box-border w-[197px] h-[32px] absolute left-[7px] top-[8px] font-almarai text-[14px] font-[400] leading-[16px] text-left whitespace-nowrap text-[#000000]">[City Name win], hallelujah | Justin Bieber Trend</p>
