@@ -1,19 +1,25 @@
-import { FigmaAboutScreenPage } from "./components/luna-figma/FigmaAboutScreenPage";
+import { FigmaScreenPage } from "./components/luna-figma/FigmaScreenPage";
+import { LunaFigmaApiBridge } from "./components/luna-figma/LunaFigmaApiBridge";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { AboutUsPage } from "@/pages/AboutUsPage";
 import { PlaceholderPage } from "@/pages/PlaceholderPage";
-import { VisitorHomePage } from "@/pages/VisitorHomePage";
 
-/**
- * Home (JAW-9721): VisitorHomePage — SiteHeader/SiteFooter, sections, loading/error/retry.
- * About (JAW-9755): Figma-owned compiled frame approved as shipping layout; API via LunaFigmaApiBridge.
- */
+function FigmaHomeRoute() {
+  return (
+    <>
+      <LunaFigmaApiBridge screen="home" />
+      <FigmaScreenPage />
+    </>
+  );
+}
+
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<VisitorHomePage />} />
+      <Route path="/" element={<FigmaHomeRoute />} />
       <Route path="/home" element={<Navigate to="/" replace />} />
       <Route path="/login" element={<PlaceholderPage />} />
-      <Route path="/about" element={<FigmaAboutScreenPage />} />
+      <Route path="/about" element={<AboutUsPage />} />
       <Route path="/content" element={<PlaceholderPage />} />
       <Route path="/blog" element={<PlaceholderPage />} />
       <Route path="/pricing" element={<PlaceholderPage />} />

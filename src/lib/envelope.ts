@@ -34,6 +34,10 @@ function applyMailtoContact(el: Element, nodeId: string, email: string): void {
   anchor.href = `mailto:${trimmed}`;
   anchor.textContent = trimmed;
   anchor.className = el.className;
+  const inlineStyle = el.getAttribute("style");
+  if (inlineStyle) {
+    anchor.setAttribute("style", inlineStyle);
+  }
   el.replaceWith(anchor);
 }
 

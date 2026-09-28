@@ -89,7 +89,7 @@ export function HowItWorksSection() {
                 <img
                   src={item.mockup}
                   alt={item.mockupAlt}
-                  className="w-full max-h-[70vh] object-cover object-top"
+                  className="w-full max-h-[70vh] object-contain object-left-top"
                   width={1268}
                   height={519}
                 />
