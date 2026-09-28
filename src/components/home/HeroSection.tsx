@@ -29,16 +29,11 @@ export function HeroSection({ apiData }: HeroSectionProps) {
       )}
       aria-labelledby="hero-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+      <img
+        src="/assets/figma/1-2289-17245.png"
+        alt=""
         aria-hidden
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.35]"
       />
       <div
         className="pointer-events-none absolute left-1/2 top-[10%] h-[720px] w-[900px] -translate-x-1/4 rounded-full opacity-50 blur-[100px]"
