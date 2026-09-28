@@ -60,7 +60,7 @@ export function FigmaSection_n_2270_14191() {
               <img data-figma-node="3795:12083" src="/assets/figma/3795-12083.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 8" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] rounded-[4.86px] max-w-none object-cover object-top" />
               <div data-figma-node="3795:12084" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] overflow-hidden rounded-[2.95px]">
                 <div data-figma-node="I3795:12084;741:2397" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] rounded-[2.95px]"></div>
-                <p data-figma-node="I3795:12084;741:2402" className="box-border absolute left-[2px] top-[2px] font-almarai font-[300] text-[4.86111px] text-[#000000]">Instagram Feed</p>
+                <p data-figma-node="I3795:12084;741:2402" className="box-border absolute left-[2px] top-[2px] font-almarai font-[300] text-[4.86111px] leading-[11px] text-[#000000]">Instagram Feed</p>
                 <a data-figma-node="I3795:12084;741:2398" href="#contact" className="box-border w-[103px] h-[41px] absolute left-[2px] top-[190px] rounded-[1.77px] inline-flex items-center justify-center whitespace-nowrap bg-[#ffffff] hover:opacity-90"><span className="font-almarai text-[7px] font-[400] leading-[8px] text-left whitespace-nowrap text-[#000000] whitespace-nowrap">Things I consider perfect | [City Name] edition</span></a>
               </div>
             </div>
@@ -117,7 +117,7 @@ export function FigmaSection_n_2270_14191() {
             </div>
             <div data-figma-node="3795:12157" className="box-border w-[74px] h-[19px] absolute left-[253px] top-[0px] gap-[9.72px]">
               <div data-figma-node="3795:12158" className="box-border w-[74px] h-[18px] absolute left-[0px] top-[0px] rounded-[2.92px] gap-[4.86px] pr-[8px] pl-[8px]" style={{backgroundColor: "rgba(255, 255, 255, 0.1)"}}>
-                <input data-figma-node="3795:12162" type="text" placeholder="Sort by newest" aria-label="Sort by newest" className="box-border w-[44px] h-[11px] absolute left-[8px] top-[4px] shadow-none ring-0 focus-visible:ring-0 focus-visible:outline-none border-0 bg-transparent px-0 text-[#ffffff] placeholder:text-[#ffffff] font-almarai text-[7px] font-[400] leading-[11px] text-left whitespace-nowrap" />
+                <input data-figma-node="3795:12162" type="text" readOnly defaultValue="Sort by newest" placeholder="Sort by newest" aria-label="Sort by newest" className="box-border w-[44px] h-[11px] absolute left-[8px] top-[4px] shadow-none ring-0 focus-visible:ring-0 focus-visible:outline-none border-0 bg-transparent px-0 text-[#ffffff] placeholder:text-[#ffffff] font-almarai text-[7px] font-[400] leading-[11px] text-left whitespace-nowrap" />
                 <div data-figma-node="3795:12163" className="box-border w-[10px] h-[10px] absolute left-[57px] top-[4px]"></div>
               </div>
             </div>
