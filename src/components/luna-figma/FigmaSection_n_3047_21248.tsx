@@ -14,7 +14,7 @@ export function FigmaSection_n_3047_21447() {
       data-figma-node="3047:21447"
       className="absolute box-border left-[0px] top-[0px] z-[10] w-[240px] h-[840px]"
     >
-      <div className="relative h-[840px] w-full overflow-hidden">
+      <div className="relative h-[840px] w-full overflow-visible">
         <img
           data-figma-node="I3047:21447;1237:1966"
           src="/assets/figma/I3047-21447-1237-1966.png"
@@ -23,7 +23,7 @@ export function FigmaSection_n_3047_21447() {
         />
         <div
           data-figma-node="I3047:21447;1237:2080"
-          className="absolute left-[16px] top-[80px] box-border h-[736px] w-[208px] gap-4 pt-[16px] pr-[16px] pl-[16px]"
+          className="absolute left-[16px] top-[80px] z-[11] box-border h-[736px] w-[208px] gap-4 pt-[16px] pr-[16px] pl-[16px]"
         >
           <p
             data-figma-node="I3047:21447;1678:7469"
