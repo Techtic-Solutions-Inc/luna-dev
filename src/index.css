@@ -51,8 +51,8 @@
   }
 
   body {
-    font-family: var(--font-sans);
-    background-color: var(--color-background);
+    font-family: "Almarai", sans-serif;
+    background-color: #0e0d0d;
     color: var(--color-text-primary);
     -webkit-font-smoothing: antialiased;
   }
