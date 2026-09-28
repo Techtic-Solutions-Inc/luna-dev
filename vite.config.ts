@@ -6,6 +6,7 @@ import { defineConfig } from "vite";
 export {
   LUNA_COMPILED_SPEC_FILL,
   LUNA_COMPILED_SPEC_LOREM,
+  LUNA_COMPILED_SPEC_SORT_BY,
   LUNA_COMPILED_SPEC_TEXT,
 } from "./src/lib/luna-compiled-spec";
 

@@ -1,6 +1,8 @@
 /** Strings and tokens mirrored from Luna ScreenSpec (vite parity + DOM emission). */
 export const LUNA_COMPILED_SPEC_LOREM =
-  "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make.";
+  "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
+
+export const LUNA_COMPILED_SPEC_SORT_BY = "Sort by\u00a0newest";
 
 export const LUNA_COMPILED_SPEC_FILL = "rgba(200, 164, 126, 0.1)";
 
@@ -9,6 +11,7 @@ export const LUNA_COMPILED_SPEC_TEXT = [
   "Nova",
   "Coming Soon",
   LUNA_COMPILED_SPEC_LOREM,
+  LUNA_COMPILED_SPEC_SORT_BY,
   "Instagram Stories",
   "Instagram Feed",
 ] as const;
