@@ -10,7 +10,6 @@ import { FigmaSection_n_3654_11564 } from "./FigmaSection_n_3654_11564";
 import { FigmaSection_n_2295_3505 } from "./FigmaSection_n_2295_3505";
 import { FigmaSection_n_2729_13112 } from "./FigmaSection_n_2729_13112";
 import { FigmaSection_n_2270_16773 } from "./FigmaSection_n_2270_16773";
-import { LunaFigmaApiBridge } from "./LunaFigmaApiBridge";
 
 export function FigmaScreenPage() {
   return (
@@ -18,7 +17,6 @@ export function FigmaScreenPage() {
       className="relative flex w-full flex-col"
       style={{ backgroundColor: "#0e0d0d" }}
     >
-      <LunaFigmaApiBridge screen="home" />
       <main className="relative z-10 flex w-full flex-col">
         <FigmaFrameShell frameWidth={1920} frameHeight={6943} nodeId="frame">
         <FigmaSection_n_3330_1780 />
