@@ -30,6 +30,14 @@ export const LUNA_SPEC_SECTIONS = [
         widthPx: 240,
         heightPx: 80,
       },
+      {
+        nodeId: "I3047:21447;1237:2080",
+        src: "/assets/figma/I3047-21447-1237-2080.png",
+        xPx: 16,
+        yPx: 80,
+        widthPx: 208,
+        heightPx: 736,
+      },
     ] as const,
   },
 ] as const;
