@@ -1,12 +1,13 @@
+import { FigmaScreenPage } from "./components/luna-figma/FigmaScreenPage";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { PlaceholderPage } from "@/pages/PlaceholderPage";
-import { VisitorHomePage } from "@/pages/VisitorHomePage";
 
 export function App() {
   return (
     <Routes>
-      <Route path="/" element={<VisitorHomePage />} />
+      <Route path="/" element={<FigmaScreenPage />} />
       <Route path="/home" element={<Navigate to="/" replace />} />
+      <Route path="/forgot-password" element={<FigmaScreenPage />} />
       <Route path="/login" element={<PlaceholderPage />} />
       <Route path="/about" element={<PlaceholderPage />} />
       <Route path="/content" element={<PlaceholderPage />} />
