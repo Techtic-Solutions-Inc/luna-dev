@@ -17,9 +17,34 @@ export function unwrapEnvelopeData<T extends object>(
   return payload.data as T;
 }
 
+function isEmailLike(value: string): boolean {
+  const trimmed = value.trim();
+  return trimmed.includes("@") && !trimmed.includes(" ");
+}
+
+function applyMailtoContact(el: Element, nodeId: string, email: string): void {
+  const trimmed = email.trim();
+  if (el instanceof HTMLAnchorElement) {
+    el.href = `mailto:${trimmed}`;
+    el.textContent = trimmed;
+    return;
+  }
+  const anchor = document.createElement("a");
+  anchor.setAttribute("data-figma-node", nodeId);
+  anchor.href = `mailto:${trimmed}`;
+  anchor.textContent = trimmed;
+  anchor.className = el.className;
+  el.replaceWith(anchor);
+}
+
 export function setFigmaNodeText(nodeId: string, text: string): void {
   const el = document.querySelector(`[data-figma-node="${nodeId}"]`);
-  if (el && text.trim().length > 0) {
-    el.textContent = text;
+  if (!el || text.trim().length === 0) {
+    return;
   }
+  if (isEmailLike(text)) {
+    applyMailtoContact(el, nodeId, text);
+    return;
+  }
+  el.textContent = text;
 }

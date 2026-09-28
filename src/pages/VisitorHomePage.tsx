@@ -40,7 +40,7 @@ export function VisitorHomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="w-full flex flex-col">
       <a
         href="#main"
         className={cn(
