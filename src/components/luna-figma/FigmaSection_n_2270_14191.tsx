@@ -8,7 +8,7 @@ export function FigmaSection_n_2270_14191() {
             <a data-figma-node="2270:15213" href="#contact" className="box-border w-[128px] h-[54px] absolute left-[0px] top-[0px] rounded-full inline-flex items-center justify-center whitespace-nowrap hover:opacity-90" style={{backgroundImage: "linear-gradient(150.1deg, #0b0b0b 0.0%, rgba(11, 11, 11, 0) 100.0%)"}}><span className="font-almarai text-[28px] font-[400] leading-[31px] text-left whitespace-nowrap text-[#c8a47e] whitespace-nowrap">Step 01</span></a>
             <div data-figma-node="2270:14190" className="box-border w-[517px] h-[110px] absolute left-[0px] top-[74px]">
               <p data-figma-node="2264:10454" className="box-border w-[517px] h-[55px] absolute left-[0px] top-[0px] font-eb-garamond text-[42px] font-[500] leading-[55px] text-left whitespace-nowrap text-[#ffffff]">Browse the continuously</p>
-              <p data-figma-node="2270:14188" className="box-border w-[517px] h-[55px] absolute left-[0px] top-[55px] font-eb-garamond text-[42px] font-[500] leading-[55px] text-left whitespace-nowrap bg-clip-text text-transparent" style={{backgroundImage: "linear-gradient(90.0deg, #c8a47e 24.1%, #ffffff 49.3%, #8b6843 72.5%)"}}>updated collection.</p>
+              <p data-figma-node="2270:14188" className="box-border w-[517px] h-[55px] absolute left-[0px] top-[55px] font-eb-garamond text-[42px] font-[500] leading-[55px] text-left whitespace-nowrap text-[#c8a47e]">updated collection.</p>
             </div>
             <p data-figma-node="2264:10455" className="box-border w-[447px] h-[56px] absolute left-[0px] top-[204px] opacity-[0.6] font-almarai text-[18px] font-[400] leading-[28px] text-left text-[#ffffff]">Explore hundreds of hand-designed templates for social, email, and more. Save the ones that fit your style.</p>
           </div>
@@ -30,6 +30,7 @@ export function FigmaSection_n_2270_14191() {
               <img data-figma-node="3795:12071" src="/assets/figma/3795-12071.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 5" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] rounded-[4.86px] max-w-none object-cover object-top" />
               <div data-figma-node="3795:12072" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] overflow-hidden rounded-[2.95px]">
                 <div data-figma-node="I3795:12072;741:2397" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] rounded-[2.95px]"></div>
+                <p data-figma-node="I3795:12072;741:2402" className="box-border absolute left-[2px] top-[2px] font-almarai font-[300] text-[4.86111px] leading-[11px] text-left whitespace-nowrap text-[#000000]">Instagram Reel</p>
                 <a data-figma-node="I3795:12072;741:2398" href="#contact" className="box-border w-[103px] h-[41px] absolute left-[2px] top-[190px] rounded-[1.77px] inline-flex items-center justify-center whitespace-nowrap bg-[#ffffff] hover:opacity-90"><span className="font-almarai text-[7px] font-[400] leading-[8px] text-left whitespace-nowrap text-[#000000] whitespace-nowrap">[City Name win], hallelujah | Justin Bieber Trend</span></a>
               </div>
             </div>
@@ -39,6 +40,7 @@ export function FigmaSection_n_2270_14191() {
               <img data-figma-node="3795:12075" src="/assets/figma/3795-12075.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 6" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] rounded-[4.86px] max-w-none object-cover object-top" />
               <div data-figma-node="3795:12076" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] overflow-hidden rounded-[2.95px]">
                 <div data-figma-node="I3795:12076;741:2397" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] rounded-[2.95px]"></div>
+                <p data-figma-node="I3795:12076;741:2402" className="box-border absolute left-[2px] top-[2px] font-almarai font-[300] text-[4.86111px] leading-[11px] text-left whitespace-nowrap text-[#000000] bg-[#ffffff] rounded-[1.77px] px-[2px]">Instagram Reel</p>
                 <a data-figma-node="I3795:12076;741:2398" href="#contact" className="box-border w-[103px] h-[41px] absolute left-[2px] top-[190px] rounded-[1.77px] inline-flex items-center justify-center whitespace-nowrap bg-[#ffffff] hover:opacity-90"><span className="font-almarai text-[7px] font-[400] leading-[8px] text-left whitespace-nowrap text-[#000000] whitespace-nowrap">[City Name win], hallelujah | Justin Bieber Trend</span></a>
               </div>
             </div>
@@ -48,6 +50,7 @@ export function FigmaSection_n_2270_14191() {
               <img data-figma-node="3795:12079" src="/assets/figma/3795-12079.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] rounded-[4.86px] max-w-none object-cover object-top" />
               <div data-figma-node="3795:12080" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] overflow-hidden rounded-[2.95px]">
                 <div data-figma-node="I3795:12080;741:2397" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] rounded-[2.95px]"></div>
+                <p data-figma-node="I3795:12080;741:2402" className="box-border absolute left-[2px] top-[2px] font-[300] text-[4.86111px] leading-[11px] text-[#000000]">Instagram Reel</p>
                 <a data-figma-node="I3795:12080;741:2398" href="#contact" className="box-border w-[103px] h-[33px] absolute left-[2px] top-[198px] rounded-[1.77px] inline-flex items-center justify-center whitespace-nowrap bg-[#ffffff] hover:opacity-90"><span className="font-almarai text-[7px] font-[400] leading-[8px] text-left whitespace-nowrap text-[#000000] whitespace-nowrap">Hates to see me coming</span></a>
               </div>
             </div>
@@ -57,6 +60,7 @@ export function FigmaSection_n_2270_14191() {
               <img data-figma-node="3795:12083" src="/assets/figma/3795-12083.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 8" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] rounded-[4.86px] max-w-none object-cover object-top" />
               <div data-figma-node="3795:12084" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] overflow-hidden rounded-[2.95px]">
                 <div data-figma-node="I3795:12084;741:2397" className="box-border w-[106px] h-[185px] absolute left-[0px] top-[0px] rounded-[2.95px]"></div>
+                <p data-figma-node="I3795:12084;741:2402" className="box-border absolute left-[2px] top-[2px] font-almarai font-[300] text-[4.86111px] text-[#000000]">Instagram Reel</p>
                 <a data-figma-node="I3795:12084;741:2398" href="#contact" className="box-border w-[103px] h-[41px] absolute left-[2px] top-[190px] rounded-[1.77px] inline-flex items-center justify-center whitespace-nowrap bg-[#ffffff] hover:opacity-90"><span className="font-almarai text-[7px] font-[400] leading-[8px] text-left whitespace-nowrap text-[#000000] whitespace-nowrap">Things I consider perfect | [City Name] edition</span></a>
               </div>
             </div>
@@ -105,8 +109,6 @@ export function FigmaSection_n_2270_14191() {
                   <div data-figma-node="3795:12106" className="box-border w-[10px] h-[10px] absolute left-[0px] top-[0px]"></div>
                 </div>
                 <input data-figma-node="3795:12113" type="text" placeholder="Instagram Reel" aria-label="Instagram Reel" className="box-border w-[45px] h-[11px] absolute left-[22px] top-[4px] shadow-none ring-0 focus-visible:ring-0 focus-visible:outline-none border-0 bg-transparent px-0 text-[#ffffff] placeholder:text-[#ffffff] font-almarai text-[7px] font-[400] leading-[11px] text-left whitespace-nowrap" />
-                <p data-figma-node="3795:12115" className="box-border w-[60px] h-[11px] absolute left-[22px] top-[18px] font-almarai text-[7px] font-[400] leading-[11px] text-left whitespace-nowrap text-[#ffffff]">Instagram Stories</p>
-                <p data-figma-node="3795:12116" className="box-border w-[50px] h-[11px] absolute left-[22px] top-[32px] font-almarai text-[7px] font-[400] leading-[11px] text-left whitespace-nowrap text-[#ffffff]">Instagram Feed</p>
                 <div data-figma-node="3795:12114" className="box-border w-[10px] h-[10px] absolute left-[72px] top-[4px]"></div>
               </div>
             </div>
