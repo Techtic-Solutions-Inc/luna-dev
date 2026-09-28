@@ -4,4 +4,8 @@ export const LOCKED_API_ROUTES = {
     method: "GET",
     path: "/api/visitor/home",
   },
+  aboutUs: {
+    method: "GET",
+    path: "/api/about-us",
+  },
 } as const;

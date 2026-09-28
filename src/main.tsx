@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from "@/App";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import "@/index.css";
+import "@/components/luna-figma/figma-fonts.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {

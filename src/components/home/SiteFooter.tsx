@@ -14,8 +14,24 @@ const footerNav = [
 ] as const;
 
 const CONTACT_EMAIL = "hello@agentwisemarketing.com";
+const DEFAULT_FOOTER_TEXT = "© 2026 Agentwise. All Rights Reserved.";
 
-export function SiteFooter() {
+export interface SiteFooterProps {
+  contactEmail?: string;
+  footerText?: string;
+  privacyLink?: string;
+  termsLink?: string;
+}
+
+export function SiteFooter({
+  contactEmail,
+  footerText,
+  privacyLink = "/privacy-policy",
+  termsLink = "/terms-of-service",
+}: SiteFooterProps = {}) {
+  const email = contactEmail?.trim() || CONTACT_EMAIL;
+  const copyright = footerText?.trim() || DEFAULT_FOOTER_TEXT;
+
   return (
     <footer className={cn("bg-background pb-8 pt-12", homeSectionXClass)}>
       <div className={homeContainerClass}>
@@ -36,25 +52,25 @@ export function SiteFooter() {
             ))}
           </nav>
           <a
-            href={`mailto:${CONTACT_EMAIL}`}
+            href={`mailto:${email}`}
             className="font-ui text-sm text-primary transition-opacity hover:opacity-70"
           >
-            {CONTACT_EMAIL}
+            {email}
           </a>
         </div>
         <Separator className="my-8 bg-white/10" />
         <div className="flex flex-col gap-4 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 Agentwise. All Rights Reserved.</p>
+          <p>{copyright}</p>
           <div className="flex gap-4">
             <Link
-              to="/terms-of-service"
+              to={termsLink}
               className="transition-opacity hover:opacity-70"
             >
               Terms of Service
             </Link>
             <span aria-hidden>|</span>
             <Link
-              to="/privacy-policy"
+              to={privacyLink}
               className="transition-opacity hover:opacity-70"
             >
               Privacy Policy
