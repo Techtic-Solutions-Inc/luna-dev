@@ -29,32 +29,11 @@ export function HeroSection({ apiData }: HeroSectionProps) {
       )}
       aria-labelledby="hero-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+      <img
+        src="/assets/figma/1-2289-17245.png"
+        alt=""
         aria-hidden
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute left-1/2 top-[10%] h-[720px] w-[900px] -translate-x-1/4 rounded-full opacity-50 blur-[100px]"
-        aria-hidden
-        style={{
-          background:
-            "radial-gradient(circle, rgba(200,164,126,0.45) 0%, rgba(200,164,126,0.12) 45%, transparent 72%)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute right-0 top-[5%] h-[560px] w-[640px] rounded-full opacity-40 blur-[90px]"
-        aria-hidden
-        style={{
-          background:
-            "radial-gradient(circle, rgba(114,0,255,0.22) 0%, rgba(221,42,123,0.08) 40%, transparent 70%)",
-        }}
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.35]"
       />
       <div className={cn(homeContainerClass, "relative")}>
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-[48px]">

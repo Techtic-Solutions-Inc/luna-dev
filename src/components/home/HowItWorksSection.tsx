@@ -48,16 +48,11 @@ export function HowItWorksSection() {
       className={cn("relative bg-background py-[96px]", homeSectionXClass)}
       aria-labelledby="how-it-works-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-30"
+      <img
+        src="/assets/figma/1-2289-17245.png"
+        alt=""
         aria-hidden
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30"
       />
       <div className={cn(homeContainerClass, "relative")}>
         <Heading
@@ -85,11 +80,11 @@ export function HowItWorksSection() {
                   {item.body}
                 </p>
               </div>
-              <div className="overflow-hidden rounded-2xl shadow-2xl shadow-black/50">
+              <div className="min-w-0 w-full overflow-hidden max-h-[70vh] rounded-2xl shadow-2xl shadow-black/50">
                 <img
                   src={item.mockup}
                   alt={item.mockupAlt}
-                  className="h-auto w-full object-contain object-left-top"
+                  className="w-full max-h-[70vh] w-full object-cover object-top"
                   width={1268}
                   height={519}
                 />
