@@ -15,7 +15,7 @@ export function FigmaSection_n_3047_21332() {
           role="tab"
           aria-label="Tabs"
           data-figma-node="3047:21338"
-          className="pointer-events-auto z-[1] box-border absolute left-[0px] top-[0px] h-[40px] w-[673px] border-0 p-0 opacity-100 text-[#ffffff]"
+          className="pointer-events-auto z-[3] box-border absolute left-[0px] top-[0px] h-[40px] w-[316px] border-0 p-0 opacity-100 text-[#ffffff]"
           style={{ backgroundColor: fieldChromeBg }}
         />
         <div data-figma-node="3047:21335" className="pointer-events-auto z-[2] box-border w-[185px] h-[40px] absolute left-[316px] top-[0px] gap-5">
