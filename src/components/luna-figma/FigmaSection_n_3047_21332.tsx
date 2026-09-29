@@ -15,8 +15,7 @@ export function FigmaSection_n_3047_21332() {
           role="tab"
           aria-label="Tabs"
           data-figma-node="3047:21338"
-          className="pointer-events-auto z-[3] box-border absolute left-[0px] top-[0px] h-[40px] w-[316px] border-0 p-0 opacity-100 text-[#ffffff]"
-          style={{ backgroundColor: fieldChromeBg }}
+          className="pointer-events-auto z-[3] box-border absolute left-[0px] top-[0px] h-[40px] w-[316px] border-0 bg-hero-grid p-0 opacity-100 text-primary"
         />
         <div data-figma-node="3047:21335" className="pointer-events-auto z-[2] box-border w-[185px] h-[40px] absolute left-[316px] top-[0px] gap-5">
           <div data-figma-node="3047:21336" className="box-border w-[185px] h-[38px] absolute left-[0px] top-[1px] rounded-[6px] gap-2.5 pr-[16px] pl-[16px]" style={{ backgroundColor: fieldChromeBg }}>
@@ -25,15 +24,13 @@ export function FigmaSection_n_3047_21332() {
               type="button"
               data-figma-node="34624212"
               aria-label="Rectangle 34624212"
-              className="pointer-events-auto z-[2] box-border absolute left-[0px] top-[0px] h-[38px] w-[185px] border-0 p-0 text-[#ffffff]"
-              style={{ backgroundColor: fieldChromeBg }}
+              className="pointer-events-auto z-[2] box-border absolute left-[0px] top-[0px] h-[38px] w-[185px] border-0 bg-hero-grid p-0 text-primary"
             />
             <button
               type="button"
               data-figma-node="3047:21337"
               aria-label="IconButton"
-              className="pointer-events-auto z-[3] box-border w-[20px] h-[20px] absolute left-[16px] top-[9px] border-0 p-0 text-[#ffffff]"
-              style={{ backgroundColor: fieldChromeBg }}
+              className="pointer-events-auto z-[3] box-border w-[20px] h-[20px] absolute left-[16px] top-[9px] border-0 bg-hero-grid p-0 text-primary"
             >
               <div data-figma-node="3047:21339" className="box-border w-[12px] h-[12px] absolute left-[4px] top-[4px]"></div>
             </button>
@@ -41,8 +38,7 @@ export function FigmaSection_n_3047_21332() {
               type="button"
               data-figma-node="3047:21347"
               aria-label="IconButton"
-              className="pointer-events-auto z-[3] box-border w-[20px] h-[20px] absolute left-[149px] top-[9px] border-0 p-0 text-[#ffffff]"
-              style={{ backgroundColor: fieldChromeBg }}
+              className="pointer-events-auto z-[3] box-border w-[20px] h-[20px] absolute left-[149px] top-[9px] border-0 bg-hero-grid p-0 text-primary"
             />
           </div>
         </div>
@@ -53,15 +49,13 @@ export function FigmaSection_n_3047_21332() {
               type="button"
               data-figma-node="34624213"
               aria-label="Rectangle 34624213"
-              className="pointer-events-auto z-[2] box-border absolute left-[0px] top-[0px] h-[38px] w-[152px] border-0 p-0 text-[#ffffff]"
-              style={{ backgroundColor: fieldChromeBg }}
+              className="pointer-events-auto z-[2] box-border absolute left-[0px] top-[0px] h-[38px] w-[152px] border-0 bg-hero-grid p-0 text-primary"
             />
             <button
               type="button"
               data-figma-node="3047:21396"
               aria-label="IconButton"
-              className="pointer-events-auto z-[3] box-border w-[20px] h-[20px] absolute left-[116px] top-[9px] border-0 p-0 text-[#ffffff]"
-              style={{ backgroundColor: fieldChromeBg }}
+              className="pointer-events-auto z-[3] box-border w-[20px] h-[20px] absolute left-[116px] top-[9px] border-0 bg-hero-grid p-0 text-primary"
             />
           </div>
         </div>

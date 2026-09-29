@@ -40,6 +40,48 @@ export const LUNA_SPEC_SECTIONS = [
       },
     ] as const,
   },
+  {
+    nodeId: "3047:21253",
+    name: "Content grid",
+    widthPx: 1130,
+    heightPx: 2226,
+    className: "w-[1130px] h-[2226px]",
+    slotClassName: "relative w-full overflow-hidden",
+    childBitmaps: [
+      {
+        nodeId: "3047:21287",
+        src: "/assets/figma/3047-21287.png",
+        xPx: 48,
+        yPx: 898,
+        widthPx: 218,
+        heightPx: 381,
+      },
+      {
+        nodeId: "3047:21291",
+        src: "/assets/figma/3047-21291.png",
+        xPx: 335,
+        yPx: 898,
+        widthPx: 218,
+        heightPx: 381,
+      },
+      {
+        nodeId: "3047:21295",
+        src: "/assets/figma/3047-21295.png",
+        xPx: 622,
+        yPx: 898,
+        widthPx: 218,
+        heightPx: 381,
+      },
+      {
+        nodeId: "3047:21299",
+        src: "/assets/figma/3047-21299.png",
+        xPx: 909,
+        yPx: 898,
+        widthPx: 218,
+        heightPx: 381,
+      },
+    ] as const,
+  },
 ] as const;
 
 export const LUNA_HASH_ANCHORS = [

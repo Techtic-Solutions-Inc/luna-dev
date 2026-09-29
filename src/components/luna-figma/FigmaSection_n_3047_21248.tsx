@@ -16,24 +16,17 @@ export function FigmaSection_n_3047_21447() {
     >
       <div className="relative w-full overflow-hidden h-[840px]">
         <img
-          data-figma-node="3047:21447"
-          src="/assets/figma/3047-21447.png"
-          alt="Dashboard/Nav/Vertical"
-          className="box-border h-[840px] w-full max-w-none object-cover object-top"
-        />
-        <img
           data-figma-node="I3047:21447;1237:1966"
           src="/assets/figma/I3047-21447-1237-1966.png"
-          alt=""
-          aria-hidden
-          className="pointer-events-none absolute left-[0px] top-[0px] box-border h-[80px] w-[240px] max-w-none object-cover object-top"
+          alt="Dashboard/Nav/Vertical"
+          className="absolute left-[0px] top-[0px] box-border h-[80px] w-[240px] max-w-none object-cover object-top"
         />
         <img
           data-figma-node="I3047:21447;1237:2080"
           src="/assets/figma/I3047-21447-1237-2080.png"
           alt=""
           aria-hidden
-          className="pointer-events-none absolute left-[16px] top-[80px] box-border h-[736px] w-[208px] max-w-none object-cover object-top"
+          className="absolute left-[16px] top-[80px] box-border h-[736px] w-[208px] max-w-none object-cover object-top"
         />
       </div>
     </section>

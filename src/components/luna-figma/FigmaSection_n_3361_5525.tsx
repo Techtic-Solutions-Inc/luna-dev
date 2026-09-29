@@ -4,7 +4,9 @@ export function FigmaSection_n_3361_5525() {
     <section data-figma-node="3361:5525" className="pointer-events-none absolute box-border left-[788px] top-[0px] w-[652px] h-[1049px] block z-[9]">
       <div data-figma-node="3361:5526" className="pointer-events-none box-border w-[652px] h-[2224px] absolute left-[0px] top-[0px]">
         <div data-figma-node="3361:5527" className="pointer-events-none box-border w-[652px] h-[2224px] absolute left-[0px] top-[0px] bg-[#f7f2ec]"></div>
-        <button type="button" data-figma-node="3361:5528" aria-label="IconButton" className="pointer-events-auto box-border w-[24px] h-[24px] absolute left-[588px] top-[40px] border-0 p-0 bg-[#f7f2ec] text-text-on-light" />
+        <button type="button" data-figma-node="3361:5528" aria-label="IconButton" className="pointer-events-auto box-border w-[24px] h-[24px] absolute left-[588px] top-[40px] border-0 bg-transparent p-0">
+          <div data-figma-node="3361:5529" className="box-border h-[24px] w-[24px] bg-[#f7f2ec]" aria-hidden />
+        </button>
         <div data-figma-node="3361:5531" className="box-border w-[572px] h-[636px] absolute left-[40px] top-[848px]">
           <div data-figma-node="3361:5532" className="box-border w-[572px] h-[636px] absolute left-[0px] top-[0px] rounded-[16px] bg-[#000000]"></div>
           <div data-figma-node="3361:5533" className="box-border w-[510px] h-[1px] absolute left-[31px] top-[100px]" style={{backgroundColor: "rgba(255, 255, 255, 0.2)"}} />
