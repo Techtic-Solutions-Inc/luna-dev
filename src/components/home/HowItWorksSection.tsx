@@ -48,17 +48,6 @@ export function HowItWorksSection() {
       className={cn("relative bg-background py-[96px]", homeSectionXClass)}
       aria-labelledby="how-it-works-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-30"
-        aria-hidden
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
       <div className={cn(homeContainerClass, "relative")}>
         <Heading
           id="how-it-works-heading"

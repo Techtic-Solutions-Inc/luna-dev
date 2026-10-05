@@ -329,7 +329,7 @@ export function FigmaFieldError({ field }: { field: string }) {
       id: `${field}-field-error`,
       role: "alert",
       className:
-        "absolute left-[0px] top-[56px] w-full font-almarai text-[12px] leading-[14px] text-[#ff6b6b]",
+        "absolute left-[0px] top-[56px] w-full font-almarai text-[12px] leading-[14px] text-[#c8a47e]",
     },
     message,
   );
