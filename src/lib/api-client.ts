@@ -12,17 +12,10 @@ export class ApiRequestError extends Error {
   }
 }
 
-/**
- * Backend origin for locked contract paths (e.g. `http://127.0.0.1:3000`).
- * Set `VITE_API_BASE_URL` in `.env` for local validation; in dev, an empty value
- * falls back to `http://127.0.0.1:3000` so requests do not hit the Vite proxy origin.
- */
+/** Backend origin for locked contract paths. Empty `VITE_API_BASE_URL` → same-origin. */
 function getBaseUrl(): string {
   const base = import.meta.env.VITE_API_BASE_URL;
   if (base === undefined || base === null || String(base).trim() === "") {
-    if (import.meta.env.DEV) {
-      return "http://127.0.0.1:3000";
-    }
     return "";
   }
   return String(base).replace(/\/$/, "");
