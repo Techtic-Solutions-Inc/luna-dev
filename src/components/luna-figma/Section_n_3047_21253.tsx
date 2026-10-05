@@ -141,11 +141,18 @@ export function Section_n_3047_21253() {
           </div>
         </div>
       </div>
+      <div data-figma-node="3047:21293" className="box-border w-[267px] h-[429px] overflow-hidden rounded-[10px] relative gap-4 pt-[24px] pr-[16px] pb-[24px] pl-[16px]" style={{backgroundColor: "rgba(255, 255, 255, 0.05)"}}>
+        <div data-figma-node="3047:21294" className="box-border w-[219px] h-[381px] absolute left-[24px] top-[24px]">
+          <div data-figma-node="3047:21296" data-figma-component="741:2411" className="box-border w-[219px] h-[381px] absolute left-[0px] top-[0px] overflow-hidden rounded-[6.07px]">
+            <img data-figma-node="3047:21295" src="/assets/figma/3047-21295.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 6" className="box-border w-[218px] h-[381px] absolute left-[0px] top-[0px] rounded-[10px] max-w-none object-cover object-top" />
+          </div>
+        </div>
+      </div>
       <div data-figma-node="3047:21297" className="box-border w-[267px] h-[429px] overflow-hidden rounded-[10px] relative gap-4 pt-[24px] pr-[16px] pb-[24px] pl-[16px] border-[rgba(200,164,126,0.05)] border-[1px]" style={{backgroundColor: "rgba(255, 255, 255, 0.05)"}}>
         <div data-figma-node="3047:21298" className="box-border w-[219px] h-[381px] absolute left-[24px] top-[24px]">
-          <img data-figma-node="3047:21299" src="/assets/figma/3047-21299.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7" className="box-border w-[218px] h-[381px] absolute left-[0px] top-[0px] rounded-[10px] max-w-none object-cover object-top" />
           <div data-figma-node="3047:21300" data-figma-component="741:2411" className="box-border w-[219px] h-[381px] absolute left-[0px] top-[0px] overflow-hidden rounded-[6.07px] flex flex-col items-center gap-[27px]">
             <div data-figma-node="I3047:21300;741:2397" className="box-border w-[218px] h-[381px] overflow-hidden rounded-[6.07px] relative">
+              <img data-figma-node="3047:21299" src="/assets/figma/3047-21299.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7" className="box-border w-[218px] h-[381px] absolute left-[0px] top-[0px] rounded-[10px] max-w-none object-cover object-top" />
             </div>
             <div data-figma-node="I3047:21300;741:2398" className="box-border w-[211px] h-[67px] rounded-[3.64px] relative flex flex-col items-start gap-[8px] gap-[8.5px] pt-[8px] pr-[7px] pb-[8px] pl-[7px] bg-[#ffffff]">
               <p data-figma-node="I3047:21300;741:2399" className="box-border w-[197px] h-[16px] font-almarai text-[14px] font-[400] leading-[16px] text-left whitespace-nowrap text-[#000000]">Hates to see me coming</p>

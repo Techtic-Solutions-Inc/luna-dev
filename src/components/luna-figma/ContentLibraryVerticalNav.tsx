@@ -6,8 +6,8 @@
 export function ContentLibraryVerticalNav() {
   return (
     <div data-figma-node="3047:21447" data-figma-component="1666:5362" className="pointer-events-auto box-border w-[240px] h-[840px] absolute left-[0px] top-[0px] [--fx:0] [--fww:240] overflow-hidden flex flex-col items-center">
-            <img data-figma-node="I3047:21447;1237:1966" src="/assets/figma/I3047-21447-1237-1966.png" alt="stack" className="relative box-border w-[240px] h-[80px] max-w-none object-cover object-top" />
-            <div data-figma-node="I3047:21447;1237:2080" className="box-border w-[240px] h-[736px] relative flex flex-col items-start gap-[16px] gap-4 pt-[16px] pr-[16px] pl-[16px]">
+            <img data-figma-node="I3047:21447;1237:1966" src="/assets/figma/I3047-21447-1237-1966.png" alt="stack" className="box-border w-[240px] h-[80px] absolute left-[0px] top-[0px] max-w-none object-cover object-top" />
+            <div data-figma-node="I3047:21447;1237:2080" className="box-border w-[240px] h-[736px] relative mt-[80px] flex flex-col items-start gap-[16px] gap-4 pt-[16px] pr-[16px] pl-[16px]">
               <div data-figma-node="I3047:21447;1237:2081" className="box-border w-[208px] h-[404px] relative flex flex-col items-center gap-[10px] gap-2.5">
                 <div data-figma-node="I3047:21447;1678:7481" className="box-border w-[208px] h-[160px] relative flex flex-col items-center gap-[4px] gap-1">
                   <p data-figma-node="I3047:21447;1678:7469" className="box-border w-[208px] h-[16px] opacity-[0.6] font-almarai text-[14px] font-[400] leading-[16px] text-left whitespace-nowrap text-[#ffffff]">Studio</p>

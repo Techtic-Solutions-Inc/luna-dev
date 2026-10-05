@@ -13,11 +13,11 @@ export function IconButtonSection() {
   const iconbuttonProps = useFigmaFieldProps("iconbutton");
   return (
     <section
-      className="absolute box-border left-[1100px] top-[47px] w-[300px] h-[44px] [--fx:1100] [--fww:300] block z-[6]"
+      data-figma-node="3047:21439"
+      className="pointer-events-auto absolute box-border left-[1100px] top-[47px] w-[300px] h-[44px] [--fx:1100] [--fww:300] block z-[12]"
       style={{ backgroundColor: "rgba(255, 255, 255, 0.1)" }}
     >
       <input
-        data-figma-node="3047:21439"
         data-figma-field="iconbutton"
         data-figma-field-origin="layer_metadata"
         type="search"

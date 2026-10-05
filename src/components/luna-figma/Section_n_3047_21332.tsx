@@ -15,7 +15,17 @@ export function Section_n_3047_21332() {
         <div data-figma-node="3047:21335" className="box-border w-[185px] h-[40px] relative gap-5">
           <div data-figma-node="3047:21336" className="box-border w-[185px] h-[38px] absolute left-[0px] top-[1px] rounded-[6px] flex items-center gap-[10px] gap-2.5 pr-[16px] pl-[16px]" style={{backgroundColor: "rgba(255, 255, 255, 0.1)"}}>
             <div data-figma-node="3047:21337" className="box-border w-[20px] h-[20px] relative">
-              <div data-figma-node="3047:21338" className="box-border w-[20px] h-[20px] absolute left-[0px] top-[0px] pointer-events-none" style={{backgroundImage: "linear-gradient(45.0deg, #faad4f 0.0%, #dd2a7b 35.0%, #9537b0 62.0%, #515bd4 100.0%)", clipPath: "path('M10.0198 0L9.97429 0C4.46564 0 0 4.46696 0 9.97723L0 10.0228C0 15.533 4.46564 20 9.97429 20L10.0198 20C15.5285 20 19.9941 15.533 19.9941 10.0228L19.9941 9.97723C19.9941 4.46696 15.5285 0 10.0198 0Z')"}} />
+              <svg data-figma-node="3047:21338" viewBox="0 0 20 20" preserveAspectRatio="none" aria-hidden="true" className="box-border w-[20px] h-[20px] absolute left-[0px] top-[0px] pointer-events-none overflow-visible">
+                <defs>
+                  <linearGradient id="luna-3047-21338-grad" x1="0" y1="20" x2="20" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#faad4f" />
+                    <stop offset="35%" stopColor="#dd2a7b" />
+                    <stop offset="62%" stopColor="#9537b0" />
+                    <stop offset="100%" stopColor="#515bd4" />
+                  </linearGradient>
+                </defs>
+                <path d="M10.0198 0L9.97429 0C4.46564 0 0 4.46696 0 9.97723L0 10.0228C0 15.533 4.46564 20 9.97429 20L10.0198 20C15.5285 20 19.9941 15.533 19.9941 10.0228L19.9941 9.97723C19.9941 4.46696 15.5285 0 10.0198 0Z" fill="url(#luna-3047-21338-grad)" />
+              </svg>
               <div data-figma-node="3047:21339" className="box-border w-[12px] h-[12px] absolute left-[4px] top-[4px]">
                 <svg data-figma-node="3047:21340" viewBox="0 0 12.39 11.86" preserveAspectRatio="none" aria-hidden="true" className="box-border w-[12px] h-[12px] absolute left-[0px] top-[0px] pointer-events-none overflow-visible"><path d="M9.28641 0L3.09967 0C1.39047 0 0 1.39088 0 3.10058L0 8.76222C0 10.4719 1.39047 11.8628 3.09967 11.8628L9.28641 11.8628C10.9956 11.8628 12.3861 10.4719 12.3861 8.76222L12.3861 3.10058C12.3861 1.39088 10.9956 0 9.28641 0ZM1.09347 3.10058C1.09347 1.99418 1.9936 1.09379 3.09967 1.09379L9.28641 1.09379C10.3925 1.09379 11.2926 1.99418 11.2926 3.10058L11.2926 8.76222C11.2926 9.86862 10.3925 10.769 9.28641 10.769L3.09967 10.769C1.9936 10.769 1.09347 9.86862 1.09347 8.76222L1.09347 3.10058Z" fill="#ffffff" /></svg>
                 <svg data-figma-node="3047:21341" viewBox="0 0 5.77 5.77" preserveAspectRatio="none" aria-hidden="true" className="box-border w-[6px] h-[6px] absolute left-[-1px] top-[-1px] pointer-events-none overflow-visible"><path d="M2.88322 5.76814C4.47264 5.76814 5.76644 4.47465 5.76644 2.88407C5.76644 1.29349 4.47334 0 2.88322 0C1.29311 0 0 1.29349 0 2.88407C0 4.47465 1.29311 5.76814 2.88322 5.76814ZM2.88322 1.09449C3.87021 1.09449 4.67298 1.89749 4.67298 2.88477C4.67298 3.87205 3.87021 4.67505 2.88322 4.67505C1.89623 4.67505 1.09347 3.87205 1.09347 2.88477C1.09347 1.89749 1.89623 1.09449 2.88322 1.09449Z" fill="#ffffff" /></svg>

@@ -145,6 +145,13 @@ function injectMissingImageStamps(code: string, sectionRoot: SpecNode): string {
   return next;
 }
 
+function fixInstagramReelGradientVector(code: string): string {
+  return code.replace(
+    /<div data-figma-node="3047:21338" className="box-border w-\[20px\] h-\[20px\] absolute left-\[0px\] top-\[0px\] pointer-events-none" style=\{\{backgroundImage:[^}]+\}\} \/>/,
+    `<svg data-figma-node="3047:21338" viewBox="0 0 20 20" preserveAspectRatio="none" aria-hidden="true" className="box-border w-[20px] h-[20px] absolute left-[0px] top-[0px] pointer-events-none overflow-visible"><defs><linearGradient id="luna-3047-21338-grad" x1="0" y1="20" x2="20" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stopColor="#faad4f" /><stop offset="35%" stopColor="#dd2a7b" /><stop offset="62%" stopColor="#9537b0" /><stop offset="100%" stopColor="#515bd4" /></linearGradient></defs><path d="M10.0198 0L9.97429 0C4.46564 0 0 4.46696 0 9.97723L0 10.0228C0 15.533 4.46564 20 9.97429 20L10.0198 20C15.5285 20 19.9941 15.533 19.9941 10.0228L19.9941 9.97723C19.9941 4.46696 15.5285 0 10.0198 0Z" fill="url(#luna-3047-21338-grad)" /></svg>`,
+  );
+}
+
 function fixUltimateMindVector(code: string): string {
   return code.replace(
     /<svg([^>]*data-figma-node="I3047:21447;1700:3241"[^>]*) data-figma-diagnostic="vector_geometry_unavailable"[^>]*>[\s\S]*?<\/svg>/,
@@ -178,12 +185,8 @@ function normalizeOwnedLayoutModule(code: string, id: string): string {
     next = fixUltimateMindVector(next);
   }
 
-  if (id.endsWith("Section_n_3047_21253.tsx")) {
-    const sections = loadContentLibrarySections();
-    const gridRoot = findSpecSection(sections, "3047:21253");
-    if (gridRoot) {
-      next = injectMissingImageStamps(next, gridRoot);
-    }
+  if (id.endsWith("Section_n_3047_21332.tsx")) {
+    next = fixInstagramReelGradientVector(next);
   }
 
   return next;
