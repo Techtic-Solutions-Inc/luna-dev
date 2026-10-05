@@ -12,21 +12,26 @@ export class ApiRequestError extends Error {
   }
 }
 
+/** Backend origin for locked contract paths. Empty `VITE_API_BASE_URL` → same-origin. */
 function getBaseUrl(): string {
   const base = import.meta.env.VITE_API_BASE_URL;
-  if (!base) {
-    throw new Error("VITE_API_BASE_URL is not configured.");
+  if (base === undefined || base === null || String(base).trim() === "") {
+    return "";
   }
-  return base.replace(/\/$/, "");
+  return String(base).replace(/\/$/, "");
 }
 
 /**
- * Join a locked contract path (e.g. `/api/visitor/home`) to VITE_API_BASE_URL
- * when the base URL already includes the `/api` prefix.
+ * Join a locked contract path to VITE_API_BASE_URL (server origin).
+ * Contract paths include their prefix (e.g. `/api/...`). Empty base → same-origin.
  */
 export function resolveApiUrl(lockedPath: string): string {
   const base = getBaseUrl();
   const normalized = lockedPath.startsWith("/") ? lockedPath : `/${lockedPath}`;
+
+  if (!base) {
+    return normalized;
+  }
 
   if (base.endsWith("/api") && normalized.startsWith("/api/")) {
     return `${base}${normalized.slice("/api".length)}`;
