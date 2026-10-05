@@ -4,4 +4,12 @@ export const LOCKED_API_ROUTES = {
     method: "GET",
     path: "/api/visitor/home",
   },
+  authLogin: {
+    method: "POST",
+    path: "/auth/login",
+  },
+  authForgotPassword: {
+    method: "POST",
+    path: "/api/auth/forgot-password",
+  },
 } as const;
