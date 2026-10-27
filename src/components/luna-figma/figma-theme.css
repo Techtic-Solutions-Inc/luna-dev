@@ -1,0 +1,27 @@
+/**
+ * Luna generated support file
+ * Role: figma design tokens
+ * Ownership: Figma-owned layout
+ * luna-spec-codegen: owned-layout
+ */
+@theme inline {
+  --color-background: #0e0d0d;
+  --color-accent: #c8a47e;
+  --color-color-19: #333333;
+  --color-color-21: #14100d;
+  --color-color-24: #0e0d0d;
+  --color-color-27: #0e0d0d;
+  --color-color-46: #0b0b0b;
+  --color-color-66: #ffffff;
+  --color-color-78: #232323;
+  --color-info: #c8a47e;
+  --color-success: #ffffff;
+  --color-text-primary: #000000;
+  --color-text-secondary: #828282;
+  --color-warning: #e0e0e0;
+  --color-panel-dark: #1b1b1b;
+  --color-icon-muted: #868686;
+  --font-almarai: "Almarai", sans-serif;
+  --font-eb-garamond: "EB Garamond", serif;
+  --font-public-sans: "Public Sans", sans-serif;
+}

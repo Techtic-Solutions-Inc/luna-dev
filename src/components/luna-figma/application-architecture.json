@@ -1,0 +1,47 @@
+{
+  "adapter": "react",
+  "modules": [
+    {
+      "evidence": "application_ir.features",
+      "id": "feature:home",
+      "kind": "feature",
+      "ownership": "application",
+      "page_ids": [
+        "page:home:2241:1459"
+      ],
+      "path": "src/features/home"
+    }
+  ],
+  "notes": [
+    "Visual luna-figma files remain Figma-owned.",
+    "Application modules attach state to semantic owners (page/feature/form/collection/workflow), not a mega-hook.",
+    "Collections authorize 0..N cardinality independent of painted nodes.",
+    "Unresolved form fields stay explicit; do not invent controls."
+  ],
+  "ownership": {
+    "developer_owned": [
+      "feature hooks implementations",
+      "API client wiring",
+      "approved workflow logic"
+    ],
+    "figma_owned": [
+      "components/luna-figma/* owned-layout",
+      "visual geometry classes",
+      "assets"
+    ],
+    "generated_owned": [
+      "application-model.json",
+      "application-ir.json",
+      "architecture plan modules below"
+    ]
+  },
+  "pages": [
+    {
+      "component": "luna-figma page (visual)",
+      "frame_id": "2241:1459",
+      "page_id": "page:home:2241:1459",
+      "route": "home"
+    }
+  ],
+  "visual_emit": "legacy_artboard_compatible"
+}
