@@ -79,9 +79,12 @@ function lookup(binding: FigmaDisplayBinding): { loaded: boolean; value: unknown
     if (current === undefined || current === null) {
       break;
     }
-    current = typeof part === "number"
-      ? (Array.isArray(current) ? current[part] : undefined)
-      : asRecord(current)?.[part];
+    current =
+      typeof part === "number"
+        ? Array.isArray(current)
+          ? current[part]
+          : undefined
+        : asRecord(current)?.[part];
   }
   return { loaded: true, value: current };
 }

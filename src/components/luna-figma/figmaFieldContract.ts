@@ -41,8 +41,8 @@ export const UNRESOLVED_FIGMA_FIELDS: Readonly<Record<string, readonly string[]>
     "phone-number",
     "how-long-have-you-been-in-real-estate",
     "what-do-you-currently-do-for-marketing-your-business",
-    "your-message"
-  ]
+    "your-message",
+  ],
 };
 
 export function figmaOperations(frameId: string): readonly FigmaOperation[] {
@@ -165,10 +165,7 @@ function messageText(value: unknown): string | null {
 }
 
 /** Server validation errors mapped from API field names onto Figma fields. */
-export function fieldErrorsFromResponse(
-  op: FigmaOperation,
-  body: unknown,
-): Record<string, string> {
+export function fieldErrorsFromResponse(op: FigmaOperation, body: unknown): Record<string, string> {
   const errors: Record<string, string> = {};
   const byApi = new Map(op.fields.map((field) => [field.apiField, field.figmaField]));
   const record = asRecord(body);

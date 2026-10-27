@@ -10,7 +10,6 @@
   --color-destructive-foreground: var(--color-success);
   --color-muted: var(--color-color-25);
   --color-muted-foreground: var(--color-text-secondary);
-  --color-accent: var(--color-info);
   --color-accent-foreground: var(--color-success);
   --color-popover: var(--color-color-27);
   --color-popover-foreground: var(--color-success);
@@ -20,7 +19,6 @@
   --color-input: var(--color-color-56);
   --color-ring: var(--color-info);
   --color-foreground: var(--color-success);
-  --color-background: var(--color-color-27);
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.625rem;

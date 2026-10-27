@@ -1,11 +1,22 @@
 import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
+import eslintPluginPrettier from "eslint-plugin-prettier";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: [ "next-env.d.ts", ".next/**", "out/**", "build/**","dist/**", "node_modules/**", "coverage/**"] },
+  {
+    ignores: [
+      "next-env.d.ts",
+      ".next/**",
+      "out/**",
+      "build/**",
+      "dist/**",
+      "node_modules/**",
+      "coverage/**",
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   eslintConfigPrettier,
@@ -26,6 +37,7 @@ export default tseslint.config(
     plugins: {
       react,
       "react-hooks": reactHooks,
+      prettier: eslintPluginPrettier,
     },
     languageOptions: {
       parserOptions: {
@@ -40,6 +52,7 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
+      "prettier/prettier": "warn",
     },
   },
 );

@@ -1,5 +1,5 @@
 import { createGlobalStyle, ThemeProvider as StyledThemeProvider } from "styled-components";
-import { colors, radius, shadows, spacing, typography } from "./tokens";
+import { colors, effects, radius, shadows, spacing, typography } from "./tokens";
 import { globalResetRules } from "./globalReset";
 
 function cssVarName(key: string): string {
@@ -20,7 +20,12 @@ function buildCssVariables(): string {
   for (const [key, value] of Object.entries(shadows)) {
     lines.push(`  --shadow-${key}: ${value};`);
   }
+  for (const [key, value] of Object.entries(effects)) {
+    lines.push(`  --effect-${key}: ${value};`);
+  }
   lines.push(`  --font-almarai: ${typography.body.fontFamily};`);
+  lines.push(`  --font-eb-garamond: ${typography["heading-xl-36"].fontFamily};`);
+  lines.push(`  --font-public-sans: "Public Sans", sans-serif;`);
   return lines.join("\n");
 }
 
@@ -30,6 +35,7 @@ export const theme = {
   spacing,
   radius,
   shadows,
+  effects,
 } as const;
 
 export type AppTheme = typeof theme;

@@ -8,9 +8,7 @@
 // with no bound fields stay on the real API.
 
 /** METHOD + path → HTTP body (same envelope as the live response). */
-export const MOCK_BOUND_READS: Readonly<Record<string, unknown>> = !import.meta.env.PROD
-  ? {}
-  : {};
+export const MOCK_BOUND_READS: Readonly<Record<string, unknown>> = !import.meta.env.PROD ? {} : {};
 
 const MOCK_FLAG_ENABLED = new Set(["true", "1", "yes"]);
 const MOCK_FLAG_DISABLED = new Set(["false", "0", "no"]);

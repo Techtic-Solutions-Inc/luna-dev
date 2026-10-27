@@ -9,9 +9,446 @@
  */
 export function MarketingThatStopsTheScrollSection() {
   return (
-    <section data-figma-node="2295:3500" id="content" className="relative box-border w-full min-w-0 h-[919px] min-w-[2336px] block bg-success z-[6]">
-      <div data-figma-node="2241:2575" className="box-border w-[1920px] h-[919px] absolute left-[208px] top-[0px] block bg-success"></div>
-      <div data-figma-node="2241:2579" className="box-border w-max max-w-[min(2340px,100%)] h-auto absolute left-[calc(50%+0px)] -translate-x-1/2 top-[calc(50%+0px)] -translate-y-1/2 overflow-hidden"><div className="luna-spec-marquee-track flex w-max gap-[21px]"><div className="flex shrink-0 gap-[21px]"><img data-figma-node="I2295:3482;65:2285" src="/assets/figma/I2295-3482-65-2285.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2286" src="/assets/figma/I2295-3482-65-2286.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 5" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2287" src="/assets/figma/I2295-3482-65-2287.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 2" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2288" src="/assets/figma/I2295-3482-65-2288.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 6" width={315} height={551} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[315px] h-[551px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2289" src="/assets/figma/I2295-3482-65-2289.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 1" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2290" src="/assets/figma/I2295-3482-65-2290.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 3" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2291" src="/assets/figma/I2295-3482-65-2291.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 4" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1642" src="/assets/figma/I2295-3482-323-1642.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1643" src="/assets/figma/I2295-3482-323-1643.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 5" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1644" src="/assets/figma/I2295-3482-323-1644.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 2" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1645" src="/assets/figma/I2295-3482-323-1645.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 6" width={315} height={551} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[315px] h-[551px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1646" src="/assets/figma/I2295-3482-323-1646.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 1" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1647" src="/assets/figma/I2295-3482-323-1647.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 3" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1648" src="/assets/figma/I2295-3482-323-1648.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 4" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /></div><div className="flex shrink-0 gap-[21px]" aria-hidden="true"><img data-figma-node="I2295:3482;65:2285" src="/assets/figma/I2295-3482-65-2285.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2286" src="/assets/figma/I2295-3482-65-2286.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 5" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2287" src="/assets/figma/I2295-3482-65-2287.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 2" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2288" src="/assets/figma/I2295-3482-65-2288.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 6" width={315} height={551} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[315px] h-[551px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2289" src="/assets/figma/I2295-3482-65-2289.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 1" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2290" src="/assets/figma/I2295-3482-65-2290.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 3" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;65:2291" src="/assets/figma/I2295-3482-65-2291.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 4" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1642" src="/assets/figma/I2295-3482-323-1642.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1643" src="/assets/figma/I2295-3482-323-1643.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 5" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1644" src="/assets/figma/I2295-3482-323-1644.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 2" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1645" src="/assets/figma/I2295-3482-323-1645.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 6" width={315} height={551} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[315px] h-[551px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1646" src="/assets/figma/I2295-3482-323-1646.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 1" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1647" src="/assets/figma/I2295-3482-323-1647.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 3" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /><img data-figma-node="I2295:3482;323:1648" src="/assets/figma/I2295-3482-323-1648.png" alt="attLgjgQKNGEFOHWZ-large-IMG_6232 4" width={316} height={552} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top" /></div></div></div>
+    <section
+      data-figma-node="2295:3500"
+      id="content"
+      className="relative box-border w-full min-w-0 h-[919px] min-w-[2336px] block bg-success z-[6]"
+    >
+      <div
+        data-figma-node="2241:2575"
+        className="box-border w-[1920px] h-[919px] absolute left-[208px] top-[0px] block bg-success"
+      ></div>
+      <div
+        data-figma-node="2241:2579"
+        className="box-border w-max max-w-[min(2340px,100%)] h-auto absolute left-[calc(50%+0px)] -translate-x-1/2 top-[calc(50%+0px)] -translate-y-1/2 overflow-hidden"
+      >
+        <div className="luna-spec-marquee-track flex w-max gap-[21px]">
+          <div className="flex shrink-0 gap-[21px]">
+            <img
+              data-figma-node="I2295:3482;65:2285"
+              src="/assets/figma/I2295-3482-65-2285.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2286"
+              src="/assets/figma/I2295-3482-65-2286.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 5"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2287"
+              src="/assets/figma/I2295-3482-65-2287.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 2"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2288"
+              src="/assets/figma/I2295-3482-65-2288.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 6"
+              width={315}
+              height={551}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[315px] h-[551px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2289"
+              src="/assets/figma/I2295-3482-65-2289.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 1"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2290"
+              src="/assets/figma/I2295-3482-65-2290.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 3"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2291"
+              src="/assets/figma/I2295-3482-65-2291.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 4"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1642"
+              src="/assets/figma/I2295-3482-323-1642.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1643"
+              src="/assets/figma/I2295-3482-323-1643.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 5"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1644"
+              src="/assets/figma/I2295-3482-323-1644.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 2"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1645"
+              src="/assets/figma/I2295-3482-323-1645.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 6"
+              width={315}
+              height={551}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[315px] h-[551px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1646"
+              src="/assets/figma/I2295-3482-323-1646.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 1"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1647"
+              src="/assets/figma/I2295-3482-323-1647.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 3"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1648"
+              src="/assets/figma/I2295-3482-323-1648.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 4"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+          </div>
+          <div className="flex shrink-0 gap-[21px]" aria-hidden="true">
+            <img
+              data-figma-node="I2295:3482;65:2285"
+              src="/assets/figma/I2295-3482-65-2285.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2286"
+              src="/assets/figma/I2295-3482-65-2286.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 5"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2287"
+              src="/assets/figma/I2295-3482-65-2287.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 2"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2288"
+              src="/assets/figma/I2295-3482-65-2288.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 6"
+              width={315}
+              height={551}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[315px] h-[551px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2289"
+              src="/assets/figma/I2295-3482-65-2289.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 1"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2290"
+              src="/assets/figma/I2295-3482-65-2290.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 3"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;65:2291"
+              src="/assets/figma/I2295-3482-65-2291.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 4"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1642"
+              src="/assets/figma/I2295-3482-323-1642.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 7"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1643"
+              src="/assets/figma/I2295-3482-323-1643.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 5"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1644"
+              src="/assets/figma/I2295-3482-323-1644.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 2"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1645"
+              src="/assets/figma/I2295-3482-323-1645.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 6"
+              width={315}
+              height={551}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[315px] h-[551px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1646"
+              src="/assets/figma/I2295-3482-323-1646.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 1"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1647"
+              src="/assets/figma/I2295-3482-323-1647.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 3"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+            <img
+              data-figma-node="I2295:3482;323:1648"
+              src="/assets/figma/I2295-3482-323-1648.png"
+              alt="attLgjgQKNGEFOHWZ-large-IMG_6232 4"
+              width={316}
+              height={552}
+              decoding="async"
+              onError={(e) => {
+                const img = e.currentTarget as HTMLImageElement;
+                img.onerror = null;
+                img.src =
+                  "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E";
+              }}
+              className="box-border w-[316px] h-[552px] rounded-[20.41px] max-w-none object-cover object-top"
+            />
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

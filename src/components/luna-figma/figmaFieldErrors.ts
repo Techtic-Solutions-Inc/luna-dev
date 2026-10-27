@@ -3,11 +3,7 @@
 
 import { createElement, useSyncExternalStore, type FormEvent, type ReactElement } from "react";
 
-import {
-  figmaWriteOperation,
-  validateValues,
-  type FigmaFieldValues,
-} from "./figmaFieldContract";
+import { figmaWriteOperation, validateValues, type FigmaFieldValues } from "./figmaFieldContract";
 
 // ── Field error state (aria-invalid / aria-describedby) ─────────────────────
 // Rules come from the contract operations above; nothing here is invented.
@@ -29,7 +25,11 @@ export function setFigmaFieldErrors(errors: Readonly<Record<string, string>>): v
 }
 
 export function useFigmaFieldErrors(): Readonly<Record<string, string>> {
-  return useSyncExternalStore(subscribeFieldErrors, () => fieldErrors, () => noFieldErrors);
+  return useSyncExternalStore(
+    subscribeFieldErrors,
+    () => fieldErrors,
+    () => noFieldErrors,
+  );
 }
 
 export function figmaFieldErrorId(field: string): string {
@@ -74,7 +74,10 @@ export function figmaValidateOnSubmit(event: FormEvent<HTMLFormElement>): void {
   const values: FigmaFieldValues = {};
   for (const field of op.fields) {
     const control = form.elements.namedItem(field.figmaField);
-    if (control instanceof HTMLInputElement && (control.type === "checkbox" || control.type === "radio")) {
+    if (
+      control instanceof HTMLInputElement &&
+      (control.type === "checkbox" || control.type === "radio")
+    ) {
       values[field.figmaField] = control.checked;
     } else if (
       control instanceof HTMLInputElement ||

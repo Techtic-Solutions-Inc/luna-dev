@@ -2,6 +2,7 @@
   "name": "luna-figma-app",
   "private": true,
   "version": "0.0.0",
+  "description": "Vite SPA. Dual styling: styled-components GlobalStyle and tokens.ts stay in sync with src/components/luna-figma/figma-theme.css; Tailwind 4 and shadcn/Radix cover app UI primitives.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,7 +14,11 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@radix-ui/react-alert-dialog": "^1.1.14",
+    "@radix-ui/react-toast": "^1.2.14",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-select": "^2.2.5",
@@ -53,7 +58,7 @@
     "vite": "^6.0.0",
     "vitest": "^3.1.4",
     "@tailwindcss/postcss": "^4.0.0",
-    "eslint-config-next": "^15.1.0",
-    "@types/node": "^22.10.0"
+    "@types/node": "^22.10.0",
+    "eslint-config-next": "^15.1.0"
   }
 }
