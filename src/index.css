@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary: var(--color-info);
+  --color-primary: var(--color-accent);
   --color-primary-foreground: var(--color-success);
   --color-secondary: var(--color-color-26);
   --color-secondary-foreground: var(--color-text-primary);
@@ -11,7 +11,7 @@
   --color-muted: var(--color-color-25);
   --color-muted-foreground: var(--color-text-secondary);
   --color-accent: var(--color-info);
-  --color-accent-foreground: var(--color-text-primary);
+  --color-accent-foreground: var(--color-success);
   --color-popover: var(--color-color-27);
   --color-popover-foreground: var(--color-success);
   --color-card: var(--color-color-27);
@@ -20,6 +20,7 @@
   --color-input: var(--color-color-56);
   --color-ring: var(--color-info);
   --color-foreground: var(--color-success);
+  --color-background: var(--color-color-27);
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.625rem;

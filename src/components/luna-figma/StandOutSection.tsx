@@ -27,7 +27,7 @@ import { Shared9 } from "./Shared9";
 import { Stack } from "./Stack";
 export function StandOutSection() {
   return (
-    <section data-figma-node="2270:14699" className="relative box-border mt-[60px] w-[1267px] max-w-full ml-[337px] min-h-[519px] flex flex-row items-start gap-[50px] z-[8]">
+    <section data-figma-node="2270:14699" className="relative box-border mt-[60px] w-[1267px] max-w-full ml-[337px] box-border h-[519px] overflow-hidden flex flex-row items-start gap-[50px] z-[8]">
       <div data-figma-node="2270:14700" className="box-border w-max max-w-[min(521px,100%)] h-auto relative flex flex-row items-start gap-5">
         <div data-figma-node="2270:14701" className="box-border w-max max-w-[min(521px,100%)] h-auto relative flex flex-col items-start gap-5">
           {/* LUNA-UNRESOLVED-ACTION: no prototype reaction or submit binding found for this control (node 2270:15222) — wire manually */}

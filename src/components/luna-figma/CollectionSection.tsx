@@ -26,7 +26,7 @@ import { Shared9 } from "./Shared9";
 import { Stack } from "./Stack";
 export function CollectionSection() {
   return (
-    <section data-figma-node="2270:14191" className="relative box-border mt-[306px] w-[1267px] max-w-full ml-[337px] min-h-[519px] flex flex-row items-start gap-[50px] z-[3]">
+    <section data-figma-node="2270:14191" className="relative box-border mt-[306px] w-[1267px] max-w-full ml-[337px] box-border h-[519px] overflow-hidden flex flex-row items-start gap-[50px] z-[3]">
       <div data-figma-node="2264:10897" className="box-border w-max max-w-[min(521px,100%)] h-auto relative flex flex-row items-start gap-5">
         <div data-figma-node="2270:14185" className="box-border w-max max-w-[min(521px,100%)] h-auto relative flex flex-col items-start gap-5">
           <div data-figma-node="2270:14187" className="box-border w-max max-w-[min(521px,100%)] h-auto shrink-0 relative flex flex-col items-start gap-5">
