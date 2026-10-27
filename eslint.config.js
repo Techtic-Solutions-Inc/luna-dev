@@ -2,6 +2,7 @@ import js from "@eslint/js";
 
 /** TypeScript sources are checked via `npm run typecheck` (TS 7.x). ESLint covers config files. */
 export default [
+  { ignores: ["next-env.d.ts", ".next/**", "out/**", "build/**", "dist/**", "coverage/**", "node_modules/**"] },
   js.configs.recommended,
   {
     files: ["*.{js,mjs,cjs}", "vite.config.ts", "vitest.config.ts"],

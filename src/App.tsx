@@ -1,12 +1,5 @@
-import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { Toaster } from "@/components/ui/sonner";
-import AppRouter from "@/routes";
+import { FigmaScreenPage } from "./components/luna-figma/FigmaScreenPage";
 
 export default function App() {
-  return (
-    <ErrorBoundary>
-      <AppRouter />
-      <Toaster position="top-right" richColors closeButton />
-    </ErrorBoundary>
-  );
+  return <FigmaScreenPage />;
 }
