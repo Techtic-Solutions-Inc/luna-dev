@@ -7,11 +7,31 @@ const baseURL = import.meta.env.VITE_API_BASE_URL?.replace(/\/+$/, "") ?? "";
 export const apiClient = axios.create({
   baseURL,
   headers: { Accept: "application/json" },
+  validateStatus: (status) => status >= 200 && status < 300,
 });
 
+function normalizeRequestPath(url: string | undefined, configBaseURL?: string): string {
+  if (!url) {
+    return "";
+  }
+  let path = url.split("?")[0] ?? "";
+  const base = (configBaseURL ?? baseURL).replace(/\/+$/, "");
+  if (base && path.startsWith(base)) {
+    path = path.slice(base.length);
+  }
+  if (!path.startsWith("/")) {
+    path = `/${path}`;
+  }
+  return path;
+}
+
+function isLoginRequest(url: string | undefined, method: string | undefined, configBaseURL?: string): boolean {
+  const path = normalizeRequestPath(url, configBaseURL);
+  return path === "/api/auth/login" && method?.toLowerCase() === "post";
+}
+
 apiClient.interceptors.request.use((config) => {
-  const isLogin = config.url === "/api/auth/login" && config.method?.toLowerCase() === "post";
-  if (!isLogin) {
+  if (!isLoginRequest(config.url, config.method, config.baseURL)) {
     const token = getToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -20,23 +40,13 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
-function handleUnauthorized(url: string | undefined, method: string | undefined): void {
-  const isLogin = url === "/api/auth/login" && method?.toLowerCase() === "post";
-  if (!isLogin) {
-    rejectSession();
-  }
-}
-
 apiClient.interceptors.response.use(
-  (response) => {
-    if (response.status === 401) {
-      handleUnauthorized(response.config.url, response.config.method);
-    }
-    return response;
-  },
+  (response) => response,
   (error) => {
     if (axios.isAxiosError(error) && error.response?.status === 401) {
-      handleUnauthorized(error.config?.url, error.config?.method);
+      if (!isLoginRequest(error.config?.url, error.config?.method, error.config?.baseURL)) {
+        rejectSession();
+      }
     }
     return Promise.reject(error);
   },

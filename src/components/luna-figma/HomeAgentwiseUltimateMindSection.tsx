@@ -8,10 +8,11 @@
  * luna-spec-codegen: owned-layout
  */
 import { figmaUnresolvedActionProps } from "./useFigmaScreenData";
-import { figmaTextContent } from "./figmaDisplay";
+import { useFigmaTextContent } from "./figmaDisplay";
 import { Button } from "@/components/ui/button";
 import { Shared2D0874 } from "./Shared2D0874";
 export function HomeAgentwiseUltimateMindSection() {
+  const cardAvatarSrc = useFigmaTextContent("I3735:5494;1226:1592", "");
   return (
     <section data-figma-node="3654:11564" className="relative box-border mt-[97px] w-[1500px] max-w-full mx-auto h-[695px] min-w-[1500px] pl-[210px] pr-[210px] block overflow-hidden z-[13]">
       <div className="relative box-border w-[1500px] h-[695px] rounded-[20px] block" style={{backgroundImage: "linear-gradient(180.0deg, rgba(25, 38, 32, 0.7) 0.0%, rgba(17, 93, 57, 0.7) 100.0%)"}}>
@@ -189,7 +190,7 @@ export function HomeAgentwiseUltimateMindSection() {
                           <div data-figma-node="I3735:5494;1226:1589" className="box-border w-[14px] shrink-0 h-[14px] rounded-[23.4px] relative flex flex-row items-start pt-[1px] pr-[1px] pb-[1px] pl-[1px] outline-[#333333] outline-[0.47px]">
                             <div data-figma-node="I3735:5494;1226:1590" className="box-border flex-1 min-w-0 self-stretch overflow-hidden rounded-[234.03px] relative flex flex-row items-center justify-center">
                               <div data-figma-node="I3735:5494;1226:1591" className="box-border w-[19px] shrink-0 h-[19px] rounded-[234.03px] relative flex flex-row items-center justify-center">
-                                <img data-figma-node="I3735:5494;1226:1592" src={figmaTextContent("avatar_url", "")} alt="#Img_Avatar.25" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border flex-1 min-w-0 self-stretch rounded-[234.03px] object-cover" />
+                                <img data-figma-node="I3735:5494;1226:1592" src={cardAvatarSrc} alt="#Img_Avatar.25" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border flex-1 min-w-0 self-stretch rounded-[234.03px] object-cover" />
                               </div>
                             </div>
                           </div>

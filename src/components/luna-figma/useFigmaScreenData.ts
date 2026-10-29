@@ -10,6 +10,7 @@ import {
   useEffect,
   useMemo,
   useState,
+  type ChangeEvent,
   type Dispatch,
   type ReactNode,
   type SetStateAction,
@@ -657,32 +658,31 @@ function useScreenContext(): ScreenContextValue {
   return ctx;
 }
 
-export function figmaFieldProps(field: string): FigmaFieldBinding {
+export function useFigmaFieldProps(field: string) {
   const { values, setValues, readLoading, submitting, frameId } = useScreenContext();
   const unresolved = UNRESOLVED_FIGMA_FIELDS[frameId]?.includes(field);
   const value = values[field];
   const disabled = readLoading || submitting;
-
-  if (field === "checkbox") {
-    return {
-      checked: value === true,
-      disabled,
-      onChange: (event) => {
-        setValues((prev) => ({ ...prev, checkbox: event.target.checked }));
-      },
-    };
-  }
+  const isCheckbox = field === "checkbox";
 
   return {
-    value: typeof value === "string" ? value : value === undefined ? "" : String(value),
-    disabled: disabled && !unresolved,
-    onChange: (event) => {
+    ...(isCheckbox
+      ? { checked: value === true }
+      : {
+          value: typeof value === "string" ? value : value === undefined ? "" : String(value),
+        }),
+    disabled: isCheckbox ? disabled : disabled && !unresolved,
+    onChange: (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      if (isCheckbox) {
+        setValues((prev) => ({ ...prev, checkbox: (event.target as HTMLInputElement).checked }));
+        return;
+      }
       setValues((prev) => ({ ...prev, [field]: event.target.value }));
     },
   };
 }
 
-export function figmaActionProps(action: string): FigmaActionBinding {
+export function useFigmaActionProps(action: string): FigmaActionBinding {
   const { submit, submitting, setRatingForAction } = useScreenContext();
 
   if (SUBMIT_ACTIONS.has(action)) {

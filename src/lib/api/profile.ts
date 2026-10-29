@@ -24,6 +24,16 @@ export async function get(): Promise<ProfileData> {
 }
 
 export async function update(payload: UpdateProfileRequest): Promise<ProfileData> {
+  if (
+    typeof payload.first_name !== "string" ||
+    !payload.first_name.trim() ||
+    typeof payload.last_name !== "string" ||
+    !payload.last_name.trim() ||
+    typeof payload.email !== "string" ||
+    !payload.email.trim()
+  ) {
+    throw Object.assign(new Error("Profile update requires first name, last name, and email."), { status: 400 });
+  }
   const response = await apiRequest({
     method: "PUT",
     path: "/api/profile",

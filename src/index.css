@@ -5,7 +5,8 @@
 @theme inline {
   --color-accent: var(--accent, #c8a47e);
   --color-primary: var(--primary, #c8a47e);
-  --color-foreground: var(--text-primary, #ffffff);
+  --color-foreground: var(--color-success, #ffffff);
+  --color-success: var(--color-success, #ffffff);
   --color-muted-foreground: var(--text-secondary, #828282);
   --color-border: var(--border, rgba(200, 164, 126, 0.2));
   --color-ring: var(--accent, #c8a47e);

@@ -22,10 +22,4 @@ export default tseslint.config(
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
     },
   },
-  {
-    files: ["src/components/luna-figma/**/*.{ts,tsx}"],
-    rules: {
-      "react-hooks/rules-of-hooks": "off",
-    },
-  },
 );

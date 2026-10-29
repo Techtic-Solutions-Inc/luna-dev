@@ -22,9 +22,11 @@ createRoot(rootElement).render(
     <ErrorBoundary>
       <ThemeProvider theme={appTheme}>
         <GlobalStyle />
-        <span className="sr-only" aria-hidden="true">
-          <FontAwesomeIcon icon={faCheck} />
-        </span>
+        {import.meta.env.DEV ? (
+          <span className="fixed bottom-2 right-2 z-[9999] rounded bg-[#14100d] p-2 text-[#ffffff]" aria-label="Font Awesome loaded">
+            <FontAwesomeIcon icon={faCheck} aria-hidden={false} title="Font Awesome loaded" />
+          </span>
+        ) : null}
         <App />
       </ThemeProvider>
     </ErrorBoundary>

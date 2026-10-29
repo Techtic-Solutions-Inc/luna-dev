@@ -3,14 +3,9 @@
 // The data hook calls publishReadPayload(method, path, body) after every read;
 // bound copy then renders the response value and cards past the response
 // array length are hidden. Before a response arrives the Figma copy shows.
-// figmaTextContent and figmaItemProps call useSyncExternalStore internally so
-// they re-render when payloads change. They must be called at component render
-// level, not inside callbacks or conditionals — same rule as any hook.
+// useFigmaTextContent and useFigmaItemProps subscribe to read payloads and
+// must be called at component render level, not inside callbacks or conditionals.
 import { useSyncExternalStore } from "react";
-
-// Aliased so rules-of-hooks (not every project enables it) does not flag the
-// non-use-named helpers below, so no blanket lint suppression is needed.
-const readStore = useSyncExternalStore;
 
 export type FigmaDisplayPathPart = string | number;
 
@@ -38,6 +33,39 @@ export const FIGMA_DISPLAY_BINDINGS: Readonly<Record<string, FigmaDisplayBinding
     valueType: "string",
     format: null,
     evidence: "profile_heading_full_name",
+  },
+  "I3158:22263;1226:1920": {
+    nodeId: "I3158:22263;1226:1920",
+    frameId: "3158:22053",
+    operation: "GET /api/profile",
+    responseUnwrap: "data",
+    path: ["full_name"],
+    kind: "text",
+    valueType: "string",
+    format: null,
+    evidence: "profile_sidebar_full_name",
+  },
+  "I3158:22263;1226:1592": {
+    nodeId: "I3158:22263;1226:1592",
+    frameId: "3158:22053",
+    operation: "GET /api/profile",
+    responseUnwrap: "data",
+    path: ["image"],
+    kind: "text",
+    valueType: "string",
+    format: null,
+    evidence: "profile_sidebar_avatar_url",
+  },
+  "3158:22611": {
+    nodeId: "3158:22611",
+    frameId: "3158:22053",
+    operation: "GET /api/profile",
+    responseUnwrap: "data",
+    path: ["image"],
+    kind: "text",
+    valueType: "string",
+    format: null,
+    evidence: "profile_header_avatar_url",
   },
 };
 
@@ -164,8 +192,8 @@ export function formatDisplayValue(value: unknown, binding: FigmaDisplayBinding)
 }
 
 /** Bound copy: the response value once its read is published, the Figma copy before. */
-export function figmaTextContent(nodeId: string, fallback: string): string {
-  readStore(subscribe, snapshot, snapshot);
+export function useFigmaTextContent(nodeId: string, fallback: string): string {
+  useSyncExternalStore(subscribe, snapshot, snapshot);
   const binding = FIGMA_DISPLAY_BINDINGS[nodeId];
   if (!binding || binding.kind !== "text") {
     return fallback;
@@ -181,8 +209,8 @@ export type FigmaItemBinding = {
 };
 
 /** A repeated card hides once its read is published without an item at its index. */
-export function figmaItemProps(nodeId: string): FigmaItemBinding {
-  readStore(subscribe, snapshot, snapshot);
+export function useFigmaItemProps(nodeId: string): FigmaItemBinding {
+  useSyncExternalStore(subscribe, snapshot, snapshot);
   const binding = FIGMA_DISPLAY_BINDINGS[nodeId];
   if (!binding || binding.kind !== "item") {
     return {};
@@ -212,8 +240,8 @@ export function publishSelectOptions(nodeId: string, options: FigmaSelectOption[
 }
 
 /** Dynamic <option> list for a select bound to a list endpoint; [] before load / unresolved. */
-export function figmaSelectOptions(nodeId: string): FigmaSelectOption[] {
-  readStore(subscribe, snapshot, snapshot);
+export function useFigmaSelectOptions(nodeId: string): FigmaSelectOption[] {
+  useSyncExternalStore(subscribe, snapshot, snapshot);
   return selectOptions.get(nodeId) ?? [];
 }
 

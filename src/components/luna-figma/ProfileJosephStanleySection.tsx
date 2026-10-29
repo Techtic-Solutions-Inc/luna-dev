@@ -7,18 +7,22 @@
  * Behavior: useFigmaScreenData / figmaFieldContract
  * luna-spec-codegen: owned-layout
  */
-import { figmaTextContent } from "./figmaDisplay";
+import { useFigmaTextContent } from "./figmaDisplay";
+
 export function ProfileJosephStanleySection() {
+  const fullName = useFigmaTextContent("3158:22834", "Joseph Stanley");
+  const avatarSrc = useFigmaTextContent("3158:22611", "/assets/figma/3158-22611.png");
+
   return (
     <section data-figma-node="3158:22607" className="relative box-border mt-[62px] w-[295px] max-w-full ml-[272px] min-h-[92px] flex flex-row items-center gap-5 z-[6]">
       <div data-figma-node="3158:22608" className="box-border w-[92px] shrink-0 h-[92px] rounded-[60px] relative block">
         <div data-figma-node="3158:22609" className="box-border w-[92px] h-[92px] absolute left-[0px] top-[0px] rounded-[60px] block">
-          <img data-figma-node="3158:22611" src="/assets/figma/3158-22611.png" alt="" aria-hidden="true" width={92} height={92} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[92px] h-[92px] absolute left-[0px] top-[0px] rounded-[60px] max-w-none object-cover object-top" />
+          <img data-figma-node="3158:22611" src={avatarSrc || "/assets/figma/3158-22611.png"} alt="" aria-hidden="true" width={92} height={92} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-[92px] h-[92px] absolute left-[0px] top-[0px] rounded-[60px] max-w-none object-cover object-top" />
         </div>
       </div>
       <div data-figma-node="3158:22833" className="box-border w-max max-w-[min(187px,100%)] h-auto relative flex flex-col items-start gap-2.5">
         <div data-figma-node="3158:22961" className="box-border self-stretch min-w-0 h-auto shrink-0 relative flex flex-row items-center gap-2.5">
-          <h1 data-figma-node="3158:22834" className="box-border w-max max-w-[min(187px,100%)] h-auto min-h-[42px] font-eb-garamond text-[32px] font-[500] leading-[42px] capitalize text-left lg:whitespace-nowrap text-success">{figmaTextContent("3158:22834", "Joseph Stanley")}</h1>
+          <h1 data-figma-node="3158:22834" className="box-border w-max max-w-[min(187px,100%)] h-auto min-h-[42px] font-eb-garamond text-[32px] font-[500] leading-[42px] capitalize text-left lg:whitespace-nowrap text-success">{fullName}</h1>
         </div>
         <p data-figma-node="3158:22835" className="box-border self-stretch min-w-0 h-auto min-h-[18px] shrink-0 opacity-[0.6] font-almarai text-[16px] font-[400] leading-[18px] text-left text-success">Member since March 2024</p>
       </div>

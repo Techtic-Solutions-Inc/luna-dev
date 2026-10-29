@@ -12,10 +12,6 @@ function messageFromBody(body: unknown): string | null {
   if (typeof record.message === "string" && record.message.trim() !== "") {
     return record.message;
   }
-  const err = asRecord(record.error);
-  if (typeof err?.message === "string" && err.message.trim() !== "") {
-    return err.message;
-  }
   return null;
 }
 

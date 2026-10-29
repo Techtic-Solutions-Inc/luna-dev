@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { EyeOff } from "lucide-react";
-import { figmaFieldProps } from "./useFigmaScreenData";
+import { useFigmaFieldProps } from "./useFigmaScreenData";
 import { FigmaFieldError, figmaFieldA11y, useFigmaFieldErrors } from "./figmaFieldErrors";
 
 /** Figma 998:1148 password row with show/hide toggle on the existing eye chrome. */
@@ -20,7 +20,7 @@ export function SignInPasswordField() {
         data-figma-field="password"
         data-figma-field-origin="design_text"
         data-figma-api-field="password"
-        {...figmaFieldProps("password")}
+        {...useFigmaFieldProps("password")}
         aria-required="true"
         {...figmaFieldA11y(figmaErrors, "password")}
         type={visible ? "text" : "password"}

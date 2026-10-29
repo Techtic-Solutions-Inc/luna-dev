@@ -18,11 +18,13 @@ import { ProfileSection_n_3158_22262 } from "./ProfileSection_n_3158_22262";
 import { ProfileJosephStanleySection } from "./ProfileJosephStanleySection";
 import { ProfileTabsSection } from "./ProfileTabsSection";
 import { ProfileAddressSection } from "./ProfileAddressSection";
-import { figmaTextContent } from "./figmaDisplay";
+import { useFigmaTextContent } from "./figmaDisplay";
 import { Skeleton } from "../ui/skeleton";
 
 export function ProfilePage() {
   const screenData = useFigmaScreenData();
+  const sidebarFullName = useFigmaTextContent("I3158:22263;1226:1920", "Joseph Stanley");
+  const sidebarAvatarSrc = useFigmaTextContent("I3158:22263;1226:1592", "");
   return (
     <div data-figma-bound={screenData.bound}
       data-figma-frame="3158:22053" className="relative flex min-h-screen w-full min-w-0 flex-col bg-color-46">
@@ -162,11 +164,11 @@ export function ProfilePage() {
                   <div data-figma-node="I3158:22263;1226:1589" className="box-border w-[30px] shrink-0 h-[30px] rounded-[50px] relative flex flex-row items-start pt-[2px] pr-[2px] pb-[2px] pl-[2px] outline-[#333333] outline-[1px]">
                     <div data-figma-node="I3158:22263;1226:1590" className="box-border flex-1 min-w-0 self-stretch overflow-hidden rounded-[500px] relative flex flex-row items-center justify-center">
                       <div data-figma-node="I3158:22263;1226:1591" className="box-border w-[40px] shrink-0 h-[40px] rounded-[500px] relative flex flex-row items-center justify-center">
-                        <img data-figma-node="I3158:22263;1226:1592" src={figmaTextContent("avatar_url", "")} alt="#Img_Avatar.25" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border flex-1 min-w-0 self-stretch rounded-[500px] object-cover" />
+                        <img data-figma-node="I3158:22263;1226:1592" src={sidebarAvatarSrc || "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"} alt="#Img_Avatar.25" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border flex-1 min-w-0 self-stretch rounded-[500px] object-cover" />
                       </div>
                     </div>
                   </div>
-                  <p data-figma-node="I3158:22263;1226:1920" className="box-border w-max max-w-[min(98px,100%)] h-auto min-h-[16px] font-almarai text-[14px] font-[400] leading-[16px] text-left whitespace-nowrap text-success">Joseph Stanley</p>
+                  <p data-figma-node="I3158:22263;1226:1920" className="box-border w-max max-w-[min(98px,100%)] h-auto min-h-[16px] font-almarai text-[14px] font-[400] leading-[16px] text-left whitespace-nowrap text-success">{sidebarFullName}</p>
                 </div>
                 <div data-figma-node="I3158:22263;1226:1598" className="box-border w-[20px] shrink-0 h-[20px] rotate-[-90deg] origin-center opacity-[0.6] relative block">
                   <svg data-figma-node="I3158:22263;1226:1600" viewBox="0 0 11.69 5.84" preserveAspectRatio="none" aria-hidden="true" className="box-border absolute [--fx:7] [--fww:6] left-[35%] w-[30%] top-[20%] h-[60%] pointer-events-none overflow-visible"><path d="M5.8344 5.8344C5.63969 5.83478 5.45099 5.76696 5.30106 5.64273L0.301063 1.47606C-0.0533202 1.18151 -0.101823 0.655445 0.192729 0.301062C0.487281 -0.0533202 1.01335 -0.101823 1.36773 0.192729L5.8344 3.92606L10.3011 0.326063C10.4732 0.186254 10.694 0.120838 10.9145 0.1443C11.1351 0.167761 11.3372 0.278163 11.4761 0.451063C11.6303 0.624279 11.7054 0.85396 11.6833 1.08486C11.6612 1.31576 11.5438 1.52699 11.3594 1.66773L6.3594 5.69273C6.20516 5.79733 6.02031 5.8472 5.8344 5.8344Z" fill="#ffffff" /></svg>

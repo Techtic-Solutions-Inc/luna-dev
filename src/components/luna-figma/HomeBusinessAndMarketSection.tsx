@@ -8,10 +8,11 @@
  * luna-spec-codegen: owned-layout
  */
 import { figmaUnresolvedActionProps } from "./useFigmaScreenData";
-import { figmaTextContent } from "./figmaDisplay";
+import { useFigmaTextContent } from "./figmaDisplay";
 import { Button } from "@/components/ui/button";
 import { Shared1429CF } from "./Shared1429CF";
 export function HomeBusinessAndMarketSection() {
+  const cardAvatarSrc = useFigmaTextContent("I3917:8120;1226:1592", "");
   return (
     <section data-figma-node="2270:14193" id="pricing" className="relative box-border mt-[60px] w-[1267px] max-w-full ml-[337px] min-h-[519px] flex flex-row items-start gap-[50px] z-[7]">
       <div data-figma-node="2270:14194" className="box-border w-max max-w-[min(521px,100%)] h-auto relative flex flex-row items-start gap-5">
@@ -23,7 +24,7 @@ export function HomeBusinessAndMarketSection() {
               <h4 data-figma-node="2270:14198" className="box-border w-[517px] h-auto min-h-[55px] shrink-0 font-eb-garamond text-[42px] font-[500] leading-[55px] capitalize text-left lg:whitespace-nowrap text-success">We personalize it to your</h4>
               <h4 data-figma-node="2270:14199" className="box-border w-[517px] h-auto min-h-[55px] shrink-0 [background-image:linear-gradient(90.0deg,_#c8a47e_24.1%,_#ffffff_49.3%,_#8b6843_72.5%),linear-gradient(90.0deg,_#c8a47e_24.1%,_#ffffff_49.3%,_#c8a47e_72.5%)]! font-eb-garamond text-[42px] font-[500] leading-[55px] capitalize text-left lg:whitespace-nowrap bg-clip-text text-transparent" style={{backgroundImage: "linear-gradient(90.0deg, #c8a47e 24.1%, #ffffff 49.3%, #8b6843 72.5%)"}}>business and market.</h4>
             </div>
-            <p data-figma-node="2270:14200" className="box-border w-[447px] h-auto min-h-[84px] shrink-0 opacity-[0.6] font-almarai text-[18px] font-[400] leading-[28px] text-left text-success">Our AI customizes every template with your brand, your market, and your neighborhood — automatically. What used to take hours now takes seconds.</p>
+            <p data-figma-node="2270:14200" className="box-border w-[447px] h-auto min-h-[84px] shrink-0 font-almarai text-[18px] font-[400] leading-[28px] text-left text-[#868686]">Our AI customizes every template with your brand, your market, and your neighborhood — automatically. What used to take hours now takes seconds.</p>
           </div>
         </div>
       </div>
@@ -196,7 +197,7 @@ export function HomeBusinessAndMarketSection() {
                     <div data-figma-node="I3917:8120;1226:1589" className="box-border w-[14px] shrink-0 h-[14px] rounded-[24.03px] relative flex flex-row items-start pt-[1px] pr-[1px] pb-[1px] pl-[1px] outline-[#333333] outline-[0.48px]">
                       <div data-figma-node="I3917:8120;1226:1590" className="box-border flex-1 min-w-0 self-stretch overflow-hidden rounded-[240.31px] relative flex flex-row items-center justify-center">
                         <div data-figma-node="I3917:8120;1226:1591" className="box-border w-[19px] shrink-0 h-[19px] rounded-[240.31px] relative flex flex-row items-center justify-center">
-                          <img data-figma-node="I3917:8120;1226:1592" src={figmaTextContent("avatar_url", "")} alt="#Img_Avatar.25" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border flex-1 min-w-0 self-stretch rounded-[240.31px] object-cover" />
+                          <img data-figma-node="I3917:8120;1226:1592" src={cardAvatarSrc} alt="#Img_Avatar.25" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border flex-1 min-w-0 self-stretch rounded-[240.31px] object-cover" />
                         </div>
                       </div>
                     </div>
