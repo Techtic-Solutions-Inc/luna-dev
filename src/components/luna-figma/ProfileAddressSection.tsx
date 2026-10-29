@@ -8,9 +8,7 @@
  * luna-spec-codegen: owned-layout
  */
 import { useState } from "react";
-import { ChangePasswordDialog, profileUiPrimitives } from "../features/profile/ChangePasswordDialog";
-
-void profileUiPrimitives;
+import { ChangePasswordDialog } from "../features/profile/ChangePasswordDialog";
 import { figmaFieldProps, figmaActionProps, figmaUnresolvedActionProps, useFigmaScreenData } from "./useFigmaScreenData";
 import { FigmaFieldError, figmaFieldA11y, figmaValidateOnSubmit, useFigmaFieldErrors } from "./figmaFieldErrors";
 export function ProfileAddressSection() {
@@ -19,8 +17,8 @@ export function ProfileAddressSection() {
   const busy = readLoading || submitting;
   const [changePasswordOpen, setChangePasswordOpen] = useState(false);
   return (
-    <section data-figma-node="3158:23028" id="contact" aria-busy={busy} className={`relative box-border mt-[30px] w-[1128px] max-w-full ml-[272px] min-h-[819px] pt-[24px] pr-[24px] pb-[24px] pl-[24px] border-[rgba(200,164,126,0.1)] border-[1px] rounded-[16px] flex flex-col items-start gap-6 z-[1] ${busy ? "animate-pulse pointer-events-none opacity-70" : ""}`} style={{backgroundColor: "rgba(255, 255, 255, 0.05)"}}>
-      <div data-figma-node="3158:23030" className="box-border w-[1080px] h-auto shrink-0 relative flex flex-col items-start gap-6">
+    <section data-figma-node="3158:23028" id="contact" aria-busy={busy} className={`relative box-border mt-[30px] w-[1128px] max-w-full ml-[272px] h-[819px] pt-[24px] pr-[24px] pb-[24px] pl-[24px] flex flex-col items-start z-[1] ${busy ? "animate-pulse pointer-events-none opacity-70" : ""}`}>
+      <div data-figma-node="3158:23030" className="box-border w-[1080px] h-full shrink-0 relative flex flex-col items-start gap-6 rounded-[16px] border-[rgba(200,164,126,0.1)] border-[1px] p-6" style={{backgroundColor: "rgba(255, 255, 255, 0.05)"}}>
         <div data-figma-node="3158:23032" className="box-border w-max max-w-[min(161px,100%)] h-auto shrink-0 relative flex flex-col items-start gap-3.5">
           <h3 data-figma-node="3158:23033" className="box-border self-stretch min-w-0 h-auto min-h-[31px] shrink-0 font-eb-garamond text-[24px] font-[600] leading-[31px] capitalize text-left text-success">Personal details</h3>
         </div>

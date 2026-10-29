@@ -48,7 +48,7 @@ export function HomePage() {
           </div>
         </div>
         <div className="pointer-events-none absolute inset-0 z-[2]">
-          <h2 data-figma-node="2264:10451" className="box-border w-[1394px] h-[110px] absolute left-[263px] top-[2009px] [--fx:263] [--fww:1394] font-eb-garamond text-[84px] font-[400] leading-[110px] capitalize text-center lg:whitespace-nowrap text-success">Stunning marketing, in three simple steps</h2>
+          <h2 data-figma-node="2264:10451" className="box-border w-[1394px] h-[110px] absolute left-[263px] top-[2009px] [--fx:263] [--fww:1394] font-eb-garamond text-[84px] font-[400] leading-[110px] capitalize text-center lg:whitespace-nowrap bg-[#ffffff] text-success">Stunning marketing, in three simple steps</h2>
         </div>
       </main>
     </div>

@@ -1,5 +1,11 @@
-import { FigmaScreenPage } from "./components/luna-figma/FigmaScreenPage";
+import AppRouter from "./routes";
+import { Toaster } from "./components/ui/sonner";
 
 export default function App() {
-  return <FigmaScreenPage />;
+  return (
+    <>
+      <AppRouter />
+      <Toaster />
+    </>
+  );
 }

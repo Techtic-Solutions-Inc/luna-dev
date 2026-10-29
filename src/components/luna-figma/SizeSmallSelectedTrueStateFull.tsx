@@ -13,7 +13,7 @@ export function SizeSmallSelectedTrueStateFull({ className = "", ...rest }: { cl
   const ratingAction = ratingActionForNode(nodeId);
   const actionBinding = ratingAction ? figmaActionProps(ratingAction) : figmaVariantProps("41:27");
   return (
-  <button data-figma-node="I2270:16933;2615:382325" data-figma-component="41:31" type="button" {...actionBinding} className={`box-border w-full min-w-0 h-[20px] relative block cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current disabled:cursor-not-allowed disabled:opacity-50 ${className}`} {...rest}>
+  <button data-figma-node="I2270:16933;2615:382325" data-figma-component="41:31" type="button" {...actionBinding} className={`box-border w-full min-w-0 h-[20px] block cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current disabled:cursor-not-allowed disabled:opacity-50 ${className}`} {...rest}>
     <SocialRatingFull data-figma-node="I2270:16933;2615:382325;2615:382304" data-figma-component="41:24" className="box-border h-[20px] absolute left-[0%] w-[100%] top-[0px]" />
   </button>
   );

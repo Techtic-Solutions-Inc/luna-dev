@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { changePassword } from "../../../lib/api/profile";
@@ -16,11 +16,6 @@ import {
 } from "../../ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../ui/form";
 import { PasswordInput } from "../../shared/PasswordInput";
-import { FigmaSelectField } from "../../shared/FigmaSelectField";
-import { Checkbox } from "../../ui/checkbox";
-
-/** Profile Figma rows still use native selects/checkbox; primitives are wired for dialogs/toolbars. */
-export const profileUiPrimitives = { FigmaSelectField, Checkbox };
 
 const schema = z
   .object({
@@ -34,6 +29,44 @@ const schema = z
   });
 
 type FormValues = z.infer<typeof schema>;
+type PasswordFieldKey = keyof FormValues;
+
+function asRecord(value: unknown): Record<string, unknown> | null {
+  return value !== null && typeof value === "object" && !Array.isArray(value)
+    ? (value as Record<string, unknown>)
+    : null;
+}
+
+function applyApiFieldErrors(body: unknown, form: Pick<UseFormReturn<FormValues>, "setError">): boolean {
+  const outer = asRecord(body);
+  const nestedError = outer ? asRecord(outer.error) : null;
+  const details =
+    nestedError?.details && typeof nestedError.details === "object"
+      ? (nestedError.details as Record<string, unknown>)
+      : outer?.details && typeof outer.details === "object"
+        ? (outer.details as Record<string, unknown>)
+        : outer?.errors && typeof outer.errors === "object"
+          ? (outer.errors as Record<string, unknown>)
+          : null;
+  if (!details) {
+    return false;
+  }
+  let mapped = false;
+  for (const key of ["current_password", "new_password", "confirm_password"] as const) {
+    const raw = details[key];
+    const message =
+      typeof raw === "string"
+        ? raw
+        : Array.isArray(raw) && typeof raw[0] === "string"
+          ? raw[0]
+          : asRecord(raw)?.message;
+    if (typeof message === "string" && message.trim() !== "") {
+      form.setError(key as PasswordFieldKey, { type: "server", message });
+      mapped = true;
+    }
+  }
+  return mapped;
+}
 
 export function ChangePasswordDialog({
   open,
@@ -54,12 +87,16 @@ export function ChangePasswordDialog({
 
   async function onSubmit(values: FormValues) {
     setSaving(true);
+    form.clearErrors();
     try {
       const response = await changePassword(values);
       const body = await response.json().catch(() => ({}));
       if (!response.ok) {
-        const msg = getApiErrorMessageFromResponse(response.status, body, "profile");
-        notifyError(msg);
+        const mapped = applyApiFieldErrors(body, form);
+        if (!mapped) {
+          const msg = getApiErrorMessageFromResponse(response.status, body, "profile");
+          notifyError(msg);
+        }
         return;
       }
       notifySuccess("Password changed successfully.");

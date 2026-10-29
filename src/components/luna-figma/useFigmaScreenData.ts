@@ -17,6 +17,7 @@ import {
 import { getApiErrorMessageFromResponse } from "../../lib/api/errors";
 import { notifyError, notifySuccess } from "../../lib/notify";
 import { apiRequest, clearAuthToken, getAuthToken, setAuthToken } from "../../lib/apiRequest";
+import * as profileApi from "../../lib/api/profile";
 import { clearSessionRejected, isSessionRejected } from "../../lib/session";
 import { clearReadPayloads, publishReadPayload } from "./figmaDisplay";
 import {
@@ -328,22 +329,34 @@ async function fetchProfileRead(
   if (!readOp) {
     return false;
   }
-  const response = await apiRequest({ method: "GET", path: "/api/profile" });
-  const body = await response.json().catch(() => ({}));
+  let body: unknown;
+  try {
+    const data = await profileApi.get();
+    body = { data };
+  } catch (err) {
+    const status = typeof err === "object" && err !== null && "status" in err ? (err as { status: number }).status : 0;
+    const errBody = typeof err === "object" && err !== null && "body" in err ? (err as { body: unknown }).body : {};
+    body = errBody;
+    publishReadPayload("GET", "/api/profile", body);
+    if (status === 401) {
+      redirectToLogin();
+      const msg = "Your session may have expired. Please sign in again.";
+      setStatusMessage(msg);
+      notifyError(msg);
+      return false;
+    }
+    if (status) {
+      const msg = formLevelError(errBody, status, "profile") ?? "Could not load profile.";
+      setStatusMessage(msg);
+      notifyError(msg);
+      return false;
+    }
+    const msg = "Unable to connect. Please check your connection.";
+    setStatusMessage(msg);
+    notifyError(msg);
+    return false;
+  }
   publishReadPayload("GET", "/api/profile", body);
-  if (response.status === 401) {
-    redirectToLogin();
-    const msg = "Your session may have expired. Please sign in again.";
-    setStatusMessage(msg);
-    notifyError(msg);
-    return false;
-  }
-  if (!response.ok) {
-    const msg = formLevelError(body, response.status, "profile") ?? "Could not load profile.";
-    setStatusMessage(msg);
-    notifyError(msg);
-    return false;
-  }
   setValues((prev) => ({ ...prev, ...profileFormValues(readOp, body) }));
   return true;
 }

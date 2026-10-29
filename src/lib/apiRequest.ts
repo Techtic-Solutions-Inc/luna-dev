@@ -1,5 +1,6 @@
 import { clearReadPayloads } from "../components/luna-figma/figmaDisplay";
-import { clearSessionRejected, isSessionRejected, markSessionRejected } from "./session";
+import { clearToken, getToken, setToken } from "../hooks/useAuth";
+import { markSessionRejected } from "./session";
 
 export type ApiRequestInit = {
   method: string;
@@ -7,8 +8,6 @@ export type ApiRequestInit = {
   body?: unknown;
   headers?: Record<string, string>;
 };
-
-const AUTH_TOKEN_KEY = "luna_auth_token";
 
 function apiBaseUrl(): string {
   const raw = import.meta.env.VITE_API_BASE_URL;
@@ -28,31 +27,15 @@ export function apiUrl(path: string): string {
 }
 
 export function getAuthToken(): string | null {
-  if (isSessionRejected()) {
-    return null;
-  }
-  try {
-    return localStorage.getItem(AUTH_TOKEN_KEY);
-  } catch {
-    return null;
-  }
+  return getToken();
 }
 
 export function setAuthToken(token: string): void {
-  clearSessionRejected();
-  try {
-    localStorage.setItem(AUTH_TOKEN_KEY, token);
-  } catch {
-    /* ignore quota errors */
-  }
+  setToken(token);
 }
 
 export function clearAuthToken(): void {
-  try {
-    localStorage.removeItem(AUTH_TOKEN_KEY);
-  } catch {
-    /* ignore */
-  }
+  clearToken();
 }
 
 export function rejectSession(): void {

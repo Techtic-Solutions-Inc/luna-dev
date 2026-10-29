@@ -1,4 +1,5 @@
 @import "./components/luna-figma/figma-theme.css";
+@import "./components/luna-figma/figma-fonts.css";
 @import "tailwindcss";
 
 @theme inline {
@@ -6,7 +7,7 @@
   --color-primary: var(--color-info);
   --color-foreground: var(--color-success);
   --color-muted-foreground: var(--color-text-secondary);
-  --color-border: var(--color-error);
+  --color-border: rgba(200, 164, 126, 0.2);
   --color-ring: var(--color-info);
   --color-card: var(--color-color-16);
   --color-input: rgba(255, 255, 255, 0.05);

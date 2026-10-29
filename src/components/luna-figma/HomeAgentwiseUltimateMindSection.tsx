@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Shared2D0874 } from "./Shared2D0874";
 export function HomeAgentwiseUltimateMindSection() {
   return (
-    <section data-figma-node="3654:11564" className="relative box-border mt-[97px] w-[1500px] max-w-full mx-auto h-[695px] min-w-[1500px] block overflow-hidden z-[13]">
+    <section data-figma-node="3654:11564" className="relative box-border mt-[97px] w-[1500px] max-w-full mx-auto h-[695px] min-w-[1500px] pl-[210px] pr-[210px] block overflow-hidden z-[13]">
       <div className="relative box-border w-[1500px] h-[695px] rounded-[20px] block" style={{backgroundImage: "linear-gradient(180.0deg, rgba(25, 38, 32, 0.7) 0.0%, rgba(17, 93, 57, 0.7) 100.0%)"}}>
         <div data-figma-node="2270:16233" className="box-border w-[1500px] h-[695px] absolute left-[0px] top-[0px] rounded-[20px] shadow-[20px_-10px_34px_0px_rgba(0,0,0,0.95),0px_44px_54px_0px_rgba(60,60,60,0.45)] block">
           <div data-figma-node="2270:16234" className="box-border w-[1500px] h-[695px] absolute left-[0px] top-[0px] rounded-[20px] block border-[rgba(255,255,255,0.1)] border-[1px]" style={{backgroundImage: "linear-gradient(180.0deg, rgba(25, 38, 32, 0.7) 0.0%, rgba(17, 93, 57, 0.7) 100.0%)"}}></div>

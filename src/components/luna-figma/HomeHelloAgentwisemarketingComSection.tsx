@@ -9,7 +9,7 @@
  */
 export function HomeHelloAgentwisemarketingComSection() {
   return (
-    <section data-figma-node="2270:16773" className="relative box-border mt-[80px] w-full min-w-0 h-[324px] min-w-[1920px] block bg-text-primary z-[4]">
+    <section data-figma-node="2270:16773" className="relative box-border mt-[80px] w-full min-w-0 h-[324px] min-w-[1920px] block bg-[#000000] z-[4]">
       <div data-figma-node="2270:16774" className="box-border w-[1920px] h-[324px] absolute left-[0px] top-[0px] block bg-text-primary"></div>
       <div data-figma-node="2270:16775" className="box-border w-max max-w-[min(499px,100%)] h-auto absolute left-[210px] top-[187px] flex flex-row items-center gap-9">
         <div data-figma-node="2270:16776" role="link" aria-disabled="true" data-figma-route-pending="true" title="Coming soon" className="box-border w-max max-w-[min(61px,100%)] h-auto min-h-[25px] font-almarai text-[22px] font-[400] leading-[25px] capitalize text-left whitespace-nowrap text-success cursor-not-allowed">About</div>
