@@ -1,0 +1,157 @@
+{
+  "adapter": "react",
+  "modules": [
+    {
+      "evidence": "application_ir.shell",
+      "kind": "shell",
+      "ownership": "application",
+      "path": "src/features/app-shell"
+    },
+    {
+      "evidence": "application_ir.features",
+      "id": "feature:sign-in",
+      "kind": "feature",
+      "ownership": "application",
+      "page_ids": [
+        "page:sign-in:998:1024"
+      ],
+      "path": "src/features/sign-in"
+    },
+    {
+      "evidence": "application_ir.features",
+      "id": "feature:profile",
+      "kind": "feature",
+      "ownership": "application",
+      "page_ids": [
+        "page:user-profile:3158:22053"
+      ],
+      "path": "src/features/profile"
+    },
+    {
+      "evidence": "application_ir.features",
+      "id": "feature:home",
+      "kind": "feature",
+      "ownership": "application",
+      "page_ids": [
+        "page:home:2241:1459"
+      ],
+      "path": "src/features/home"
+    },
+    {
+      "evidence": "application_ir.forms",
+      "field_statuses": [
+        "resolved",
+        "resolved",
+        "unbound"
+      ],
+      "hook": "useFormPageSignIn9981024ApiAuthLoginForm",
+      "id": "form:page:sign-in:998:1024:api-auth-login",
+      "kind": "form",
+      "ownership": "application",
+      "path": "src/features/forms/form-page-sign-in-998-1024-api-auth-login"
+    },
+    {
+      "evidence": "application_ir.forms",
+      "field_statuses": [
+        "resolved",
+        "resolved",
+        "resolved",
+        "resolved",
+        "resolved",
+        "resolved",
+        "resolved",
+        "resolved",
+        "resolved",
+        "resolved",
+        "resolved"
+      ],
+      "hook": "useFormPageUserProfile315822053ApiProfileForm",
+      "id": "form:page:user-profile:3158:22053:api-profile",
+      "kind": "form",
+      "ownership": "application",
+      "path": "src/features/forms/form-page-user-profile-3158-22053-api-profile"
+    },
+    {
+      "evidence": "application_ir.collections",
+      "hook": "useCollectionPageUserProfile315822053ApiProfileCollection",
+      "id": "collection:page:user-profile:3158:22053:api-profile",
+      "kind": "collection",
+      "ownership": "application",
+      "path": "src/features/collections/collection-page-user-profile-3158-22053-api-profile",
+      "supports_variable_cardinality": true
+    },
+    {
+      "api_path": "/api/profile",
+      "evidence": "application_ir.queries",
+      "id": "query:GET:/api/profile:3158:22053",
+      "kind": "query",
+      "method": "GET",
+      "ownership": "application",
+      "path": "src/api/api-profile"
+    },
+    {
+      "api_path": "/api/auth/login",
+      "evidence": "application_ir.mutations",
+      "id": "mutation:POST:/api/auth/login:998:1024",
+      "kind": "mutation",
+      "method": "POST",
+      "ownership": "application",
+      "path": "src/api/api-auth-login",
+      "unbound_required": []
+    },
+    {
+      "api_path": "/api/profile",
+      "evidence": "application_ir.mutations",
+      "id": "mutation:PUT:/api/profile:3158:22053",
+      "kind": "mutation",
+      "method": "PUT",
+      "ownership": "application",
+      "path": "src/api/api-profile",
+      "unbound_required": []
+    }
+  ],
+  "notes": [
+    "Visual luna-figma files remain Figma-owned.",
+    "Application modules attach state to semantic owners (page/feature/form/collection/workflow), not a mega-hook.",
+    "Collections authorize 0..N cardinality independent of painted nodes.",
+    "Unresolved form fields stay explicit; do not invent controls."
+  ],
+  "ownership": {
+    "developer_owned": [
+      "feature hooks implementations",
+      "API client wiring",
+      "approved workflow logic"
+    ],
+    "figma_owned": [
+      "components/luna-figma/* owned-layout",
+      "visual geometry classes",
+      "assets"
+    ],
+    "generated_owned": [
+      "application-model.json",
+      "application-ir.json",
+      "architecture plan modules below"
+    ]
+  },
+  "pages": [
+    {
+      "component": "luna-figma page (visual)",
+      "frame_id": "998:1024",
+      "page_id": "page:sign-in:998:1024",
+      "route": "sign-in"
+    },
+    {
+      "component": "luna-figma page (visual)",
+      "frame_id": "3158:22053",
+      "page_id": "page:user-profile:3158:22053",
+      "route": "user-profile"
+    },
+    {
+      "component": "luna-figma page (visual)",
+      "frame_id": "2241:1459",
+      "page_id": "page:home:2241:1459",
+      "route": "home"
+    }
+  ],
+  "visual_emit": "legacy_artboard_compatible"
+}
