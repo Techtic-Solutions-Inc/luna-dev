@@ -376,8 +376,12 @@ async function loadReads(
   setReadLoading(true);
   setStatusMessage("");
   let loadedAny = false;
+  let anyResolvableRead = false;
   for (const op of reads) {
-    const resolution = resolveBoundRead(op);
+    const resolution = await resolveBoundRead(op);
+    if (resolution.mode !== "missing") {
+      anyResolvableRead = true;
+    }
     if (resolution.mode === "missing") {
       setStatusMessage(resolution.diagnostic);
       continue;
@@ -413,7 +417,7 @@ async function loadReads(
       notifyError(msg);
     }
   }
-  if (!loadedAny && reads.some((op) => resolveBoundRead(op).mode !== "missing")) {
+  if (!loadedAny && anyResolvableRead) {
     /* empty profile is valid */
   }
   setReadLoading(false);

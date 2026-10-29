@@ -7,35 +7,26 @@
 // VITE_MOCK_DATA is not an offline switch: auth, mutations, and GETs
 // with no bound fields stay on the real API.
 
-/** METHOD + path → HTTP body (same envelope as the live response). */
-export const MOCK_BOUND_READS: Readonly<Record<string, unknown>> = !import.meta.env.PROD
-  ? {
-  "GET /api/profile": {
-    "data": {
-      "email": "mock_email@example.com",
-      "first_name": "mock_first_name",
-      "last_name": "mock_last_name",
-      "full_name": "mock_first_name mock_last_name",
-      "mobile_number": "+1 555 0100",
-      "bio": "mock bio",
-      "time_zone": "America/New_York",
-      "street": "123 Mock St",
-      "city": "Mock City",
-      "state": "Mock State",
-      "zip": "12345",
-      "country": "Mock Country"
-    }
-  }
-}
-  : {};
-
 const MOCK_FLAG_ENABLED = new Set(["true", "1", "yes"]);
 const MOCK_FLAG_DISABLED = new Set(["false", "0", "no"]);
 let mockFlagWarned = false;
 
+let mockBoundReadsCache: Readonly<Record<string, unknown>> | null = null;
+
+async function loadMockBoundReads(): Promise<Readonly<Record<string, unknown>>> {
+  if (import.meta.env.PROD) {
+    return {};
+  }
+  if (mockBoundReadsCache) {
+    return mockBoundReadsCache;
+  }
+  const mod = await import("./figmaMockReads.fixtures");
+  mockBoundReadsCache = mod.MOCK_BOUND_READS;
+  return mockBoundReadsCache;
+}
+
 /** Enabled for true/1/yes after trim and lowercase. Unset and empty stay off. */
 export function mockBoundReadsEnabled(): boolean {
-  // Production builds never serve fixtures, whatever the flag says.
   if (import.meta.env.PROD) {
     return false;
   }
@@ -71,16 +62,17 @@ export type BoundReadResolution =
  * GETs, writes, login, and logout stay on "network".
  * "missing" means do not fetch and do not invent values.
  */
-export function resolveBoundRead(op: {
+export async function resolveBoundRead(op: {
   readonly method: string;
   readonly path: string;
   readonly role: string;
   readonly fields: readonly unknown[];
-}): BoundReadResolution {
+}): Promise<BoundReadResolution> {
   if (op.role !== "read" || op.fields.length === 0 || !mockBoundReadsEnabled()) {
     return { mode: "network" };
   }
-  const body = MOCK_BOUND_READS[`${op.method} ${op.path}`];
+  const mocks = await loadMockBoundReads();
+  const body = mocks[`${op.method} ${op.path}`];
   if (body !== undefined) {
     return { mode: "mock", body };
   }
