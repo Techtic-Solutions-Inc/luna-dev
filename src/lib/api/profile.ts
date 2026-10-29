@@ -1,4 +1,5 @@
 import { apiRequest } from "../apiRequest";
+import type { ProfileData, UpdateProfileRequest } from "../../types/api";
 
 export type ChangePasswordRequest = {
   current_password: string;
@@ -13,16 +14,16 @@ function unwrapData(body: unknown): unknown {
   return body;
 }
 
-export async function get(): Promise<unknown> {
+export async function get(): Promise<ProfileData> {
   const response = await apiRequest({ method: "GET", path: "/api/profile" });
   const body = await response.json().catch(() => ({}));
   if (!response.ok) {
     throw Object.assign(new Error("Profile fetch failed"), { status: response.status, body });
   }
-  return unwrapData(body);
+  return unwrapData(body) as ProfileData;
 }
 
-export async function update(payload: Record<string, unknown>): Promise<unknown> {
+export async function update(payload: UpdateProfileRequest): Promise<ProfileData> {
   const response = await apiRequest({
     method: "PUT",
     path: "/api/profile",
@@ -32,7 +33,7 @@ export async function update(payload: Record<string, unknown>): Promise<unknown>
   if (!response.ok) {
     throw Object.assign(new Error("Profile update failed"), { status: response.status, body });
   }
-  return unwrapData(body);
+  return unwrapData(body) as ProfileData;
 }
 
 export async function changePassword(body: ChangePasswordRequest): Promise<Response> {

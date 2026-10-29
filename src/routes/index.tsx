@@ -15,6 +15,26 @@ function withFigmaProvider(routePath: string, Page: () => ReactElement) {
   );
 }
 
+function StubPage({ title }: { title: string }) {
+  return (
+    <main className="flex min-h-screen items-center justify-center p-6">
+      <h1 className="font-almarai text-success">{title}</h1>
+    </main>
+  );
+}
+
+const stubRoutes: { path: string; title: string }[] = [
+  { path: "/pricing", title: "Pricing" },
+  { path: "/blog", title: "Blog" },
+  { path: "/content", title: "Content" },
+  { path: "/contact", title: "Contact" },
+  { path: "/join", title: "Join" },
+  { path: "/forgot-password", title: "Forgot password" },
+  { path: "/privacy-policy", title: "Privacy policy" },
+  { path: "/terms-of-service", title: "Terms of service" },
+  { path: "/announcements", title: "Announcements" },
+];
+
 export default function AppRouter() {
   return (
     <BrowserRouter>
@@ -35,8 +55,11 @@ export default function AppRouter() {
             <ProtectedRoute>{withFigmaProvider("user-profile", ProfilePage)}</ProtectedRoute>
           }
         />
-        <Route path="*" element={<NotFound />} />
+        {stubRoutes.map(({ path, title }) => (
+          <Route key={path} path={path} element={<StubPage title={title} />} />
+        ))}
         <Route path="/index.html" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

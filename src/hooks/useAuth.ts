@@ -1,6 +1,9 @@
+import { notifyAuthChange, subscribeAuth } from "../lib/authEvents";
 import { clearSessionRejected, isSessionRejected } from "../lib/session";
 
 export const AUTH_TOKEN_KEY = "token";
+
+export { subscribeAuth };
 
 export function getToken(): string | null {
   if (isSessionRejected()) {
@@ -23,6 +26,7 @@ export function setToken(token: string): void {
   } catch {
     /* ignore */
   }
+  notifyAuthChange();
 }
 
 export function clearToken(): void {
@@ -32,6 +36,7 @@ export function clearToken(): void {
   } catch {
     /* ignore */
   }
+  notifyAuthChange();
 }
 
 export function isAuthenticated(): boolean {
@@ -44,5 +49,6 @@ export function useAuth() {
     setToken,
     clearToken,
     isAuthenticated,
+    subscribeAuth,
   };
 }

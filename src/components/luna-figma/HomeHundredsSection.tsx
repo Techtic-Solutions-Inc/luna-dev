@@ -31,7 +31,7 @@ export function HomeHundredsSection() {
       <svg data-figma-node="2291:5796" viewBox="0 0 392.74 392.74" preserveAspectRatio="none" aria-hidden="true" className="box-border h-[393px] absolute blur-[197px] pointer-events-none left-[81.354%] w-[20.469%] top-[calc(50%+286px)] -translate-y-1/2 overflow-visible"><path d="M196.369 392.738C304.821 392.738 392.738 304.821 392.738 196.369C392.738 87.9174 304.821 0 196.369 0C87.9174 0 0 87.9174 0 196.369C0 304.821 87.9174 392.738 196.369 392.738Z" fill="rgba(24, 119, 242, 0.5)" /></svg>
       <svg data-figma-node="2291:5793" viewBox="0 0 386.66 386.66" preserveAspectRatio="none" aria-hidden="true" className="box-border absolute blur-[257px] pointer-events-none left-[69.323%] w-[20.156%] top-[58.812%] h-[38.317%] overflow-visible"><path d="M193.328 386.656C300.1 386.656 386.656 300.1 386.656 193.328C386.656 86.5559 300.1 0 193.328 0C86.5559 0 0 86.5559 0 193.328C0 300.1 86.5559 386.656 193.328 386.656Z" fill="rgba(47, 0, 255, 0.3)" /></svg>
       <div data-figma-node="2264:10401" className="box-border w-[1584px] h-[582px] absolute left-[210px] top-[213px] block">
-        <div data-figma-node="2241:8954" className="box-border w-[824px] h-[520px] absolute left-[678px] top-[62px] overflow-hidden rounded-[11.14px] shadow-[10px_10px_20px_0px_rgba(0,0,0,0.5)] [background-image:linear-gradient(#0b0b0b,#0b0b0b),linear-gradient(145.7deg,_#554545_0.0%,_#000000_100.0%)]! [background-origin:border-box]! [background-clip:padding-box,border-box]! [border-color:transparent]! border-[1px] block bg-color-46">
+        <div data-figma-node="2241:8954" className="box-border w-[824px] h-[520px] absolute left-[678px] top-[62px] overflow-hidden rounded-[11.14px] shadow-[10px_10px_20px_0px_rgba(0,0,0,0.5)] [background-image:linear-gradient(#1b1b1b,#1b1b1b),linear-gradient(145.7deg,_#554545_0.0%,_#000000_100.0%)]! [background-origin:border-box]! [background-clip:padding-box,border-box]! [border-color:transparent]! border-[1px] block bg-[#1b1b1b]">
           <div data-figma-node="2241:8955" className="box-border w-[681px] h-[520px] absolute left-[137px] top-[0px] block">
             <div data-figma-node="2241:8956" className="box-border w-[681px] h-[527px] absolute left-[0px] top-[6px] rounded-[9.15px_9.15px_0px_0px] shadow-[-1.72px_0px_14.3px_0px_rgba(0,0,0,0.1)] flex flex-col items-center gap-[17.16px] pt-[17px] pr-[17px] pb-[17px] pl-[17px]" style={{backgroundImage: "linear-gradient(180.0deg, rgba(200, 164, 126, 0.2) 0.0%, rgba(98, 80, 62, 0) 100.0%)"}}></div>
             <div data-figma-node="4708:6242" className="box-border w-[646px] h-auto absolute left-[17px] top-[23px] flex flex-col items-start gap-[17.15px]">
@@ -180,6 +180,22 @@ export function HomeHundredsSection() {
                   </div>
                 </div>
                 <div data-figma-node="4708:6468" className="box-border flex-1 min-w-0 h-auto relative flex flex-col items-start gap-[5.72px]">
+                  <div data-figma-node="2147227830" className="box-border self-stretch min-w-0 h-auto shrink-0 overflow-hidden rounded-[9.15px] relative flex flex-col items-start gap-[5.72px] pt-[14px] pr-[14px] pb-[14px] pl-[14px] border-[rgba(255,255,255,0.2)] border-[0.57px]" style={{backgroundColor: "rgba(255, 255, 255, 0.05)"}}>
+                    <div data-figma-node="2147227835" className="box-border self-stretch min-w-0 h-auto shrink-0 overflow-hidden rounded-[9.15px] flex flex-col items-start gap-[5.72px]">
+                      <div data-figma-node="2147227843" className="box-border self-stretch min-w-0 h-auto shrink-0 relative flex flex-row items-center justify-between gap-[5.72px]">
+                        <p data-figma-node="2147227844" className="box-border w-max max-w-[min(160px,100%)] h-auto min-h-[19px] font-eb-garamond text-[15px] font-[500] leading-[19px] capitalize text-left whitespace-nowrap text-success">New Content This Week</p>
+                        <p data-figma-node="2147227845" className="box-border w-max max-w-[min(80px,100%)] h-auto min-h-[10px] font-almarai text-[9px] font-[400] leading-[10px] text-right whitespace-nowrap text-info">Browse all</p>
+                      </div>
+                      <p data-figma-node="2147227846" className="box-border w-max max-w-[min(180px,100%)] h-auto min-h-[19px] font-eb-garamond text-[15px] font-[500] leading-[19px] capitalize text-left whitespace-nowrap text-success">Your content calendar</p>
+                      <div data-figma-node="2147227847" className="box-border w-full min-w-0 h-auto shrink-0 flex flex-row items-center gap-[5.72px]">
+                        <p data-figma-node="2147227848" className="box-border w-max h-auto min-h-[10px] font-almarai text-[9px] font-[400] leading-[10px] text-success">Mon</p>
+                        <p data-figma-node="2147227849" className="box-border w-max h-auto min-h-[10px] font-almarai text-[9px] font-[400] leading-[10px] text-success">Tue</p>
+                        <p data-figma-node="2147227850" className="box-border w-max h-auto min-h-[10px] font-almarai text-[9px] font-[400] leading-[10px] text-success">Wed</p>
+                        <p data-figma-node="2147227851" className="box-border w-max h-auto min-h-[10px] font-almarai text-[9px] font-[400] leading-[10px] text-success">Thu</p>
+                        <p data-figma-node="2147227852" className="box-border w-max h-auto min-h-[10px] font-almarai text-[9px] font-[400] leading-[10px] text-success">Fri</p>
+                      </div>
+                    </div>
+                  </div>
                   <div data-figma-node="4708:6469" className="box-border self-stretch min-w-0 h-[228px] shrink-0 rounded-[9.15px] relative flex flex-col items-start gap-[11.43px] pt-[14px] pr-[14px] pb-[14px] pl-[14px] border-[rgba(255,255,255,0.2)] border-[0.57px]" style={{backgroundColor: "rgba(255, 255, 255, 0.05)"}}>
                     <div data-figma-node="4708:6470" role="link" aria-disabled="true" data-figma-route-pending="true" title="Coming soon" className="box-border self-stretch min-w-0 h-auto shrink-0 relative flex flex-row items-center justify-between gap-[465.92px] cursor-not-allowed">
                       <div data-figma-node="4708:6471" className="box-border w-[186px] shrink-0 h-auto relative flex flex-row items-center gap-[5.72px]">
@@ -190,7 +206,7 @@ export function HomeHundredsSection() {
                         </div>
                         <p data-figma-node="4708:6479" className="box-border w-max max-w-[min(102px,100%)] h-auto min-h-[19px] font-eb-garamond text-[15px] font-[500] leading-[19px] capitalize text-left whitespace-nowrap text-success">Announcements</p>
                       </div>
-                      <p data-figma-node="4708:6480" className="box-border w-max max-w-[min(35px,100%)] h-auto min-h-[10px] font-almarai text-[9px] font-[400] leading-[10px] text-left whitespace-nowrap text-info">View all</p>
+                      <a data-figma-node="4708:6480" href="/announcements" className="box-border w-max max-w-[min(35px,100%)] h-auto min-h-[10px] font-almarai text-[9px] font-[400] leading-[10px] text-left whitespace-nowrap text-info no-underline hover:opacity-80">View all</a>
                     </div>
                     <div data-figma-node="4708:6481" className="box-border self-stretch min-w-0 h-auto shrink-0 relative flex flex-col items-start gap-[5.72px]">
                       <div data-figma-node="4708:6482" className="box-border self-stretch min-w-0 h-[29px] shrink-0 rounded-[5.72px] min-h-[25px] relative flex flex-row items-center pr-[11px] pl-[11px] border-[rgba(200,164,126,0.1)] border-[0.57px]" style={{backgroundColor: "rgba(200, 164, 126, 0.1)"}}>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { EyeOff } from "lucide-react";
 import { figmaFieldProps } from "./useFigmaScreenData";
 import { FigmaFieldError, figmaFieldA11y, useFigmaFieldErrors } from "./figmaFieldErrors";
 
