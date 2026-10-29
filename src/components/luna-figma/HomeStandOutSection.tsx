@@ -8,6 +8,7 @@
  * luna-spec-codegen: owned-layout
  */
 import { figmaUnresolvedActionProps } from "./useFigmaScreenData";
+import { Button } from "@/components/ui/button";
 import { IconContainer0633D4 } from "./IconContainer0633D4";
 import { IconContainer1E44BE } from "./IconContainer1E44BE";
 import { IconContainer61D53C } from "./IconContainer61D53C";
@@ -30,7 +31,7 @@ export function HomeStandOutSection() {
       <div data-figma-node="2270:14700" className="box-border w-max max-w-[min(521px,100%)] h-auto relative flex flex-row items-start gap-5">
         <div data-figma-node="2270:14701" className="box-border w-max max-w-[min(521px,100%)] h-auto relative flex flex-col items-start gap-5">
           {/* LUNA-UNRESOLVED-ACTION: no prototype reaction or submit binding found for this control (node 2270:15222) — wire manually */}
-<button data-figma-node="2270:15222" type="button" data-figma-unresolved-action="true" {...figmaUnresolvedActionProps("2270:15222")} className="box-border w-max h-[54px] shrink-0 rounded-full [background-image:linear-gradient(150.1deg,_#0b0b0b_0.0%,_rgba(11,_11,_11,_0)_100.0%),linear-gradient(123.3deg,_#4a4a4a_0.0%,_#020102_100.0%)]! [background-origin:border-box]! [background-clip:padding-box,border-box]! [border-color:transparent]! border-[1px] min-w-[131px] pt-[8px] pr-[20px] pb-[8px] pl-[20px] inline-flex items-center justify-center whitespace-nowrap hover:opacity-90 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current disabled:cursor-not-allowed disabled:opacity-50" style={{backgroundImage: "linear-gradient(150.1deg, #0b0b0b 0.0%, rgba(11, 11, 11, 0) 100.0%)"}}><span className="font-almarai text-[28px] font-[400] leading-[31px] text-left whitespace-nowrap text-info">Step 03</span></button>
+<Button data-figma-node="2270:15222" type="button" data-figma-unresolved-action="true" {...figmaUnresolvedActionProps("2270:15222")} className="p-0 box-border w-max h-[54px] shrink-0 rounded-full [background-image:linear-gradient(150.1deg,_#0b0b0b_0.0%,_rgba(11,_11,_11,_0)_100.0%),linear-gradient(123.3deg,_#4a4a4a_0.0%,_#020102_100.0%)]! [background-origin:border-box]! [background-clip:padding-box,border-box]! [border-color:transparent]! border-[1px] min-w-[131px] pt-[8px] pr-[20px] pb-[8px] pl-[20px] inline-flex items-center justify-center whitespace-nowrap hover:opacity-90 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current disabled:cursor-not-allowed disabled:opacity-50 gap-0 bg-transparent hover:bg-transparent shadow-none" style={{backgroundImage: "linear-gradient(150.1deg, #0b0b0b 0.0%, rgba(11, 11, 11, 0) 100.0%)"}}><span className="font-almarai text-[28px] font-[400] leading-[31px] text-left whitespace-nowrap text-info">Step 03</span></Button>
           <div data-figma-node="2270:14702" className="box-border w-max max-w-[min(521px,100%)] h-auto shrink-0 relative flex flex-col items-start gap-5">
             <div data-figma-node="2270:14703" className="box-border w-max max-w-[min(521px,100%)] h-auto shrink-0 relative flex flex-col items-start">
               <h4 data-figma-node="2270:14704" className="box-border w-[517px] h-auto min-h-[55px] shrink-0 font-eb-garamond text-[42px] font-[500] leading-[55px] capitalize text-left lg:whitespace-nowrap text-success">Post, attract, engage, and</h4>

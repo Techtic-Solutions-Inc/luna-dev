@@ -9,6 +9,7 @@
  */
 import { figmaUnresolvedActionProps } from "./useFigmaScreenData";
 import { figmaTextContent } from "./figmaDisplay";
+import { Button } from "@/components/ui/button";
 import { Shared2D0874 } from "./Shared2D0874";
 export function HomeAgentwiseUltimateMindSection() {
   return (
@@ -40,7 +41,7 @@ export function HomeAgentwiseUltimateMindSection() {
                       </div>
                     </div>
                     <div data-figma-node="3735:5439" className="box-border self-stretch min-w-0 h-auto shrink-0 relative flex flex-col items-center gap-[14.04px]">
-                      <button data-figma-node="3735:5440" type="button" className="box-border self-stretch min-w-0 h-auto shrink-0 rounded-[7.49px] shadow-[0px_1.87px_18.72px_0px_rgba(0,0,0,0.1)] border-[#ebebeb] border-[0.47px] pt-[9px] pr-[9px] pb-[9px] pl-[9px] inline-flex items-center justify-center whitespace-nowrap bg-success hover:opacity-90 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current disabled:cursor-not-allowed disabled:opacity-50"><span className="font-almarai text-[7px] font-[400] leading-[8px] text-left lg:whitespace-nowrap text-text-primary whitespace-nowrap">Ask the Mind anything about your business…</span></button>
+                      <Button data-figma-node="3735:5440" type="button" className="p-0 box-border self-stretch min-w-0 h-auto shrink-0 rounded-[7.49px] shadow-[0px_1.87px_18.72px_0px_rgba(0,0,0,0.1)] border-[#ebebeb] border-[0.47px] pt-[9px] pr-[9px] pb-[9px] pl-[9px] inline-flex items-center justify-center whitespace-nowrap bg-success hover:opacity-90 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current disabled:cursor-not-allowed disabled:opacity-50 gap-0 hover:bg-success"><span className="font-almarai text-[7px] font-[400] leading-[8px] text-left lg:whitespace-nowrap text-text-primary whitespace-nowrap">Ask the Mind anything about your business…</span></Button>
                       <div data-figma-node="3735:5452" className="box-border w-[343px] h-auto shrink-0 relative flex flex-row items-start gap-[9.36px] flex-wrap">
                         <div data-figma-node="3735:5453" className="box-border flex-1 min-w-0 h-[28px] overflow-hidden rounded-[4.68px] relative flex flex-col items-start justify-center gap-[9.36px] pt-[11px] pr-[9px] pb-[11px] pl-[9px]" style={{backgroundColor: "rgba(200, 164, 126, 0.2)"}}>
                           <Shared2D0874 data-figma-node="3735:5454" className="box-border self-stretch min-w-0 h-auto shrink-0" title={"What should I post this week to stand out in Austin?"} />
@@ -230,7 +231,7 @@ export function HomeAgentwiseUltimateMindSection() {
           <h1 data-figma-node="2270:15210" className="box-border self-stretch min-w-0 h-auto min-h-[330px] shrink-0 font-eb-garamond text-[84px] font-[400] leading-[110px] capitalize text-left text-success"><span className="text-success">Here’s the deal… </span><span className="bg-clip-text text-transparent" style={{backgroundImage: "linear-gradient(90.0deg, #c8a47e 24.1%, #8b6843 72.5%, #ffffff 100.0%)"}}>Great Marketing</span><span className="text-success"> is Just the Start. </span></h1>
           <h4 data-figma-node="2270:15212" className="box-border w-[576px] h-auto min-h-[56px] shrink-0 opacity-[0.6] font-almarai text-[20px] font-[400] leading-[28px] text-left text-success"> A custom business dashboard and a personalized AI advisor built into every plan.</h4>
           {/* LUNA-UNRESOLVED-ACTION: no prototype reaction or submit binding found for this control (node 3654:11567) — wire manually */}
-<button data-figma-node="3654:11567" type="button" data-figma-unresolved-action="true" {...figmaUnresolvedActionProps("3654:11567")} className="box-border w-max h-[50px] shrink-0 rounded-full min-w-[153px] pt-[10px] pr-[32px] pb-[10px] pl-[32px] inline-flex items-center justify-center whitespace-nowrap bg-info hover:opacity-90 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current disabled:cursor-not-allowed disabled:opacity-50"><span className="font-almarai text-[18px] font-[400] leading-[20px] text-left whitespace-nowrap text-success">Learn More</span></button>
+<Button data-figma-node="3654:11567" type="button" data-figma-unresolved-action="true" {...figmaUnresolvedActionProps("3654:11567")} className="p-0 box-border w-max h-[50px] shrink-0 rounded-full min-w-[153px] pt-[10px] pr-[32px] pb-[10px] pl-[32px] inline-flex items-center justify-center whitespace-nowrap bg-info hover:opacity-90 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current disabled:cursor-not-allowed disabled:opacity-50 gap-0 hover:bg-info shadow-none"><span className="font-almarai text-[18px] font-[400] leading-[20px] text-left whitespace-nowrap text-success">Learn More</span></Button>
         </div>
       </div>
     </section>
