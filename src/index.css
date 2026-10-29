@@ -1,0 +1,24 @@
+@import "./components/luna-figma/figma-theme.css";
+@import "tailwindcss";
+
+@theme inline {
+  --color-accent: var(--color-info);
+  --color-primary: var(--color-info);
+  --color-foreground: var(--color-success);
+  --color-muted-foreground: var(--color-text-secondary);
+  --color-border: var(--color-error);
+  --color-ring: var(--color-info);
+  --color-background: var(--color-color-27);
+  --color-card: var(--color-color-16);
+  --color-input: rgba(255, 255, 255, 0.05);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: var(--font-almarai);
+  background-color: var(--color-color-27);
+  color: var(--color-success);
+}
