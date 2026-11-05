@@ -17,7 +17,7 @@ import {
 import { ApiRequestError, apiRequest } from "../../lib/apiRequest";
 import { clearReadPayloads, publishReadPayload } from "./figmaDisplay";
 import { postLogin } from "../../lib/auth.service";
-import { setSession } from "../../hooks/useAuth";
+import { setSession } from "../../lib/session";
 import { postSignup } from "../../lib/signup.service";
 import type { LoginRequestBody, SignupRequestBody } from "../../types/api";
 import {
@@ -183,7 +183,12 @@ function unwrapEnvelope(body: unknown): unknown {
 }
 
 async function loadReads(frameId: string): Promise<void> {
-  const ops = figmaReadOperations(frameId);
+  let ops = figmaReadOperations(frameId);
+  if (frameId === "2241:1459") {
+    ops = ops.filter(
+      (op) => !(op.method === "GET" && op.path === "/api/visitor/home"),
+    );
+  }
   if (ops.length === 0) {
     patchScreen({ loaded: true, bound: "" });
     return;
@@ -495,7 +500,7 @@ export function figmaActionProps(action: string): FigmaActionBinding {
         openFigmaDialog(action);
         return;
       }
-      if (process.env.NODE_ENV !== "production") {
+      if (import.meta.env.DEV) {
         globalThis.console.warn("[luna] action has no behavior yet:", action);
       }
     },
@@ -531,7 +536,7 @@ export function figmaUnresolvedActionProps(actionId: string): FigmaActionBinding
   }
   return {
     onClick: () => {
-      if (process.env.NODE_ENV !== "production") {
+      if (import.meta.env.DEV) {
         globalThis.console.warn(
           "[luna] unresolved action clicked:",
           actionId,

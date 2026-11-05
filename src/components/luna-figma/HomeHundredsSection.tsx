@@ -151,7 +151,7 @@ export function HomeHundredsSection() {
                 <div data-figma-node="4708:6319" className="box-border self-stretch min-w-0 h-auto shrink-0 relative flex flex-row items-center justify-between gap-[11.43px]">
                   <div data-figma-node="4708:6320" className="box-border flex-1 min-w-0 h-auto relative flex flex-col items-start gap-[3.43px]">
                     <p data-figma-node="4708:6321" className="box-border w-max max-w-[min(78px,100%)] h-auto min-h-[22px] shrink-0 font-eb-garamond text-[17px] font-[500] leading-[22px] capitalize text-left whitespace-nowrap text-success">Your tools</p>
-                    <p data-figma-node="4708:6322" className="box-border w-max max-w-[min(107px,100%)] h-auto min-h-[10px] shrink-0 opacity-[0.6] font-almarai text-[9px] font-[400] leading-[10px] text-left truncate min-w-0 text-success">Two places to do the work.</p>
+                    <p data-figma-node="4708:6322" className="box-border w-max max-w-[min(107px,100%)] h-auto min-h-[10px] shrink-0 opacity-[0.6] font-almarai text-[9px] font-[400] leading-[10px] text-left truncate min-w-0 text-success">{figmaTextContent("4708:6322", "")}</p>
                   </div>
                 </div>
                 <div data-figma-node="4708:6323" className="box-border self-stretch min-w-0 h-auto shrink-0 relative flex flex-row items-start gap-[11.43px]">
@@ -166,7 +166,7 @@ export function HomeHundredsSection() {
                         <div data-figma-node="4708:6337" className="box-border self-stretch min-w-0 h-auto shrink-0 relative flex flex-row items-center justify-between gap-[465.92px]">
                           <p data-figma-node="4708:6338" className="box-border w-max max-w-[min(146px,100%)] h-auto min-h-[18px] font-eb-garamond text-[14px] font-[500] leading-[18px] capitalize text-left whitespace-nowrap text-success">Agentwise Ultimate Mind</p>
                         </div>
-                        <p data-figma-node="4708:6340" className="box-border self-stretch min-w-0 h-auto min-h-[10px] shrink-0 opacity-[0.6] font-almarai text-[9px] font-[400] leading-[10px] text-left text-success">Agentwise Ultimate Mind is your strategic advisor and business partner customized for your business - not just a generic chatbot.</p>
+                        <p data-figma-node="4708:6340" className="box-border self-stretch min-w-0 h-auto min-h-[10px] shrink-0 opacity-[0.6] font-almarai text-[9px] font-[400] leading-[10px] text-left text-success">{figmaTextContent("4708:6340", "")}</p>
                       </div>
                       <div data-figma-node="4708:6341" className="box-border w-max max-w-[min(101px,100%)] h-[27px] max-[1919px]:h-auto max-[1919px]:min-h-[27px] shrink-0 rounded-full relative flex flex-row items-center justify-center gap-[3.43px] pt-[6px] pr-[11px] pb-[6px] pl-[11px]" style={{backgroundColor: "rgba(200, 164, 126, 0.5)"}}>
                         <p data-figma-node="4708:6342" className="box-border w-max max-w-[min(63px,100%)] h-auto min-h-[10px] opacity-[0.98] font-almarai text-[9px] font-[400] leading-[10px] text-left whitespace-nowrap text-success">Start a session</p>
@@ -446,14 +446,14 @@ export function HomeHundredsSection() {
             <p data-figma-node="2554:14116" className="box-border w-max max-w-[min(168px,100%)] h-auto min-h-[16px] font-almarai text-[14px] font-[700] leading-[16px] capitalize text-left min-[1920px]:whitespace-nowrap text-success">Agentwise Ultimate Mind</p>
           </div>
           <div data-figma-node="2554:14117" className="box-border self-stretch min-w-0 h-auto shrink-0 relative flex flex-col items-start gap-[5.74px]">
-            <p data-figma-node="2554:14118" className="box-border self-stretch min-w-0 h-auto min-h-[72px] shrink-0 opacity-[0.6] font-almarai text-[14px] font-[400] leading-[18px] text-left text-success">Agentwise Ultimate Mind is your strategic advisor and business partner customized for your business - not just a generic chatbot.</p>
+            <p data-figma-node="2554:14118" className="box-border self-stretch min-w-0 h-auto min-h-[72px] shrink-0 opacity-[0.6] font-almarai text-[14px] font-[400] leading-[18px] text-left text-success">{figmaTextContent("2554:14118", "")}</p>
           </div>
         </div>
         <div data-figma-node="2264:10374" className="box-border w-[569px] h-auto absolute left-[0px] top-[calc(50%+-6px)] -translate-y-1/2 flex flex-col items-start gap-10">
           <div data-figma-node="2241:1736" className="box-border w-[569px] h-auto shrink-0 relative flex flex-row items-start gap-2.5">
             <div data-figma-node="2241:3104" className="box-border w-[569px] shrink-0 h-auto relative flex flex-col items-start gap-6">
-              <h4 data-figma-node="2241:1740" className="box-border w-[540px] h-auto min-h-[312px] shrink-0 font-eb-garamond text-[60px] font-[400] leading-[78px] capitalize text-left text-success">{figmaTextContent("2241:1740", "")}</h4>
-              <p data-figma-node="2241:1737" className="box-border w-[522px] h-auto min-h-[112px] shrink-0 opacity-[0.6] font-almarai text-[20px] font-[400] leading-[28px] text-left text-success">{figmaTextContent("2241:1737", "")}</p>
+              <h4 data-figma-node="2241:1740" className="box-border w-[540px] h-auto min-h-[312px] shrink-0 font-eb-garamond text-[60px] font-[400] leading-[78px] capitalize text-left text-success">{figmaTextContent("2241:1740", "Stunning Real Estate Marketing, Personalized to Your Market in Minutes")}</h4>
+              <p data-figma-node="2241:1737" className="box-border w-[522px] h-auto min-h-[112px] shrink-0 opacity-[0.6] font-almarai text-[20px] font-[400] leading-[28px] text-left text-success">{figmaTextContent("2241:1737", "The all-in-one marketing platform for residential real estate agents AI-personalized content, a custom business dashboard, and a strategic AI advisor that knows your market.")}</p>
             </div>
           </div>
           <img data-figma-node="2264:10373" src="/assets/figma/2264-10373.png" alt="" aria-hidden="true" width={264} height={40} decoding="async" onError={e => { const img = e.currentTarget as HTMLImageElement; img.onerror = null; img.src = "data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23e5e7eb'/%3E%3C/svg%3E"; }} className="box-border w-max max-w-[min(268px,100%)] h-auto shrink-0 max-w-none object-cover object-top" />

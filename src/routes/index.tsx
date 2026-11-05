@@ -20,7 +20,7 @@ const SuccessBanner = styled.div`
   background: ${({ theme }) => theme.colors.color20};
   color: ${({ theme }) => theme.colors.success};
   font-family: ${({ theme }) => theme.fonts.almarai};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.info};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.color23};
 `;
 
 function HomeRoute() {
