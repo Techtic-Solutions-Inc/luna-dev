@@ -17,6 +17,7 @@ import {
 import { ApiRequestError, apiRequest } from "../../lib/apiRequest";
 import { clearReadPayloads, publishReadPayload } from "./figmaDisplay";
 import { postLogin } from "../../lib/auth.service";
+import { setSession } from "../../hooks/useAuth";
 import { postSignup } from "../../lib/signup.service";
 import type { LoginRequestBody, SignupRequestBody } from "../../types/api";
 import {
@@ -65,8 +66,6 @@ const ROUTE_TO_FRAME: Readonly<Record<string, string>> = {
 
 const SIGNUP_FRAME = "1006:1333";
 const SIGNUP_SUBMIT_NODE = "1007:1923";
-const SIGNIN_SUBMIT_NODE = "998:1335";
-
 let activeRoutePath = "";
 
 // ── Dialog state ────────────────────────────────────────────────────────────
@@ -267,7 +266,7 @@ async function submit(): Promise<void> {
     patchScreen({ statusMessage: "Please fix the highlighted fields." });
     return;
   }
-  const signingIn = op.path === "/api/auth/login";
+  const signingIn = op.path === "/auth/login";
   patchScreen({
     submitting: true,
     statusMessage: signingIn ? "Signing in…" : "Creating your account…",
@@ -277,10 +276,10 @@ async function submit(): Promise<void> {
     if (op.path === "/api/signup" && op.method === "POST") {
       await postSignup(payload as unknown as SignupRequestBody);
       patchScreen({ statusMessage: "Account created. Redirecting to sign in…" });
-      navigateClient("sign-in");
+      navigateClient("login?signupSuccess=1");
       return;
     }
-    if (op.path === "/api/auth/login" && op.method === "POST") {
+    if (op.path === "/auth/login" && op.method === "POST") {
       const body = await postLogin(payload as unknown as LoginRequestBody);
       const data = unwrapEnvelope(body) as Record<string, unknown> | null;
       const token =
@@ -288,7 +287,7 @@ async function submit(): Promise<void> {
         (typeof data?.token === "string" && data.token) ||
         "";
       if (token) {
-        localStorage.setItem("accessToken", token);
+        setSession(token);
       }
       if (values["remember-me"] === true) {
         localStorage.setItem(REMEMBER_EMAIL_KEY, String(values.email ?? "").trim());
@@ -306,7 +305,7 @@ async function submit(): Promise<void> {
       }
       let serverErrors = fieldErrorsFromResponse(op, err.body);
       if (
-        op.path === "/api/auth/login" &&
+        op.path === "/auth/login" &&
         err.status === 401 &&
         Object.keys(serverErrors).length === 0
       ) {

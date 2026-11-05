@@ -1,4 +1,5 @@
 import axios, { type AxiosError, type AxiosRequestConfig } from "axios";
+import { clearSession } from "../../hooks/useAuth";
 import type { ApiErrorResponse, ValidationFailedBody } from "../../types/api";
 
 export function resolveApiBase(): string {
@@ -9,7 +10,7 @@ export function resolveApiBase(): string {
         "VITE_API_BASE_URL is required. Copy .env.example to .env and set the backend origin.",
       );
     }
-    return "http://127.0.0.1:3000";
+    return "";
   }
   return raw.replace(/\/+$/, "");
 }
@@ -30,6 +31,16 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error: AxiosError) => {
+    if (error.response?.status === 401) {
+      clearSession();
+    }
+    return Promise.reject(error);
+  },
+);
+
 export function parseApiErrorBody(body: unknown): string {
   if (body !== null && typeof body === "object") {
     const record = body as Record<string, unknown>;
@@ -47,7 +58,6 @@ export function fieldErrorsFromApiBody(body: unknown): Record<string, string[]> 
   if (body === null || typeof body !== "object") {
     return {};
   }
-  const record = body as Record<string, unknown>;
   const validation = body as unknown as ValidationFailedBody;
   if (validation.errors && typeof validation.errors === "object") {
     return validation.errors;

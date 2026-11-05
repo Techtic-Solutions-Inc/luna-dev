@@ -9,5 +9,6 @@ export function useVisitorHome() {
     queryKey: visitorHomeQueryKey,
     queryFn: fetchVisitorHome,
     meta: { path: VISITOR_HOME_PATH },
+    retry: false,
   });
 }

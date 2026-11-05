@@ -1,7 +1,19 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
+import styled from "styled-components";
 
 type Props = { children: ReactNode };
 type State = { hasError: boolean };
+
+const Fallback = styled.main`
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: ${({ theme }) => theme.spacing.padding20};
+  background: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.textPrimary};
+  font-family: ${({ theme }) => theme.fonts.almarai};
+`;
 
 export class ErrorBoundary extends Component<Props, State> {
   state: State = { hasError: false };
@@ -16,11 +28,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   render() {
     if (this.state.hasError) {
-      return (
-        <main role="alert" className="flex min-h-screen items-center justify-center p-6">
-          <p>Something went wrong.</p>
-        </main>
-      );
+      return <Fallback role="alert">Something went wrong.</Fallback>;
     }
     return this.props.children;
   }

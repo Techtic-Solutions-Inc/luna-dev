@@ -72,7 +72,7 @@ export const FIGMA_OPERATIONS: Readonly<Record<string, readonly FigmaOperation[]
         },
       ],
       method: "POST",
-      path: "/api/auth/login",
+      path: "/auth/login",
       responseUnwrap: "data",
       role: "write",
       submitNodeId: "998:1335",
