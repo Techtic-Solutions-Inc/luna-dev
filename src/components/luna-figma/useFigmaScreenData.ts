@@ -195,7 +195,7 @@ async function loadReads(frameId: string): Promise<void> {
   }
   patchScreen({ loaded: false, bound: ops.map((o) => `${o.method} ${o.path}`).join(", ") });
   const tasks = ops.map(async (op) => {
-    const resolved = resolveBoundRead(op);
+    const resolved = await resolveBoundRead(op);
     if (resolved.mode === "missing") {
       patchScreen({ statusMessage: resolved.diagnostic });
       return;

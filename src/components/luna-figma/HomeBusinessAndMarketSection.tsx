@@ -53,16 +53,16 @@ export function HomeBusinessAndMarketSection() {
 </span></button>
                 <div data-figma-node="3917:8078" className="box-border w-[342px] h-auto shrink-0 relative flex flex-row items-start gap-[9.33px] flex-wrap">
                   <div data-figma-node="3917:8079" className="box-border w-[166px] shrink-0 h-[28px] max-[1919px]:h-auto max-[1919px]:min-h-[28px] overflow-hidden rounded-[4.67px] relative flex flex-col items-start justify-center gap-[9.33px] pt-[11px] pr-[9px] pb-[11px] pl-[9px]" style={{backgroundColor: "rgba(200, 164, 126, 0.2)"}}>
-                    <Shared1429CF data-figma-node="3917:8080" className="box-border self-stretch min-w-0 h-auto shrink-0" title={"What should I post this week to stand out in Austin?"} />
+                    <Shared1429CF data-figma-node="3917:8080" className="box-border self-stretch min-w-0 h-auto shrink-0" />
                   </div>
                   <div data-figma-node="3917:8089" className="box-border w-[166px] shrink-0 h-[28px] max-[1919px]:h-auto max-[1919px]:min-h-[28px] overflow-hidden rounded-[4.67px] relative flex flex-col items-start justify-center gap-[9.33px] pt-[11px] pr-[9px] pb-[11px] pl-[9px]" style={{backgroundColor: "rgba(200, 164, 126, 0.2)"}}>
-                    <Shared1429CF data-figma-node="3917:8090" className="box-border self-stretch min-w-0 h-auto shrink-0" title={"Draft a positioning statement for my luxury buyer niche."} />
+                    <Shared1429CF data-figma-node="3917:8090" className="box-border self-stretch min-w-0 h-auto shrink-0" />
                   </div>
                   <div data-figma-node="3917:8099" className="box-border w-[166px] shrink-0 h-[28px] max-[1919px]:h-auto max-[1919px]:min-h-[28px] overflow-hidden rounded-[4.67px] relative flex flex-col items-start justify-center gap-[9.33px] pt-[11px] pr-[9px] pb-[11px] pl-[9px]" style={{backgroundColor: "rgba(200, 164, 126, 0.2)"}}>
-                    <Shared1429CF data-figma-node="3917:8100" className="box-border self-stretch min-w-0 h-auto shrink-0" title={"How do I price the new Travis Heights listing?"} />
+                    <Shared1429CF data-figma-node="3917:8100" className="box-border self-stretch min-w-0 h-auto shrink-0" />
                   </div>
                   <div data-figma-node="3917:8109" className="box-border w-[166px] shrink-0 h-[28px] max-[1919px]:h-auto max-[1919px]:min-h-[28px] overflow-hidden rounded-[4.67px] relative flex flex-col items-start justify-center gap-[9.33px] pt-[11px] pr-[9px] pb-[11px] pl-[9px]" style={{backgroundColor: "rgba(200, 164, 126, 0.2)"}}>
-                    <Shared1429CF data-figma-node="3917:8110" className="box-border self-stretch min-w-0 h-auto shrink-0" title={"Build me a 30-day content plan around relocations."} />
+                    <Shared1429CF data-figma-node="3917:8110" className="box-border self-stretch min-w-0 h-auto shrink-0" />
                   </div>
                 </div>
                 <p data-figma-node="3917:8119" className="box-border self-stretch min-w-0 h-auto min-h-[6px] shrink-0 opacity-[0.6] font-almarai text-[6px] font-[400] leading-[6px] text-center text-text-primary">{figmaTextContent("3917:8119", "Trained on your business data · Austin, TX dataset active")}</p>

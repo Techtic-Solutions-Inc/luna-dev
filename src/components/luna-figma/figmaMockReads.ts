@@ -1,16 +1,25 @@
 /** luna-spec-codegen: owned-layout */
 // Explicit mock bodies for consumed application-data reads.
 // DEVELOPMENT ONLY: production builds drop the fixtures and ignore the flag.
-// A consumed read has bound scalar fields that valuesFromResponse copies
-// into form controls. Pass `body` through the same unwrap +
-// valuesFromResponse path as a real response. Do not render a second UI.
-// VITE_MOCK_DATA is not an offline switch: auth, mutations, and GETs
-// with no bound fields stay on the real API.
 
-/** METHOD + path → HTTP body (same envelope as the live response). */
-export const MOCK_BOUND_READS: Readonly<Record<string, unknown>> = !import.meta.env.PROD
-  ? {}
-  : {};
+let mockReadsCache: Record<string, unknown> | null = null;
+let mockReadsLoad: Promise<Record<string, unknown>> | null = null;
+
+async function getMockBoundReads(): Promise<Record<string, unknown>> {
+  if (import.meta.env.PROD || process.env.NODE_ENV === "production") {
+    return {};
+  }
+  if (mockReadsCache) {
+    return mockReadsCache;
+  }
+  if (!mockReadsLoad) {
+    mockReadsLoad = import("./figmaMockReads.fixtures").then((mod) => {
+      mockReadsCache = mod.MOCK_BOUND_READS;
+      return mockReadsCache;
+    });
+  }
+  return mockReadsLoad;
+}
 
 const MOCK_FLAG_ENABLED = new Set(["true", "1", "yes"]);
 const MOCK_FLAG_DISABLED = new Set(["false", "0", "no"]);
@@ -18,8 +27,7 @@ let mockFlagWarned = false;
 
 /** Enabled for true/1/yes after trim and lowercase. Unset and empty stay off. */
 export function mockBoundReadsEnabled(): boolean {
-  // Production builds never serve fixtures, whatever the flag says.
-  if (import.meta.env.PROD) {
+  if (import.meta.env.PROD || process.env.NODE_ENV === "production") {
     return false;
   }
   const raw = import.meta.env.VITE_MOCK_DATA;
@@ -47,22 +55,16 @@ export type BoundReadResolution =
   | { readonly mode: "mock"; readonly body: unknown }
   | { readonly mode: "missing"; readonly diagnostic: string };
 
-/**
- * Source for one contract read.
- *
- * Only a read with bound fields can return "mock" or "missing". Empty-field
- * GETs, writes, login, and logout stay on "network".
- * "missing" means do not fetch and do not invent values.
- */
-export function resolveBoundRead(op: {
+export async function resolveBoundRead(op: {
   readonly method: string;
   readonly path: string;
   readonly role: string;
   readonly fields: readonly unknown[];
-}): BoundReadResolution {
+}): Promise<BoundReadResolution> {
   if (op.role !== "read" || op.fields.length === 0 || !mockBoundReadsEnabled()) {
     return { mode: "network" };
   }
+  const MOCK_BOUND_READS = await getMockBoundReads();
   const body = MOCK_BOUND_READS[`${op.method} ${op.path}`];
   if (body !== undefined) {
     return { mode: "mock", body };
