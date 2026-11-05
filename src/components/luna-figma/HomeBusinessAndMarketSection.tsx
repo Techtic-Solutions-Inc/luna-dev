@@ -23,7 +23,8 @@ export function HomeBusinessAndMarketSection() {
               <h4 data-figma-node="2270:14198" className="box-border w-[517px] h-auto min-h-[55px] shrink-0 font-eb-garamond text-[42px] font-[500] leading-[55px] capitalize text-left min-[1920px]:whitespace-nowrap text-success">We personalize it to your</h4>
               <h4 data-figma-node="2270:14199" className="box-border w-[517px] h-auto min-h-[55px] shrink-0 [background-image:linear-gradient(90.0deg,_#c8a47e_24.1%,_#ffffff_49.3%,_#8b6843_72.5%),linear-gradient(90.0deg,_#c8a47e_24.1%,_#ffffff_49.3%,_#c8a47e_72.5%)]! font-eb-garamond text-[42px] font-[500] leading-[55px] capitalize text-left min-[1920px]:whitespace-nowrap bg-clip-text text-transparent" style={{backgroundImage: "linear-gradient(90.0deg, #c8a47e 24.1%, #ffffff 49.3%, #8b6843 72.5%)"}}>business and market.</h4>
             </div>
-            <p data-figma-node="2270:14200" className="box-border w-[447px] h-auto min-h-[84px] shrink-0 opacity-[0.6] font-almarai text-[18px] font-[400] leading-[28px] text-left text-success">Our AI customizes every template with your brand, your market, and your neighborhood — automatically. What used to take hours now takes seconds.</p>
+            <p data-figma-node="2270:14200" className="box-border w-[447px] h-auto min-h-[84px] shrink-0 opacity-[0.6] font-almarai text-[18px] font-[400] leading-[28px] text-left text-success">Our AI customizes every template with your brand, your market, and your neighborhood — automatically. What used to take hours now takes seconds.
+</p>
           </div>
         </div>
       </div>
@@ -48,7 +49,8 @@ export function HomeBusinessAndMarketSection() {
                 </div>
               </div>
               <div data-figma-node="3917:8065" className="box-border self-stretch min-w-0 h-auto shrink-0 relative flex flex-col items-center gap-3.5">
-                <button data-figma-node="3917:8066" type="button" className="box-border self-stretch min-w-0 h-auto shrink-0 rounded-[7.47px] shadow-[0px_1.87px_18.67px_0px_rgba(0,0,0,0.1)] border-[#ebebeb] border-[0.47px] pt-[9px] pr-[9px] pb-[9px] pl-[9px] inline-flex items-center justify-center whitespace-nowrap bg-success hover:opacity-90 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current disabled:cursor-not-allowed disabled:opacity-50"><span className="font-almarai text-[7px] font-[400] leading-[8px] text-left min-[1920px]:whitespace-nowrap text-text-primary whitespace-nowrap">Ask the Mind anything about your business…</span></button>
+                <button data-figma-node="3917:8066" type="button" className="box-border self-stretch min-w-0 h-auto shrink-0 rounded-[7.47px] shadow-[0px_1.87px_18.67px_0px_rgba(0,0,0,0.1)] border-[#ebebeb] border-[0.47px] pt-[9px] pr-[9px] pb-[9px] pl-[9px] inline-flex items-center justify-center whitespace-nowrap bg-success hover:opacity-90 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current disabled:cursor-not-allowed disabled:opacity-50"><span className="font-almarai text-[7px] font-[400] leading-[8px] text-left min-[1920px]:whitespace-nowrap text-text-primary whitespace-nowrap">Ask the Mind anything about your business…
+</span></button>
                 <div data-figma-node="3917:8078" className="box-border w-[342px] h-auto shrink-0 relative flex flex-row items-start gap-[9.33px] flex-wrap">
                   <div data-figma-node="3917:8079" className="box-border w-[166px] shrink-0 h-[28px] max-[1919px]:h-auto max-[1919px]:min-h-[28px] overflow-hidden rounded-[4.67px] relative flex flex-col items-start justify-center gap-[9.33px] pt-[11px] pr-[9px] pb-[11px] pl-[9px]" style={{backgroundColor: "rgba(200, 164, 126, 0.2)"}}>
                     <Shared1429CF data-figma-node="3917:8080" className="box-border self-stretch min-w-0 h-auto shrink-0" title={"What should I post this week to stand out in Austin?"} />
@@ -141,7 +143,7 @@ export function HomeBusinessAndMarketSection() {
                         </div>
                       </div>
                       <div data-figma-node="I3917:8120;1237:2152" className="box-border flex-1 min-w-0 h-auto relative flex flex-col items-center justify-center pr-[8px]">
-                        <p data-figma-node="I3917:8120;1237:2153" className="box-border self-stretch min-w-0 h-auto min-h-[9px] shrink-0 opacity-[0.6] font-almarai text-[8px] font-[400] leading-[9px] text-left truncate text-success">Announcements</p>
+                        <p data-figma-node="I3917:8120;1237:2153" className="box-border self-stretch min-w-0 h-auto min-h-[9px] shrink-0 opacity-[0.6] font-almarai text-[8px] font-[400] leading-[9px] text-left truncate text-success">{figmaTextContent("I3917:8120;1237:2153", "")}</p>
                       </div>
                     </div>
                     <div data-figma-node="I3917:8120;1589:4789" className="box-border self-stretch min-w-0 h-auto shrink-0 rounded-[3.84px] min-h-[21px] relative flex flex-row items-center pr-[4px] pl-[6px]">

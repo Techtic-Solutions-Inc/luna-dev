@@ -5,6 +5,7 @@
 "use client";
 
 import {
+  createContext,
   createElement,
   Fragment,
   useContext,
@@ -274,13 +275,13 @@ async function submit(): Promise<void> {
   try {
     const payload = requestBodyFor(op, values);
     if (op.path === "/api/signup" && op.method === "POST") {
-      await postSignup(payload as SignupRequestBody);
+      await postSignup(payload as unknown as SignupRequestBody);
       patchScreen({ statusMessage: "Account created. Redirecting to sign in…" });
       navigateClient("sign-in");
       return;
     }
     if (op.path === "/api/auth/login" && op.method === "POST") {
-      const body = await postLogin(payload as LoginRequestBody);
+      const body = await postLogin(payload as unknown as LoginRequestBody);
       const data = unwrapEnvelope(body) as Record<string, unknown> | null;
       const token =
         (typeof data?.accessToken === "string" && data.accessToken) ||
@@ -447,7 +448,7 @@ export function figmaFieldProps(field: string): FigmaFieldBinding {
     return {
       checked: raw === true,
       onChange: (event) => {
-        setFieldValue(field, event.target.checked);
+        setFieldValue(field, event.target.checked === true);
         setFigmaFieldErrors({ ...errors, [field]: "" });
       },
       disabled: screenStore.submitting,
@@ -502,6 +503,16 @@ export function figmaActionProps(action: string): FigmaActionBinding {
   };
 }
 
+const ROUTE_ACTIONS: Readonly<Record<string, string>> = {
+  "2241:1738": "sign-up",
+  "2241:1732": "sign-up",
+  "3654:11567": "announcements",
+  "2270:15213": "content",
+  "2270:15219": "pricing",
+  "2270:15222": "about-us",
+  "2738:13270": "sign-up",
+};
+
 export function figmaUnresolvedActionProps(actionId: string): FigmaActionBinding {
   const submitBinding = submitActionBinding(actionId);
   if (submitBinding) {
@@ -509,6 +520,15 @@ export function figmaUnresolvedActionProps(actionId: string): FigmaActionBinding
   }
   if (actionId === SIGNUP_SUBMIT_NODE) {
     return figmaActionProps(SIGNUP_SUBMIT_NODE);
+  }
+  const route = ROUTE_ACTIONS[actionId];
+  if (route) {
+    return {
+      onClick: (event) => {
+        event.preventDefault();
+        navigateClient(route);
+      },
+    };
   }
   return {
     onClick: () => {

@@ -8,6 +8,7 @@
  * luna-spec-codegen: owned-layout
  */
 import { figmaUnresolvedActionProps } from "./useFigmaScreenData";
+import { figmaTextContent, useFigmaPayloadVersion } from "./figmaDisplay";
 import { IconContainer0633D4 } from "./IconContainer0633D4";
 import { IconContainer61D53C } from "./IconContainer61D53C";
 import { IconContainer6AA20F } from "./IconContainer6AA20F";
@@ -25,6 +26,7 @@ import { Shared8 } from "./Shared8";
 import { Shared9 } from "./Shared9";
 import { Stack20F2B8 } from "./Stack20F2B8";
 export function HomeStandOutSection() {
+  useFigmaPayloadVersion();
   return (
     <section data-figma-node="2270:14699" className="relative box-border mt-[60px] w-[1267px] max-w-[calc(100%-min(337px,17.55%))] ml-[min(337px,17.55%)] min-h-[519px] flex flex-row items-start gap-[50px] max-w-full flex-wrap gap-y-2 z-[8]">
       <div data-figma-node="2270:14700" className="box-border w-max max-w-[min(521px,100%)] h-auto relative flex flex-row items-start gap-5">
@@ -181,7 +183,7 @@ export function HomeStandOutSection() {
                       <svg data-figma-node="3795:11097" viewBox="0 0 0.76 0.76" preserveAspectRatio="none" aria-hidden="true" className="box-border absolute left-[66.667%] w-[16.667%]! top-[16.667%] h-[16.667%]! pointer-events-none overflow-visible"><path d="M0.377632 0.755488C0.585687 0.755488 0.755265 0.586201 0.755265 0.377744C0.755265 0.169287 0.586028 0 0.377632 0C0.169235 0 0 0.169287 0 0.377744C0 0.586201 0.169235 0.755488 0.377632 0.755488Z" fill="#ffffff" /></svg>
                     </div>
                   </div>
-                  <p data-figma-node="3795:11101" className="box-border w-max max-w-[min(49px,100%)] h-auto min-h-[11px] font-almarai text-[7px] font-[400] leading-[11px] text-left whitespace-nowrap text-success">Instagram Reel</p>
+                  <p data-figma-node="3795:11101" className="box-border w-max max-w-[min(49px,100%)] h-auto min-h-[11px] font-almarai text-[7px] font-[400] leading-[11px] text-left whitespace-nowrap text-success">{figmaTextContent("3795:11101", "")}</p>
                   <div data-figma-node="3795:11102" className="box-border w-[10px] shrink-0 h-[10px] rotate-[90deg] origin-center relative block">
                     <svg data-figma-node="3795:11104" viewBox="0 0 2.86 5.68" preserveAspectRatio="none" aria-hidden="true" className="box-border absolute left-[20%] w-[60%]! top-[40%] h-[30%]! pointer-events-none overflow-visible"><path d="M0.405807 5.68314C0.311156 5.68333 0.219429 5.65036 0.146548 5.58997C0.0637033 5.52129 0.0115919 5.42246 0.00171202 5.31531C-0.00816781 5.20815 0.0249959 5.10146 0.0938855 5.01879L1.9087 2.84749L0.1587 0.672147C0.0907378 0.588457 0.0589386 0.481129 0.0703434 0.373924C0.0817481 0.26672 0.135416 0.168484 0.219464 0.100966C0.304196 0.0264131 0.416188 -0.00941177 0.528458 0.00212283C0.640729 0.0136574 0.743097 0.0715056 0.810899 0.16173L2.7675 2.59229C2.89037 2.74177 2.89037 2.95727 2.7675 3.10675L0.742034 5.53731C0.659612 5.63674 0.534721 5.69091 0.405807 5.68314Z" fill="#ffffff" /></svg>
                   </div>
@@ -257,7 +259,7 @@ export function HomeStandOutSection() {
               <div data-figma-node="3795:11249" className="box-border w-[171px] h-[33px] max-[1919px]:h-auto max-[1919px]:min-h-[33px] absolute left-[19px] top-[19px] flex flex-col items-start gap-[5.83px]">
                 <p data-figma-node="3795:11250" className="box-border self-stretch min-w-0 h-auto min-h-[16px] shrink-0 font-almarai text-[15px] font-[400] leading-[16px] text-left text-text-primary">Market update — Austin Q2</p>
                 <div data-figma-node="3795:11251" className="box-border w-max max-w-[min(59px,100%)] h-[11px] max-[1919px]:h-auto max-[1919px]:min-h-[11px] shrink-0 rounded-full relative flex flex-row items-center justify-center gap-[4.86px] border-[rgba(200,164,126,0.2)] border-[0.49px] pt-[2.51px] pr-[4.51px] pb-[2.51px] pl-[4.51px]" style={{backgroundColor: "rgba(200, 164, 126, 0.1)"}}>
-                  <p data-figma-node="3795:11252" className="box-border w-max max-w-[min(49px,100%)] h-auto min-h-[8px] font-almarai text-[7px] font-[400] leading-[8px] text-right truncate min-w-0 text-info">Instagram Reel</p>
+                  <p data-figma-node="3795:11252" className="box-border w-max max-w-[min(49px,100%)] h-auto min-h-[8px] font-almarai text-[7px] font-[400] leading-[8px] text-right truncate min-w-0 text-info">{figmaTextContent("3795:11252", "")}</p>
                 </div>
               </div>
               <div data-figma-node="3795:11253" className="box-border w-[278px] absolute left-[19px] top-[62px] bg-warning h-px" />
@@ -334,7 +336,7 @@ export function HomeStandOutSection() {
                   <div data-figma-node="I3795:11283;1237:2144" role="link" aria-disabled="true" data-figma-route-pending="true" title="Coming soon" className="box-border self-stretch min-w-0 h-auto shrink-0 rounded-[3.89px] min-h-[21px] relative flex flex-row items-center pr-[4px] pl-[6px] cursor-not-allowed">
                     <IconContainerE59260 data-figma-node="I3795:11283;1237:2145" className="box-border w-max max-w-[min(23px,100%)] h-auto pr-[8px]" />
                     <div data-figma-node="I3795:11283;1237:2152" className="box-border flex-1 min-w-0 h-auto relative flex flex-col items-center justify-center pr-[8px]">
-                      <p data-figma-node="I3795:11283;1237:2153" className="box-border self-stretch min-w-0 h-auto min-h-[9px] shrink-0 opacity-[0.6] font-almarai text-[8px] font-[400] leading-[9px] text-left truncate text-success">Announcements</p>
+                      <p data-figma-node="I3795:11283;1237:2153" className="box-border self-stretch min-w-0 h-auto min-h-[9px] shrink-0 opacity-[0.6] font-almarai text-[8px] font-[400] leading-[9px] text-left truncate text-success">{figmaTextContent("I3795:11283;1237:2153", "")}</p>
                     </div>
                   </div>
                   <div data-figma-node="I3795:11283;1589:4789" className="box-border self-stretch min-w-0 h-auto shrink-0 rounded-[3.89px] min-h-[21px] relative flex flex-row items-center pr-[4px] pl-[6px]">
