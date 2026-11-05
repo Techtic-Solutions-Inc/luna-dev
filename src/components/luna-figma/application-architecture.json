@@ -1,0 +1,115 @@
+{
+  "adapter": "react",
+  "modules": [
+    {
+      "evidence": "application_ir.features",
+      "id": "feature:sign-up",
+      "kind": "feature",
+      "ownership": "application",
+      "page_ids": [
+        "page:sign-up:1006:1333"
+      ],
+      "path": "src/features/sign-up"
+    },
+    {
+      "evidence": "application_ir.features",
+      "id": "feature:sign-in",
+      "kind": "feature",
+      "ownership": "application",
+      "page_ids": [
+        "page:sign-in:998:1024"
+      ],
+      "path": "src/features/sign-in"
+    },
+    {
+      "evidence": "application_ir.features",
+      "id": "feature:home",
+      "kind": "feature",
+      "ownership": "application",
+      "page_ids": [
+        "page:home:2241:1459"
+      ],
+      "path": "src/features/home"
+    },
+    {
+      "evidence": "application_ir.collections",
+      "hook": "useCollectionPageSignIn9981024ApiAuthLogoutCollection",
+      "id": "collection:page:sign-in:998:1024:api-auth-logout",
+      "kind": "collection",
+      "ownership": "application",
+      "path": "src/features/collections/collection-page-sign-in-998-1024-api-auth-logout",
+      "supports_variable_cardinality": true
+    },
+    {
+      "evidence": "application_ir.collections",
+      "hook": "useCollectionPageHome22411459ApiVisitorHomeCollection",
+      "id": "collection:page:home:2241:1459:api-visitor-home",
+      "kind": "collection",
+      "ownership": "application",
+      "path": "src/features/collections/collection-page-home-2241-1459-api-visitor-home",
+      "supports_variable_cardinality": true
+    },
+    {
+      "api_path": "/api/auth/logout",
+      "evidence": "application_ir.queries",
+      "id": "query:GET:/api/auth/logout:998:1024",
+      "kind": "query",
+      "method": "GET",
+      "ownership": "application",
+      "path": "src/api/api-auth-logout"
+    },
+    {
+      "api_path": "/api/visitor/home",
+      "evidence": "application_ir.queries",
+      "id": "query:GET:/api/visitor/home:2241:1459",
+      "kind": "query",
+      "method": "GET",
+      "ownership": "application",
+      "path": "src/api/api-visitor-home"
+    }
+  ],
+  "notes": [
+    "Visual luna-figma files remain Figma-owned.",
+    "Application modules attach state to semantic owners (page/feature/form/collection/workflow), not a mega-hook.",
+    "Collections authorize 0..N cardinality independent of painted nodes.",
+    "Unresolved form fields stay explicit; do not invent controls."
+  ],
+  "ownership": {
+    "developer_owned": [
+      "feature hooks implementations",
+      "API client wiring",
+      "approved workflow logic"
+    ],
+    "figma_owned": [
+      "components/luna-figma/* owned-layout",
+      "visual geometry classes",
+      "assets"
+    ],
+    "generated_owned": [
+      "application-model.json",
+      "application-ir.json",
+      "architecture plan modules below"
+    ]
+  },
+  "pages": [
+    {
+      "component": "luna-figma page (visual)",
+      "frame_id": "1006:1333",
+      "page_id": "page:sign-up:1006:1333",
+      "route": "sign-up"
+    },
+    {
+      "component": "luna-figma page (visual)",
+      "frame_id": "998:1024",
+      "page_id": "page:sign-in:998:1024",
+      "route": "sign-in"
+    },
+    {
+      "component": "luna-figma page (visual)",
+      "frame_id": "2241:1459",
+      "page_id": "page:home:2241:1459",
+      "route": "home"
+    }
+  ],
+  "visual_emit": "legacy_artboard_compatible"
+}

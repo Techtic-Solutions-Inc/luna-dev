@@ -1,0 +1,19 @@
+/**
+ * Luna generated support file
+ * Role: responsive geometry
+ * Ownership: Figma-owned layout
+ * luna-spec-codegen: owned-layout
+ */
+/* A borderless text field sits inside a painted wrapper that draws the field
+   box (search bars, pill inputs). The browser/utility outline on the input
+   itself is a hard-cornered rectangle inside that rounded box. Keep the
+   keyboard focus indicator (WCAG 2.4.7) but draw it on the wrapper. */
+input[data-figma-field].border-0:focus-visible,
+textarea[data-figma-field].border-0:focus-visible {
+  outline: none !important;
+}
+:has(> input[data-figma-field].border-0:focus-visible),
+:has(> textarea[data-figma-field].border-0:focus-visible) {
+  outline: 2px solid var(--color-primary, currentColor);
+  outline-offset: 2px;
+}
