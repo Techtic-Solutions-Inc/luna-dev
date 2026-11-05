@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-html-link-for-pages */
 /**
  * Luna generated layout
  * Figma node: 998:1033

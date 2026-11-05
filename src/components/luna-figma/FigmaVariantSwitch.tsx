@@ -95,7 +95,7 @@ export function FigmaVariantSwitch({ base, variants, dismissible = [], children 
 }
 
 /** Click binding for a CHANGE_TO trigger. Clicking the active target goes back. */
-export function figmaVariantProps(destination: string) {
+export function useFigmaVariantProps(destination: string) {
   const ctx = useContext(FigmaVariantContext);
   return {
     "aria-expanded": ctx ? ctx.variant === destination : undefined,
